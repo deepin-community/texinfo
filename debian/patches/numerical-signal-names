@@ -1,0 +1,48 @@
+replace numerical signal names with symbolical
+---
+ contrib/fix-info-dir |    6 +++---
+ contrib/fixfonts     |    2 +-
+ util/texi2dvi        |    2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+--- a/util/texi2dvi
++++ b/util/texi2dvi
+@@ -1948,7 +1948,7 @@ do
+              $SED "s,^$orig_pwd/,,;s,^\./,,;s,/,!,g"`
+   esac
+   # Remove it at exit if clean mode.
+-  trap "cleanup" 0 1 2 15
++  trap "cleanup" 0 HUP INT TERM
+ 
+   ensure_dir "$build_dir" "$t2ddir"
+ 
+--- a/contrib/fix-info-dir
++++ b/contrib/fix-info-dir
+@@ -254,13 +254,13 @@ fi
+ 
+ trap ' eval "$DEBUG"; rm -f $TMP_FILE_LIST; exit ' 0
+ trap ' rm -f $TMP_FILE_LIST
+-	exit ' 1
++	exit ' HUP
+ trap ' rm -f $TMP_FILE_LIST
+ 	echo "$0:$LINENO: received INT signal.">&2
+-	exit ' 2
++	exit ' INT
+ trap ' rm -f $TMP_FILE_LIST
+ 	echo "$0:$LINENO: received QUIT signal.">&2
+-	exit ' 3
++	exit ' QUIT
+ 
+ sed -e "1,/$MENU_BEGIN/d" -e "$MENU_FILTER1" -e "$MENU_FILTER2"<$DIR_FILE\
+ |sed -n -e '/\* /{
+--- a/contrib/fixfonts
++++ b/contrib/fixfonts
+@@ -33,7 +33,7 @@ tempfile="${TMPDIR}/circ$$"
+ tempfile2="${TMPDIR}/circ2$$"
+ 
+ # EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+-#trap 'rm -f "${tempfile}" "${tempfile2}"' 0 1 2 3 15
++#trap 'rm -f "${tempfile}" "${tempfile2}"' 0 HUP INT QUIT TERM
+ 
+ # Find all the fonts with names that include `circle'.
+ (cd "${texfontdir}"; find . -name '*circle*' -print > "${tempfile}")

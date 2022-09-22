@@ -1,0 +1,18 @@
+20_warn_missing_tex.dpatch by  <preining@logic.at>
+
+---
+ util/texi2dvi |    3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/util/texi2dvi
++++ b/util/texi2dvi
+@@ -1870,6 +1870,9 @@ output for more details.
+ 
+ For information about obtaining TeX, please see http://tug.org/texlive,
+ or do a web search for TeX and your operating system or distro.
++
++On Debian you can install a working TeX system with
++  apt-get install texlive
+ EOM
+     exit 1
+   fi

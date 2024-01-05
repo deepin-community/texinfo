@@ -1,7 +1,7 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
@@ -9,97 +9,92 @@ $result_trees{'part_before_top'} = [
   {
     'contents' => [
       {
-        'contents' => [],
-        'parent' => {},
-        'type' => 'text_root'
+        'contents' => [
+          {
+            'contents' => [],
+            'type' => 'preamble_before_content'
+          }
+        ],
+        'type' => 'before_node_section'
       },
       {
         'args' => [
           {
             'contents' => [
               {
-                'parent' => {},
                 'text' => 'part'
               }
             ],
-            'extra' => {
-              'spaces_after_argument' => '
+            'info' => {
+              'spaces_after_argument' => {
+                'text' => '
 '
+              }
             },
-            'parent' => {},
             'type' => 'line_arg'
           }
         ],
         'cmdname' => 'part',
         'contents' => [
           {
-            'parent' => {},
             'text' => '
 ',
             'type' => 'empty_line'
           }
         ],
-        'extra' => {
-          'spaces_before_argument' => ' '
+        'extra' => {},
+        'info' => {
+          'spaces_before_argument' => {
+            'text' => ' '
+          }
         },
-        'level' => 0,
-        'line_nr' => {
+        'source_info' => {
           'file_name' => '',
           'line_nr' => 1,
           'macro' => ''
-        },
-        'parent' => {}
+        }
       },
       {
         'args' => [
           {
             'contents' => [
               {
-                'parent' => {},
                 'text' => 'top'
               }
             ],
-            'extra' => {
-              'spaces_after_argument' => '
+            'info' => {
+              'spaces_after_argument' => {
+                'text' => '
 '
+              }
             },
-            'parent' => {},
             'type' => 'line_arg'
           }
         ],
         'cmdname' => 'top',
-        'contents' => [],
         'extra' => {
-          'associated_part' => {},
-          'spaces_before_argument' => ' '
+          'associated_part' => {}
         },
-        'level' => 0,
-        'line_nr' => {
+        'info' => {
+          'spaces_before_argument' => {
+            'text' => ' '
+          }
+        },
+        'source_info' => {
           'file_name' => '',
           'line_nr' => 3,
           'macro' => ''
-        },
-        'parent' => {}
+        }
       }
     ],
     'extra' => {
-      'element_command' => {},
-      'section' => {}
+      'unit_command' => {}
     },
-    'type' => 'element'
+    'type' => 'unit'
   }
 ];
-$result_trees{'part_before_top'}[0]{'contents'}[0]{'parent'} = $result_trees{'part_before_top'}[0];
-$result_trees{'part_before_top'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'part_before_top'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'part_before_top'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'part_before_top'}[0]{'contents'}[1];
-$result_trees{'part_before_top'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'part_before_top'}[0]{'contents'}[1];
-$result_trees{'part_before_top'}[0]{'contents'}[1]{'parent'} = $result_trees{'part_before_top'}[0];
-$result_trees{'part_before_top'}[0]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'part_before_top'}[0]{'contents'}[2]{'args'}[0];
-$result_trees{'part_before_top'}[0]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'part_before_top'}[0]{'contents'}[2];
 $result_trees{'part_before_top'}[0]{'contents'}[2]{'extra'}{'associated_part'} = $result_trees{'part_before_top'}[0]{'contents'}[1];
-$result_trees{'part_before_top'}[0]{'contents'}[2]{'parent'} = $result_trees{'part_before_top'}[0];
-$result_trees{'part_before_top'}[0]{'extra'}{'element_command'} = $result_trees{'part_before_top'}[0]{'contents'}[2];
-$result_trees{'part_before_top'}[0]{'extra'}{'section'} = $result_trees{'part_before_top'}[0]{'contents'}[2];
+$result_trees{'part_before_top'}[0]{'extra'}{'unit_command'} = $result_trees{'part_before_top'}[0]{'contents'}[2];
 
 $result_texis{'part_before_top'} = '@part part
 
@@ -115,38 +110,57 @@ top
 ';
 
 $result_sectioning{'part_before_top'} = {
-  'level' => -1,
-  'section_childs' => [
-    {
-      'cmdname' => 'part',
-      'extra' => {
-        'part_associated_section' => {
-          'cmdname' => 'top',
-          'extra' => {
-            'associated_part' => {},
-            'spaces_before_argument' => ' '
-          },
-          'level' => 0,
-          'section_prev' => {},
-          'section_up' => {}
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'part',
+        'extra' => {
+          'part_associated_section' => {
+            'cmdname' => 'top',
+            'extra' => {
+              'associated_part' => {}
+            },
+            'structure' => {
+              'associated_unit' => {
+                'extra' => {
+                  'unit_command' => {}
+                },
+                'structure' => {
+                  'directions' => {
+                    'This' => {}
+                  }
+                },
+                'type' => 'unit'
+              },
+              'section_level' => 0,
+              'section_prev' => {},
+              'section_up' => {}
+            }
+          }
         },
-        'spaces_before_argument' => ' '
+        'structure' => {
+          'associated_unit' => {},
+          'section_level' => 0,
+          'section_up' => {}
+        }
       },
-      'level' => 0,
-      'section_up' => {}
-    },
-    {}
-  ]
+      {}
+    ],
+    'section_level' => -1
+  }
 };
-$result_sectioning{'part_before_top'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'extra'}{'associated_part'} = $result_sectioning{'part_before_top'}{'section_childs'}[0];
-$result_sectioning{'part_before_top'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'section_prev'} = $result_sectioning{'part_before_top'}{'section_childs'}[0];
-$result_sectioning{'part_before_top'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'section_up'} = $result_sectioning{'part_before_top'};
-$result_sectioning{'part_before_top'}{'section_childs'}[0]{'section_up'} = $result_sectioning{'part_before_top'};
-$result_sectioning{'part_before_top'}{'section_childs'}[1] = $result_sectioning{'part_before_top'}{'section_childs'}[0]{'extra'}{'part_associated_section'};
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'extra'}{'associated_part'} = $result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'structure'}{'associated_unit'}{'extra'}{'unit_command'} = $result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'};
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'structure'}{'associated_unit'}{'structure'}{'directions'}{'This'} = $result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'structure'}{'associated_unit'};
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'structure'}{'section_prev'} = $result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'structure'}{'section_up'} = $result_sectioning{'part_before_top'};
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'structure'}{'associated_unit'} = $result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'}{'structure'}{'associated_unit'};
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'part_before_top'};
+$result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[1] = $result_sectioning{'part_before_top'}{'structure'}{'section_childs'}[0]{'extra'}{'part_associated_section'};
 
 $result_errors{'part_before_top'} = [
   {
-    'error_line' => ':1: warning: @part should not be associated with @top
+    'error_line' => 'warning: @part should not be associated with @top
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -163,30 +177,33 @@ $result_floats{'part_before_top'} = {};
 $result_elements{'part_before_top'} = [
   {
     'extra' => {
-      'directions' => {
-        'This' => {}
-      },
-      'element_command' => {
+      'unit_command' => {
         'cmdname' => 'top',
         'extra' => {
           'associated_part' => {
             'cmdname' => 'part',
-            'extra' => {
-              'spaces_before_argument' => ' '
-            },
-            'level' => 0
-          },
-          'spaces_before_argument' => ' '
+            'extra' => {},
+            'structure' => {
+              'associated_unit' => {}
+            }
+          }
         },
-        'level' => 0
-      },
-      'section' => {}
+        'structure' => {
+          'associated_unit' => {}
+        }
+      }
     },
-    'type' => 'element'
+    'structure' => {
+      'directions' => {
+        'This' => {}
+      }
+    },
+    'type' => 'unit'
   }
 ];
-$result_elements{'part_before_top'}[0]{'extra'}{'directions'}{'This'} = $result_elements{'part_before_top'}[0];
-$result_elements{'part_before_top'}[0]{'extra'}{'section'} = $result_elements{'part_before_top'}[0]{'extra'}{'element_command'};
+$result_elements{'part_before_top'}[0]{'extra'}{'unit_command'}{'extra'}{'associated_part'}{'structure'}{'associated_unit'} = $result_elements{'part_before_top'}[0];
+$result_elements{'part_before_top'}[0]{'extra'}{'unit_command'}{'structure'}{'associated_unit'} = $result_elements{'part_before_top'}[0];
+$result_elements{'part_before_top'}[0]{'structure'}{'directions'}{'This'} = $result_elements{'part_before_top'}[0];
 
 
 
@@ -201,7 +218,7 @@ $result_converted{'plaintext'}->{'part_before_top'} = 'top
 ';
 
 
-$result_converted{'html'}->{'part_before_top'} = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+$result_converted{'html'}->{'part_before_top'} = '<!DOCTYPE html>
 <html>
 <!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
 <head>
@@ -216,21 +233,8 @@ $result_converted{'html'}->{'part_before_top'} = '<!DOCTYPE html PUBLIC "-//W3C/
 
 <style type="text/css">
 <!--
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
 -->
 </style>
 
@@ -238,14 +242,14 @@ ul.no-bullet {list-style: none}
 </head>
 
 <body lang="en">
-<div class="part" id="part">
-<h1 class="part">part</h1>
+<div class="part-level-extent" id="part">
+<h1 class="part"><span>part<a class="copiable-link" href="#part"> &para;</a></span></h1>
 <hr>
 
 </div>
-<div class="top" id="top">
-<h1 class="top">top</h1>
-<hr></div>
+<div class="top-level-extent" id="top">
+<h1 class="top"><span>top<a class="copiable-link" href="#top"> &para;</a></span></h1>
+</div>
 
 
 

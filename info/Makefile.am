@@ -1,8 +1,6 @@
-# $Id$
 # Makefile.am for texinfo/info.
 #
-# Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2012,
-# 2013, 2014, 2015, 2016, 2017, 2018, 2019 Free Software Foundation, Inc.
+# Copyright 2002-2023 Free Software Foundation, Inc.
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -26,18 +24,28 @@ AM_CPPFLAGS =                                   \
   -DINFODIR=\"$(infodir)\"                      \
   -DINFODIR2=\"$(datadir)/info\"
 
-LDADD = $(top_builddir)/gnulib/lib/libgnu.a $(TERMLIBS) $(LIBINTL) $(LIBICONV) $(LIBTHREAD)
+LDADD = $(top_builddir)/gnulib/lib/libgnu.a $(TERMLIBS)
+
+# for various gnulib modules
+LDADD += $(LIBINTL) $(LIBICONV) $(LIBC32CONV) $(LIBUNISTRING) $(LIBTHREAD)
+
+# for hard-locale gnulib module which is brought in indirectly
+LDADD += $(HARD_LOCALE_LIB) $(SETLOCALE_NULL_LIB)
+
+# for mbrtowc gnulib module which is brought in indirectly
+LDADD += $(MBRTOWC_LIB)
 
 EXTRA_DIST = pcterm.c
 
 ginfo_SOURCES = dir.c display.c display.h doc.h dribble.c dribble.h \
   echo-area.c echo-area.h \
   filesys.c filesys.h footnotes.c footnotes.h indices.c indices.h \
-  info-utils.c info-utils.h info.c info.h infodoc.c infokey.c \
+  info.c info.h infodoc.c infokey.c \
   infomap.c infomap.h infopath.c m-x.c man.c man.h nodemenu.c \
-  nodes.c nodes.h search.c search.h session.c session.h signals.c signals.h \
+  nodes.c nodes.h scan.c scan.h \
+  search.c search.h session.c session.h signals.c signals.h \
   tag.c tag.h termdep.h terminal.c terminal.h tilde.c tilde.h \
-  variables.c variables.h window.c window.h
+  util.c util.h variables.c variables.h window.c window.h
 nodist_ginfo_SOURCES = doc.c funs.h
 
 # The files `doc.c' and `funs.h' are created by ./makedoc run over the
@@ -132,6 +140,7 @@ TESTS = \
 	t/window-split-dir.sh \
 	t/last-node-not-top-level.sh \
 	t/adjust-anchors.sh \
+	t/recode-C-locale.sh \
 	t/xref-to-anchor.sh \
 	t/search-after-tag.sh \
 	t/split-file-menu.sh \
@@ -143,6 +152,7 @@ TESTS = \
 	t/index-completing.sh \
 	t/split-index.sh \
 	t/index-long-nodeline.sh \
+	t/index-paren.sh \
 	t/empty-infopath.sh \
 	t/menu-sequence.sh \
 	t/relative-reference.sh \

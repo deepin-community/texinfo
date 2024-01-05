@@ -1,7 +1,7 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
@@ -10,97 +10,114 @@ $result_trees{'transparent_sort_chars'} = {
     {
       'contents' => [
         {
-          'args' => [
+          'contents' => [
             {
-              'parent' => {},
-              'text' => 'txiindexhyphenignore',
-              'type' => 'misc_arg'
+              'args' => [
+                {
+                  'text' => 'txiindexhyphenignore',
+                  'type' => 'rawline_arg'
+                },
+                {
+                  'text' => '',
+                  'type' => 'rawline_arg'
+                }
+              ],
+              'cmdname' => 'set',
+              'info' => {
+                'arg_line' => ' txiindexhyphenignore
+'
+              }
             },
             {
-              'parent' => {},
-              'text' => '',
-              'type' => 'misc_arg'
+              'text' => '
+',
+              'type' => 'empty_line'
             }
           ],
-          'cmdname' => 'set',
-          'extra' => {
-            'arg_line' => ' txiindexhyphenignore
-',
-            'misc_args' => [
-              'txiindexhyphenignore',
-              ''
-            ]
-          },
-          'parent' => {}
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line'
+          'type' => 'preamble_before_content'
         }
       ],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
-      'contents' => [],
       'extra' => {
-        'isindex' => 1,
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'Top'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 3,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     },
     {
       'args' => [
         {
-          'contents' => [],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'top',
       'contents' => [
         {
-          'parent' => {},
+          'text' => '
+',
+          'type' => 'empty_line'
+        }
+      ],
+      'extra' => {},
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 4,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'chap'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'contents' => [
+        {
           'text' => '
 ',
           'type' => 'empty_line'
@@ -114,25 +131,20 @@ $result_trees{'transparent_sort_chars'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => '--version'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'brace_command_arg'
                     }
                   ],
                   'cmdname' => 'code',
-                  'contents' => [],
-                  'line_nr' => {
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 6,
+                    'line_nr' => 8,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 },
                 {
-                  'parent' => {},
                   'text' => ', for '
                 },
                 {
@@ -140,140 +152,127 @@ $result_trees{'transparent_sort_chars'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'install-info'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'brace_command_arg'
                     }
                   ],
                   'cmdname' => 'command',
-                  'contents' => [],
-                  'line_nr' => {
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 6,
+                    'line_nr' => 8,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'cindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'cindex',
-              'index_name' => 'cp',
-              'index_type_command' => 'cindex',
-              'key' => 'version, for installinfo',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'cp',
+              1
+            ],
+            'index_ignore_chars' => '-'
           },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 6,
-            'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'index_entry_command'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'Source file format'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
             }
-          ],
-          'cmdname' => 'cindex',
-          'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'cindex',
-              'index_name' => 'cp',
-              'index_type_command' => 'cindex',
-              'key' => 'Source file format',
-              'node' => {},
-              'number' => 2
-            },
-            'spaces_before_argument' => ' '
           },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 7,
-            'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'index_entry_command'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'Semantic markup'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'cindex',
-          'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'cindex',
-              'index_name' => 'cp',
-              'index_type_command' => 'cindex',
-              'key' => 'Semantic markup',
-              'node' => {},
-              'number' => 3
-            },
-            'spaces_before_argument' => ' '
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 8,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
-          'parent' => {},
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'Source file format'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
+            }
+          ],
+          'cmdname' => 'cindex',
+          'extra' => {
+            'element_node' => {},
+            'index_entry' => [
+              'cp',
+              2
+            ],
+            'index_ignore_chars' => '-'
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 9,
+            'macro' => ''
+          },
+          'type' => 'index_entry_command'
+        },
+        {
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'Semantic markup'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
+            }
+          ],
+          'cmdname' => 'cindex',
+          'extra' => {
+            'element_node' => {},
+            'index_entry' => [
+              'cp',
+              3
+            ],
+            'index_ignore_chars' => '-'
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 10,
+            'macro' => ''
+          },
+          'type' => 'index_entry_command'
+        },
+        {
           'text' => '
 ',
           'type' => 'empty_line'
@@ -283,15 +282,15 @@ $result_trees{'transparent_sort_chars'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'cp'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -299,78 +298,48 @@ $result_trees{'transparent_sort_chars'} = {
           'extra' => {
             'misc_args' => [
               'cp'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 10,
+            'line_nr' => 12,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {},
-      'level' => 0,
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 4,
-        'macro' => ''
+      'extra' => {
+        'isindex' => 1,
+        'normalized' => 'chap'
       },
-      'parent' => {}
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 6,
+        'macro' => ''
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'transparent_sort_chars'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[0]{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[0]{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[0]{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'};
-$result_trees{'transparent_sort_chars'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[1]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[1];
-$result_trees{'transparent_sort_chars'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'transparent_sort_chars'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'transparent_sort_chars'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[1]{'parent'} = $result_trees{'transparent_sort_chars'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[2]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[2]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'extra'}{'index_entry'}{'command'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'extra'}{'index_entry'}{'content'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'extra'}{'index_entry'}{'node'} = $result_trees{'transparent_sort_chars'}{'contents'}[1];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'extra'}{'index_entry'}{'command'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'extra'}{'index_entry'}{'content'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'args'}[0]{'contents'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'args'}[0]{'contents'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'extra'}{'index_entry'}{'node'} = $result_trees{'transparent_sort_chars'}{'contents'}[1];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[2]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'extra'}{'index_entry'}{'command'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'extra'}{'index_entry'}{'content'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'args'}[0]{'contents'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'args'}[0]{'contents'};
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'extra'}{'index_entry'}{'node'} = $result_trees{'transparent_sort_chars'}{'contents'}[1];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[3]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[4]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[5]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[5]{'args'}[0];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[5]{'args'}[0]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[5];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'contents'}[5]{'parent'} = $result_trees{'transparent_sort_chars'}{'contents'}[2];
-$result_trees{'transparent_sort_chars'}{'contents'}[2]{'parent'} = $result_trees{'transparent_sort_chars'};
+$result_trees{'transparent_sort_chars'}{'contents'}[3]{'contents'}[1]{'extra'}{'element_node'} = $result_trees{'transparent_sort_chars'}{'contents'}[3];
+$result_trees{'transparent_sort_chars'}{'contents'}[3]{'contents'}[2]{'extra'}{'element_node'} = $result_trees{'transparent_sort_chars'}{'contents'}[3];
+$result_trees{'transparent_sort_chars'}{'contents'}[3]{'contents'}[3]{'extra'}{'element_node'} = $result_trees{'transparent_sort_chars'}{'contents'}[3];
 
 $result_texis{'transparent_sort_chars'} = '@set txiindexhyphenignore
 
 @node Top
 @top
+
+@node chap
 
 @cindex @code{--version}, for @command{install-info}
 @cindex Source file format
@@ -383,29 +352,33 @@ $result_texis{'transparent_sort_chars'} = '@set txiindexhyphenignore
 $result_texts{'transparent_sort_chars'} = '
 
 
+
 ';
 
 $result_sectioning{'transparent_sort_chars'} = {
-  'level' => -1,
-  'section_childs' => [
-    {
-      'cmdname' => 'top',
-      'extra' => {
-        'associated_node' => {
-          'cmdname' => 'node',
-          'extra' => {
-            'isindex' => 1,
-            'normalized' => 'Top',
-            'spaces_before_argument' => ' '
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'top',
+        'extra' => {
+          'associated_node' => {
+            'cmdname' => 'node',
+            'extra' => {
+              'normalized' => 'Top'
+            },
+            'structure' => {}
           }
+        },
+        'structure' => {
+          'section_level' => 0,
+          'section_up' => {}
         }
-      },
-      'level' => 0,
-      'section_up' => {}
-    }
-  ]
+      }
+    ],
+    'section_level' => -1
+  }
 };
-$result_sectioning{'transparent_sort_chars'}{'section_childs'}[0]{'section_up'} = $result_sectioning{'transparent_sort_chars'};
+$result_sectioning{'transparent_sort_chars'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'transparent_sort_chars'};
 
 $result_nodes{'transparent_sort_chars'} = {
   'cmdname' => 'node',
@@ -413,21 +386,31 @@ $result_nodes{'transparent_sort_chars'} = {
     'associated_section' => {
       'cmdname' => 'top',
       'extra' => {},
-      'level' => 0
+      'structure' => {}
     },
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'isindex' => 1,
+        'normalized' => 'chap'
+      },
+      'structure' => {
+        'node_prev' => {}
+      }
+    }
   }
 };
+$result_nodes{'transparent_sort_chars'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'transparent_sort_chars'};
 
 $result_menus{'transparent_sort_chars'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'transparent_sort_chars'} = [];
@@ -436,23 +419,36 @@ $result_errors{'transparent_sort_chars'} = [];
 $result_floats{'transparent_sort_chars'} = {};
 
 
+$result_indices_sort_strings{'transparent_sort_chars'} = {
+  'cp' => [
+    'Semantic markup',
+    'Source file format',
+    'version, for installinfo'
+  ]
+};
+
+
 
 $result_converted{'info'}->{'transparent_sort_chars'} = 'This is , produced from .
 
 
-File: ,  Node: Top,  Up: (dir)
+File: ,  Node: Top,  Next: chap,  Up: (dir)
+
+
+File: ,  Node: chap,  Prev: Top
 
  [index ]
 * Menu:
 
-* Semantic markup:                       Top.                   (line 3)
-* Source file format:                    Top.                   (line 3)
-* --version, for install-info:           Top.                   (line 3)
+* Semantic markup:                       chap.                  (line 3)
+* Source file format:                    chap.                  (line 3)
+* --version, for install-info:           chap.                  (line 3)
 
 
 
 Tag Table:
 Node: Top27
+Node: chap74
 
 End Tag Table
 
@@ -465,42 +461,133 @@ End:
 
 $result_converted{'plaintext'}->{'transparent_sort_chars'} = '* Menu:
 
-* Semantic markup:                       Top.                   (line 0)
-* Source file format:                    Top.                   (line 0)
-* --version, for install-info:           Top.                   (line 0)
+* Semantic markup:                       chap.                  (line 0)
+* Source file format:                    chap.                  (line 0)
+* --version, for install-info:           chap.                  (line 0)
 
 ';
 
 
 $result_converted{'html_text'}->{'transparent_sort_chars'} = '
-<div class="top" id="Top">
-<span id="SEC_Top"></span>
-<span id="index-_002d_002dversion_002c-for-install_002dinfo"></span>
-<span id="index-Source-file-format"></span>
-<span id="index-Semantic-markup"></span>
+<div class="top-level-extent" id="Top">
+<div class="nav-panel">
+<p>
+[<a href="#chap" title="Index" rel="index">Index</a>]</p>
+</div>
+<a class="top" id="SEC_Top"></a>
+<hr>
+<a class="node-id" id="chap"></a><div class="nav-panel">
+<p>
+[<a href="#chap" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="node"><span>chap<a class="copiable-link" href="#chap"> &para;</a></span></h4>
 
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#t_h_cp_letter-S"><b>S</b></a>
+<a class="index-entry-id" id="index-_002d_002dversion_002c-for-install_002dinfo"></a>
+<a class="index-entry-id" id="index-Source-file-format"></a>
+<a class="index-entry-id" id="index-Semantic-markup"></a>
+
+<div class="printindex cp-printindex">
+<table class="cp-letters-header-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#chap_cp_letter-S"><b>S</b></a>
  &nbsp; 
-<a class="summary-letter" href="#t_h_cp_letter-V"><b>V</b></a>
+<a class="summary-letter-printindex" href="#chap_cp_letter-V"><b>V</b></a>
  &nbsp; 
 </td></tr></table>
-<table class="index-cp" border="0">
-<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="t_h_cp_letter-S">S</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Semantic-markup">Semantic markup</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Source-file-format">Source file format</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="t_h_cp_letter-V">V</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-_002d_002dversion_002c-for-install_002dinfo"><code>--version</code>, for <code>install-info</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
+<table class="cp-entries-printindex" border="0">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="chap_cp_letter-S">S</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Semantic-markup">Semantic markup</a></td><td class="printindex-index-section"><a href="#chap">chap</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Source-file-format">Source file format</a></td><td class="printindex-index-section"><a href="#chap">chap</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="chap_cp_letter-V">V</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_002d_002dversion_002c-for-install_002dinfo"><code class="code">--version</code>, for <code class="command">install-info</code></a></td><td class="printindex-index-section"><a href="#chap">chap</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
 </table>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#t_h_cp_letter-S"><b>S</b></a>
+<table class="cp-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#chap_cp_letter-S"><b>S</b></a>
  &nbsp; 
-<a class="summary-letter" href="#t_h_cp_letter-V"><b>V</b></a>
+<a class="summary-letter-printindex" href="#chap_cp_letter-V"><b>V</b></a>
  &nbsp; 
 </td></tr></table>
-<hr></div>
+</div>
+</div>
+';
+
+
+$result_converted{'xml'}->{'transparent_sort_chars'} = '<set name="txiindexhyphenignore" line=" txiindexhyphenignore"></set>
+
+<node name="Top" spaces=" "><nodename>Top</nodename><nodenext automatic="on">chap</nodenext></node>
+<top><sectiontitle></sectiontitle>
+
+</top>
+<node name="chap" spaces=" "><nodename>chap</nodename><nodeprev automatic="on">Top</nodeprev></node>
+
+<cindex index="cp" spaces=" "><indexterm index="cp" number="1"><code>--version</code>, for <command>install-info</command></indexterm></cindex>
+<cindex index="cp" spaces=" "><indexterm index="cp" number="2">Source file format</indexterm></cindex>
+<cindex index="cp" spaces=" "><indexterm index="cp" number="3">Semantic markup</indexterm></cindex>
+
+<printindex spaces=" " value="cp" line="cp"></printindex>
+';
+
+
+$result_converted{'latex'}->{'transparent_sort_chars'} = '\\documentclass{book}
+\\usepackage{amsfonts}
+\\usepackage{amsmath}
+\\usepackage[gen]{eurosym}
+\\usepackage{textcomp}
+\\usepackage{graphicx}
+\\usepackage{etoolbox}
+\\usepackage{titleps}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{imakeidx}
+\\usepackage{float}
+% use hidelinks to remove boxes around links to be similar to Texinfo TeX
+\\usepackage[hidelinks]{hyperref}
+
+\\makeatletter
+\\newcommand{\\Texinfosettitle}{No Title}%
+
+% no index headers
+\\indexsetup{level=\\relax,toclevel=section}%
+\\makeindex[name=cp,title=]%
+
+% redefine the \\mainmatter command such that it does not clear page
+% as if in double page
+\\renewcommand\\mainmatter{\\clearpage\\@mainmattertrue\\pagenumbering{arabic}}
+\\newenvironment{Texinfopreformatted}{%
+  \\par\\GNUTobeylines\\obeyspaces\\frenchspacing\\parskip=\\z@\\parindent=\\z@}{}
+{\\catcode`\\^^M=13 \\gdef\\GNUTobeylines{\\catcode`\\^^M=13 \\def^^M{\\null\\par}}}
+\\newenvironment{Texinfoindented}{\\begin{list}{}{}\\item\\relax}{\\end{list}}
+
+% used for substitutions in commands
+\\newcommand{\\Texinfoplaceholder}[1]{}
+
+\\newpagestyle{single}{\\sethead[\\chaptername{} \\thechapter{} \\chaptertitle{}][][\\thepage]
+                              {\\chaptername{} \\thechapter{} \\chaptertitle{}}{}{\\thepage}}
+
+% allow line breaking at underscore
+\\let\\Texinfounderscore\\_
+\\renewcommand{\\_}{\\Texinfounderscore\\discretionary{}{}{}}
+\\renewcommand{\\includegraphics}[1]{\\fbox{FIG \\detokenize{#1}}}
+
+\\makeatother
+% set default for @setchapternewpage
+\\makeatletter
+\\patchcmd{\\chapter}{\\if@openright\\cleardoublepage\\else\\clearpage\\fi}{\\Texinfoplaceholder{setchapternewpage placeholder}\\clearpage}{}{}
+\\makeatother
+\\pagestyle{single}%
+
+
+\\begin{document}
+\\label{anchor:Top}%
+\\label{anchor:chap}%
+
+\\index[cp]{version, for installinfo@\\texttt{{-}{-}version}, for \\texttt{install-info}}%
+\\index[cp]{Source file format@Source file format}%
+\\index[cp]{Semantic markup@Semantic markup}%
+
+\\printindex[cp]
+\\end{document}
 ';
 
 1;

@@ -1,7 +1,7 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
@@ -10,221 +10,217 @@ $result_trees{'format_in_titlepage'} = {
     {
       'contents' => [
         {
-          'cmdname' => 'titlepage',
           'contents' => [
             {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line_after_command'
-            },
-            {
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line'
-            },
-            {
-              'cmdname' => 'format',
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
-                  },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
-                },
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'Published
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
                     }
+                  },
+                  'type' => 'block_line_arg'
+                }
+              ],
+              'cmdname' => 'titlepage',
+              'contents' => [
+                {
+                  'text' => '
+',
+                  'type' => 'empty_line'
+                },
+                {
+                  'args' => [
+                    {
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'block_line_arg'
+                    }
                   ],
-                  'parent' => {},
-                  'type' => 'preformatted'
+                  'cmdname' => 'format',
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'Published
+'
+                        }
+                      ],
+                      'type' => 'preformatted'
+                    },
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'format'
+                            }
+                          ],
+                          'info' => {
+                            'spaces_after_argument' => {
+                              'text' => '
+'
+                            }
+                          },
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'end',
+                      'extra' => {
+                        'text_arg' => 'format'
+                      },
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 5,
+                        'macro' => ''
+                      }
+                    }
+                  ],
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 3,
+                    'macro' => ''
+                  }
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'empty_line'
                 },
                 {
                   'args' => [
                     {
                       'contents' => [
                         {
-                          'parent' => {},
-                          'text' => 'format'
+                          'text' => 'titlepage'
                         }
                       ],
-                      'extra' => {
-                        'spaces_after_argument' => '
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
 '
+                        }
                       },
-                      'parent' => {},
                       'type' => 'line_arg'
                     }
                   ],
                   'cmdname' => 'end',
                   'extra' => {
-                    'command_argument' => 'format',
-                    'spaces_before_argument' => ' ',
-                    'text_arg' => 'format'
+                    'text_arg' => 'titlepage'
                   },
-                  'line_nr' => {
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 5,
+                    'line_nr' => 7,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 }
               ],
-              'extra' => {
-                'end_command' => {}
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 3,
+                'line_nr' => 1,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 ',
               'type' => 'empty_line'
-            },
-            {
-              'args' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'titlepage'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
-'
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'end',
-              'extra' => {
-                'command_argument' => 'titlepage',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'titlepage'
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 7,
-                'macro' => ''
-              },
-              'parent' => {}
             }
           ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 1,
-            'macro' => ''
-          },
-          'parent' => {}
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line'
+          'type' => 'preamble_before_content'
         }
       ],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'Top'
+      },
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 9,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'chap'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         }
       ],
       'extra' => {
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'chap'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
-        'line_nr' => 9,
+        'line_nr' => 10,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[0]{'extra'}{'command'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[1];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[2]{'args'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[2];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[2]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'extra'}{'end_command'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'contents'}[2];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[3]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[4]{'args'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[4];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[4]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'contents'}[4];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'};
-$result_trees{'format_in_titlepage'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[1]{'args'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[1];
-$result_trees{'format_in_titlepage'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'format_in_titlepage'}{'contents'}[1];
-$result_trees{'format_in_titlepage'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'format_in_titlepage'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'format_in_titlepage'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'format_in_titlepage'}{'contents'}[1]{'parent'} = $result_trees{'format_in_titlepage'};
 
 $result_texis{'format_in_titlepage'} = '@titlepage
 
@@ -235,6 +231,7 @@ Published
 @end titlepage
 
 @node Top
+@node chap
 
 ';
 
@@ -243,22 +240,31 @@ $result_texts{'format_in_titlepage'} = '
 
 ';
 
-$result_sectioning{'format_in_titlepage'} = {};
-
 $result_nodes{'format_in_titlepage'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'chap'
+      },
+      'structure' => {
+        'node_prev' => {}
+      }
+    }
   }
 };
+$result_nodes{'format_in_titlepage'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'format_in_titlepage'};
 
 $result_menus{'format_in_titlepage'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'format_in_titlepage'} = [];
@@ -271,12 +277,16 @@ $result_floats{'format_in_titlepage'} = {};
 $result_converted{'info'}->{'format_in_titlepage'} = 'This is , produced from .
 
 
-File: ,  Node: Top,  Up: (dir)
+File: ,  Node: Top,  Next: chap,  Up: (dir)
+
+
+File: ,  Node: chap,  Prev: Top
 
 
 
 Tag Table:
 Node: Top27
+Node: chap74
 
 End Tag Table
 
@@ -287,7 +297,7 @@ End:
 ';
 
 
-$result_converted{'html'}->{'format_in_titlepage'} = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+$result_converted{'html'}->{'format_in_titlepage'} = '<!DOCTYPE html>
 <html>
 <!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
 <head>
@@ -303,21 +313,8 @@ $result_converted{'html'}->{'format_in_titlepage'} = '<!DOCTYPE html PUBLIC "-//
 <link href="#Top" rel="start" title="Top">
 <style type="text/css">
 <!--
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
 -->
 </style>
 
@@ -326,9 +323,19 @@ ul.no-bullet {list-style: none}
 
 <body lang="en">
 
-<span id="Top"></span><h1 class="node-heading">Top</h1>
-
+<a class="node-id" id="Top"></a><div class="nav-panel">
+<p>
+Next: <a href="#chap" accesskey="n" rel="next">chap</a> &nbsp; </p>
+</div>
+<h1 class="node"><span>Top<a class="copiable-link" href="#Top"> &para;</a></span></h1>
 <hr>
+<a class="node-id" id="chap"></a><div class="nav-panel">
+<p>
+Previous: <a href="#Top" accesskey="p" rel="prev">Top</a> &nbsp; </p>
+</div>
+<h4 class="node"><span>chap<a class="copiable-link" href="#chap"> &para;</a></span></h4>
+
+
 
 
 </body>
@@ -344,5 +351,32 @@ $result_converted_errors{'html'}->{'format_in_titlepage'} = [
   }
 ];
 
+
+
+$result_converted{'latex_text'}->{'format_in_titlepage'} = '
+\\begin{document}
+
+\\frontmatter
+\\pagestyle{empty}%
+\\begin{titlepage}
+\\begingroup
+\\newskip\\titlepagetopglue \\titlepagetopglue = 1.5in
+\\newskip\\titlepagebottomglue \\titlepagebottomglue = 2pc
+\\setlength{\\parindent}{0pt}
+% Leave some space at the very top of the page.
+    \\vglue\\titlepagetopglue
+
+\\begin{Texinfopreformatted}%
+Published
+\\end{Texinfopreformatted}
+
+\\endgroup
+\\end{titlepage}
+\\mainmatter
+\\pagestyle{single}%
+\\label{anchor:Top}%
+\\label{anchor:chap}%
+
+';
 
 1;

@@ -1,38 +1,67 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'backslash_in_arg'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'Top'
+      },
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 1,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'chap'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -40,12 +69,10 @@ $result_trees{'backslash_in_arg'} = {
         {
           'args' => [
             {
-              'parent' => {},
               'text' => 'funindex',
               'type' => 'macro_name'
             },
             {
-              'parent' => {},
               'text' => 'TEXT',
               'type' => 'macro_arg'
             }
@@ -53,36 +80,81 @@ $result_trees{'backslash_in_arg'} = {
           'cmdname' => 'macro',
           'contents' => [
             {
-              'parent' => {},
-              'text' => '@findex \\TEXT\\',
+              'text' => '@findex \\TEXT\\
+',
               'type' => 'raw'
             },
             {
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'last_raw_newline'
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'macro'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'macro'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 6,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
+          'info' => {
             'arg_line' => ' funindex {TEXT}
 '
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 4,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line_after_command'
-        },
-        {
-          'parent' => {},
+          'source_marks' => [
+            {
+              'counter' => 1,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => '\\\\q'
+                      }
+                    ],
+                    'type' => 'line_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'funindex',
+                  'spaces_before_argument' => {
+                    'text' => ' '
+                  }
+                },
+                'type' => 'macro_call'
+              },
+              'position' => 1,
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
           'text' => '
 ',
           'type' => 'empty_line'
@@ -92,81 +164,67 @@ $result_trees{'backslash_in_arg'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
+                  'source_marks' => [
+                    {
+                      'counter' => 1,
+                      'position' => 3,
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'end'
+                    }
+                  ],
                   'text' => '\\\\q'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'findex',
-          'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 1,
-              'index_at_command' => 'findex',
-              'index_name' => 'fn',
-              'index_type_command' => 'findex',
-              'key' => '\\\\q',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 7,
-            'macro' => 'funindex'
-          },
-          'parent' => {},
-          'type' => 'index_entry_command'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => '\\r'
                 }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'findex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 1,
-              'index_at_command' => 'findex',
-              'index_name' => 'fn',
-              'index_type_command' => 'findex',
-              'key' => '\\r',
-              'node' => {},
-              'number' => 2
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'fn',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 8,
             'macro' => 'funindex'
           },
-          'parent' => {},
+          'source_marks' => [
+            {
+              'counter' => 2,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => '\\r'
+                      }
+                    ],
+                    'type' => 'brace_command_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'funindex'
+                },
+                'type' => 'macro_call'
+              },
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
           'type' => 'index_entry_command'
         },
         {
@@ -174,40 +232,70 @@ $result_trees{'backslash_in_arg'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => '\\q'
+                  'source_marks' => [
+                    {
+                      'counter' => 2,
+                      'position' => 2,
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'end'
+                    }
+                  ],
+                  'text' => '\\r'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'findex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 1,
-              'index_at_command' => 'findex',
-              'index_name' => 'fn',
-              'index_type_command' => 'findex',
-              'key' => '\\q',
-              'node' => {},
-              'number' => 3
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'fn',
+              2
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 9,
             'macro' => 'funindex'
           },
-          'parent' => {},
+          'source_marks' => [
+            {
+              'counter' => 3,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => '\\q'
+                      }
+                    ],
+                    'type' => 'line_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'funindex',
+                  'spaces_before_argument' => {
+                    'text' => ' '
+                  }
+                },
+                'type' => 'macro_call'
+              },
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
           'type' => 'index_entry_command'
         },
         {
@@ -215,40 +303,67 @@ $result_trees{'backslash_in_arg'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => '\\r'
+                  'source_marks' => [
+                    {
+                      'counter' => 3,
+                      'position' => 2,
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'end'
+                    }
+                  ],
+                  'text' => '\\q'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'findex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 1,
-              'index_at_command' => 'findex',
-              'index_name' => 'fn',
-              'index_type_command' => 'findex',
-              'key' => '\\r',
-              'node' => {},
-              'number' => 4
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'fn',
+              3
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 10,
             'macro' => 'funindex'
           },
-          'parent' => {},
+          'source_marks' => [
+            {
+              'counter' => 4,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => '\\r'
+                      }
+                    ],
+                    'type' => 'brace_command_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'funindex'
+                },
+                'type' => 'macro_call'
+              },
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
           'type' => 'index_entry_command'
         },
         {
@@ -256,15 +371,60 @@ $result_trees{'backslash_in_arg'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
+                  'source_marks' => [
+                    {
+                      'counter' => 4,
+                      'position' => 2,
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'end'
+                    }
+                  ],
+                  'text' => '\\r'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
+            }
+          ],
+          'cmdname' => 'findex',
+          'extra' => {
+            'element_node' => {},
+            'index_entry' => [
+              'fn',
+              4
+            ]
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 11,
+            'macro' => 'funindex'
+          },
+          'type' => 'index_entry_command'
+        },
+        {
+          'args' => [
+            {
+              'contents' => [
+                {
                   'text' => 'fn'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -272,90 +432,45 @@ $result_trees{'backslash_in_arg'} = {
           'extra' => {
             'misc_args' => [
               'fn'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 11,
+            'line_nr' => 12,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
       'extra' => {
         'isindex' => 1,
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'chap'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
-        'line_nr' => 1,
+        'line_nr' => 2,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'backslash_in_arg'}{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'args'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'args'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'extra'}{'index_entry'}{'command'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'extra'}{'index_entry'}{'content'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'extra'}{'index_entry'}{'node'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[4]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'args'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'extra'}{'index_entry'}{'command'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'extra'}{'index_entry'}{'content'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'extra'}{'index_entry'}{'node'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[5]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'args'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'extra'}{'index_entry'}{'command'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'extra'}{'index_entry'}{'content'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'extra'}{'index_entry'}{'node'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[6]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'args'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'extra'}{'index_entry'}{'command'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'extra'}{'index_entry'}{'content'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'args'}[0]{'contents'};
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'extra'}{'index_entry'}{'node'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[7]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[8]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[8]{'args'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[8]{'args'}[0]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[8];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'contents'}[8]{'parent'} = $result_trees{'backslash_in_arg'}{'contents'}[1];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'backslash_in_arg'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'backslash_in_arg'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'backslash_in_arg'}{'contents'}[1]{'parent'} = $result_trees{'backslash_in_arg'};
+$result_trees{'backslash_in_arg'}{'contents'}[2]{'contents'}[3]{'extra'}{'element_node'} = $result_trees{'backslash_in_arg'}{'contents'}[2];
+$result_trees{'backslash_in_arg'}{'contents'}[2]{'contents'}[4]{'extra'}{'element_node'} = $result_trees{'backslash_in_arg'}{'contents'}[2];
+$result_trees{'backslash_in_arg'}{'contents'}[2]{'contents'}[5]{'extra'}{'element_node'} = $result_trees{'backslash_in_arg'}{'contents'}[2];
+$result_trees{'backslash_in_arg'}{'contents'}[2]{'contents'}[6]{'extra'}{'element_node'} = $result_trees{'backslash_in_arg'}{'contents'}[2];
 
 $result_texis{'backslash_in_arg'} = '@node Top
+@node chap
 
 @macro funindex {TEXT}
 @findex \\TEXT\\
@@ -373,30 +488,48 @@ $result_texts{'backslash_in_arg'} = '
 
 ';
 
-$result_sectioning{'backslash_in_arg'} = {};
-
 $result_nodes{'backslash_in_arg'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'isindex' => 1,
+        'normalized' => 'chap'
+      },
+      'structure' => {
+        'node_prev' => {}
+      }
+    }
   }
 };
+$result_nodes{'backslash_in_arg'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'backslash_in_arg'};
 
 $result_menus{'backslash_in_arg'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'backslash_in_arg'} = [];
 
 
 $result_floats{'backslash_in_arg'} = {};
+
+
+$result_indices_sort_strings{'backslash_in_arg'} = {
+  'fn' => [
+    '\\\\q',
+    '\\q',
+    '\\r',
+    '\\r'
+  ]
+};
 
 
 1;

@@ -1,185 +1,119 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'not_letters_in_prototype'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => '1.3  5-6'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'multitable',
       'contents' => [
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'cmdname' => 'item',
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => '1.3 '
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'paragraph'
-                    }
-                  ],
-                  'extra' => {
-                    'cell_number' => 1,
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 2,
-                    'macro' => ''
-                  },
-                  'parent' => {}
-                },
-                {
-                  'cmdname' => 'tab',
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => '5-6
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'paragraph'
-                    }
-                  ],
-                  'extra' => {
-                    'cell_number' => 2,
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 2,
-                    'macro' => ''
-                  },
-                  'parent' => {}
-                }
-              ],
-              'extra' => {
-                'row_number' => 1
-              },
-              'parent' => {},
-              'type' => 'row'
-            }
-          ],
-          'parent' => {},
-          'type' => 'multitable_body'
-        },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'multitable'
+                  'text' => '1.3  5-6'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'end',
+          'cmdname' => 'multitable',
+          'contents' => [
+            {
+              'contents' => [
+                {
+                  'text' => ' ',
+                  'type' => 'ignorable_spaces_after_command'
+                },
+                {
+                  'contents' => [
+                    {
+                      'text' => '1.3 '
+                    }
+                  ],
+                  'type' => 'paragraph'
+                },
+                {
+                  'text' => ' ',
+                  'type' => 'ignorable_spaces_after_command'
+                },
+                {
+                  'contents' => [
+                    {
+                      'text' => '5-6
+'
+                    }
+                  ],
+                  'type' => 'paragraph'
+                }
+              ],
+              'type' => 'before_item'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'multitable'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'multitable'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
+            }
+          ],
           'extra' => {
-            'command_argument' => 'multitable',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'multitable'
+            'max_columns' => 0
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => '  '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {},
-        'max_columns' => 2,
-        'prototypes' => [
-          {
-            'text' => '1.3',
-            'type' => 'row_prototype'
-          },
-          {
-            'text' => '5-6',
-            'type' => 'row_prototype'
-          }
-        ],
-        'prototypes_line' => [
-          {
-            'text' => '1.3',
-            'type' => 'row_prototype'
-          },
-          {
-            'text' => '  ',
-            'type' => 'prototype_space'
-          },
-          {
-            'text' => '5-6',
-            'type' => 'row_prototype'
-          }
-        ],
-        'spaces_before_argument' => '  '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'args'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[1];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'not_letters_in_prototype'}{'contents'}[0]{'contents'}[1];
-$result_trees{'not_letters_in_prototype'}{'contents'}[0]{'parent'} = $result_trees{'not_letters_in_prototype'};
 
 $result_texis{'not_letters_in_prototype'} = '@multitable  1.3  5-6
-@item 1.3 @tab 5-6
+ 1.3  5-6
 @end multitable
 ';
 
@@ -187,26 +121,65 @@ $result_texis{'not_letters_in_prototype'} = '@multitable  1.3  5-6
 $result_texts{'not_letters_in_prototype'} = '1.3 5-6
 ';
 
-$result_errors{'not_letters_in_prototype'} = [];
+$result_errors{'not_letters_in_prototype'} = [
+  {
+    'error_line' => 'warning: empty multitable
+',
+    'file_name' => '',
+    'line_nr' => 1,
+    'macro' => '',
+    'text' => 'empty multitable',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: @item in empty multitable
+',
+    'file_name' => '',
+    'line_nr' => 2,
+    'macro' => '',
+    'text' => '@item in empty multitable',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: @tab in empty multitable
+',
+    'file_name' => '',
+    'line_nr' => 2,
+    'macro' => '',
+    'text' => '@tab in empty multitable',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: @multitable has text but no @item
+',
+    'file_name' => '',
+    'line_nr' => 1,
+    'macro' => '',
+    'text' => '@multitable has text but no @item',
+    'type' => 'warning'
+  }
+];
 
 
 $result_floats{'not_letters_in_prototype'} = {};
 
 
 
-$result_converted{'plaintext'}->{'not_letters_in_prototype'} = '1.3   5-6
+$result_converted{'plaintext'}->{'not_letters_in_prototype'} = '1.3
+5-6
 ';
 
 
-$result_converted{'html_text'}->{'not_letters_in_prototype'} = '<table>
-<tr><td>1.3</td><td>5-6</td></tr>
+$result_converted{'html_text'}->{'not_letters_in_prototype'} = '<table class="multitable">
+<tr><td>1.3 <p>5-6
+</p></td></tr>
 </table>
 ';
 
 
-$result_converted{'xml'}->{'not_letters_in_prototype'} = '<multitable spaces="  " endspaces=" "><columnprototypes><columnprototype>1.3</columnprototype>  <columnprototype>5-6</columnprototype></columnprototypes>
-<tbody><row><entry command="item" spaces=" "><para>1.3 </para></entry><entry command="tab" spaces=" "><para>5-6
-</para></entry></row></tbody></multitable>
+$result_converted{'xml'}->{'not_letters_in_prototype'} = '<multitable spaces="  " endspaces=" "><columnprototypes>1.3  5-6</columnprototypes>
+<beforefirstitem> <para>1.3 </para> <para>5-6
+</para></beforefirstitem></multitable>
 ';
 
 1;

@@ -3,7 +3,7 @@
 # Also serve as an example of using the Texinfo::Parser module,
 # including the usual per-format options.
 #
-# Copyright 2012, 2013, 2014, 2015, 2016 Free Software Foundation, Inc.
+# Copyright 2012-2023 Free Software Foundation, Inc.
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -219,8 +219,10 @@ my $error_count = 0;
 my $parser = Texinfo::Parser::parser($parser_options);
 my $tree = $parser->parse_texi_file($input_file_name);
 
+my $registrar = $parser->registered_errors();
+
 if (!defined($tree)) {
-  handle_errors($parser, $error_count);
+  handle_errors($registrar, $error_count);
   exit (1);
 }
 

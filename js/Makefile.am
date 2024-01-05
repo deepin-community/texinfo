@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2017-2018  Free Software Foundation, Inc.
+# Copyright (C) 2017-2022  Free Software Foundation, Inc.
 #
 # This file is part of GNU Texinfo.
 #
@@ -58,13 +58,12 @@ js_scripts = \
 dist_js_DATA=$(js_scripts) info.css
 
 EXTRA_DIST += HACKING README TODO \
-	      build-aux/eslint.json \
-	      build-aux/modernizr.json \
-	      modernizr.js \
-	      package.json \
-	      server.js \
-	      tsconfig.json \
-	      yarn.lock
+              build-aux/eslint.json \
+              build-aux/modernizr.json \
+              modernizr.js \
+              package.json \
+              tsconfig.json
+
 
 
 ## ---------- ##
@@ -82,7 +81,8 @@ examples_src = \
   examples/kawa \
   kawa.css
 
-EXTRA_DIST += $(examples_src)
+# Do not distribute the examples as they take up too much space
+#EXTRA_DIST += $(examples_src)
 
 
 hello_extra_head = '<link rel="stylesheet" type="text/css" href="info.css"/><script src="modernizr.js" type="text/javascript"></script><script src="info.js" type="text/javascript"></script>'

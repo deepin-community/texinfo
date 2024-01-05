@@ -1,203 +1,156 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'on_index_entry_line'} = {
   'contents' => [
     {
-      'args' => [
+      'contents' => [
         {
-          'contents' => [
+          'args' => [
             {
-              'cmdname' => 'indent',
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
-            },
-            {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => ' ',
-              'type' => 'empty_spaces_after_command'
-            },
-            {
-              'args' => [
+              'contents' => [
                 {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'in titlefont'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'brace_command_arg'
-                }
-              ],
-              'cmdname' => 'titlefont',
-              'contents' => [],
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
-            },
-            {
-              'parent' => {},
-              'text' => ' '
-            },
-            {
-              'args' => [
+                  'cmdname' => 'indent',
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
+                },
                 {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'in anchor'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'brace_command_arg'
-                }
-              ],
-              'cmdname' => 'anchor',
-              'contents' => [],
-              'extra' => {
-                'node_content' => [
-                  {}
-                ],
-                'normalized' => 'in-anchor'
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
-            },
-            {
-              'args' => [
+                  'text' => ' ',
+                  'type' => 'ignorable_spaces_after_command'
+                },
                 {
-                  'contents' => [
+                  'args' => [
                     {
                       'contents' => [
                         {
-                          'parent' => {},
-                          'text' => 'footnote'
+                          'text' => 'in titlefont'
                         }
                       ],
-                      'parent' => {},
-                      'type' => 'paragraph'
+                      'type' => 'brace_command_arg'
                     }
                   ],
-                  'parent' => {},
-                  'type' => 'brace_command_context'
-                }
-              ],
-              'cmdname' => 'footnote',
-              'contents' => [],
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
-            },
-            {
-              'parent' => {},
-              'text' => ' '
-            },
-            {
-              'args' => [
+                  'cmdname' => 'titlefont',
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
+                },
                 {
-                  'contents' => [
+                  'text' => ' '
+                },
+                {
+                  'args' => [
                     {
-                      'parent' => {},
-                      'text' => 'exdent'
+                      'contents' => [
+                        {
+                          'text' => 'in anchor'
+                        }
+                      ],
+                      'type' => 'brace_command_arg'
                     }
                   ],
+                  'cmdname' => 'anchor',
                   'extra' => {
-                    'spaces_after_argument' => '
-'
+                    'normalized' => 'in-anchor'
                   },
-                  'parent' => {},
-                  'type' => 'line_arg'
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'footnote'
+                            }
+                          ],
+                          'type' => 'paragraph'
+                        }
+                      ],
+                      'type' => 'brace_command_context'
+                    }
+                  ],
+                  'cmdname' => 'footnote',
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
+                },
+                {
+                  'text' => ' '
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'exdent'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'exdent',
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
                 }
               ],
-              'cmdname' => 'exdent',
-              'extra' => {
-                'spaces_before_argument' => ' '
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
+              'type' => 'line_arg'
             }
           ],
-          'parent' => {},
-          'type' => 'line_arg'
+          'cmdname' => 'cindex',
+          'extra' => {
+            'index_entry' => [
+              'cp',
+              1
+            ]
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 1,
+            'macro' => ''
+          },
+          'type' => 'index_entry_command'
         }
       ],
-      'cmdname' => 'cindex',
-      'extra' => {
-        'index_entry' => {
-          'command' => {},
-          'content' => [],
-          'content_normalized' => [],
-          'in_code' => 0,
-          'index_at_command' => 'cindex',
-          'index_name' => 'cp',
-          'index_type_command' => 'cindex',
-          'key' => 'in titlefont  exdent
-',
-          'number' => 1
-        },
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {},
-      'type' => 'index_entry_command'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[1]{'extra'}{'command'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[2];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[3]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4]{'extra'}{'node_content'}[0] = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4]{'args'}[0]{'contents'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[4]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5]{'args'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5]{'args'}[0]{'contents'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5]{'args'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[5]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[6]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[7]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[7]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[7]{'args'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[7];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'}[7]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'on_index_entry_line'}{'contents'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'on_index_entry_line'}{'contents'}[0];
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'on_index_entry_line'}{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'on_index_entry_line'}{'contents'}[0]{'parent'} = $result_trees{'on_index_entry_line'};
 
 $result_texis{'on_index_entry_line'} = '@cindex @indent @titlefont{in titlefont} @anchor{in anchor}@footnote{footnote} @exdent exdent
 ';
@@ -207,43 +160,43 @@ $result_texts{'on_index_entry_line'} = '';
 
 $result_errors{'on_index_entry_line'} = [
   {
-    'error_line' => ':1: warning: @indent should not appear in @cindex
+    'error_line' => 'warning: @indent should not appear on @cindex line
 ',
     'file_name' => '',
     'line_nr' => 1,
     'macro' => '',
-    'text' => '@indent should not appear in @cindex',
+    'text' => '@indent should not appear on @cindex line',
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @titlefont should not appear in @cindex
+    'error_line' => 'warning: @titlefont should not appear on @cindex line
 ',
     'file_name' => '',
     'line_nr' => 1,
     'macro' => '',
-    'text' => '@titlefont should not appear in @cindex',
+    'text' => '@titlefont should not appear on @cindex line',
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @anchor should not appear in @cindex
+    'error_line' => 'warning: @anchor should not appear on @cindex line
 ',
     'file_name' => '',
     'line_nr' => 1,
     'macro' => '',
-    'text' => '@anchor should not appear in @cindex',
+    'text' => '@anchor should not appear on @cindex line',
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @footnote should not appear in @cindex
+    'error_line' => 'warning: @footnote should not appear on @cindex line
 ',
     'file_name' => '',
     'line_nr' => 1,
     'macro' => '',
-    'text' => '@footnote should not appear in @cindex',
+    'text' => '@footnote should not appear on @cindex line',
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @exdent should only appear at the beginning of a line
+    'error_line' => 'warning: @exdent should only appear at the beginning of a line
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -252,16 +205,16 @@ $result_errors{'on_index_entry_line'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @exdent should not appear in @cindex
+    'error_line' => 'warning: @exdent should not appear on @cindex line
 ',
     'file_name' => '',
     'line_nr' => 1,
     'macro' => '',
-    'text' => '@exdent should not appear in @cindex',
+    'text' => '@exdent should not appear on @cindex line',
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: entry for index `cp\' outside of any node
+    'error_line' => 'warning: entry for index `cp\' outside of any node
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -273,6 +226,14 @@ $result_errors{'on_index_entry_line'} = [
 
 
 $result_floats{'on_index_entry_line'} = {};
+
+
+$result_indices_sort_strings{'on_index_entry_line'} = {
+  'cp' => [
+    'in titlefont  exdent
+'
+  ]
+};
 
 
 1;

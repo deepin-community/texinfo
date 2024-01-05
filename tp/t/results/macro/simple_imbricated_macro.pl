@@ -1,168 +1,231 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'simple_imbricated_macro'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'truc',
-          'type' => 'macro_name'
-        }
-      ],
-      'cmdname' => 'macro',
       'contents' => [
-        {
-          'parent' => {},
-          'text' => 'truc.
-',
-          'type' => 'raw'
-        },
-        {
-          'cmdname' => 'macro',
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'bidule.',
-              'type' => 'raw'
-            },
-            {
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'last_raw_newline'
-            }
-          ],
-          'extra' => {
-            'arg_line' => ' bidule {}
-'
-          },
-          'parent' => {}
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line_after_command'
-        }
-      ],
-      'extra' => {
-        'arg_line' => ' truc {}
-'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line_after_command'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'truc.
-'
-        },
         {
           'args' => [
             {
-              'parent' => {},
-              'text' => 'bidule',
+              'text' => 'truc',
               'type' => 'macro_name'
             }
           ],
           'cmdname' => 'macro',
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'bidule.',
+              'text' => 'truc.
+',
               'type' => 'raw'
             },
             {
-              'parent' => {},
-              'text' => '
+              'text' => '@macro bidule {}
 ',
-              'type' => 'last_raw_newline'
+              'type' => 'raw'
+            },
+            {
+              'text' => 'bidule.
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@end macro
+',
+              'type' => 'raw'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'macro'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'macro'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 6,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'arg_line' => ' bidule {}
+          'info' => {
+            'arg_line' => ' truc {}
 '
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 8,
-            'macro' => 'truc'
-          },
-          'parent' => {}
+            'line_nr' => 1,
+            'macro' => ''
+          }
         },
         {
-          'parent' => {},
+          'source_marks' => [
+            {
+              'counter' => 1,
+              'element' => {
+                'args' => [
+                  {
+                    'type' => 'brace_command_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'truc'
+                },
+                'type' => 'macro_call'
+              },
+              'position' => 1,
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
           'text' => '
 ',
-          'type' => 'empty_line_after_command'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
+          'type' => 'empty_line'
+        },
         {
-          'parent' => {},
-          'text' => 'bidule.
+          'contents' => [
+            {
+              'text' => 'truc.
 '
+            },
+            {
+              'args' => [
+                {
+                  'text' => 'bidule',
+                  'type' => 'macro_name'
+                }
+              ],
+              'cmdname' => 'macro',
+              'contents' => [
+                {
+                  'text' => 'bidule.
+',
+                  'type' => 'raw'
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'source_marks' => [
+                            {
+                              'counter' => 1,
+                              'position' => 5,
+                              'sourcemark_type' => 'macro_expansion',
+                              'status' => 'end'
+                            }
+                          ],
+                          'text' => 'macro'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'end',
+                  'extra' => {
+                    'text_arg' => 'macro'
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 8,
+                    'macro' => 'truc'
+                  }
+                }
+              ],
+              'info' => {
+                'arg_line' => ' bidule {}
+'
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 8,
+                'macro' => 'truc'
+              }
+            }
+          ],
+          'type' => 'paragraph'
+        },
+        {
+          'source_marks' => [
+            {
+              'counter' => 2,
+              'element' => {
+                'args' => [
+                  {
+                    'type' => 'brace_command_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'bidule'
+                },
+                'type' => 'macro_call'
+              },
+              'position' => 1,
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'source_marks' => [
+                {
+                  'counter' => 2,
+                  'position' => 7,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                }
+              ],
+              'text' => 'bidule.
+'
+            }
+          ],
+          'type' => 'paragraph'
         }
       ],
-      'parent' => {},
-      'type' => 'paragraph'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[0];
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[0];
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[1];
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[1];
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[0];
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[0];
-$result_trees{'simple_imbricated_macro'}{'contents'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'};
-$result_trees{'simple_imbricated_macro'}{'contents'}[1]{'parent'} = $result_trees{'simple_imbricated_macro'};
-$result_trees{'simple_imbricated_macro'}{'contents'}[2]{'parent'} = $result_trees{'simple_imbricated_macro'};
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[3];
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1];
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1];
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1];
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[1]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[3];
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'contents'}[2]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[3];
-$result_trees{'simple_imbricated_macro'}{'contents'}[3]{'parent'} = $result_trees{'simple_imbricated_macro'};
-$result_trees{'simple_imbricated_macro'}{'contents'}[4]{'parent'} = $result_trees{'simple_imbricated_macro'};
-$result_trees{'simple_imbricated_macro'}{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'simple_imbricated_macro'}{'contents'}[5];
-$result_trees{'simple_imbricated_macro'}{'contents'}[5]{'parent'} = $result_trees{'simple_imbricated_macro'};
 
 $result_texis{'simple_imbricated_macro'} = '@macro truc {}
 truc.

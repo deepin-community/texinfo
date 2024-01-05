@@ -1,155 +1,390 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'empty_macro_argument'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'mymacro',
-          'type' => 'macro_name'
-        }
-      ],
-      'cmdname' => 'macro',
       'contents' => [
         {
-          'parent' => {},
-          'text' => 'text',
-          'type' => 'raw'
+          'args' => [
+            {
+              'text' => 'mymacro',
+              'type' => 'macro_name'
+            }
+          ],
+          'cmdname' => 'macro',
+          'contents' => [
+            {
+              'text' => 'text
+',
+              'type' => 'raw'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'macro'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'macro'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
+            }
+          ],
+          'info' => {
+            'arg_line' => ' mymacro{}
+'
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 1,
+            'macro' => ''
+          }
         },
         {
-          'parent' => {},
+          'source_marks' => [
+            {
+              'counter' => 1,
+              'element' => {
+                'args' => [
+                  {
+                    'type' => 'brace_command_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'mymacro'
+                },
+                'type' => 'macro_call'
+              },
+              'position' => 1,
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
           'text' => '
 ',
-          'type' => 'last_raw_newline'
-        }
-      ],
-      'extra' => {
-        'arg_line' => ' mymacro{}
-'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line_after_command'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'text text text text
-'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'mytwo',
-          'type' => 'macro_name'
+          'type' => 'empty_line'
         },
         {
-          'parent' => {},
-          'text' => 'arg',
-          'type' => 'macro_arg'
-        }
-      ],
-      'cmdname' => 'macro',
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'X\\arg\\X',
-          'type' => 'raw'
+          'contents' => [
+            {
+              'source_marks' => [
+                {
+                  'counter' => 1,
+                  'position' => 4,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                },
+                {
+                  'counter' => 2,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'mymacro',
+                      'spaces_before_argument' => {
+                        'text' => ' '
+                      }
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 5,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 2,
+                  'position' => 9,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                },
+                {
+                  'counter' => 3,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'mymacro',
+                      'spaces_before_argument' => {
+                        'text' => '  '
+                      }
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 10,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 3,
+                  'position' => 14,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                },
+                {
+                  'counter' => 4,
+                  'element' => {
+                    'args' => [
+                      {
+                        'contents' => [
+                          {
+                            'text' => 'x'
+                          }
+                        ],
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'mymacro',
+                      'spaces_before_argument' => {
+                        'text' => '  '
+                      }
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 15,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 4,
+                  'position' => 19,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                }
+              ],
+              'text' => 'text text text text
+'
+            }
+          ],
+          'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
-          'type' => 'last_raw_newline'
-        }
-      ],
-      'extra' => {
-        'arg_line' => ' mytwo{arg}
-'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 7,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line_after_command'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
+          'type' => 'empty_line'
+        },
         {
-          'parent' => {},
-          'text' => 'XX XX XX XxX'
+          'args' => [
+            {
+              'text' => 'mytwo',
+              'type' => 'macro_name'
+            },
+            {
+              'text' => 'arg',
+              'type' => 'macro_arg'
+            }
+          ],
+          'cmdname' => 'macro',
+          'contents' => [
+            {
+              'text' => 'X\\arg\\X
+',
+              'type' => 'raw'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'macro'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'macro'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 9,
+                'macro' => ''
+              }
+            }
+          ],
+          'info' => {
+            'arg_line' => ' mytwo{arg}
+'
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 7,
+            'macro' => ''
+          }
+        },
+        {
+          'source_marks' => [
+            {
+              'counter' => 5,
+              'element' => {
+                'args' => [
+                  {
+                    'type' => 'brace_command_arg'
+                  }
+                ],
+                'info' => {
+                  'command_name' => 'mytwo'
+                },
+                'type' => 'macro_call'
+              },
+              'position' => 1,
+              'sourcemark_type' => 'macro_expansion',
+              'status' => 'start'
+            }
+          ],
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'source_marks' => [
+                {
+                  'counter' => 5,
+                  'position' => 2,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                },
+                {
+                  'counter' => 6,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'mytwo',
+                      'spaces_before_argument' => {
+                        'text' => ' '
+                      }
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 3,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 6,
+                  'position' => 5,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                },
+                {
+                  'counter' => 7,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'mytwo',
+                      'spaces_before_argument' => {
+                        'text' => '  '
+                      }
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 6,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 7,
+                  'position' => 8,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                },
+                {
+                  'counter' => 8,
+                  'element' => {
+                    'args' => [
+                      {
+                        'contents' => [
+                          {
+                            'text' => 'x'
+                          }
+                        ],
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'mytwo',
+                      'spaces_before_argument' => {
+                        'text' => '  '
+                      }
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 9,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 8,
+                  'position' => 12,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                }
+              ],
+              'text' => 'XX XX XX XxX'
+            }
+          ],
+          'type' => 'paragraph'
         }
       ],
-      'parent' => {},
-      'type' => 'paragraph'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'empty_macro_argument'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[0];
-$result_trees{'empty_macro_argument'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[0];
-$result_trees{'empty_macro_argument'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[0];
-$result_trees{'empty_macro_argument'}{'contents'}[0]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[1]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[2]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[3];
-$result_trees{'empty_macro_argument'}{'contents'}[3]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[4]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[5]{'args'}[0]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[5];
-$result_trees{'empty_macro_argument'}{'contents'}[5]{'args'}[1]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[5];
-$result_trees{'empty_macro_argument'}{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[5];
-$result_trees{'empty_macro_argument'}{'contents'}[5]{'contents'}[1]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[5];
-$result_trees{'empty_macro_argument'}{'contents'}[5]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[6]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[7]{'parent'} = $result_trees{'empty_macro_argument'};
-$result_trees{'empty_macro_argument'}{'contents'}[8]{'contents'}[0]{'parent'} = $result_trees{'empty_macro_argument'}{'contents'}[8];
-$result_trees{'empty_macro_argument'}{'contents'}[8]{'parent'} = $result_trees{'empty_macro_argument'};
 
 $result_texis{'empty_macro_argument'} = '@macro mymacro{}
 text
@@ -172,7 +407,7 @@ XX XX XX XxX';
 
 $result_errors{'empty_macro_argument'} = [
   {
-    'error_line' => ':5: macro `mymacro\' declared without argument called with an argument
+    'error_line' => 'macro `mymacro\' declared without argument called with an argument
 ',
     'file_name' => '',
     'line_nr' => 5,

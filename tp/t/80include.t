@@ -1,14 +1,14 @@
 use strict;
 
 use lib '.';
-use Texinfo::ModulePath (undef, undef, 'updirs' => 2);
+use Texinfo::ModulePath (undef, undef, undef, 'updirs' => 2);
 
 require 't/test_utils.pl';
 
 my @test_cases = (
 [ 'simple',
 '@include inc_file.texi
-'],
+',{'test_formats' => ['info', 'plaintext', 'html', 'xml', 'docbook', 'latex_text']}],
 ['simple_no_eol',
 '@include inc_file.texi'
 ],
@@ -23,6 +23,15 @@ Following
 Call macro
 @themacro{}
 '],
+['test_two_include',
+'Include version
+@include version.texi
+
+include inc_file
+@include inc_file.texi
+
+After inclusion.
+'],
 ['value_expansion_in_include',
 '@set testvar incl-incl.txi
 
@@ -34,6 +43,7 @@ Call macro
 
 
 @node Top
+@node chap
 
 testvar include: @include @value{testvar}
 
@@ -77,6 +87,8 @@ macro_included.texi
 @node Top
 @top top
 
+@node chap
+
 @include @multiinclude
 
 @themacro{}
@@ -106,6 +118,8 @@ macro_included.texi
 @node Top
 @top top
 
+@node chap
+
 @include @multiinclude
 
 @themacro{}
@@ -131,8 +145,13 @@ After.'],
 # for now the plaintext expansion do not test anything as the setfilename in
 # included files is removed from the tree.  But this may change in the future.
 '@include included_file_with_setfilename.texi 
-@setfilename main_file.info
+@setfilename include_with_setfilename.info
 ', {'test_formats' => ['info']}],
+['include_with_setfilename_in_preformatted',
+'@example
+@include included_file_with_setfilename.texi
+after include
+@end example', {'test_formats' => ['info']}],
 ['include_setfilename_on_setfilename_line',
 '@setfilename file @setfilename other file @include are you joking!
 '],
@@ -147,12 +166,14 @@ After.'],
 @verbatiminclude verbatim_encoded_latin1.texi
 ', {'test_formats' => ['plaintext']}],
 ['cpp_lines',
-undef, {'test_file' => 'cpp_lines.texi'}
+undef, {'test_file' => 'cpp_lines.texi'},
+],
+['cpp_line_before_first_node',
+undef, {'test_file' => 'cpp_line_before_first_node.texi'},
+],
+['cpp_line_latin1',
+undef, {'test_file' => 'cpp_line_latin1.texi'},
 ],
 );
 
-our ($arg_test_case, $arg_generate, $arg_debug);
-
-run_all ('include', \@test_cases, $arg_test_case,
-   $arg_generate, $arg_debug);
-
+run_all('include', \@test_cases);

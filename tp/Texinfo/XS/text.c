@@ -1,4 +1,4 @@
-/* Copyright 2014, 2015, 2016, 2018 Free Software Foundation, Inc.
+/* Copyright 2014-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -46,7 +46,8 @@ text_printf (TEXT *t, char *format, ...)
   char *s;
 
   va_start (v, format);
-  vasprintf (&s, format, v);
+  if (vasprintf (&s, format, v) < 0)
+    abort ();  /* out of memory */
   text_append (t, s);
   free (s);
   va_end (v);

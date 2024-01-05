@@ -1,666 +1,537 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'set_on_item_line'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'cmdname' => 'code',
-              'contents' => [],
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {},
-              'type' => 'command_as_argument'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'table',
       'contents' => [
         {
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'cmdname' => 'code',
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  },
+                  'type' => 'command_as_argument'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'table',
           'contents' => [
             {
               'contents' => [
                 {
-                  'args' => [
+                  'contents' => [
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'text' => 'ca',
+                                  'type' => 'rawline_arg'
+                                },
+                                {
+                                  'text' => 'b',
+                                  'type' => 'rawline_arg'
+                                }
+                              ],
+                              'cmdname' => 'set',
+                              'info' => {
+                                'arg_line' => ' ca b@c
+'
+                              }
+                            }
+                          ],
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'item',
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 2,
+                        'macro' => ''
+                      }
+                    }
+                  ],
+                  'type' => 'table_term'
+                },
+                {
+                  'contents' => [
                     {
                       'contents' => [
                         {
-                          'args' => [
-                            {
-                              'parent' => {},
-                              'text' => 'a',
-                              'type' => 'misc_arg'
-                            },
-                            {
-                              'parent' => {},
-                              'text' => 'b',
-                              'type' => 'misc_arg'
-                            }
-                          ],
-                          'cmdname' => 'set',
-                          'extra' => {
-                            'arg_line' => ' a b@c
-',
-                            'misc_args' => [
-                              'a',
-                              'b'
-                            ]
-                          },
-                          'parent' => {}
+                          'text' => 'item text
+'
                         },
                         {
-                          'parent' => {},
-                          'text' => 'item text'
+                          'text' => 'in item
+'
                         }
                       ],
-                      'extra' => {
-                        'spaces_after_argument' => '
-'
-                      },
-                      'parent' => {},
-                      'type' => 'line_arg'
+                      'type' => 'paragraph'
                     }
                   ],
-                  'cmdname' => 'item',
-                  'extra' => {
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 2,
-                    'macro' => ''
-                  },
-                  'parent' => {}
+                  'type' => 'table_definition'
                 }
               ],
-              'parent' => {},
-              'type' => 'table_term'
+              'type' => 'table_entry'
             },
             {
               'contents' => [
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => 'in item
-'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'paragraph'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_item'
-            }
-          ],
-          'parent' => {},
-          'type' => 'table_entry'
-        },
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'args' => [
-                    {
-                      'contents' => [
+                      'args' => [
                         {
-                          'parent' => {},
-                          'text' => 'jj '
-                        },
-                        {
-                          'args' => [
+                          'contents' => [
                             {
-                              'parent' => {},
-                              'text' => 'j',
-                              'type' => 'misc_arg'
+                              'text' => 'cjj '
                             },
                             {
-                              'parent' => {},
-                              'text' => '',
-                              'type' => 'misc_arg'
+                              'args' => [
+                                {
+                                  'text' => 'cj',
+                                  'type' => 'rawline_arg'
+                                },
+                                {
+                                  'text' => '',
+                                  'type' => 'rawline_arg'
+                                }
+                              ],
+                              'cmdname' => 'set',
+                              'info' => {
+                                'arg_line' => ' cj@c
+'
+                              }
                             }
                           ],
-                          'cmdname' => 'set',
-                          'extra' => {
-                            'arg_line' => ' j@c
-',
-                            'misc_args' => [
-                              'j',
-                              ''
-                            ]
-                          },
-                          'parent' => {}
-                        },
-                        {
-                          'parent' => {},
-                          'text' => 'line'
+                          'type' => 'line_arg'
                         }
                       ],
-                      'extra' => {
-                        'spaces_after_argument' => '
-'
+                      'cmdname' => 'item',
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
                       },
-                      'parent' => {},
-                      'type' => 'line_arg'
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 5,
+                        'macro' => ''
+                      }
                     }
                   ],
-                  'cmdname' => 'item',
-                  'extra' => {
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 5,
-                    'macro' => ''
-                  },
-                  'parent' => {}
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_term'
-            }
-          ],
-          'parent' => {},
-          'type' => 'table_entry'
-        },
-        {
-          'contents' => [
-            {
-              'contents' => [
+                  'type' => 'table_term'
+                },
                 {
-                  'args' => [
+                  'contents' => [
                     {
                       'contents' => [
                         {
-                          'parent' => {},
-                          'text' => 'vvv '
-                        },
-                        {
-                          'args' => [
-                            {
-                              'parent' => {},
-                              'text' => 'g',
-                              'type' => 'misc_arg'
-                            },
-                            {
-                              'parent' => {},
-                              'text' => '',
-                              'type' => 'misc_arg'
-                            }
-                          ],
-                          'cmdname' => 'set',
-                          'extra' => {
-                            'arg_line' => ' g@c
-',
-                            'misc_args' => [
-                              'g',
-                              ''
-                            ]
-                          },
-                          'parent' => {}
+                          'text' => 'line
+'
                         }
                       ],
-                      'parent' => {},
-                      'type' => 'line_arg'
+                      'type' => 'paragraph'
                     }
                   ],
-                  'cmdname' => 'item',
-                  'extra' => {
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 7,
-                    'macro' => ''
-                  },
-                  'parent' => {}
+                  'type' => 'table_definition'
                 }
               ],
-              'parent' => {},
-              'type' => 'table_term'
+              'type' => 'table_entry'
+            },
+            {
+              'contents' => [
+                {
+                  'contents' => [
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'cvvv '
+                            },
+                            {
+                              'args' => [
+                                {
+                                  'text' => 'cg',
+                                  'type' => 'rawline_arg'
+                                },
+                                {
+                                  'text' => '',
+                                  'type' => 'rawline_arg'
+                                }
+                              ],
+                              'cmdname' => 'set',
+                              'info' => {
+                                'arg_line' => ' cg@c
+'
+                              }
+                            }
+                          ],
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'item',
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 7,
+                        'macro' => ''
+                      }
+                    }
+                  ],
+                  'type' => 'table_term'
+                }
+              ],
+              'type' => 'table_entry'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'table'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'table'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 8,
+                'macro' => ''
+              }
             }
           ],
-          'parent' => {},
-          'type' => 'table_entry'
+          'extra' => {
+            'command_as_argument' => {}
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 1,
+            'macro' => ''
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'table'
+                  'cmdname' => 'code',
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 10,
+                    'macro' => ''
+                  },
+                  'type' => 'command_as_argument'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'table',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'table'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 8,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'command_as_argument' => {},
-        'end_command' => {},
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
-        {
+          'cmdname' => 'table',
           'contents' => [
             {
-              'cmdname' => 'code',
-              'contents' => [],
-              'line_nr' => {
+              'contents' => [
+                {
+                  'contents' => [
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'text' => 'a',
+                                  'type' => 'rawline_arg'
+                                },
+                                {
+                                  'text' => 'b',
+                                  'type' => 'rawline_arg'
+                                }
+                              ],
+                              'cmdname' => 'set',
+                              'info' => {
+                                'arg_line' => ' a b
+'
+                              }
+                            }
+                          ],
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'item',
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 11,
+                        'macro' => ''
+                      }
+                    }
+                  ],
+                  'type' => 'table_term'
+                },
+                {
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'item text
+'
+                        },
+                        {
+                          'text' => 'in item
+'
+                        }
+                      ],
+                      'type' => 'paragraph'
+                    }
+                  ],
+                  'type' => 'table_definition'
+                }
+              ],
+              'type' => 'table_entry'
+            },
+            {
+              'contents' => [
+                {
+                  'contents' => [
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'jj '
+                            },
+                            {
+                              'args' => [
+                                {
+                                  'text' => 'j',
+                                  'type' => 'rawline_arg'
+                                },
+                                {
+                                  'text' => '',
+                                  'type' => 'rawline_arg'
+                                }
+                              ],
+                              'cmdname' => 'set',
+                              'info' => {
+                                'arg_line' => ' j
+'
+                              }
+                            }
+                          ],
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'item',
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 14,
+                        'macro' => ''
+                      }
+                    }
+                  ],
+                  'type' => 'table_term'
+                },
+                {
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'line
+'
+                        }
+                      ],
+                      'type' => 'paragraph'
+                    }
+                  ],
+                  'type' => 'table_definition'
+                }
+              ],
+              'type' => 'table_entry'
+            },
+            {
+              'contents' => [
+                {
+                  'contents' => [
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'vvv '
+                            },
+                            {
+                              'args' => [
+                                {
+                                  'text' => 'g',
+                                  'type' => 'rawline_arg'
+                                },
+                                {
+                                  'text' => '',
+                                  'type' => 'rawline_arg'
+                                }
+                              ],
+                              'cmdname' => 'set',
+                              'info' => {
+                                'arg_line' => ' g
+'
+                              }
+                            }
+                          ],
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'item',
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 16,
+                        'macro' => ''
+                      }
+                    }
+                  ],
+                  'type' => 'table_term'
+                }
+              ],
+              'type' => 'table_entry'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'table'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'table'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 10,
+                'line_nr' => 17,
                 'macro' => ''
-              },
-              'parent' => {},
-              'type' => 'command_as_argument'
+              }
             }
           ],
           'extra' => {
-            'spaces_after_argument' => '
-'
+            'command_as_argument' => {}
           },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'table',
-      'contents' => [
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'args' => [
-                    {
-                      'contents' => [
-                        {
-                          'args' => [
-                            {
-                              'parent' => {},
-                              'text' => 'a',
-                              'type' => 'misc_arg'
-                            },
-                            {
-                              'parent' => {},
-                              'text' => 'b',
-                              'type' => 'misc_arg'
-                            }
-                          ],
-                          'cmdname' => 'set',
-                          'extra' => {
-                            'arg_line' => ' a b
-',
-                            'misc_args' => [
-                              'a',
-                              'b'
-                            ]
-                          },
-                          'parent' => {}
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'line_arg'
-                    }
-                  ],
-                  'cmdname' => 'item',
-                  'extra' => {
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 11,
-                    'macro' => ''
-                  },
-                  'parent' => {}
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_term'
-            },
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'item text
-'
-                    },
-                    {
-                      'parent' => {},
-                      'text' => 'in item
-'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'paragraph'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_item'
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
             }
-          ],
-          'parent' => {},
-          'type' => 'table_entry'
-        },
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'args' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'jj '
-                        },
-                        {
-                          'args' => [
-                            {
-                              'parent' => {},
-                              'text' => 'j',
-                              'type' => 'misc_arg'
-                            },
-                            {
-                              'parent' => {},
-                              'text' => '',
-                              'type' => 'misc_arg'
-                            }
-                          ],
-                          'cmdname' => 'set',
-                          'extra' => {
-                            'arg_line' => ' j
-',
-                            'misc_args' => [
-                              'j',
-                              ''
-                            ]
-                          },
-                          'parent' => {}
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'line_arg'
-                    }
-                  ],
-                  'cmdname' => 'item',
-                  'extra' => {
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 14,
-                    'macro' => ''
-                  },
-                  'parent' => {}
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_term'
-            },
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'line
-'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'paragraph'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_item'
-            }
-          ],
-          'parent' => {},
-          'type' => 'table_entry'
-        },
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'args' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'vvv '
-                        },
-                        {
-                          'args' => [
-                            {
-                              'parent' => {},
-                              'text' => 'g',
-                              'type' => 'misc_arg'
-                            },
-                            {
-                              'parent' => {},
-                              'text' => '',
-                              'type' => 'misc_arg'
-                            }
-                          ],
-                          'cmdname' => 'set',
-                          'extra' => {
-                            'arg_line' => ' g
-',
-                            'misc_args' => [
-                              'g',
-                              ''
-                            ]
-                          },
-                          'parent' => {}
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'line_arg'
-                    }
-                  ],
-                  'cmdname' => 'item',
-                  'extra' => {
-                    'spaces_before_argument' => ' '
-                  },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 16,
-                    'macro' => ''
-                  },
-                  'parent' => {}
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_term'
-            }
-          ],
-          'parent' => {},
-          'type' => 'table_entry'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'table'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'table',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'table'
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 17,
+            'line_nr' => 10,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'command_as_argument' => {},
-        'end_command' => {},
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 10,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'set_on_item_line'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[2]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[3]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[3];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[3]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'extra'}{'command_as_argument'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[3];
-$result_trees{'set_on_item_line'}{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'};
-$result_trees{'set_on_item_line'}{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'};
-$result_trees{'set_on_item_line'}{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[2]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[3]{'args'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[3];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[3]{'parent'} = $result_trees{'set_on_item_line'}{'contents'}[2];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'extra'}{'command_as_argument'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'args'}[0]{'contents'}[0];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'extra'}{'end_command'} = $result_trees{'set_on_item_line'}{'contents'}[2]{'contents'}[3];
-$result_trees{'set_on_item_line'}{'contents'}[2]{'parent'} = $result_trees{'set_on_item_line'};
+$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'extra'}{'command_as_argument'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0];
+$result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'extra'}{'command_as_argument'} = $result_trees{'set_on_item_line'}{'contents'}[0]{'contents'}[2]{'args'}[0]{'contents'}[0];
 
 $result_texis{'set_on_item_line'} = '@table @code
-@item @set a b@c
+@item @set ca b@c
 item text
 in item
-@item jj @set j@c
+@item cjj @set cj@c
 line
-@item vvv @set g@c
+@item cvvv @set cg@c
 @end table
 
 @table @code
@@ -674,10 +545,12 @@ line
 ';
 
 
-$result_texts{'set_on_item_line'} = 'item text
+$result_texts{'set_on_item_line'} = '
+item text
 in item
-jj line
-vvv 
+cjj 
+line
+cvvv 
 
 
 item text
@@ -687,7 +560,44 @@ line
 vvv 
 ';
 
-$result_errors{'set_on_item_line'} = [];
+$result_errors{'set_on_item_line'} = [
+  {
+    'error_line' => 'warning: @set should only appear at the beginning of a line
+',
+    'file_name' => '',
+    'line_nr' => 5,
+    'macro' => '',
+    'text' => '@set should only appear at the beginning of a line',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: @set should only appear at the beginning of a line
+',
+    'file_name' => '',
+    'line_nr' => 7,
+    'macro' => '',
+    'text' => '@set should only appear at the beginning of a line',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: @set should only appear at the beginning of a line
+',
+    'file_name' => '',
+    'line_nr' => 14,
+    'macro' => '',
+    'text' => '@set should only appear at the beginning of a line',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: @set should only appear at the beginning of a line
+',
+    'file_name' => '',
+    'line_nr' => 16,
+    'macro' => '',
+    'text' => '@set should only appear at the beginning of a line',
+    'type' => 'warning'
+  }
+];
 
 
 $result_floats{'set_on_item_line'} = {};

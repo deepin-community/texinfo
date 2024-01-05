@@ -1,221 +1,198 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'setfilename'} = {
   'contents' => [
     {
-      'args' => [
+      'contents' => [
         {
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'file_comment'
-            }
-          ],
-          'extra' => {
-            'comment_at_end' => {
               'args' => [
                 {
-                  'parent' => {},
-                  'text' => ' comment
+                  'contents' => [
+                    {
+                      'text' => 'file_comment'
+                    }
+                  ],
+                  'info' => {
+                    'comment_at_end' => {
+                      'args' => [
+                        {
+                          'text' => ' comment
 ',
-                  'type' => 'misc_arg'
+                          'type' => 'rawline_arg'
+                        }
+                      ],
+                      'cmdname' => 'c'
+                    }
+                  },
+                  'type' => 'line_arg'
                 }
               ],
-              'cmdname' => 'c',
+              'cmdname' => 'setfilename',
               'extra' => {
-                'misc_args' => [
-                  ' comment
-'
-                ]
+                'text_arg' => 'file_comment'
               },
-              'parent' => {}
-            }
-          },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'setfilename',
-      'extra' => {
-        'spaces_before_argument' => ' ',
-        'text_arg' => 'file_comment'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'file_and_spaces'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '   
-'
-          },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'setfilename',
-      'extra' => {
-        'spaces_before_argument' => ' ',
-        'text_arg' => 'file_and_spaces'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 2,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'file_space_comment'
-            }
-          ],
-          'extra' => {
-            'comment_at_end' => {
-              'args' => [
-                {
-                  'parent' => {},
-                  'text' => ' comment
-',
-                  'type' => 'misc_arg'
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
                 }
-              ],
-              'cmdname' => 'c',
-              'extra' => {
-                'misc_args' => [
-                  ' comment
-'
-                ]
               },
-              'parent' => {}
-            },
-            'spaces_after_argument' => ' '
-          },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'setfilename',
-      'extra' => {
-        'spaces_before_argument' => ' ',
-        'text_arg' => 'file_space_comment'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 3,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'cmdname' => ' ',
-              'parent' => {}
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 1,
+                'macro' => ''
+              }
             },
             {
               'args' => [
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => ' name ',
-                      'type' => 'raw'
+                      'text' => 'file_and_spaces'
                     }
                   ],
-                  'parent' => {},
-                  'type' => 'brace_command_arg'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '   
+'
+                    }
+                  },
+                  'type' => 'line_arg'
                 }
               ],
-              'cmdname' => 'verb',
-              'contents' => [],
+              'cmdname' => 'setfilename',
               'extra' => {
-                'delimiter' => ':'
+                'text_arg' => 'file_and_spaces'
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 2,
+                'macro' => ''
+              }
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'file_space_comment'
+                    }
+                  ],
+                  'info' => {
+                    'comment_at_end' => {
+                      'args' => [
+                        {
+                          'text' => ' comment
+',
+                          'type' => 'rawline_arg'
+                        }
+                      ],
+                      'cmdname' => 'c'
+                    },
+                    'spaces_after_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'setfilename',
+              'extra' => {
+                'text_arg' => 'file_space_comment'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'cmdname' => ' '
+                    },
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => ' name ',
+                              'type' => 'raw'
+                            }
+                          ],
+                          'type' => 'brace_command_arg'
+                        }
+                      ],
+                      'cmdname' => 'verb',
+                      'info' => {
+                        'delimiter' => ':'
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 4,
+                        'macro' => ''
+                      }
+                    },
+                    {
+                      'cmdname' => ' '
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'setfilename',
+              'extra' => {
+                'missing_argument' => 1
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 4,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'cmdname' => ' ',
-              'parent' => {}
+              'text' => '
+',
+              'type' => 'empty_line'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'line_arg'
+          'type' => 'preamble_before_content'
         }
       ],
-      'cmdname' => 'setfilename',
-      'extra' => {
-        'missing_argument' => 1,
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 4,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'setfilename'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[0]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[0]{'args'}[0]{'extra'}{'comment_at_end'}{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[0]{'args'}[0]{'extra'}{'comment_at_end'};
-$result_trees{'setfilename'}{'contents'}[0]{'args'}[0]{'extra'}{'comment_at_end'}{'parent'} = $result_trees{'setfilename'}{'contents'}[0]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[0];
-$result_trees{'setfilename'}{'contents'}[0]{'parent'} = $result_trees{'setfilename'};
-$result_trees{'setfilename'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[1]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[1];
-$result_trees{'setfilename'}{'contents'}[1]{'parent'} = $result_trees{'setfilename'};
-$result_trees{'setfilename'}{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[2]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[2]{'args'}[0]{'extra'}{'comment_at_end'}{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[2]{'args'}[0]{'extra'}{'comment_at_end'};
-$result_trees{'setfilename'}{'contents'}[2]{'args'}[0]{'extra'}{'comment_at_end'}{'parent'} = $result_trees{'setfilename'}{'contents'}[2]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[2];
-$result_trees{'setfilename'}{'contents'}[2]{'parent'} = $result_trees{'setfilename'};
-$result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[3]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[1];
-$result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'setfilename'}{'contents'}[3]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'contents'}[2]{'parent'} = $result_trees{'setfilename'}{'contents'}[3]{'args'}[0];
-$result_trees{'setfilename'}{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'setfilename'}{'contents'}[3];
-$result_trees{'setfilename'}{'contents'}[3]{'parent'} = $result_trees{'setfilename'};
-$result_trees{'setfilename'}{'contents'}[4]{'parent'} = $result_trees{'setfilename'};
 
 $result_texis{'setfilename'} = '@setfilename file_comment@c comment
 @setfilename file_and_spaces   
@@ -230,7 +207,7 @@ $result_texts{'setfilename'} = '
 
 $result_errors{'setfilename'} = [
   {
-    'error_line' => ':2: warning: multiple @setfilename
+    'error_line' => 'warning: multiple @setfilename
 ',
     'file_name' => '',
     'line_nr' => 2,
@@ -239,7 +216,7 @@ $result_errors{'setfilename'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':3: warning: multiple @setfilename
+    'error_line' => 'warning: multiple @setfilename
 ',
     'file_name' => '',
     'line_nr' => 3,
@@ -248,7 +225,7 @@ $result_errors{'setfilename'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':4: warning: multiple @setfilename
+    'error_line' => 'warning: multiple @setfilename
 ',
     'file_name' => '',
     'line_nr' => 4,
@@ -257,7 +234,7 @@ $result_errors{'setfilename'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':4: warning: @verb should not appear in @setfilename
+    'error_line' => 'warning: @verb should not appear in @setfilename
 ',
     'file_name' => '',
     'line_nr' => 4,
@@ -266,7 +243,7 @@ $result_errors{'setfilename'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':4: bad argument to @setfilename: @ @verb{: name :}@
+    'error_line' => 'bad argument to @setfilename: @ @verb{: name :}@
 ',
     'file_name' => '',
     'line_nr' => 4,
@@ -285,6 +262,55 @@ $result_converted{'plaintext'}->{'setfilename'} = '';
 
 
 $result_converted{'html_text'}->{'setfilename'} = '
+';
+
+
+$result_converted{'latex'}->{'setfilename'} = '\\documentclass{book}
+\\usepackage{amsfonts}
+\\usepackage{amsmath}
+\\usepackage[gen]{eurosym}
+\\usepackage{textcomp}
+\\usepackage{graphicx}
+\\usepackage{etoolbox}
+\\usepackage{titleps}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{float}
+% use hidelinks to remove boxes around links to be similar to Texinfo TeX
+\\usepackage[hidelinks]{hyperref}
+
+\\makeatletter
+\\newcommand{\\Texinfosettitle}{No Title}%
+
+% redefine the \\mainmatter command such that it does not clear page
+% as if in double page
+\\renewcommand\\mainmatter{\\clearpage\\@mainmattertrue\\pagenumbering{arabic}}
+\\newenvironment{Texinfopreformatted}{%
+  \\par\\GNUTobeylines\\obeyspaces\\frenchspacing\\parskip=\\z@\\parindent=\\z@}{}
+{\\catcode`\\^^M=13 \\gdef\\GNUTobeylines{\\catcode`\\^^M=13 \\def^^M{\\null\\par}}}
+\\newenvironment{Texinfoindented}{\\begin{list}{}{}\\item\\relax}{\\end{list}}
+
+% used for substitutions in commands
+\\newcommand{\\Texinfoplaceholder}[1]{}
+
+\\newpagestyle{single}{\\sethead[\\chaptername{} \\thechapter{} \\chaptertitle{}][][\\thepage]
+                              {\\chaptername{} \\thechapter{} \\chaptertitle{}}{}{\\thepage}}
+
+% allow line breaking at underscore
+\\let\\Texinfounderscore\\_
+\\renewcommand{\\_}{\\Texinfounderscore\\discretionary{}{}{}}
+\\renewcommand{\\includegraphics}[1]{\\fbox{FIG \\detokenize{#1}}}
+
+\\makeatother
+% set default for @setchapternewpage
+\\makeatletter
+\\patchcmd{\\chapter}{\\if@openright\\cleardoublepage\\else\\clearpage\\fi}{\\Texinfoplaceholder{setchapternewpage placeholder}\\clearpage}{}{}
+\\makeatother
+\\pagestyle{single}%
+
+
+\\begin{document}
+\\end{document}
 ';
 
 

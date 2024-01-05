@@ -1,7 +1,7 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
@@ -10,123 +10,115 @@ $result_trees{'command_translated'} = {
     {
       'contents' => [
         {
-          'args' => [
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'fr'
+                  'contents' => [
+                    {
+                      'text' => 'fr'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
                 }
               ],
+              'cmdname' => 'documentlanguage',
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'text_arg' => 'fr'
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 1,
+                'macro' => ''
+              }
+            },
+            {
+              'text' => '
+',
+              'type' => 'empty_line'
             }
           ],
-          'cmdname' => 'documentlanguage',
-          'extra' => {
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'fr'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 1,
-            'macro' => ''
-          },
-          'parent' => {}
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line'
+          'type' => 'preamble_before_content'
         }
       ],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
-      'contents' => [],
       'extra' => {
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'Top'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 3,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'top '
             },
             {
               'args' => [
                 {
-                  'contents' => [],
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'error',
-              'contents' => [],
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 4,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'top',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -136,64 +128,119 @@ $result_trees{'command_translated'} = {
             {
               'args' => [
                 {
-                  'contents' => [],
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'error',
-              'contents' => [],
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 6,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
         }
       ],
-      'extra' => {
-        'spaces_before_argument' => ' '
+      'extra' => {},
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
       },
-      'level' => 0,
-      'line_nr' => {
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 4,
         'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'chapter '
+            },
+            {
+              'args' => [
+                {
+                  'type' => 'brace_command_arg'
+                }
+              ],
+              'cmdname' => 'error',
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 8,
+                'macro' => ''
+              }
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'chapter-error_002d_002d_003e'
       },
-      'parent' => {}
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 8,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'Chapter'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'chapter',
+      'extra' => {},
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 9,
+        'macro' => ''
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'command_translated'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'command_translated'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[0]{'contents'}[0];
-$result_trees{'command_translated'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[0];
-$result_trees{'command_translated'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'command_translated'}{'contents'}[0];
-$result_trees{'command_translated'}{'contents'}[0]{'parent'} = $result_trees{'command_translated'};
-$result_trees{'command_translated'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[1]{'args'}[0];
-$result_trees{'command_translated'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[1];
-$result_trees{'command_translated'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'command_translated'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'command_translated'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'command_translated'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'command_translated'}{'contents'}[1]{'parent'} = $result_trees{'command_translated'};
-$result_trees{'command_translated'}{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[2]{'args'}[0];
-$result_trees{'command_translated'}{'contents'}[2]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[2]{'args'}[0]{'contents'}[1];
-$result_trees{'command_translated'}{'contents'}[2]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'command_translated'}{'contents'}[2]{'args'}[0];
-$result_trees{'command_translated'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[2];
-$result_trees{'command_translated'}{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[2];
-$result_trees{'command_translated'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[2]{'contents'}[1]{'contents'}[0];
-$result_trees{'command_translated'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'command_translated'}{'contents'}[2]{'contents'}[1];
-$result_trees{'command_translated'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'command_translated'}{'contents'}[2]{'contents'}[1];
-$result_trees{'command_translated'}{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'command_translated'}{'contents'}[2];
-$result_trees{'command_translated'}{'contents'}[2]{'parent'} = $result_trees{'command_translated'};
 
 $result_texis{'command_translated'} = '@documentlanguage fr
 
@@ -201,6 +248,9 @@ $result_texis{'command_translated'} = '@documentlanguage fr
 @top top @error{}
 
 @error{}
+
+@node chapter @error{}
+@chapter Chapter
 ';
 
 
@@ -209,51 +259,99 @@ top error-->
 ************
 
 error-->
+
+1 Chapter
+*********
 ';
 
 $result_sectioning{'command_translated'} = {
-  'level' => -1,
-  'section_childs' => [
-    {
-      'cmdname' => 'top',
-      'extra' => {
-        'associated_node' => {
-          'cmdname' => 'node',
-          'extra' => {
-            'normalized' => 'Top',
-            'spaces_before_argument' => ' '
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'top',
+        'extra' => {
+          'associated_node' => {
+            'cmdname' => 'node',
+            'extra' => {
+              'normalized' => 'Top'
+            },
+            'structure' => {}
           }
         },
-        'spaces_before_argument' => ' '
-      },
-      'level' => 0,
-      'section_up' => {}
-    }
-  ]
+        'structure' => {
+          'section_childs' => [
+            {
+              'cmdname' => 'chapter',
+              'extra' => {
+                'associated_node' => {
+                  'cmdname' => 'node',
+                  'extra' => {
+                    'normalized' => 'chapter-error_002d_002d_003e'
+                  },
+                  'structure' => {}
+                }
+              },
+              'structure' => {
+                'section_level' => 1,
+                'section_number' => 1,
+                'section_up' => {},
+                'toplevel_prev' => {},
+                'toplevel_up' => {}
+              }
+            }
+          ],
+          'section_level' => 0,
+          'section_up' => {}
+        }
+      }
+    ],
+    'section_level' => -1
+  }
 };
-$result_sectioning{'command_translated'}{'section_childs'}[0]{'section_up'} = $result_sectioning{'command_translated'};
+$result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'toplevel_prev'} = $result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'toplevel_up'} = $result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'command_translated'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'command_translated'};
 
 $result_nodes{'command_translated'} = {
   'cmdname' => 'node',
   'extra' => {
     'associated_section' => {
       'cmdname' => 'top',
-      'extra' => {
-        'spaces_before_argument' => ' '
-      },
-      'level' => 0
+      'extra' => {},
+      'structure' => {}
     },
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'associated_section' => {
+          'cmdname' => 'chapter',
+          'extra' => {},
+          'structure' => {
+            'section_number' => 1
+          }
+        },
+        'normalized' => 'chapter-error_002d_002d_003e'
+      },
+      'structure' => {
+        'node_prev' => {},
+        'node_up' => {}
+      }
+    }
   }
 };
+$result_nodes{'command_translated'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'command_translated'};
+$result_nodes{'command_translated'}{'structure'}{'node_next'}{'structure'}{'node_up'} = $result_nodes{'command_translated'};
 
 $result_menus{'command_translated'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'command_translated'} = [];
@@ -263,26 +361,42 @@ $result_floats{'command_translated'} = {};
 
 
 
-$result_converted{'plaintext'}->{'command_translated'} = 'top erreur->
-************
+$result_converted{'plaintext'}->{'command_translated'} = 'top erreur→
+***********
 
-erreur->
+erreur→
+
+1 Chapter
+*********
+
 ';
 
 
 $result_converted{'info'}->{'command_translated'} = 'This is , produced from .
 
 
-File: ,  Node: Top,  Up: (dir)
+File: ,  Node: Top,  Next: chapter erreur→,  Up: (dir)
 
-top erreur->
-************
+top erreur→
+***********
 
-erreur->
+erreur→
+
+* Menu:
+
+* chapter erreur→::
+
+
+File: ,  Node: chapter erreur→,  Prev: Top,  Up: Top
+
+1 Chapter
+*********
+
 
 
 Tag Table:
 Node: Top27
+Node: chapter erreur→157
 
 End Tag Table
 
@@ -293,7 +407,7 @@ End:
 ';
 
 
-$result_converted{'html'}->{'command_translated'} = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+$result_converted{'html'}->{'command_translated'} = '<!DOCTYPE html>
 <html>
 <!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
 <head>
@@ -309,21 +423,8 @@ $result_converted{'html'}->{'command_translated'} = '<!DOCTYPE html PUBLIC "-//W
 <link href="#Top" rel="start" title="Top">
 <style type="text/css">
 <!--
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
 -->
 </style>
 
@@ -332,11 +433,27 @@ ul.no-bullet {list-style: none}
 
 <body lang="fr">
 
-<div class="top" id="Top">
-<span id="top-error_002d_002d_003e"></span><h1 class="top">top erreur&rarr;</h1>
+<div class="top-level-extent" id="Top">
+<div class="nav-panel">
+<p>
+Suivant: <a href="#chapter-error_002d_002d_003e" accesskey="n" rel="next">Chapter</a> &nbsp; </p>
+</div>
+<h1 class="top" id="top-error_002d_002d_003e"><span>top erreur&rarr;<a class="copiable-link" href="#top-error_002d_002d_003e"> &para;</a></span></h1>
 
 <p>erreur&rarr;
-</p><hr></div>
+</p>
+<ul class="mini-toc">
+<li><a href="#chapter-error_002d_002d_003e" accesskey="1">Chapter</a></li>
+</ul>
+<hr>
+<div class="chapter-level-extent" id="chapter-error_002d_002d_003e">
+<div class="nav-panel">
+<p>
+Pr&eacute;c&eacute;dent: <a href="#Top" accesskey="p" rel="prev">top erreur&rarr;</a>, Monter: <a href="#Top" accesskey="u" rel="up">top erreur&rarr;</a> &nbsp; </p>
+</div>
+<h2 class="chapter" id="Chapter"><span>1 Chapter<a class="copiable-link" href="#Chapter"> &para;</a></span></h2>
+</div>
+</div>
 
 
 

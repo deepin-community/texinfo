@@ -1,102 +1,100 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'invalid'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'args' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => '2x.2 2.23x'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
-'
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'columnfractions',
-              'extra' => {
-                'spaces_before_argument' => ' '
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
-            }
-          ],
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'multitable',
       'contents' => [
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'multitable'
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => '2x.2 2.23x'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'columnfractions',
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
                 }
               ],
-              'parent' => {},
-              'type' => 'line_arg'
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'end',
+          'cmdname' => 'multitable',
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'multitable'
+                    }
+                  ],
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'multitable'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 2,
+                'macro' => ''
+              }
+            }
+          ],
           'extra' => {
-            'command_argument' => 'multitable',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'multitable'
+            'max_columns' => 0
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 2,
+            'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {},
-        'max_columns' => 0,
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'invalid'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0]{'args'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0]{'contents'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'invalid'}{'contents'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'invalid'}{'contents'}[0]{'contents'}[0];
-$result_trees{'invalid'}{'contents'}[0]{'parent'} = $result_trees{'invalid'};
 
 $result_texis{'invalid'} = '@multitable @columnfractions 2x.2 2.23x
 @end multitable';
@@ -106,7 +104,7 @@ $result_texts{'invalid'} = '';
 
 $result_errors{'invalid'} = [
   {
-    'error_line' => ':1: column fraction not a number: 2x.2
+    'error_line' => 'column fraction not a number: 2x.2
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -115,7 +113,7 @@ $result_errors{'invalid'} = [
     'type' => 'error'
   },
   {
-    'error_line' => ':1: column fraction not a number: 2.23x
+    'error_line' => 'column fraction not a number: 2.23x
 ',
     'file_name' => '',
     'line_nr' => 1,

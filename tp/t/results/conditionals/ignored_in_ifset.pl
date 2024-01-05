@@ -1,167 +1,284 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'ignored_in_ifset'} = {
   'contents' => [
     {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
       'contents' => [
         {
-          'parent' => {},
-          'text' => 'text
-'
-        },
-        {
-          'args' => [
+          'source_marks' => [
             {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'ifset'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'counter' => 1,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => 'notset'
+                      }
+                    ],
+                    'info' => {
+                      'spaces_after_argument' => {
+                        'text' => '
 '
+                      }
+                    },
+                    'type' => 'block_line_arg'
+                  }
+                ],
+                'cmdname' => 'ifset',
+                'contents' => [
+                  {
+                    'text' => '@ignore
+',
+                    'type' => 'raw'
+                  },
+                  {
+                    'args' => [
+                      {
+                        'contents' => [
+                          {
+                            'text' => 'ifset'
+                          }
+                        ],
+                        'info' => {
+                          'spaces_after_argument' => {
+                            'text' => '
+'
+                          }
+                        },
+                        'type' => 'line_arg'
+                      }
+                    ],
+                    'cmdname' => 'end',
+                    'extra' => {
+                      'text_arg' => 'ifset'
+                    },
+                    'info' => {
+                      'spaces_before_argument' => {
+                        'text' => ' '
+                      }
+                    },
+                    'source_info' => {
+                      'file_name' => '',
+                      'line_nr' => 4,
+                      'macro' => ''
+                    }
+                  }
+                ],
+                'info' => {
+                  'spaces_before_argument' => {
+                    'text' => ' '
+                  }
+                },
+                'source_info' => {
+                  'file_name' => '',
+                  'line_nr' => 2,
+                  'macro' => ''
+                }
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'position' => 1,
+              'sourcemark_type' => 'ignored_conditional_block'
             }
           ],
-          'cmdname' => 'end',
-          'extra' => {
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'ifset'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 7,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'parent' => {},
-      'text' => '
+          'text' => '
 ',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
+          'type' => 'empty_line'
+        },
         {
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'ifset'
+              'text' => 'text
+'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'end',
-      'extra' => {
-        'spaces_before_argument' => ' ',
-        'text_arg' => 'ifset'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 13,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => '%
-'
+          'type' => 'paragraph'
         },
         {
-          'args' => [
+          'source_marks' => [
             {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'ifset'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'counter' => 2,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => 'notset'
+                      }
+                    ],
+                    'info' => {
+                      'spaces_after_argument' => {
+                        'text' => '
 '
+                      }
+                    },
+                    'type' => 'block_line_arg'
+                  }
+                ],
+                'cmdname' => 'ifset',
+                'contents' => [
+                  {
+                    'text' => '@verbatim
+',
+                    'type' => 'raw'
+                  },
+                  {
+                    'args' => [
+                      {
+                        'contents' => [
+                          {
+                            'text' => 'ifset'
+                          }
+                        ],
+                        'info' => {
+                          'spaces_after_argument' => {
+                            'text' => '
+'
+                          }
+                        },
+                        'type' => 'line_arg'
+                      }
+                    ],
+                    'cmdname' => 'end',
+                    'extra' => {
+                      'text_arg' => 'ifset'
+                    },
+                    'info' => {
+                      'spaces_before_argument' => {
+                        'text' => ' '
+                      }
+                    },
+                    'source_info' => {
+                      'file_name' => '',
+                      'line_nr' => 11,
+                      'macro' => ''
+                    }
+                  }
+                ],
+                'info' => {
+                  'spaces_before_argument' => {
+                    'text' => ' '
+                  }
+                },
+                'source_info' => {
+                  'file_name' => '',
+                  'line_nr' => 9,
+                  'macro' => ''
+                }
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'position' => 1,
+              'sourcemark_type' => 'ignored_conditional_block'
             }
           ],
-          'cmdname' => 'end',
-          'extra' => {
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'ifset'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 19,
-            'macro' => ''
-          },
-          'parent' => {}
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'source_marks' => [
+            {
+              'counter' => 3,
+              'element' => {
+                'args' => [
+                  {
+                    'contents' => [
+                      {
+                        'text' => 'notset'
+                      }
+                    ],
+                    'info' => {
+                      'spaces_after_argument' => {
+                        'text' => '
+'
+                      }
+                    },
+                    'type' => 'block_line_arg'
+                  }
+                ],
+                'cmdname' => 'ifset',
+                'contents' => [
+                  {
+                    'text' => '@verb{%
+',
+                    'type' => 'raw'
+                  },
+                  {
+                    'args' => [
+                      {
+                        'contents' => [
+                          {
+                            'text' => 'ifset'
+                          }
+                        ],
+                        'info' => {
+                          'spaces_after_argument' => {
+                            'text' => '
+'
+                          }
+                        },
+                        'type' => 'line_arg'
+                      }
+                    ],
+                    'cmdname' => 'end',
+                    'extra' => {
+                      'text_arg' => 'ifset'
+                    },
+                    'info' => {
+                      'spaces_before_argument' => {
+                        'text' => ' '
+                      }
+                    },
+                    'source_info' => {
+                      'file_name' => '',
+                      'line_nr' => 17,
+                      'macro' => ''
+                    }
+                  }
+                ],
+                'info' => {
+                  'spaces_before_argument' => {
+                    'text' => ' '
+                  }
+                },
+                'source_info' => {
+                  'file_name' => '',
+                  'line_nr' => 15,
+                  'macro' => ''
+                }
+              },
+              'position' => 1,
+              'sourcemark_type' => 'ignored_conditional_block'
+            }
+          ],
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'text' => '%
+'
+            }
+          ],
+          'type' => 'paragraph'
         }
       ],
-      'parent' => {},
-      'type' => 'paragraph'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'ignored_in_ifset'}{'contents'}[0]{'parent'} = $result_trees{'ignored_in_ifset'};
-$result_trees{'ignored_in_ifset'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[1];
-$result_trees{'ignored_in_ifset'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[1]{'contents'}[1]{'args'}[0];
-$result_trees{'ignored_in_ifset'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[1]{'contents'}[1];
-$result_trees{'ignored_in_ifset'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[1];
-$result_trees{'ignored_in_ifset'}{'contents'}[1]{'parent'} = $result_trees{'ignored_in_ifset'};
-$result_trees{'ignored_in_ifset'}{'contents'}[2]{'parent'} = $result_trees{'ignored_in_ifset'};
-$result_trees{'ignored_in_ifset'}{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[3]{'args'}[0];
-$result_trees{'ignored_in_ifset'}{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[3];
-$result_trees{'ignored_in_ifset'}{'contents'}[3]{'parent'} = $result_trees{'ignored_in_ifset'};
-$result_trees{'ignored_in_ifset'}{'contents'}[4]{'parent'} = $result_trees{'ignored_in_ifset'};
-$result_trees{'ignored_in_ifset'}{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[5];
-$result_trees{'ignored_in_ifset'}{'contents'}[5]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[5]{'contents'}[1]{'args'}[0];
-$result_trees{'ignored_in_ifset'}{'contents'}[5]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[5]{'contents'}[1];
-$result_trees{'ignored_in_ifset'}{'contents'}[5]{'contents'}[1]{'parent'} = $result_trees{'ignored_in_ifset'}{'contents'}[5];
-$result_trees{'ignored_in_ifset'}{'contents'}[5]{'parent'} = $result_trees{'ignored_in_ifset'};
 
 $result_texis{'ignored_in_ifset'} = '
 text
-@end ifset
 
-@end ifset
 
 %
-@end ifset
 ';
 
 
@@ -174,7 +291,7 @@ text
 
 $result_errors{'ignored_in_ifset'} = [
   {
-    'error_line' => ':5: unmatched `@end ignore\'
+    'error_line' => 'unmatched `@end ignore\'
 ',
     'file_name' => '',
     'line_nr' => 5,
@@ -183,16 +300,16 @@ $result_errors{'ignored_in_ifset'} = [
     'type' => 'error'
   },
   {
-    'error_line' => ':7: unmatched `@end\'
+    'error_line' => 'unmatched `@end ifset\'
 ',
     'file_name' => '',
     'line_nr' => 7,
     'macro' => '',
-    'text' => 'unmatched `@end\'',
+    'text' => 'unmatched `@end ifset\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':12: unmatched `@end verbatim\'
+    'error_line' => 'unmatched `@end verbatim\'
 ',
     'file_name' => '',
     'line_nr' => 12,
@@ -201,16 +318,16 @@ $result_errors{'ignored_in_ifset'} = [
     'type' => 'error'
   },
   {
-    'error_line' => ':13: unmatched `@end\'
+    'error_line' => 'unmatched `@end ifset\'
 ',
     'file_name' => '',
     'line_nr' => 13,
     'macro' => '',
-    'text' => 'unmatched `@end\'',
+    'text' => 'unmatched `@end ifset\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':18: misplaced }
+    'error_line' => 'misplaced }
 ',
     'file_name' => '',
     'line_nr' => 18,
@@ -219,12 +336,12 @@ $result_errors{'ignored_in_ifset'} = [
     'type' => 'error'
   },
   {
-    'error_line' => ':19: unmatched `@end\'
+    'error_line' => 'unmatched `@end ifset\'
 ',
     'file_name' => '',
     'line_nr' => 19,
     'macro' => '',
-    'text' => 'unmatched `@end\'',
+    'text' => 'unmatched `@end ifset\'',
     'type' => 'error'
   }
 ];

@@ -1,7 +1,7 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
@@ -10,281 +10,257 @@ $result_trees{'raw_in_para'} = {
     {
       'contents' => [
         {
-          'parent' => {},
-          'text' => 'para
+          'contents' => [
+            {
+              'text' => 'para
 '
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'cmdname' => 'verbatim',
-      'contents' => [
+            }
+          ],
+          'type' => 'paragraph'
+        },
         {
-          'extra' => {
-            'command' => {}
-          },
-          'parent' => {},
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'verbatim',
+          'contents' => [
+            {
+              'text' => 'in verbatim
+',
+              'type' => 'raw'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'verbatim'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'verbatim'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 4,
+                'macro' => ''
+              }
+            }
+          ],
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 2,
+            'macro' => ''
+          }
+        },
+        {
           'text' => '
 ',
-          'type' => 'empty_line_after_command'
+          'type' => 'empty_line'
         },
         {
-          'parent' => {},
-          'text' => 'in verbatim
-',
-          'type' => 'raw'
-        }
-      ],
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 2,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line_after_command'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'para b html
-'
-        },
-        {
-          'cmdname' => 'html',
           'contents' => [
             {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line_after_command'
-            },
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'in html
+              'text' => 'para b html
 '
-                }
-              ],
-              'parent' => {},
-              'type' => 'rawpreformatted'
             },
             {
               'args' => [
                 {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'html'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
-                  'type' => 'line_arg'
+                  'type' => 'block_line_arg'
                 }
               ],
-              'cmdname' => 'end',
-              'extra' => {
-                'command_argument' => 'html',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'html'
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 9,
-                'macro' => ''
-              },
-              'parent' => {}
-            }
-          ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 7,
-            'macro' => ''
-          },
-          'parent' => {}
-        },
-        {
-          'parent' => {},
-          'text' => 'in para
-'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'para b tex
-'
-        },
-        {
-          'cmdname' => 'tex',
-          'contents' => [
-            {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line_after_command'
-            },
-            {
+              'cmdname' => 'html',
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'in tex1
+                  'contents' => [
+                    {
+                      'text' => 'in html
 '
+                    }
+                  ],
+                  'type' => 'rawpreformatted'
                 },
                 {
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line'
-                },
-                {
-                  'parent' => {},
-                  'text' => 'in tex2
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'html'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
 '
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'end',
+                  'extra' => {
+                    'text_arg' => 'html'
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 9,
+                    'macro' => ''
+                  }
                 }
               ],
-              'parent' => {},
-              'type' => 'rawpreformatted'
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 7,
+                'macro' => ''
+              }
+            },
+            {
+              'text' => 'in para
+'
+            }
+          ],
+          'type' => 'paragraph'
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'text' => 'para b tex
+'
             },
             {
               'args' => [
                 {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'tex'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
-                  'type' => 'line_arg'
+                  'type' => 'block_line_arg'
                 }
               ],
-              'cmdname' => 'end',
-              'extra' => {
-                'command_argument' => 'tex',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'tex'
-              },
-              'line_nr' => {
+              'cmdname' => 'tex',
+              'contents' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'in tex1
+'
+                    },
+                    {
+                      'text' => '
+',
+                      'type' => 'empty_line'
+                    },
+                    {
+                      'text' => 'in tex2
+'
+                    }
+                  ],
+                  'type' => 'rawpreformatted'
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'tex'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'end',
+                  'extra' => {
+                    'text_arg' => 'tex'
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 17,
+                    'macro' => ''
+                  }
+                }
+              ],
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 17,
+                'line_nr' => 13,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             }
           ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 13,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
+          'type' => 'paragraph'
+        },
         {
-          'parent' => {},
-          'text' => 'End.
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'text' => 'End.
 '
+            }
+          ],
+          'type' => 'paragraph'
         }
       ],
-      'parent' => {},
-      'type' => 'paragraph'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'raw_in_para'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[0];
-$result_trees{'raw_in_para'}{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[1]{'contents'}[0]{'extra'}{'command'} = $result_trees{'raw_in_para'}{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[2]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[3]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'extra'}{'command'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'args'}[0];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[2];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'contents'}[2];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4];
-$result_trees{'raw_in_para'}{'contents'}[4]{'contents'}[2]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[4];
-$result_trees{'raw_in_para'}{'contents'}[4]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[5]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[0]{'extra'}{'command'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[2]{'args'}[0];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[2];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'contents'}[2];
-$result_trees{'raw_in_para'}{'contents'}[6]{'contents'}[1]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[6];
-$result_trees{'raw_in_para'}{'contents'}[6]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[7]{'parent'} = $result_trees{'raw_in_para'};
-$result_trees{'raw_in_para'}{'contents'}[8]{'contents'}[0]{'parent'} = $result_trees{'raw_in_para'}{'contents'}[8];
-$result_trees{'raw_in_para'}{'contents'}[8]{'parent'} = $result_trees{'raw_in_para'};
 
 $result_texis{'raw_in_para'} = 'para
 @verbatim
@@ -312,9 +288,13 @@ $result_texts{'raw_in_para'} = 'para
 in verbatim
 
 para b html
+in html
 in para
 
 para b tex
+in tex1
+
+in tex2
 
 End.
 ';
@@ -335,5 +315,27 @@ in verbatim
 
    End.
 ';
+
+
+$result_converted{'xml'}->{'raw_in_para'} = '<para>para
+</para><verbatim xml:space="preserve" endspaces=" ">
+in verbatim
+</verbatim>
+
+<para>para b html
+<html endspaces=" ">
+in html
+</html>
+in para
+</para>
+<para>para b tex
+<tex endspaces=" ">
+in tex1
+
+in tex2
+</tex>
+</para>
+<para>End.
+</para>';
 
 1;

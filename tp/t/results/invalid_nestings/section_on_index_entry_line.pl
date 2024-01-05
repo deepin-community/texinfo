@@ -1,7 +1,7 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
@@ -14,50 +14,59 @@ $result_trees{'section_on_index_entry_line'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'a '
+                  'text' => 'a'
                 }
               ],
-              'parent' => {},
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => ' '
+                }
+              },
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'cindex',
           'extra' => {
-            'spaces_before_argument' => ' '
+            'index_entry' => [
+              'cp',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 1,
             'macro' => ''
           },
-          'parent' => {}
+          'type' => 'index_entry_command'
         }
       ],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'b'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'section',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -65,40 +74,27 @@ $result_trees{'section_on_index_entry_line'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Somethin
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         }
       ],
-      'extra' => {
-        'spaces_before_argument' => ' '
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
       },
-      'level' => 2,
-      'line_nr' => {
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 1,
         'macro' => ''
-      },
-      'number' => 1,
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'section_on_index_entry_line'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'section_on_index_entry_line'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[0]{'contents'}[0];
-$result_trees{'section_on_index_entry_line'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[0];
-$result_trees{'section_on_index_entry_line'}{'contents'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'};
-$result_trees{'section_on_index_entry_line'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[1]{'args'}[0];
-$result_trees{'section_on_index_entry_line'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[1];
-$result_trees{'section_on_index_entry_line'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[1];
-$result_trees{'section_on_index_entry_line'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[1]{'contents'}[1];
-$result_trees{'section_on_index_entry_line'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'section_on_index_entry_line'}{'contents'}[1];
-$result_trees{'section_on_index_entry_line'}{'contents'}[1]{'parent'} = $result_trees{'section_on_index_entry_line'};
 
 $result_texis{'section_on_index_entry_line'} = '@cindex a @section b
 
@@ -113,24 +109,25 @@ Somethin
 ';
 
 $result_sectioning{'section_on_index_entry_line'} = {
-  'level' => 1,
-  'section_childs' => [
-    {
-      'cmdname' => 'section',
-      'extra' => {
-        'spaces_before_argument' => ' '
-      },
-      'level' => 2,
-      'number' => 1,
-      'section_up' => {}
-    }
-  ]
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'section',
+        'structure' => {
+          'section_level' => 2,
+          'section_number' => 1,
+          'section_up' => {}
+        }
+      }
+    ],
+    'section_level' => 1
+  }
 };
-$result_sectioning{'section_on_index_entry_line'}{'section_childs'}[0]{'section_up'} = $result_sectioning{'section_on_index_entry_line'};
+$result_sectioning{'section_on_index_entry_line'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'section_on_index_entry_line'};
 
 $result_errors{'section_on_index_entry_line'} = [
   {
-    'error_line' => ':1: warning: @section should only appear at the beginning of a line
+    'error_line' => 'warning: @section should only appear at the beginning of a line
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -139,18 +136,34 @@ $result_errors{'section_on_index_entry_line'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @section should not appear in @cindex
+    'error_line' => 'warning: @section should not appear on @cindex line
 ',
     'file_name' => '',
     'line_nr' => 1,
     'macro' => '',
-    'text' => '@section should not appear in @cindex',
+    'text' => '@section should not appear on @cindex line',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: entry for index `cp\' outside of any node
+',
+    'file_name' => '',
+    'line_nr' => 1,
+    'macro' => '',
+    'text' => 'entry for index `cp\' outside of any node',
     'type' => 'warning'
   }
 ];
 
 
 $result_floats{'section_on_index_entry_line'} = {};
+
+
+$result_indices_sort_strings{'section_on_index_entry_line'} = {
+  'cp' => [
+    'a'
+  ]
+};
 
 
 1;

@@ -1,7 +1,7 @@
 use strict;
 
 use lib '.';
-use Texinfo::ModulePath (undef, undef, 'updirs' => 2);
+use Texinfo::ModulePath (undef, undef, undef, 'updirs' => 2);
 
 require 't/test_utils.pl';
 
@@ -35,6 +35,27 @@ Y5
 Y6
 @end ifset
 '],
+['ignore_spaces_and_comments',
+'@ignore
+No space no comment
+@end ignore
+
+@ignore  
+Spaces no comment
+@end ignore
+
+@ignore@c no space comment
+Comment
+@end ignore
+
+@ignore  @comment space comment
+Space Comment
+@end ignore
+
+@ignore @c
+Space Comment no argument
+@end ignore
+'],
 ['nested_ignore',
 '@ignore
 @ignore
@@ -51,6 +72,41 @@ Y6
 @ifclear
 @end ignore
 '],
+['nested_ignore_with_comments',
+'@ignore
+@ignore
+No space no comment
+@end ignore
+
+@ignore  
+Spaces no comment
+@end ignore
+
+@ignore@c no space comment
+Comment
+@end ignore
+
+@ignore @c
+Comment no argument
+@end ignore
+
+@ignore  @c space comment
+Space Comment
+@end ignore
+
+@ignore something @comment comment after text
+Text comment
+@end ignore
+
+@ignore some @code{variable} @comment comment after command
+Command comment
+@end ignore
+
+@end ignore
+'],
+['nested_ignore_comment_no_eol',
+'@ignore
+@ignore @c comment'],
 ['empty_set_in_ifset',
 '@set a
 
@@ -126,7 +182,60 @@ This is iftex text.
 @ifnottex
 This is ifnottex text.
 @end ifnottex
-', { 'expanded_formats' => ['info', 'html'] }],
+', { 'EXPANDED_FORMATS' => ['info', 'html'] }],
+# same conditionals as in many_conditionals, but from file
+# with preambule and with some output
+['cond_ifhtml_ifinfo',
+  # same conditions as in many_conditionals
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['html'],
+    'EXPANDED_FORMATS' => ['html', 'info'],
+  },
+],
+['cond',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['html'],
+  },
+],
+['cond_xml',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['xml'],
+    'EXPANDED_FORMATS' => ['xml'],
+  },
+],
+['cond_no-ifhtml_no-ifinfo_no-iftex',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['html'],
+    'EXPANDED_FORMATS' => [],
+  },
+],
+['cond_ifhtml_ifinfo_iftex',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['html'],
+    'EXPANDED_FORMATS' => ['html', 'info', 'tex'],
+  },
+  {'EXPANDED_FORMATS' => ['html', 'info', 'tex'], },
+],
+['cond_info',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['info'],
+    'EXPANDED_FORMATS' => ['info', 'plaintext'],
+  },
+],
+['cond_info_no-ifhtml_no-ifinfo_no-iftex',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['info'],
+    'EXPANDED_FORMATS' => [],
+  },
+  {'EXPANDED_FORMATS' => []}
+],
+['cond_info_ifhtml_ifinfo_iftex',
+  undef, {'test_file' => 'cond.texi',
+    'test_formats' => ['info'],
+    'EXPANDED_FORMATS' => ['info', 'html', 'tex'],
+  },
+  {'EXPANDED_FORMATS' => ['info', 'html', 'tex'],}
+],
 ['commands_in_ifset',
 '
 @ifset notset
@@ -264,6 +373,13 @@ text
 @end verbatim
 @end ifset
 '],
+['nested_ifset_prepended_to_command_name',
+'@ifset a
+@ifsettoto b
+GG
+@end ifset
+@end ifset
+'],
 ['macro_in_ifset',
 '
 @macro truc {}
@@ -331,20 +447,20 @@ This is ignored
 @ifplaintext
 this text will only appear in plain text.
 @end ifplaintext
-', {'expanded_formats' => ['info']}
+', {'EXPANDED_FORMATS' => ['info']}
 ],
 ['plaintext_ifinfo',
 '
 @ifinfo
 this text will appear only in Info and plain text.
 @end ifinfo
-', {'expanded_formats' => ['plaintext']}
+', {'EXPANDED_FORMATS' => ['plaintext']}
 ],
 ['ifnotinfo_exception',
 '@ifnotinfo
 in ifnotinfo
 @end ifnotinfo
-', {'expanded_formats' => ['plaintext']}
+', {'EXPANDED_FORMATS' => ['plaintext']}
 ],
 ['info_ifinfo_ifnotplaintext',
 '@ifinfo
@@ -352,7 +468,7 @@ in ifnotinfo
 This will be in Info, but not plain text.
 @end ifnotplaintext
 @end ifinfo
-', {'expanded_formats' => ['info']}
+', {'EXPANDED_FORMATS' => ['info']}
 ],
 ['plaintext_ifinfo_ifnotplaintext',
 '@ifinfo
@@ -360,7 +476,7 @@ This will be in Info, but not plain text.
 This will be in Info, but not plain text.
 @end ifnotplaintext
 @end ifinfo
-', {'expanded_formats' => ['plaintext']}
+', {'EXPANDED_FORMATS' => ['plaintext']}
 ],
 ['text_on_conditional_line_expanded',
 '@ifnothtml text following ifnothtml,
@@ -372,13 +488,13 @@ a
 '@ifnothtml text following ifnothtml,
 a
 @end ifnothtml
-', {'expanded_formats' => ['html']}
+', {'EXPANDED_FORMATS' => ['html']}
 ],
 ['additional_space_in_end_conditional',
 '@ifnothtml
 not html
 @end  ifnothtml
-', {'expanded_formats' => ['html']}
+', {'EXPANDED_FORMATS' => ['html']}
 ],
 ['additional_space_in_end_conditional_expanded',
 '@ifnothtml
@@ -464,6 +580,18 @@ strongalias @@alias is defined.
 strongalias @@alias is wrongly not defined
 @end ifcommandnotdefined
 '],
+['txiinternalvalue',
+'@txiinternalvalue
+'],
+# currently this is not an error, it is only an error
+# to redefine @txiinternalvalue if in_gdt
+['user_defined_txiinternalvalue',
+'@macro txiinternalvalue
+user internalvalue
+@end macro
+
+@txiinternalvalue
+'],
 ['inlineiffmtifelse_not_closed',
 '@inlinefmtifelse{html,
 '],
@@ -483,16 +611,23 @@ strongalias @@alias is wrongly not defined
 '@ifset A/B
 @end ifset
 '],
+# there is a similar test of the command line in tests/formatting
+['defcondx_Dbar',
+  undef, {'test_file' => '../../tests/formatting/defxcond.texi',
+  'test_formats' => ['file_html'],
+  'values' => {'bar' => 1}}, {'SPLIT' => ''},
+],
+['defcondx_Ubar',
+  undef, {'test_file' => '../../tests/formatting/defxcond.texi',
+  'test_formats' => ['file_html'],
+  'values' => {}}, {'SPLIT' => ''},
+],
 );
 
 for my $test (@test_cases) {
-  if (!defined $test->[2]->{'expanded_formats'}) {
-    $test->[2]->{'expanded_formats'} = [];
+  if (!defined $test->[2]->{'EXPANDED_FORMATS'}) {
+    $test->[2]->{'EXPANDED_FORMATS'} = [];
   }
 }
 
-our ($arg_test_case, $arg_generate, $arg_debug);
-
-run_all ('conditionals', \@test_cases, $arg_test_case,
-   $arg_generate, $arg_debug);
-
+run_all('conditionals', \@test_cases);

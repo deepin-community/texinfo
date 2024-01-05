@@ -1,38 +1,73 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'seealso_duplicate'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'contents' => [
+        {
+          'contents' => [],
+          'type' => 'preamble_before_content'
+        }
+      ],
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'Top'
+      },
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 1,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'chap'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -46,82 +81,78 @@ $result_trees{'seealso_duplicate'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'awk'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'brace_command_arg'
                     }
                   ],
                   'cmdname' => 'command',
-                  'contents' => [],
-                  'line_nr' => {
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 3,
+                    'line_nr' => 4,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => ' '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => ' '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'cindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'cindex',
-              'index_name' => 'cp',
-              'index_type_command' => 'cindex',
-              'key' => 'awk',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' ',
+            'element_node' => {},
+            'index_entry' => [
+              'cp',
+              1
+            ],
             'subentry' => {
               'args' => [
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'POSIX and'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'subentry',
               'extra' => {
-                'level' => 1,
-                'spaces_before_argument' => ' '
+                'level' => 1
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 3,
+                'line_nr' => 4,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             }
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 4,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {},
@@ -134,65 +165,51 @@ $result_trees{'seealso_duplicate'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'awk'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'brace_command_arg'
                     }
                   ],
                   'cmdname' => 'command',
-                  'contents' => [],
-                  'line_nr' => {
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 4,
+                    'line_nr' => 5,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => ' '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => ' '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'cindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'cindex',
-              'index_name' => 'cp',
-              'index_type_command' => 'cindex',
-              'key' => 'awk',
-              'node' => {},
-              'number' => 2
-            },
-            'spaces_before_argument' => ' ',
+            'element_node' => {},
+            'index_entry' => [
+              'cp',
+              2
+            ],
             'subentry' => {
               'args' => [
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'POSIX and'
                     },
                     {
-                      'parent' => {},
                       'text' => ' ',
-                      'type' => 'empty_spaces_before_argument'
+                      'type' => 'spaces_at_end'
                     },
                     {
                       'args' => [
                         {
                           'contents' => [
                             {
-                              'parent' => {},
                               'text' => 'POSIX '
                             },
                             {
@@ -200,71 +217,71 @@ $result_trees{'seealso_duplicate'} = {
                                 {
                                   'contents' => [
                                     {
-                                      'parent' => {},
                                       'text' => 'awk'
                                     }
                                   ],
-                                  'parent' => {},
                                   'type' => 'brace_command_arg'
                                 }
                               ],
                               'cmdname' => 'command',
-                              'contents' => [],
-                              'line_nr' => {
+                              'source_info' => {
                                 'file_name' => '',
-                                'line_nr' => 4,
+                                'line_nr' => 5,
                                 'macro' => ''
-                              },
-                              'parent' => {}
+                              }
                             }
                           ],
-                          'parent' => {},
                           'type' => 'brace_command_arg'
                         }
                       ],
                       'cmdname' => 'seealso',
-                      'contents' => [],
-                      'line_nr' => {
+                      'source_info' => {
                         'file_name' => '',
-                        'line_nr' => 4,
+                        'line_nr' => 5,
                         'macro' => ''
-                      },
-                      'parent' => {}
+                      }
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'subentry',
               'extra' => {
                 'level' => 1,
-                'seealso' => {},
-                'spaces_before_argument' => ' '
+                'seealso' => {}
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 4,
+                'line_nr' => 5,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             }
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 4,
+            'line_nr' => 5,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {},
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -274,15 +291,15 @@ $result_trees{'seealso_duplicate'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'cp'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -290,90 +307,46 @@ $result_trees{'seealso_duplicate'} = {
           'extra' => {
             'misc_args' => [
               'cp'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 6,
+            'line_nr' => 7,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
       'extra' => {
         'isindex' => 1,
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'chap'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
-        'line_nr' => 1,
+        'line_nr' => 2,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'seealso_duplicate'}{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'index_entry'}{'command'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'index_entry'}{'content'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'index_entry'}{'node'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'subentry'}{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'subentry'}{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'subentry'}{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'subentry'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'subentry'}{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[2] = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[1]{'extra'}{'subentry'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'index_entry'}{'command'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'index_entry'}{'content'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'index_entry'}{'node'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'extra'}{'seealso'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'}{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[4] = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[3]{'extra'}{'subentry'};
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[5]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[6]{'args'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[6]{'args'}[0]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[6];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'contents'}[6]{'parent'} = $result_trees{'seealso_duplicate'}{'contents'}[1];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'seealso_duplicate'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'seealso_duplicate'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'seealso_duplicate'}{'contents'}[1]{'parent'} = $result_trees{'seealso_duplicate'};
+$result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[1]{'extra'}{'element_node'} = $result_trees{'seealso_duplicate'}{'contents'}[2];
+$result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[2] = $result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[1]{'extra'}{'subentry'};
+$result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[3]{'extra'}{'element_node'} = $result_trees{'seealso_duplicate'}{'contents'}[2];
+$result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[3]{'extra'}{'subentry'}{'extra'}{'seealso'} = $result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[3]{'extra'}{'subentry'}{'args'}[0]{'contents'}[2];
+$result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[4] = $result_trees{'seealso_duplicate'}{'contents'}[2]{'contents'}[3]{'extra'}{'subentry'};
 
 $result_texis{'seealso_duplicate'} = '@node Top
+@node chap
 
 @cindex @command{awk} @subentry POSIX and
 @cindex @command{awk} @subentry POSIX and @seealso{POSIX @command{awk}}
@@ -386,24 +359,32 @@ $result_texts{'seealso_duplicate'} = '
 
 ';
 
-$result_sectioning{'seealso_duplicate'} = {};
-
 $result_nodes{'seealso_duplicate'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'isindex' => 1,
+        'normalized' => 'chap'
+      },
+      'structure' => {
+        'node_prev' => {}
+      }
+    }
   }
 };
+$result_nodes{'seealso_duplicate'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'seealso_duplicate'};
 
 $result_menus{'seealso_duplicate'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'seealso_duplicate'} = [];
@@ -412,22 +393,34 @@ $result_errors{'seealso_duplicate'} = [];
 $result_floats{'seealso_duplicate'} = {};
 
 
+$result_indices_sort_strings{'seealso_duplicate'} = {
+  'cp' => [
+    'awk, POSIX and',
+    'awk, POSIX and'
+  ]
+};
+
+
 
 $result_converted{'info'}->{'seealso_duplicate'} = 'This is , produced from .
 
 
-File: ,  Node: Top,  Up: (dir)
+File: ,  Node: Top,  Next: chap,  Up: (dir)
+
+
+File: ,  Node: chap,  Prev: Top
 
  [index ]
 * Menu:
 
-* awk, POSIX and:                        Top.                   (line 3)
-* awk, POSIX and <1>:                    Top.                   (line 3)
+* awk, POSIX and:                        chap.                  (line 3)
+* awk, POSIX and <1>:                    chap.                  (line 3)
 
 
 
 Tag Table:
 Node: Top27
+Node: chap74
 
 End Tag Table
 
@@ -440,31 +433,108 @@ End:
 
 $result_converted{'plaintext'}->{'seealso_duplicate'} = '* Menu:
 
-* awk, POSIX and:                        Top.                   (line 0)
-* awk, POSIX and <1>:                    Top.                   (line 0)
+* awk, POSIX and:                        chap.                  (line 0)
+* awk, POSIX and <1>:                    chap.                  (line 0)
 
 ';
 
 
-$result_converted{'html_text'}->{'seealso_duplicate'} = '<span id="Top"></span><h1 class="node-heading">Top</h1>
+$result_converted{'html_text'}->{'seealso_duplicate'} = '<a class="node-id" id="Top"></a><div class="nav-panel">
+<p>
+[<a href="#chap" title="Index" rel="index">Index</a>]</p>
+</div>
+<h1 class="node"><span>Top<a class="copiable-link" href="#Top"> &para;</a></span></h1>
+<hr>
+<a class="node-id" id="chap"></a><div class="nav-panel">
+<p>
+[<a href="#chap" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="node"><span>chap<a class="copiable-link" href="#chap"> &para;</a></span></h4>
 
-<span id="index-awk"></span>
-<span id="index-awk-1"></span>
+<a class="index-entry-id" id="index-awk-POSIX-and"></a>
+<a class="index-entry-id" id="index-awk-POSIX-and-1"></a>
 
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#t_h_cp_letter-A"><b>A</b></a>
- &nbsp; 
-</td></tr></table>
-<table class="index-cp" border="0">
-<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="t_h_cp_letter-A">A</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-awk"><code>awk</code>, POSIX and</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-awk-1"><code>awk</code>, POSIX and</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
+<div class="printindex cp-printindex">
+<table class="cp-entries-printindex" border="0">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="chap_cp_letter-A">A</th></tr>
+<tr><td></td><td class="printindex-index-entry"><code class="command">awk</code></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry index-entry-level-1"><a href="#index-awk-POSIX-and">POSIX and</a></td><td class="printindex-index-section"><a href="#chap">chap</a></td></tr>
+<tr><td></td><td class="printindex-index-entry index-entry-level-1"><a href="#index-awk-POSIX-and-1">POSIX and</a></td><td class="printindex-index-section"><a href="#chap">chap</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
 </table>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#t_h_cp_letter-A"><b>A</b></a>
- &nbsp; 
-</td></tr></table>
-<hr>';
+</div>
+';
+
+
+$result_converted{'xml'}->{'seealso_duplicate'} = '<node name="Top" spaces=" "><nodename>Top</nodename><nodenext automatic="on">chap</nodenext></node>
+<node name="chap" spaces=" "><nodename>chap</nodename><nodeprev automatic="on">Top</nodeprev></node>
+
+<cindex index="cp" spaces=" "><indexterm index="cp" number="1"><command>awk</command></indexterm></cindex> <subentry spaces=" ">POSIX and</subentry>
+<cindex index="cp" spaces=" "><indexterm index="cp" number="2"><command>awk</command></indexterm></cindex> <subentry spaces=" ">POSIX and <seealso>POSIX <command>awk</command></seealso></subentry>
+
+<printindex spaces=" " value="cp" line="cp"></printindex>
+';
+
+
+$result_converted{'latex'}->{'seealso_duplicate'} = '\\documentclass{book}
+\\usepackage{amsfonts}
+\\usepackage{amsmath}
+\\usepackage[gen]{eurosym}
+\\usepackage{textcomp}
+\\usepackage{graphicx}
+\\usepackage{etoolbox}
+\\usepackage{titleps}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{imakeidx}
+\\usepackage{float}
+% use hidelinks to remove boxes around links to be similar to Texinfo TeX
+\\usepackage[hidelinks]{hyperref}
+
+\\makeatletter
+\\newcommand{\\Texinfosettitle}{No Title}%
+
+% no index headers
+\\indexsetup{level=\\relax,toclevel=section}%
+\\makeindex[name=cp,title=]%
+
+% redefine the \\mainmatter command such that it does not clear page
+% as if in double page
+\\renewcommand\\mainmatter{\\clearpage\\@mainmattertrue\\pagenumbering{arabic}}
+\\newenvironment{Texinfopreformatted}{%
+  \\par\\GNUTobeylines\\obeyspaces\\frenchspacing\\parskip=\\z@\\parindent=\\z@}{}
+{\\catcode`\\^^M=13 \\gdef\\GNUTobeylines{\\catcode`\\^^M=13 \\def^^M{\\null\\par}}}
+\\newenvironment{Texinfoindented}{\\begin{list}{}{}\\item\\relax}{\\end{list}}
+
+% used for substitutions in commands
+\\newcommand{\\Texinfoplaceholder}[1]{}
+
+\\newpagestyle{single}{\\sethead[\\chaptername{} \\thechapter{} \\chaptertitle{}][][\\thepage]
+                              {\\chaptername{} \\thechapter{} \\chaptertitle{}}{}{\\thepage}}
+
+% allow line breaking at underscore
+\\let\\Texinfounderscore\\_
+\\renewcommand{\\_}{\\Texinfounderscore\\discretionary{}{}{}}
+\\renewcommand{\\includegraphics}[1]{\\fbox{FIG \\detokenize{#1}}}
+
+\\makeatother
+% set default for @setchapternewpage
+\\makeatletter
+\\patchcmd{\\chapter}{\\if@openright\\cleardoublepage\\else\\clearpage\\fi}{\\Texinfoplaceholder{setchapternewpage placeholder}\\clearpage}{}{}
+\\makeatother
+\\pagestyle{single}%
+
+\\begin{document}
+\\label{anchor:Top}%
+\\label{anchor:chap}%
+
+\\index[cp]{awk@\\texttt{awk}!POSIX and@POSIX and}%
+\\index[cp]{awk@\\texttt{awk}!POSIX and@POSIX and|seealso{POSIX \\texttt{awk}}}%
+
+\\printindex[cp]
+\\end{document}
+';
 
 1;

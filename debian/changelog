@@ -1,3 +1,131 @@
+texinfo (7.1-2) unstable; urgency=medium
+
+  * obstack alignment patch from upstream. Should fix build failure
+    on Sparc64.
+
+ -- Hilmar Preusse <hille42@web.de>  Sun, 19 Nov 2023 00:41:13 +0100
+
+texinfo (7.1-1) unstable; urgency=medium
+
+  * New upstream release, refresh patches.
+  * Remove some generated files from built tree during clean. This
+    addresses parts of #1046800.
+
+ -- Hilmar Preusse <hille42@web.de>  Sun, 29 Oct 2023 21:57:34 +0000
+
+texinfo (7.0.3-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Hilmar Preusse <hille42@web.de>  Mon, 10 Jul 2023 21:05:01 +0200
+
+texinfo (7.0.3-1) experimental; urgency=medium
+
+  * New upstream version.
+    - Disable / Delete patches.
+  * Remove all the comments from "pre-dh *" era from d/rules.
+
+ -- Hilmar Preusse <hille42@web.de>  Thu, 30 Mar 2023 08:47:59 +0200
+
+texinfo (7.0.2-1) experimental; urgency=medium
+
+  * New upstream version.
+    - Disable / Delete patches.
+    - Remove surplus Lintian overrides.
+  * Update Standards version, no changes needed.
+
+ -- Hilmar Preusse <hille42@web.de>  Wed, 25 Jan 2023 16:57:59 +0100
+
+texinfo (7.0.1-3) experimental; urgency=medium
+
+  * Move arch dependent parts of texinfo into separate package
+    texinfo-lib.
+  * Remove very outdated constraints, pointing to tetex*.
+  * Lintian:
+    - Migrate lintian overrides to new []-format to get rid of
+      "mismatched-override".
+    - Remove unused overrides.
+    - Add overrides for bogus "very-long-line-length-in-source-file" and
+      "source-is missing".
+    - Add overrides for bogus "debian-news-entry-has-unknown-version"
+    - "license-problem-gfdl-non-official-text": override and fix.
+    - Fix "bad-whatis" in texi2dvi.1 manual page.
+    - Fix "no-dep5-copyright".
+
+ -- Hilmar Preusse <hille42@web.de>  Fri, 06 Jan 2023 00:36:53 +0100
+
+texinfo (7.0.1-2) experimental; urgency=medium
+
+  * Patch: avoid freezing at beginning of a file when 'nodeline'
+    is set to 'pointers' (the default).
+  * Patch: info: buffer overflow in copy_converting() (Closes: #1025940).
+
+ -- Hilmar Preusse <hille42@web.de>  Tue, 20 Dec 2022 17:14:22 +0100
+
+texinfo (7.0.1-1) experimental; urgency=medium
+
+  * New upstream release, disable patches.
+    - It has a fix for the text_buffer_iconv function
+      (Closes: #1024065).
+
+ -- Hilmar Preusse <hille42@web.de>  Fri, 02 Dec 2022 11:42:53 +0100
+
+texinfo (7.0-1) experimental; urgency=medium
+
+  * New upstream release: disable / refresh patches.
+    - makeinfo: converts "@minus{}" into real minus sign
+      (Closes: #1021629).
+    - UTF-8 is now the default input encoding (Closes: #1022789).
+    - speed up "info -w" for man pages (Closes: #1021839).
+    - info -o: correct exit status on error (Closes: #1021827).
+    - Fix memory exhaust issues for large info pages (Closes: #1021823).
+
+    * Add additional patches from upstream to fix regressions
+      - 40ec4f80ba9875cb801390bf7a2fed4371c6c4dc
+      - b13b687f6358af61b9fe3a04f50f7824ba38ccef
+      - fc756d9128170d92cfacb367e2622c991b1ea5c7
+
+  * Debhelper compat 13.
+  * Remove libncurses5-dev as alternative B-D.
+  * Correct lintian overrides.
+
+ -- Hilmar Preusse <hille42@web.de>  Sat, 12 Nov 2022 10:15:17 +0100
+
+texinfo (6.8-6) unstable; urgency=medium
+
+  * Stop mentioning texinfo-doc-nonfree in README.Debian.
+  * "Fix "info" crashes with "aborted" message, in any attempt to run
+    it." Add patch from upstream to solve issue. (Closes: #1013283)
+  * Upstream patch: Avoid crashes in 'handle_block_command'.
+
+ -- Hilmar Preusse <hille42@web.de>  Sun, 26 Jun 2022 23:04:39 +0200
+
+texinfo (6.8-5) unstable; urgency=medium
+
+  [ Hilmar Preusse ]
+  * Switch to dh sequencer in debian/rules. Old build sequence
+    still commented.
+  * Fix a few lintian complains, add overrides.
+  * Replace "which" by "command -v" (Closes: #1003577)
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster:
+    + texinfo: Drop versioned constraint on tex-common in Depends.
+    + info: Drop versioned constraint on texinfo in Replaces.
+    + install-info: Drop versioned constraint on dpkg in Pre-Depends.
+    + install-info: Drop versioned constraint on texinfo in Replaces.
+    + install-info: Drop versioned constraint on texinfo in Breaks.
+    + Remove 1 maintscript entries from 1 files.
+
+ -- Hilmar Preusse <hille42@web.de>  Fri, 10 Jun 2022 23:26:56 +0200
+
+texinfo (6.8-4) unstable; urgency=medium
+
+  * Add patch texinfo-6.8-undo-gnulib-nonnul.patch to fix build
+    failure w/ glibc 2.34 (Closes: #1003483).
+
+ -- Hilmar Preusse <hille42@web.de>  Tue, 11 Jan 2022 10:49:39 +0100
+
 texinfo (6.8-3) unstable; urgency=high
 
   * Cherry pick patch "Add missing option value 'single'."

@@ -1,521 +1,172 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'table_nested'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'myvtable',
-          'type' => 'macro_name'
-        }
-      ],
-      'cmdname' => 'macro',
       'contents' => [
-        {
-          'parent' => {},
-          'text' => '@vtable @asis
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@item first item
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@itemx second itemx
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => 'Text.
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@item second item
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => 'Text 2
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@item last
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@end vtable
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => 'Something.
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@table @emph
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@item in item
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => 'Text without blank line
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@item second item
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => 'Text without blank line 2
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '@end table
-',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => 'After table.',
-          'type' => 'raw'
-        },
-        {
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'last_raw_newline'
-        }
-      ],
-      'extra' => {
-        'arg_line' => ' myvtable
-'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line_after_command'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'Quotation
-'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'cmdname' => 'quotation',
-      'contents' => [
-        {
-          'extra' => {
-            'command' => {}
-          },
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line_after_command'
-        },
         {
           'args' => [
             {
-              'contents' => [
-                {
-                  'cmdname' => 'asis',
-                  'contents' => [],
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 27,
-                    'macro' => 'myvtable'
-                  },
-                  'parent' => {},
-                  'type' => 'command_as_argument'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'text' => 'myvtable',
+              'type' => 'macro_name'
             }
           ],
-          'cmdname' => 'vtable',
+          'cmdname' => 'macro',
           'contents' => [
             {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'first item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'item',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'first item',
-                          'number' => 1
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 27,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    },
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'second itemx'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'itemx',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'itemx',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'second itemx',
-                          'number' => 2
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 27,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => '
+              'text' => '@vtable @asis
 ',
-                      'type' => 'empty_line'
-                    },
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'Text.
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'paragraph'
-                    },
-                    {
-                      'parent' => {},
-                      'text' => '
-',
-                      'type' => 'empty_line'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
+              'type' => 'raw'
             },
             {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'second item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'item',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'second item',
-                          'number' => 3
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 27,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => '
+              'text' => '@item first item
 ',
-                      'type' => 'empty_line'
-                    },
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'Text 2
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'paragraph'
-                    },
-                    {
-                      'parent' => {},
-                      'text' => '
-',
-                      'type' => 'empty_line'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
+              'type' => 'raw'
             },
             {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'last'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'item',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'last',
-                          'number' => 4
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 27,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
+              'text' => '@itemx second itemx
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'Text.
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@item second item
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'Text 2
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@item last
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@end vtable
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'Something.
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@table @emph
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@item in item
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'Text without blank line
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@item second item
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'Text without blank line 2
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => '@end table
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'After table.
+',
+              'type' => 'raw'
             },
             {
               'args' => [
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => 'vtable'
+                      'text' => 'macro'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'end',
               'extra' => {
-                'command_argument' => 'vtable',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'vtable'
+                'text_arg' => 'macro'
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 27,
-                'macro' => 'myvtable'
-              },
-              'parent' => {}
+                'line_nr' => 23,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'command_as_argument' => {},
-            'end_command' => {},
-            'spaces_before_argument' => ' '
+          'info' => {
+            'arg_line' => ' myvtable
+'
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 27,
-            'macro' => 'myvtable'
-          },
-          'parent' => {}
+            'line_nr' => 1,
+            'macro' => ''
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -523,889 +174,46 @@ $result_trees{'table_nested'} = {
         {
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'Something.
+              'text' => 'Quotation
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
           'args' => [
             {
-              'contents' => [
-                {
-                  'cmdname' => 'emph',
-                  'contents' => [],
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 27,
-                    'macro' => 'myvtable'
-                  },
-                  'parent' => {},
-                  'type' => 'command_as_argument'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'table',
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'in item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 27,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'Text without blank line
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'paragraph'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'second item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 27,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'Text without blank line 2
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'paragraph'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'args' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'table'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
-'
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'end',
-              'extra' => {
-                'command_argument' => 'table',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'table'
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 27,
-                'macro' => 'myvtable'
-              },
-              'parent' => {}
-            }
-          ],
-          'extra' => {
-            'command_as_argument' => {},
-            'end_command' => {},
-            'spaces_before_argument' => ' '
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 27,
-            'macro' => 'myvtable'
-          },
-          'parent' => {}
-        },
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'After table.
-'
-            }
-          ],
-          'parent' => {},
-          'type' => 'paragraph'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'quotation'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'quotation',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'quotation'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 28,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 26,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'Example
-'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'cmdname' => 'example',
-      'contents' => [
-        {
-          'extra' => {
-            'command' => {}
-          },
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line_after_command'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'cmdname' => 'asis',
-                  'contents' => [],
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 32,
-                    'macro' => 'myvtable'
-                  },
-                  'parent' => {},
-                  'type' => 'command_as_argument'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'block_line_arg'
-            }
-          ],
-          'cmdname' => 'vtable',
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'first item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'item',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'first item',
-                          'number' => 5
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 32,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    },
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'second itemx'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'itemx',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'itemx',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'second itemx',
-                          'number' => 6
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 32,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => '
-',
-                          'type' => 'empty_line'
-                        },
-                        {
-                          'parent' => {},
-                          'text' => 'Text.
-'
-                        },
-                        {
-                          'parent' => {},
-                          'text' => '
-',
-                          'type' => 'empty_line'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'preformatted'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'second item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'item',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'second item',
-                          'number' => 7
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 32,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => '
-',
-                          'type' => 'empty_line'
-                        },
-                        {
-                          'parent' => {},
-                          'text' => 'Text 2
-'
-                        },
-                        {
-                          'parent' => {},
-                          'text' => '
-',
-                          'type' => 'empty_line'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'preformatted'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'last'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'index_entry' => {
-                          'command' => {},
-                          'content' => [],
-                          'content_normalized' => [],
-                          'in_code' => 1,
-                          'index_at_command' => 'item',
-                          'index_name' => 'vr',
-                          'index_type_command' => 'vtable',
-                          'key' => 'last',
-                          'number' => 8
-                        },
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 32,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'args' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'vtable'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
-'
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'end',
-              'extra' => {
-                'command_argument' => 'vtable',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'vtable'
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 32,
-                'macro' => 'myvtable'
-              },
-              'parent' => {}
-            }
-          ],
-          'extra' => {
-            'command_as_argument' => {},
-            'end_command' => {},
-            'spaces_before_argument' => ' '
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 32,
-            'macro' => 'myvtable'
-          },
-          'parent' => {}
-        },
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line'
-            },
-            {
-              'parent' => {},
-              'text' => 'Something.
-'
-            }
-          ],
-          'parent' => {},
-          'type' => 'preformatted'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'cmdname' => 'emph',
-                  'contents' => [],
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 32,
-                    'macro' => 'myvtable'
-                  },
-                  'parent' => {},
-                  'type' => 'command_as_argument'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'block_line_arg'
-            }
-          ],
-          'cmdname' => 'table',
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'in item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 32,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'Text without blank line
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'preformatted'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'contents' => [
-                {
-                  'contents' => [
-                    {
-                      'args' => [
-                        {
-                          'contents' => [
-                            {
-                              'parent' => {},
-                              'text' => 'second item'
-                            }
-                          ],
-                          'extra' => {
-                            'spaces_after_argument' => '
-'
-                          },
-                          'parent' => {},
-                          'type' => 'line_arg'
-                        }
-                      ],
-                      'cmdname' => 'item',
-                      'extra' => {
-                        'spaces_before_argument' => ' '
-                      },
-                      'line_nr' => {
-                        'file_name' => '',
-                        'line_nr' => 32,
-                        'macro' => 'myvtable'
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_term'
-                },
-                {
-                  'contents' => [
-                    {
-                      'contents' => [
-                        {
-                          'parent' => {},
-                          'text' => 'Text without blank line 2
-'
-                        }
-                      ],
-                      'parent' => {},
-                      'type' => 'preformatted'
-                    }
-                  ],
-                  'parent' => {},
-                  'type' => 'table_item'
-                }
-              ],
-              'parent' => {},
-              'type' => 'table_entry'
-            },
-            {
-              'args' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => 'table'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
-'
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'end',
-              'extra' => {
-                'command_argument' => 'table',
-                'spaces_before_argument' => ' ',
-                'text_arg' => 'table'
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 32,
-                'macro' => 'myvtable'
-              },
-              'parent' => {}
-            }
-          ],
-          'extra' => {
-            'command_as_argument' => {},
-            'end_command' => {},
-            'spaces_before_argument' => ' '
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 32,
-            'macro' => 'myvtable'
-          },
-          'parent' => {}
-        },
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'After table.
-'
-            }
-          ],
-          'parent' => {},
-          'type' => 'preformatted'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'example'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'example',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'example'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 33,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 31,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'parent' => {},
-          'text' => 'Double quotation
-'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'cmdname' => 'quotation',
-      'contents' => [
-        {
-          'extra' => {
-            'command' => {}
-          },
-          'parent' => {},
-          'text' => '
-',
-          'type' => 'empty_line_after_command'
-        },
-        {
           'cmdname' => 'quotation',
           'contents' => [
             {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line_after_command'
+              'source_marks' => [
+                {
+                  'counter' => 1,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'myvtable'
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                }
+              ],
+              'text' => ''
             },
             {
               'args' => [
@@ -1413,21 +221,20 @@ $result_trees{'table_nested'} = {
                   'contents' => [
                     {
                       'cmdname' => 'asis',
-                      'contents' => [],
-                      'line_nr' => {
+                      'source_info' => {
                         'file_name' => '',
-                        'line_nr' => 38,
+                        'line_nr' => 27,
                         'macro' => 'myvtable'
                       },
-                      'parent' => {},
                       'type' => 'command_as_argument'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'block_line_arg'
                 }
               ],
@@ -1442,87 +249,77 @@ $result_trees{'table_nested'} = {
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => 'first item'
                                 }
                               ],
-                              'extra' => {
-                                'spaces_after_argument' => '
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
 '
+                                }
                               },
-                              'parent' => {},
                               'type' => 'line_arg'
                             }
                           ],
                           'cmdname' => 'item',
                           'extra' => {
-                            'index_entry' => {
-                              'command' => {},
-                              'content' => [],
-                              'content_normalized' => [],
-                              'in_code' => 1,
-                              'index_at_command' => 'item',
-                              'index_name' => 'vr',
-                              'index_type_command' => 'vtable',
-                              'key' => 'first item',
-                              'number' => 9
-                            },
-                            'spaces_before_argument' => ' '
+                            'index_entry' => [
+                              'vr',
+                              1
+                            ]
                           },
-                          'line_nr' => {
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
                             'file_name' => '',
-                            'line_nr' => 38,
+                            'line_nr' => 27,
                             'macro' => 'myvtable'
-                          },
-                          'parent' => {}
+                          }
                         },
                         {
                           'args' => [
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => 'second itemx'
                                 }
                               ],
-                              'extra' => {
-                                'spaces_after_argument' => '
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
 '
+                                }
                               },
-                              'parent' => {},
                               'type' => 'line_arg'
                             }
                           ],
                           'cmdname' => 'itemx',
                           'extra' => {
-                            'index_entry' => {
-                              'command' => {},
-                              'content' => [],
-                              'content_normalized' => [],
-                              'in_code' => 1,
-                              'index_at_command' => 'itemx',
-                              'index_name' => 'vr',
-                              'index_type_command' => 'vtable',
-                              'key' => 'second itemx',
-                              'number' => 10
-                            },
-                            'spaces_before_argument' => ' '
+                            'index_entry' => [
+                              'vr',
+                              2
+                            ]
                           },
-                          'line_nr' => {
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
                             'file_name' => '',
-                            'line_nr' => 38,
+                            'line_nr' => 27,
                             'macro' => 'myvtable'
-                          },
-                          'parent' => {}
+                          }
                         }
                       ],
-                      'parent' => {},
                       'type' => 'table_term'
                     },
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => '
 ',
                           'type' => 'empty_line'
@@ -1530,26 +327,21 @@ $result_trees{'table_nested'} = {
                         {
                           'contents' => [
                             {
-                              'parent' => {},
                               'text' => 'Text.
 '
                             }
                           ],
-                          'parent' => {},
                           'type' => 'paragraph'
                         },
                         {
-                          'parent' => {},
                           'text' => '
 ',
                           'type' => 'empty_line'
                         }
                       ],
-                      'parent' => {},
-                      'type' => 'table_item'
+                      'type' => 'table_definition'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'table_entry'
                 },
                 {
@@ -1561,48 +353,42 @@ $result_trees{'table_nested'} = {
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => 'second item'
                                 }
                               ],
-                              'extra' => {
-                                'spaces_after_argument' => '
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
 '
+                                }
                               },
-                              'parent' => {},
                               'type' => 'line_arg'
                             }
                           ],
                           'cmdname' => 'item',
                           'extra' => {
-                            'index_entry' => {
-                              'command' => {},
-                              'content' => [],
-                              'content_normalized' => [],
-                              'in_code' => 1,
-                              'index_at_command' => 'item',
-                              'index_name' => 'vr',
-                              'index_type_command' => 'vtable',
-                              'key' => 'second item',
-                              'number' => 11
-                            },
-                            'spaces_before_argument' => ' '
+                            'index_entry' => [
+                              'vr',
+                              3
+                            ]
                           },
-                          'line_nr' => {
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
                             'file_name' => '',
-                            'line_nr' => 38,
+                            'line_nr' => 27,
                             'macro' => 'myvtable'
-                          },
-                          'parent' => {}
+                          }
                         }
                       ],
-                      'parent' => {},
                       'type' => 'table_term'
                     },
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => '
 ',
                           'type' => 'empty_line'
@@ -1610,26 +396,21 @@ $result_trees{'table_nested'} = {
                         {
                           'contents' => [
                             {
-                              'parent' => {},
                               'text' => 'Text 2
 '
                             }
                           ],
-                          'parent' => {},
                           'type' => 'paragraph'
                         },
                         {
-                          'parent' => {},
                           'text' => '
 ',
                           'type' => 'empty_line'
                         }
                       ],
-                      'parent' => {},
-                      'type' => 'table_item'
+                      'type' => 'table_definition'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'table_entry'
                 },
                 {
@@ -1641,46 +422,40 @@ $result_trees{'table_nested'} = {
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => 'last'
                                 }
                               ],
-                              'extra' => {
-                                'spaces_after_argument' => '
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
 '
+                                }
                               },
-                              'parent' => {},
                               'type' => 'line_arg'
                             }
                           ],
                           'cmdname' => 'item',
                           'extra' => {
-                            'index_entry' => {
-                              'command' => {},
-                              'content' => [],
-                              'content_normalized' => [],
-                              'in_code' => 1,
-                              'index_at_command' => 'item',
-                              'index_name' => 'vr',
-                              'index_type_command' => 'vtable',
-                              'key' => 'last',
-                              'number' => 12
-                            },
-                            'spaces_before_argument' => ' '
+                            'index_entry' => [
+                              'vr',
+                              4
+                            ]
                           },
-                          'line_nr' => {
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
                             'file_name' => '',
-                            'line_nr' => 38,
+                            'line_nr' => 27,
                             'macro' => 'myvtable'
-                          },
-                          'parent' => {}
+                          }
                         }
                       ],
-                      'parent' => {},
                       'type' => 'table_term'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'table_entry'
                 },
                 {
@@ -1688,46 +463,49 @@ $result_trees{'table_nested'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'vtable'
                         }
                       ],
-                      'extra' => {
-                        'spaces_after_argument' => '
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
 '
+                        }
                       },
-                      'parent' => {},
                       'type' => 'line_arg'
                     }
                   ],
                   'cmdname' => 'end',
                   'extra' => {
-                    'command_argument' => 'vtable',
-                    'spaces_before_argument' => ' ',
                     'text_arg' => 'vtable'
                   },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 38,
-                    'macro' => 'myvtable'
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {}
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 27,
+                    'macro' => 'myvtable'
+                  }
                 }
               ],
               'extra' => {
-                'command_as_argument' => {},
-                'end_command' => {},
-                'spaces_before_argument' => ' '
+                'command_as_argument' => {}
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 38,
+                'line_nr' => 27,
                 'macro' => 'myvtable'
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 ',
               'type' => 'empty_line'
@@ -1735,12 +513,10 @@ $result_trees{'table_nested'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'Something.
 '
                 }
               ],
-              'parent' => {},
               'type' => 'paragraph'
             },
             {
@@ -1749,21 +525,20 @@ $result_trees{'table_nested'} = {
                   'contents' => [
                     {
                       'cmdname' => 'emph',
-                      'contents' => [],
-                      'line_nr' => {
+                      'source_info' => {
                         'file_name' => '',
-                        'line_nr' => 38,
+                        'line_nr' => 27,
                         'macro' => 'myvtable'
                       },
-                      'parent' => {},
                       'type' => 'command_as_argument'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'block_line_arg'
                 }
               ],
@@ -1778,31 +553,31 @@ $result_trees{'table_nested'} = {
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => 'in item'
                                 }
                               ],
-                              'extra' => {
-                                'spaces_after_argument' => '
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
 '
+                                }
                               },
-                              'parent' => {},
                               'type' => 'line_arg'
                             }
                           ],
                           'cmdname' => 'item',
-                          'extra' => {
-                            'spaces_before_argument' => ' '
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
                           },
-                          'line_nr' => {
+                          'source_info' => {
                             'file_name' => '',
-                            'line_nr' => 38,
+                            'line_nr' => 27,
                             'macro' => 'myvtable'
-                          },
-                          'parent' => {}
+                          }
                         }
                       ],
-                      'parent' => {},
                       'type' => 'table_term'
                     },
                     {
@@ -1810,20 +585,16 @@ $result_trees{'table_nested'} = {
                         {
                           'contents' => [
                             {
-                              'parent' => {},
                               'text' => 'Text without blank line
 '
                             }
                           ],
-                          'parent' => {},
                           'type' => 'paragraph'
                         }
                       ],
-                      'parent' => {},
-                      'type' => 'table_item'
+                      'type' => 'table_definition'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'table_entry'
                 },
                 {
@@ -1835,31 +606,31 @@ $result_trees{'table_nested'} = {
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => 'second item'
                                 }
                               ],
-                              'extra' => {
-                                'spaces_after_argument' => '
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
 '
+                                }
                               },
-                              'parent' => {},
                               'type' => 'line_arg'
                             }
                           ],
                           'cmdname' => 'item',
-                          'extra' => {
-                            'spaces_before_argument' => ' '
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
                           },
-                          'line_nr' => {
+                          'source_info' => {
                             'file_name' => '',
-                            'line_nr' => 38,
+                            'line_nr' => 27,
                             'macro' => 'myvtable'
-                          },
-                          'parent' => {}
+                          }
                         }
                       ],
-                      'parent' => {},
                       'type' => 'table_term'
                     },
                     {
@@ -1867,20 +638,16 @@ $result_trees{'table_nested'} = {
                         {
                           'contents' => [
                             {
-                              'parent' => {},
                               'text' => 'Text without blank line 2
 '
                             }
                           ],
-                          'parent' => {},
                           'type' => 'paragraph'
                         }
                       ],
-                      'parent' => {},
-                      'type' => 'table_item'
+                      'type' => 'table_definition'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'table_entry'
                 },
                 {
@@ -1888,53 +655,63 @@ $result_trees{'table_nested'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'table'
                         }
                       ],
-                      'extra' => {
-                        'spaces_after_argument' => '
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
 '
+                        }
                       },
-                      'parent' => {},
                       'type' => 'line_arg'
                     }
                   ],
                   'cmdname' => 'end',
                   'extra' => {
-                    'command_argument' => 'table',
-                    'spaces_before_argument' => ' ',
                     'text_arg' => 'table'
                   },
-                  'line_nr' => {
-                    'file_name' => '',
-                    'line_nr' => 38,
-                    'macro' => 'myvtable'
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {}
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 27,
+                    'macro' => 'myvtable'
+                  }
                 }
               ],
               'extra' => {
-                'command_as_argument' => {},
-                'end_command' => {},
-                'spaces_before_argument' => ' '
+                'command_as_argument' => {}
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 38,
+                'line_nr' => 27,
                 'macro' => 'myvtable'
-              },
-              'parent' => {}
+              }
             },
             {
               'contents' => [
                 {
-                  'parent' => {},
+                  'source_marks' => [
+                    {
+                      'counter' => 1,
+                      'position' => 12,
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'end'
+                    }
+                  ],
                   'text' => 'After table.
 '
                 }
               ],
-              'parent' => {},
               'type' => 'paragraph'
             },
             {
@@ -1942,379 +719,1278 @@ $result_trees{'table_nested'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'quotation'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'end',
               'extra' => {
-                'command_argument' => 'quotation',
-                'spaces_before_argument' => ' ',
                 'text_arg' => 'quotation'
               },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 39,
-                'macro' => ''
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
               },
-              'parent' => {}
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 28,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 37,
+            'line_nr' => 26,
             'macro' => ''
-          },
-          'parent' => {}
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'text' => 'Example
+'
+            }
+          ],
+          'type' => 'paragraph'
         },
         {
           'args' => [
             {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'example',
+          'contents' => [
+            {
+              'source_marks' => [
+                {
+                  'counter' => 2,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'myvtable'
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                }
+              ]
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'cmdname' => 'asis',
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 32,
+                        'macro' => 'myvtable'
+                      },
+                      'type' => 'command_as_argument'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
+                }
+              ],
+              'cmdname' => 'vtable',
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'quotation'
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'args' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'first item'
+                                }
+                              ],
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
+'
+                                }
+                              },
+                              'type' => 'line_arg'
+                            }
+                          ],
+                          'cmdname' => 'item',
+                          'extra' => {
+                            'index_entry' => [
+                              'vr',
+                              5
+                            ]
+                          },
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 32,
+                            'macro' => 'myvtable'
+                          }
+                        },
+                        {
+                          'args' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'second itemx'
+                                }
+                              ],
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
+'
+                                }
+                              },
+                              'type' => 'line_arg'
+                            }
+                          ],
+                          'cmdname' => 'itemx',
+                          'extra' => {
+                            'index_entry' => [
+                              'vr',
+                              6
+                            ]
+                          },
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 32,
+                            'macro' => 'myvtable'
+                          }
+                        }
+                      ],
+                      'type' => 'table_term'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            },
+                            {
+                              'text' => 'Text.
+'
+                            },
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            }
+                          ],
+                          'type' => 'preformatted'
+                        }
+                      ],
+                      'type' => 'table_definition'
+                    }
+                  ],
+                  'type' => 'table_entry'
+                },
+                {
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'args' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'second item'
+                                }
+                              ],
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
+'
+                                }
+                              },
+                              'type' => 'line_arg'
+                            }
+                          ],
+                          'cmdname' => 'item',
+                          'extra' => {
+                            'index_entry' => [
+                              'vr',
+                              7
+                            ]
+                          },
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 32,
+                            'macro' => 'myvtable'
+                          }
+                        }
+                      ],
+                      'type' => 'table_term'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            },
+                            {
+                              'text' => 'Text 2
+'
+                            },
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            }
+                          ],
+                          'type' => 'preformatted'
+                        }
+                      ],
+                      'type' => 'table_definition'
+                    }
+                  ],
+                  'type' => 'table_entry'
+                },
+                {
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'args' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'last'
+                                }
+                              ],
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
+'
+                                }
+                              },
+                              'type' => 'line_arg'
+                            }
+                          ],
+                          'cmdname' => 'item',
+                          'extra' => {
+                            'index_entry' => [
+                              'vr',
+                              8
+                            ]
+                          },
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 32,
+                            'macro' => 'myvtable'
+                          }
+                        }
+                      ],
+                      'type' => 'table_term'
+                    }
+                  ],
+                  'type' => 'table_entry'
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'vtable'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'end',
+                  'extra' => {
+                    'text_arg' => 'vtable'
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 32,
+                    'macro' => 'myvtable'
+                  }
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'command_as_argument' => {}
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 32,
+                'macro' => 'myvtable'
+              }
+            },
+            {
+              'contents' => [
+                {
+                  'text' => '
+',
+                  'type' => 'empty_line'
+                },
+                {
+                  'text' => 'Something.
+'
+                }
+              ],
+              'type' => 'preformatted'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'cmdname' => 'emph',
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 32,
+                        'macro' => 'myvtable'
+                      },
+                      'type' => 'command_as_argument'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
+                }
+              ],
+              'cmdname' => 'table',
+              'contents' => [
+                {
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'args' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'in item'
+                                }
+                              ],
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
+'
+                                }
+                              },
+                              'type' => 'line_arg'
+                            }
+                          ],
+                          'cmdname' => 'item',
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 32,
+                            'macro' => 'myvtable'
+                          }
+                        }
+                      ],
+                      'type' => 'table_term'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'Text without blank line
+'
+                            }
+                          ],
+                          'type' => 'preformatted'
+                        }
+                      ],
+                      'type' => 'table_definition'
+                    }
+                  ],
+                  'type' => 'table_entry'
+                },
+                {
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'args' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'second item'
+                                }
+                              ],
+                              'info' => {
+                                'spaces_after_argument' => {
+                                  'text' => '
+'
+                                }
+                              },
+                              'type' => 'line_arg'
+                            }
+                          ],
+                          'cmdname' => 'item',
+                          'info' => {
+                            'spaces_before_argument' => {
+                              'text' => ' '
+                            }
+                          },
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 32,
+                            'macro' => 'myvtable'
+                          }
+                        }
+                      ],
+                      'type' => 'table_term'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'Text without blank line 2
+'
+                            }
+                          ],
+                          'type' => 'preformatted'
+                        }
+                      ],
+                      'type' => 'table_definition'
+                    }
+                  ],
+                  'type' => 'table_entry'
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'table'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'end',
+                  'extra' => {
+                    'text_arg' => 'table'
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 32,
+                    'macro' => 'myvtable'
+                  }
+                }
+              ],
+              'extra' => {
+                'command_as_argument' => {}
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 32,
+                'macro' => 'myvtable'
+              }
+            },
+            {
+              'contents' => [
+                {
+                  'source_marks' => [
+                    {
+                      'counter' => 2,
+                      'position' => 12,
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'end'
+                    }
+                  ],
+                  'text' => 'After table.
+'
+                }
+              ],
+              'type' => 'preformatted'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'example'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'example'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 33,
+                'macro' => ''
+              }
             }
           ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'quotation',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'quotation'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 40,
+            'line_nr' => 31,
             'macro' => ''
-          },
-          'parent' => {}
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'text' => 'Double quotation
+'
+            }
+          ],
+          'type' => 'paragraph'
+        },
+        {
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'quotation',
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
+                }
+              ],
+              'cmdname' => 'quotation',
+              'contents' => [
+                {
+                  'source_marks' => [
+                    {
+                      'counter' => 3,
+                      'element' => {
+                        'args' => [
+                          {
+                            'type' => 'brace_command_arg'
+                          }
+                        ],
+                        'info' => {
+                          'command_name' => 'myvtable'
+                        },
+                        'type' => 'macro_call'
+                      },
+                      'sourcemark_type' => 'macro_expansion',
+                      'status' => 'start'
+                    }
+                  ],
+                  'text' => ''
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'cmdname' => 'asis',
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 38,
+                            'macro' => 'myvtable'
+                          },
+                          'type' => 'command_as_argument'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'block_line_arg'
+                    }
+                  ],
+                  'cmdname' => 'vtable',
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'contents' => [
+                                    {
+                                      'text' => 'first item'
+                                    }
+                                  ],
+                                  'info' => {
+                                    'spaces_after_argument' => {
+                                      'text' => '
+'
+                                    }
+                                  },
+                                  'type' => 'line_arg'
+                                }
+                              ],
+                              'cmdname' => 'item',
+                              'extra' => {
+                                'index_entry' => [
+                                  'vr',
+                                  9
+                                ]
+                              },
+                              'info' => {
+                                'spaces_before_argument' => {
+                                  'text' => ' '
+                                }
+                              },
+                              'source_info' => {
+                                'file_name' => '',
+                                'line_nr' => 38,
+                                'macro' => 'myvtable'
+                              }
+                            },
+                            {
+                              'args' => [
+                                {
+                                  'contents' => [
+                                    {
+                                      'text' => 'second itemx'
+                                    }
+                                  ],
+                                  'info' => {
+                                    'spaces_after_argument' => {
+                                      'text' => '
+'
+                                    }
+                                  },
+                                  'type' => 'line_arg'
+                                }
+                              ],
+                              'cmdname' => 'itemx',
+                              'extra' => {
+                                'index_entry' => [
+                                  'vr',
+                                  10
+                                ]
+                              },
+                              'info' => {
+                                'spaces_before_argument' => {
+                                  'text' => ' '
+                                }
+                              },
+                              'source_info' => {
+                                'file_name' => '',
+                                'line_nr' => 38,
+                                'macro' => 'myvtable'
+                              }
+                            }
+                          ],
+                          'type' => 'table_term'
+                        },
+                        {
+                          'contents' => [
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            },
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'Text.
+'
+                                }
+                              ],
+                              'type' => 'paragraph'
+                            },
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            }
+                          ],
+                          'type' => 'table_definition'
+                        }
+                      ],
+                      'type' => 'table_entry'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'contents' => [
+                                    {
+                                      'text' => 'second item'
+                                    }
+                                  ],
+                                  'info' => {
+                                    'spaces_after_argument' => {
+                                      'text' => '
+'
+                                    }
+                                  },
+                                  'type' => 'line_arg'
+                                }
+                              ],
+                              'cmdname' => 'item',
+                              'extra' => {
+                                'index_entry' => [
+                                  'vr',
+                                  11
+                                ]
+                              },
+                              'info' => {
+                                'spaces_before_argument' => {
+                                  'text' => ' '
+                                }
+                              },
+                              'source_info' => {
+                                'file_name' => '',
+                                'line_nr' => 38,
+                                'macro' => 'myvtable'
+                              }
+                            }
+                          ],
+                          'type' => 'table_term'
+                        },
+                        {
+                          'contents' => [
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            },
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'Text 2
+'
+                                }
+                              ],
+                              'type' => 'paragraph'
+                            },
+                            {
+                              'text' => '
+',
+                              'type' => 'empty_line'
+                            }
+                          ],
+                          'type' => 'table_definition'
+                        }
+                      ],
+                      'type' => 'table_entry'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'contents' => [
+                                    {
+                                      'text' => 'last'
+                                    }
+                                  ],
+                                  'info' => {
+                                    'spaces_after_argument' => {
+                                      'text' => '
+'
+                                    }
+                                  },
+                                  'type' => 'line_arg'
+                                }
+                              ],
+                              'cmdname' => 'item',
+                              'extra' => {
+                                'index_entry' => [
+                                  'vr',
+                                  12
+                                ]
+                              },
+                              'info' => {
+                                'spaces_before_argument' => {
+                                  'text' => ' '
+                                }
+                              },
+                              'source_info' => {
+                                'file_name' => '',
+                                'line_nr' => 38,
+                                'macro' => 'myvtable'
+                              }
+                            }
+                          ],
+                          'type' => 'table_term'
+                        }
+                      ],
+                      'type' => 'table_entry'
+                    },
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'vtable'
+                            }
+                          ],
+                          'info' => {
+                            'spaces_after_argument' => {
+                              'text' => '
+'
+                            }
+                          },
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'end',
+                      'extra' => {
+                        'text_arg' => 'vtable'
+                      },
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 38,
+                        'macro' => 'myvtable'
+                      }
+                    }
+                  ],
+                  'extra' => {
+                    'command_as_argument' => {}
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 38,
+                    'macro' => 'myvtable'
+                  }
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'empty_line'
+                },
+                {
+                  'contents' => [
+                    {
+                      'text' => 'Something.
+'
+                    }
+                  ],
+                  'type' => 'paragraph'
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'cmdname' => 'emph',
+                          'source_info' => {
+                            'file_name' => '',
+                            'line_nr' => 38,
+                            'macro' => 'myvtable'
+                          },
+                          'type' => 'command_as_argument'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'block_line_arg'
+                    }
+                  ],
+                  'cmdname' => 'table',
+                  'contents' => [
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'contents' => [
+                                    {
+                                      'text' => 'in item'
+                                    }
+                                  ],
+                                  'info' => {
+                                    'spaces_after_argument' => {
+                                      'text' => '
+'
+                                    }
+                                  },
+                                  'type' => 'line_arg'
+                                }
+                              ],
+                              'cmdname' => 'item',
+                              'info' => {
+                                'spaces_before_argument' => {
+                                  'text' => ' '
+                                }
+                              },
+                              'source_info' => {
+                                'file_name' => '',
+                                'line_nr' => 38,
+                                'macro' => 'myvtable'
+                              }
+                            }
+                          ],
+                          'type' => 'table_term'
+                        },
+                        {
+                          'contents' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'Text without blank line
+'
+                                }
+                              ],
+                              'type' => 'paragraph'
+                            }
+                          ],
+                          'type' => 'table_definition'
+                        }
+                      ],
+                      'type' => 'table_entry'
+                    },
+                    {
+                      'contents' => [
+                        {
+                          'contents' => [
+                            {
+                              'args' => [
+                                {
+                                  'contents' => [
+                                    {
+                                      'text' => 'second item'
+                                    }
+                                  ],
+                                  'info' => {
+                                    'spaces_after_argument' => {
+                                      'text' => '
+'
+                                    }
+                                  },
+                                  'type' => 'line_arg'
+                                }
+                              ],
+                              'cmdname' => 'item',
+                              'info' => {
+                                'spaces_before_argument' => {
+                                  'text' => ' '
+                                }
+                              },
+                              'source_info' => {
+                                'file_name' => '',
+                                'line_nr' => 38,
+                                'macro' => 'myvtable'
+                              }
+                            }
+                          ],
+                          'type' => 'table_term'
+                        },
+                        {
+                          'contents' => [
+                            {
+                              'contents' => [
+                                {
+                                  'text' => 'Text without blank line 2
+'
+                                }
+                              ],
+                              'type' => 'paragraph'
+                            }
+                          ],
+                          'type' => 'table_definition'
+                        }
+                      ],
+                      'type' => 'table_entry'
+                    },
+                    {
+                      'args' => [
+                        {
+                          'contents' => [
+                            {
+                              'text' => 'table'
+                            }
+                          ],
+                          'info' => {
+                            'spaces_after_argument' => {
+                              'text' => '
+'
+                            }
+                          },
+                          'type' => 'line_arg'
+                        }
+                      ],
+                      'cmdname' => 'end',
+                      'extra' => {
+                        'text_arg' => 'table'
+                      },
+                      'info' => {
+                        'spaces_before_argument' => {
+                          'text' => ' '
+                        }
+                      },
+                      'source_info' => {
+                        'file_name' => '',
+                        'line_nr' => 38,
+                        'macro' => 'myvtable'
+                      }
+                    }
+                  ],
+                  'extra' => {
+                    'command_as_argument' => {}
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 38,
+                    'macro' => 'myvtable'
+                  }
+                },
+                {
+                  'contents' => [
+                    {
+                      'source_marks' => [
+                        {
+                          'counter' => 3,
+                          'position' => 12,
+                          'sourcemark_type' => 'macro_expansion',
+                          'status' => 'end'
+                        }
+                      ],
+                      'text' => 'After table.
+'
+                    }
+                  ],
+                  'type' => 'paragraph'
+                },
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => 'quotation'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'end',
+                  'extra' => {
+                    'text_arg' => 'quotation'
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 39,
+                    'macro' => ''
+                  }
+                }
+              ],
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 37,
+                'macro' => ''
+              }
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'quotation'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'quotation'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 40,
+                'macro' => ''
+              }
+            }
+          ],
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 36,
+            'macro' => ''
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 36,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'table_nested'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[4]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[5]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[6]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[7]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[8]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[9]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[10]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[11]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[12]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[13]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[14]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[15]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[16]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[17]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[18]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[19]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[20]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'contents'}[21]{'parent'} = $result_trees{'table_nested'}{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[0]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[1]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[2]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[3]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[0]{'extra'}{'command'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[2]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'args'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[4]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[5];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[5]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[6]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[6]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[6]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[6];
-$result_trees{'table_nested'}{'contents'}[4]{'contents'}[6]{'parent'} = $result_trees{'table_nested'}{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[4]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[4]{'contents'}[6];
-$result_trees{'table_nested'}{'contents'}[4]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[5]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[6]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[6];
-$result_trees{'table_nested'}{'contents'}[6]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[0]{'extra'}{'command'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[2]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'args'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[4]{'parent'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[5]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[5]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[5]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[5];
-$result_trees{'table_nested'}{'contents'}[7]{'contents'}[5]{'parent'} = $result_trees{'table_nested'}{'contents'}[7];
-$result_trees{'table_nested'}{'contents'}[7]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[7]{'contents'}[5];
-$result_trees{'table_nested'}{'contents'}[7]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[8]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[9]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[9];
-$result_trees{'table_nested'}{'contents'}[9]{'parent'} = $result_trees{'table_nested'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[0]{'extra'}{'command'} = $result_trees{'table_nested'}{'contents'}[10];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[0]{'extra'}{'command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[3];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[2]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[4]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[5];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[5]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[6]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[6]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[6];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[6]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'contents'}[6];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[1]{'parent'} = $result_trees{'table_nested'}{'contents'}[10];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[2]{'args'}[0];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[10]{'contents'}[2]{'parent'} = $result_trees{'table_nested'}{'contents'}[10];
-$result_trees{'table_nested'}{'contents'}[10]{'extra'}{'end_command'} = $result_trees{'table_nested'}{'contents'}[10]{'contents'}[2];
-$result_trees{'table_nested'}{'contents'}[10]{'parent'} = $result_trees{'table_nested'};
+$result_trees{'table_nested'}{'contents'}[0]{'contents'}[3]{'contents'}[1]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[0]{'contents'}[3]{'contents'}[1]{'args'}[0]{'contents'}[0];
+$result_trees{'table_nested'}{'contents'}[0]{'contents'}[3]{'contents'}[4]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[0]{'contents'}[3]{'contents'}[4]{'args'}[0]{'contents'}[0];
+$result_trees{'table_nested'}{'contents'}[0]{'contents'}[6]{'contents'}[1]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[0]{'contents'}[6]{'contents'}[1]{'args'}[0]{'contents'}[0];
+$result_trees{'table_nested'}{'contents'}[0]{'contents'}[6]{'contents'}[3]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[0]{'contents'}[6]{'contents'}[3]{'args'}[0]{'contents'}[0];
+$result_trees{'table_nested'}{'contents'}[0]{'contents'}[9]{'contents'}[0]{'contents'}[1]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[0]{'contents'}[9]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0];
+$result_trees{'table_nested'}{'contents'}[0]{'contents'}[9]{'contents'}[0]{'contents'}[4]{'extra'}{'command_as_argument'} = $result_trees{'table_nested'}{'contents'}[0]{'contents'}[9]{'contents'}[0]{'contents'}[4]{'args'}[0]{'contents'}[0];
 
 $result_texis{'table_nested'} = '@macro myvtable
 @vtable @asis
@@ -2480,7 +2156,7 @@ After table.
 
 $result_errors{'table_nested'} = [
   {
-    'error_line' => ':27: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 27,
@@ -2489,7 +2165,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':27: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 27,
@@ -2498,7 +2174,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':27: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 27,
@@ -2507,7 +2183,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':27: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 27,
@@ -2516,7 +2192,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':32: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 32,
@@ -2525,7 +2201,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':32: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 32,
@@ -2534,7 +2210,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':32: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 32,
@@ -2543,7 +2219,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':32: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 32,
@@ -2552,7 +2228,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':38: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 38,
@@ -2561,7 +2237,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':38: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 38,
@@ -2570,7 +2246,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':38: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 38,
@@ -2579,7 +2255,7 @@ $result_errors{'table_nested'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':38: warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
+    'error_line' => 'warning: entry for index `vr\' outside of any node (possibly involving @myvtable)
 ',
     'file_name' => '',
     'line_nr' => 38,
@@ -2591,6 +2267,24 @@ $result_errors{'table_nested'} = [
 
 
 $result_floats{'table_nested'} = {};
+
+
+$result_indices_sort_strings{'table_nested'} = {
+  'vr' => [
+    'first item',
+    'first item',
+    'first item',
+    'last',
+    'last',
+    'last',
+    'second item',
+    'second item',
+    'second item',
+    'second itemx',
+    'second itemx',
+    'second itemx'
+  ]
+};
 
 
 
@@ -2655,28 +2349,28 @@ $result_converted{'plaintext'}->{'table_nested'} = 'Quotation
 
 $result_converted{'html_text'}->{'table_nested'} = '
 <p>Quotation
-</p><blockquote>
-<dl compact="compact">
-<dt id=\'index-first-item\'><span>first item<a href=\'#index-first-item\' class=\'copiable-anchor\'> &para;</a></span></dt>
-<dt id=\'index-second-itemx\'><span>second itemx<a href=\'#index-second-itemx\' class=\'copiable-anchor\'> &para;</a></span></dt>
+</p><blockquote class="quotation">
+<dl class="vtable">
+<dt><a id="index-first-item"></a><span>first item<a class="copiable-link" href="#index-first-item"> &para;</a></span></dt>
+<dt><a id="index-second-itemx"></a><span>second itemx<a class="copiable-link" href="#index-second-itemx"> &para;</a></span></dt>
 <dd>
 <p>Text.
 </p>
 </dd>
-<dt id=\'index-second-item\'><span>second item<a href=\'#index-second-item\' class=\'copiable-anchor\'> &para;</a></span></dt>
+<dt><a id="index-second-item"></a><span>second item<a class="copiable-link" href="#index-second-item"> &para;</a></span></dt>
 <dd>
 <p>Text 2
 </p>
 </dd>
-<dt id=\'index-last\'><span>last<a href=\'#index-last\' class=\'copiable-anchor\'> &para;</a></span></dt>
+<dt><a id="index-last"></a><span>last<a class="copiable-link" href="#index-last"> &para;</a></span></dt>
 </dl>
 
 <p>Something.
-</p><dl compact="compact">
-<dt><span><em>in item</em></span></dt>
+</p><dl class="table">
+<dt><em class="emph">in item</em></dt>
 <dd><p>Text without blank line
 </p></dd>
-<dt><span><em>second item</em></span></dt>
+<dt><em class="emph">second item</em></dt>
 <dd><p>Text without blank line 2
 </p></dd>
 </dl>
@@ -2685,60 +2379,60 @@ $result_converted{'html_text'}->{'table_nested'} = '
 
 <p>Example
 </p><div class="example">
-<dl compact="compact">
-<dt id=\'index-first-item-1\'><span><tt>first item</tt><a href=\'#index-first-item-1\' class=\'copiable-anchor\'> &para;</a></span></dt>
-<dt id=\'index-second-itemx-1\'><span><tt>second itemx</tt><a href=\'#index-second-itemx-1\' class=\'copiable-anchor\'> &para;</a></span></dt>
-<dd><pre class="example">
+<dl class="vtable">
+<dt><a id="index-first-item-1"></a><span><code class="table-term-preformatted-code">first item</code><a class="copiable-link" href="#index-first-item-1"> &para;</a></span></dt>
+<dt><a id="index-second-itemx-1"></a><span><code class="table-term-preformatted-code">second itemx</code><a class="copiable-link" href="#index-second-itemx-1"> &para;</a></span></dt>
+<dd><pre class="example-preformatted">
 
 Text.
 
 </pre></dd>
-<dt id=\'index-second-item-1\'><span><tt>second item</tt><a href=\'#index-second-item-1\' class=\'copiable-anchor\'> &para;</a></span></dt>
-<dd><pre class="example">
+<dt><a id="index-second-item-1"></a><span><code class="table-term-preformatted-code">second item</code><a class="copiable-link" href="#index-second-item-1"> &para;</a></span></dt>
+<dd><pre class="example-preformatted">
 
 Text 2
 
 </pre></dd>
-<dt id=\'index-last-1\'><span><tt>last</tt><a href=\'#index-last-1\' class=\'copiable-anchor\'> &para;</a></span></dt>
+<dt><a id="index-last-1"></a><span><code class="table-term-preformatted-code">last</code><a class="copiable-link" href="#index-last-1"> &para;</a></span></dt>
 </dl>
-<pre class="example">
+<pre class="example-preformatted">
 
 Something.
-</pre><dl compact="compact">
-<dt><span><tt><em>in item</em></tt></span></dt>
-<dd><pre class="example">Text without blank line
+</pre><dl class="table">
+<dt><code class="table-term-preformatted-code"><em class="emph">in item</em></code></dt>
+<dd><pre class="example-preformatted">Text without blank line
 </pre></dd>
-<dt><span><tt><em>second item</em></tt></span></dt>
-<dd><pre class="example">Text without blank line 2
+<dt><code class="table-term-preformatted-code"><em class="emph">second item</em></code></dt>
+<dd><pre class="example-preformatted">Text without blank line 2
 </pre></dd>
 </dl>
-<pre class="example">After table.
+<pre class="example-preformatted">After table.
 </pre></div>
 
 <p>Double quotation
-</p><blockquote>
-<blockquote>
-<dl compact="compact">
-<dt id=\'index-first-item-2\'><span>first item<a href=\'#index-first-item-2\' class=\'copiable-anchor\'> &para;</a></span></dt>
-<dt id=\'index-second-itemx-2\'><span>second itemx<a href=\'#index-second-itemx-2\' class=\'copiable-anchor\'> &para;</a></span></dt>
+</p><blockquote class="quotation">
+<blockquote class="quotation">
+<dl class="vtable">
+<dt><a id="index-first-item-2"></a><span>first item<a class="copiable-link" href="#index-first-item-2"> &para;</a></span></dt>
+<dt><a id="index-second-itemx-2"></a><span>second itemx<a class="copiable-link" href="#index-second-itemx-2"> &para;</a></span></dt>
 <dd>
 <p>Text.
 </p>
 </dd>
-<dt id=\'index-second-item-2\'><span>second item<a href=\'#index-second-item-2\' class=\'copiable-anchor\'> &para;</a></span></dt>
+<dt><a id="index-second-item-2"></a><span>second item<a class="copiable-link" href="#index-second-item-2"> &para;</a></span></dt>
 <dd>
 <p>Text 2
 </p>
 </dd>
-<dt id=\'index-last-2\'><span>last<a href=\'#index-last-2\' class=\'copiable-anchor\'> &para;</a></span></dt>
+<dt><a id="index-last-2"></a><span>last<a class="copiable-link" href="#index-last-2"> &para;</a></span></dt>
 </dl>
 
 <p>Something.
-</p><dl compact="compact">
-<dt><span><em>in item</em></span></dt>
+</p><dl class="table">
+<dt><em class="emph">in item</em></dt>
 <dd><p>Text without blank line
 </p></dd>
-<dt><span><em>second item</em></span></dt>
+<dt><em class="emph">second item</em></dt>
 <dd><p>Text without blank line 2
 </p></dd>
 </dl>
@@ -2748,7 +2442,8 @@ Something.
 ';
 
 
-$result_converted{'xml'}->{'table_nested'} = '<macro name="myvtable" line=" myvtable">@vtable @asis
+$result_converted{'xml'}->{'table_nested'} = '<macro name="myvtable" line=" myvtable" endspaces=" ">
+@vtable @asis
 @item first item
 @itemx second itemx
 
@@ -2848,5 +2543,65 @@ Something.
 </para></quotation>
 </quotation>
 ';
+
+
+$result_converted{'docbook'}->{'table_nested'} = '
+<para>Quotation
+</para><blockquote><variablelist><varlistentry><term><indexterm role="vr"><primary>first item</primary></indexterm>first item
+</term><term><indexterm role="vr"><primary>second itemx</primary></indexterm>second itemx
+</term><listitem>
+<para>Text.
+</para>
+</listitem></varlistentry><varlistentry><term><indexterm role="vr"><primary>second item</primary></indexterm>second item
+</term><listitem>
+<para>Text 2
+</para>
+</listitem></varlistentry><varlistentry><term><indexterm role="vr"><primary>last</primary></indexterm>last
+</term></varlistentry></variablelist>
+<para>Something.
+</para><variablelist><varlistentry><term><emphasis>in item</emphasis>
+</term><listitem><para>Text without blank line
+</para></listitem></varlistentry><varlistentry><term><emphasis>second item</emphasis>
+</term><listitem><para>Text without blank line 2
+</para></listitem></varlistentry></variablelist><para>After table.
+</para></blockquote>
+<para>Example
+</para><variablelist><varlistentry><term><indexterm role="vr"><primary>first item</primary></indexterm>first item
+</term><term><indexterm role="vr"><primary>second itemx</primary></indexterm>second itemx
+</term><listitem><screen>
+Text.
+
+</screen></listitem></varlistentry><varlistentry><term><indexterm role="vr"><primary>second item</primary></indexterm>second item
+</term><listitem><screen>
+Text 2
+
+</screen></listitem></varlistentry><varlistentry><term><indexterm role="vr"><primary>last</primary></indexterm>last
+</term></varlistentry></variablelist><screen>
+Something.
+</screen><variablelist><varlistentry><term><emphasis>in item</emphasis>
+</term><listitem><screen>Text without blank line
+</screen></listitem></varlistentry><varlistentry><term><emphasis>second item</emphasis>
+</term><listitem><screen>Text without blank line 2
+</screen></listitem></varlistentry></variablelist><screen>After table.
+</screen>
+<para>Double quotation
+</para><blockquote><blockquote><variablelist><varlistentry><term><indexterm role="vr"><primary>first item</primary></indexterm>first item
+</term><term><indexterm role="vr"><primary>second itemx</primary></indexterm>second itemx
+</term><listitem>
+<para>Text.
+</para>
+</listitem></varlistentry><varlistentry><term><indexterm role="vr"><primary>second item</primary></indexterm>second item
+</term><listitem>
+<para>Text 2
+</para>
+</listitem></varlistentry><varlistentry><term><indexterm role="vr"><primary>last</primary></indexterm>last
+</term></varlistentry></variablelist>
+<para>Something.
+</para><variablelist><varlistentry><term><emphasis>in item</emphasis>
+</term><listitem><para>Text without blank line
+</para></listitem></varlistentry><varlistentry><term><emphasis>second item</emphasis>
+</term><listitem><para>Text without blank line 2
+</para></listitem></varlistentry></variablelist><para>After table.
+</para></blockquote></blockquote>';
 
 1;

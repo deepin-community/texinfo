@@ -1,6 +1,6 @@
 /* install-info -- merge Info directory entries from an Info file.
 
-   Copyright 1996-2021 Free Software Foundation, Inc.
+   Copyright 1996-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -214,7 +214,9 @@ vdiag (const char *fmt, const char *diagtype, va_list ap)
   putc ('\n', stderr);
 }
 
-void
+/* declare as static to avoid clash with glibc error function, called from
+   gnulib. */
+static void
 error (const char *fmt, ...)
 {
   va_list ap;
@@ -363,48 +365,6 @@ extract_menu_item_name (char *item_text)
   return copy_string (item_text, p - item_text);
 }
 
-/* Given the full text of a menu entry, terminated by null or newline,
-   return just the menu item file (copied).  */
-
-char *
-extract_menu_file_name (char *item_text)
-{
-  char *p = item_text;
-
-  /* If we have text that looks like * ITEM: (FILE)NODE...,
-     extract just FILE.  Otherwise return "(none)".  */
-
-  if (*p == '*')
-    p++;
-  while (*p == ' ')
-    p++;
-
-  /* Skip to and past the colon.  */
-  while (*p && *p != '\n' && *p != ':') p++;
-  if (*p == ':') p++;
-
-  /* Skip past the open-paren.  */
-  while (1)
-    {
-      if (*p == '(')
-        break;
-      else if (*p == ' ' || *p == '\t')
-        p++;
-      else
-        return "(none)";
-    }
-  p++;
-
-  item_text = p;
-
-  /* File name ends just before the close-paren.  */
-  while (*p && *p != '\n' && *p != ')') p++;
-  if (*p != ')')
-    return "(none)";
-
-  return copy_string (item_text, p - item_text);
-}
-
 
 
 /* Return FNAME with any [.info][.gz] suffix removed.  */
@@ -426,6 +386,11 @@ strip_info_suffix (char *fname)
       ret[len] = 0;
     }
   else if (len > 4 && FILENAME_CMP (ret + len - 4, ".bz2") == 0)
+    {
+      len -= 4;
+      ret[len] = 0;
+    }
+  else if (len > 4 && FILENAME_CMP (ret + len - 4, ".zst") == 0)
     {
       len -= 4;
       ret[len] = 0;
@@ -715,6 +680,12 @@ open_possibly_compressed_file (char *filename,
   if (!f)
     {
       free (*opened_filename);
+      *opened_filename = concat (filename, ".zst", "");
+      f = fopen (*opened_filename, FOPEN_RBIN);
+    }
+  if (!f)
+    {
+      free (*opened_filename);
       *opened_filename = concat (filename, ".lz", "");
       f = fopen (*opened_filename, FOPEN_RBIN);
     }
@@ -855,19 +826,22 @@ determine_file_type:
       /* Redirect stdin to the file and fork the decompression process
          reading from stdin.  This allows shell metacharacters in filenames. */
       char *command = concat (*compression_program, " -d", "");
+      FILE *f2;
 
       if (fclose (f) < 0)
         return 0;
-      f = freopen (*opened_filename, FOPEN_RBIN, stdin);
+      f2 = freopen (*opened_filename, FOPEN_RBIN, stdin);
       if (!f)
         return 0;
       f = popen (command, "r");
+      fclose (f2);
       if (!f)
         {
           /* Used for error message in calling code. */
           *opened_filename = command;
           return 0;
         }
+      free (command);
     }
   else
     {
@@ -903,7 +877,7 @@ readfile (char *filename, int *sizep,
   FILE *f;
   int filled = 0;
   int data_size = 8192;
-  char *data = xmalloc (data_size);
+  char *data = xmalloc (data_size + 1);
 
   /* If they passed the space for the file name to return, use it.  */
   f = open_possibly_compressed_file (filename, create_callback,
@@ -925,19 +899,21 @@ readfile (char *filename, int *sizep,
       if (filled == data_size)
         {
           data_size += 65536;
-          data = xrealloc (data, data_size);
+          data = xrealloc (data, data_size + 1);
         }
     }
 
   /* We need to close the stream, since on some systems the pipe created
      by popen is simulated by a temporary file which only gets removed
      inside pclose.  */
-  if (compression_program)
+  if (compression_program && *compression_program)
     pclose (f);
   else
     fclose (f);
 
   *sizep = filled;
+  data[filled] = '\0';
+
   return data;
 }
 
@@ -954,20 +930,46 @@ output_dirfile (char *dirfile, int dir_nlines, struct line_data *dir_lines,
   int n_entries_added = 0;
   int i;
   FILE *output;
+  int tempfile;
+  static char *tempname;
+  int dirfile_len;
+  mode_t um;
+
+  /* Create temporary file in the same directory as dirfile.  This ensures
+     it is on the same disk volume and can be renamed to dirfile when
+     finished. */
+  free (tempname);
+#define suffix "-XXXXXX"
+  dirfile_len = strlen (dirfile);
+  tempname = xmalloc (dirfile_len + strlen (suffix) + 1);
+  memcpy (tempname, dirfile, dirfile_len);
+  memcpy (tempname + dirfile_len, suffix, strlen (suffix) + 1);
+#undef suffix
+
+  tempfile = mkstemp (tempname);
+
+  /* Reset the mode that the file is set to.  */
+  um = umask (0022);
+  umask (um);
+  if (chmod (tempname, 0666 & ~um) < 0)
+    {
+      remove (tempname);
+      pfatal_with_name (tempname);
+    }
 
   if (compression_program)
     {
-      char *command = concat (compression_program, ">", dirfile);
+      char *command;
+      close (tempfile);
+      command = concat (compression_program, ">", tempname);
       output = popen (command, "w");
+      free (command);
     }
   else
-    output = fopen (dirfile, "w");
+    output = fdopen (tempfile, "w");
 
   if (!output)
-    {
-      perror (dirfile);
-      exit (EXIT_FAILURE);
-    }
+    pfatal_with_name (dirfile);
 
   for (i = 0; i <= dir_nlines; i++)
     {
@@ -1034,7 +1036,9 @@ output_dirfile (char *dirfile, int dir_nlines, struct line_data *dir_lines,
                 {
                   int k;
 
-                  putc ('\n', output);
+                  /* If the preceding line is not blank, add a blank line */
+                  if (i >= 1 && dir_lines[i - 1].size > 0)
+                    putc ('\n', output);
                   fputs (spec->name, output);
                   putc ('\n', output);
                   spec->missing = 0;
@@ -1076,6 +1080,19 @@ output_dirfile (char *dirfile, int dir_nlines, struct line_data *dir_lines,
     pclose (output);
   else
     fclose (output);
+
+  /* Update dir file atomically.  This stops the dir file being corrupted
+     if install-info is interrupted. */
+  if (rename (tempname, dirfile) == -1)
+    {
+      /* Try to delete target file and try again.  On some platforms you
+         may not rename to an existing file. */
+      if (remove (dirfile) == -1 || rename (tempname, dirfile) == -1)
+        {
+          remove (tempname);
+          pfatal_with_name (dirfile);
+        }
+    }
 }
 
 /* Read through the input LINES, to find the section names and the
@@ -1169,6 +1186,8 @@ parse_input (const struct line_data *lines, int nlines,
                   next->entry_sections = head;
                   next->entry_sections_tail = tail;
                   next->missing_basename = 0;
+                  next->missing_name = 0;
+                  next->missing_description = 0;
                   next->next = *entries;
                   *entries = next;
                   n_entries++;
@@ -1336,9 +1355,13 @@ mark_entry_for_deletion (struct line_data *lines, int nlines, char *name)
           /* Read menu item.  */
           while (*p != 0 && *p != ':')
             p++;
+          if (!*p)
+            continue;
           p++; /* skip : */
 
-          if (*p == ':')
+          if (!*p)
+            continue;
+          else if (*p == ':')
             { /* XEmacs-style entry, as in * Mew::Messaging.  */
               if (menu_item_equal (q, ':', name))
                 {
@@ -1352,7 +1375,7 @@ mark_entry_for_deletion (struct line_data *lines, int nlines, char *name)
               if (*p == '(')         /* if at parenthesized (FILENAME) */
                 {
                   p++;
-                  if (menu_item_equal (p, ')', name))
+                  if (*p && menu_item_equal (p, ')', name))
                     {
                       lines[i].delete = 1;
                       something_deleted = 1;
@@ -1542,6 +1565,7 @@ format_entry (char *name, size_t name_len, char *desc, size_t desc_len,
   if (offset_out)
     strncat (outstr, line_out, offset_out);
 
+  free (*outstr_out);
   *outstr_out = outstr;
   *outstr_len = strlen (outstr);
   return 1;
@@ -1629,9 +1653,8 @@ split_entry (const char *entry, char **name, size_t *name_len,
       else
         {
           /* Just show the rest when there's no newline. */
-          size_t length = strlen (ptr);
-          strncat (*description, ptr, length);
-          ptr += length;
+          strcat (*description, ptr);
+          ptr += strlen (ptr);
         }
     }
   /* Descriptions end in a new line. */
@@ -1657,7 +1680,6 @@ reformat_new_entries (struct spec_entry *entries, int calign_cli, int align_cli,
       char *name = NULL, *desc = NULL;
       size_t name_len = 0, desc_len = 0;
       split_entry (entry->text, &name, &name_len, &desc, &desc_len);
-      free (entry->text);
 
       /* Specify sane defaults if we need to */
       if (calign_cli == -1 || align_cli == -1)
@@ -1693,6 +1715,7 @@ reformat_new_entries (struct spec_entry *entries, int calign_cli, int align_cli,
 
       format_entry (name, name_len, desc, desc_len, calign, align, 
                     maxwidth, &entry->text, &entry->text_len);
+      free (name); free (desc);
     }
 }
 
@@ -2004,6 +2027,7 @@ main (int argc, char *argv[])
           {
             struct spec_entry *next;
             size_t length = strlen (optarg);
+            char *old_text;
 
             if (!entries_to_add)
               {
@@ -2034,9 +2058,11 @@ main (int argc, char *argv[])
                newline if we need one.  Prepend a space if we have no
                previous text, since eventually we will be adding the
                "* foo ()." and we want to end up with a ". " for parsing.  */
-            next->text = concat (next->text ? next->text : " ",
+            old_text = next->text;
+            next->text = concat (old_text ? old_text : " ",
                                  optarg, 
                                  optarg[length - 1] == '\n' ? "" : "\n");
+            free (old_text);
             next->text_len = strlen (next->text);
           }
           break;
@@ -2236,7 +2262,7 @@ main (int argc, char *argv[])
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n\
 This is free software: you are free to change and redistribute it.\n\
 There is NO WARRANTY, to the extent permitted by law.\n"),
-              "2021");
+              "2023");
           exit (EXIT_SUCCESS);
 
         case 'W':

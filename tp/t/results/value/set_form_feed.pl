@@ -1,141 +1,167 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'set_form_feed'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'gg',
-          'type' => 'misc_arg'
-        },
-        {
-          'parent' => {},
-          'text' => 'a\\a\\f\\\\',
-          'type' => 'misc_arg'
-        }
-      ],
-      'cmdname' => 'set',
-      'extra' => {
-        'arg_line' => ' gg  a\\a\\f\\\\
-',
-        'misc_args' => [
-          'gg',
-          'a\\a\\f\\\\'
-        ]
-      },
-      'parent' => {}
-    },
-    {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'hh',
-          'type' => 'misc_arg'
-        },
-        {
-          'parent' => {},
-          'text' => '',
-          'type' => 'misc_arg'
-        }
-      ],
-      'cmdname' => 'set',
-      'extra' => {
-        'arg_line' => ' hh
-',
-        'misc_args' => [
-          'hh',
-          ''
-        ]
-      },
-      'parent' => {}
-    },
-    {
-      'args' => [
-        {
-          'parent' => {},
-          'text' => 'll',
-          'type' => 'misc_arg'
-        },
-        {
-          'parent' => {},
-          'text' => '',
-          'type' => 'misc_arg'
-        }
-      ],
-      'cmdname' => 'set',
-      'extra' => {
-        'arg_line' => ' ll 
-',
-        'misc_args' => [
-          'll',
-          ''
-        ]
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
       'contents' => [
         {
           'args' => [
             {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'a\\a\\f\\\\. . '
-                }
-              ],
-              'parent' => {},
-              'type' => 'brace_command_arg'
+              'text' => 'gg',
+              'type' => 'rawline_arg'
+            },
+            {
+              'text' => 'a\\a\\f\\\\',
+              'type' => 'rawline_arg'
             }
           ],
-          'cmdname' => 'code',
-          'contents' => [],
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 5,
-            'macro' => ''
-          },
-          'parent' => {}
+          'cmdname' => 'set',
+          'info' => {
+            'arg_line' => ' gg  a\\a\\f\\\\
+'
+          }
         },
         {
-          'parent' => {},
-          'text' => '.
+          'args' => [
+            {
+              'text' => 'hh',
+              'type' => 'rawline_arg'
+            },
+            {
+              'text' => '',
+              'type' => 'rawline_arg'
+            }
+          ],
+          'cmdname' => 'set',
+          'info' => {
+            'arg_line' => ' hh
 '
+          }
+        },
+        {
+          'args' => [
+            {
+              'text' => 'll',
+              'type' => 'rawline_arg'
+            },
+            {
+              'text' => '',
+              'type' => 'rawline_arg'
+            }
+          ],
+          'cmdname' => 'set',
+          'info' => {
+            'arg_line' => ' ll 
+'
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'source_marks' => [
+                        {
+                          'counter' => 1,
+                          'element' => {
+                            'args' => [
+                              {
+                                'text' => 'gg'
+                              }
+                            ],
+                            'cmdname' => 'value'
+                          },
+                          'line' => 'a\\a\\f\\\\',
+                          'sourcemark_type' => 'value_expansion',
+                          'status' => 'start'
+                        },
+                        {
+                          'counter' => 1,
+                          'position' => 7,
+                          'sourcemark_type' => 'value_expansion',
+                          'status' => 'end'
+                        },
+                        {
+                          'counter' => 2,
+                          'element' => {
+                            'args' => [
+                              {
+                                'text' => 'hh'
+                              }
+                            ],
+                            'cmdname' => 'value'
+                          },
+                          'line' => '',
+                          'position' => 9,
+                          'sourcemark_type' => 'value_expansion',
+                          'status' => 'start'
+                        },
+                        {
+                          'counter' => 2,
+                          'position' => 9,
+                          'sourcemark_type' => 'value_expansion',
+                          'status' => 'end'
+                        },
+                        {
+                          'counter' => 3,
+                          'element' => {
+                            'args' => [
+                              {
+                                'text' => 'll'
+                              }
+                            ],
+                            'cmdname' => 'value'
+                          },
+                          'line' => '',
+                          'position' => 11,
+                          'sourcemark_type' => 'value_expansion',
+                          'status' => 'start'
+                        },
+                        {
+                          'counter' => 3,
+                          'position' => 11,
+                          'sourcemark_type' => 'value_expansion',
+                          'status' => 'end'
+                        }
+                      ],
+                      'text' => 'a\\a\\f\\\\. . '
+                    }
+                  ],
+                  'type' => 'brace_command_arg'
+                }
+              ],
+              'cmdname' => 'code',
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 5,
+                'macro' => ''
+              }
+            },
+            {
+              'text' => '.
+'
+            }
+          ],
+          'type' => 'paragraph'
         }
       ],
-      'parent' => {},
-      'type' => 'paragraph'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'set_form_feed'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[0];
-$result_trees{'set_form_feed'}{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[0];
-$result_trees{'set_form_feed'}{'contents'}[0]{'parent'} = $result_trees{'set_form_feed'};
-$result_trees{'set_form_feed'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[1];
-$result_trees{'set_form_feed'}{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[1];
-$result_trees{'set_form_feed'}{'contents'}[1]{'parent'} = $result_trees{'set_form_feed'};
-$result_trees{'set_form_feed'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[2];
-$result_trees{'set_form_feed'}{'contents'}[2]{'args'}[1]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[2];
-$result_trees{'set_form_feed'}{'contents'}[2]{'parent'} = $result_trees{'set_form_feed'};
-$result_trees{'set_form_feed'}{'contents'}[3]{'parent'} = $result_trees{'set_form_feed'};
-$result_trees{'set_form_feed'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[4]{'contents'}[0]{'args'}[0];
-$result_trees{'set_form_feed'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[4]{'contents'}[0];
-$result_trees{'set_form_feed'}{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[4];
-$result_trees{'set_form_feed'}{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'set_form_feed'}{'contents'}[4];
-$result_trees{'set_form_feed'}{'contents'}[4]{'parent'} = $result_trees{'set_form_feed'};
 
 $result_texis{'set_form_feed'} = '@set gg  a\\a\\f\\\\
 @set hh

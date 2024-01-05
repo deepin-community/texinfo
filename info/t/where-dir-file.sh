@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2014-2019 Free Software Foundation, Inc.
+# Copyright (C) 2014-2023 Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,5 +19,5 @@ srcdir=${srcdir:-.}
 
 # Follow a reference to file1 in dir and print location
 $ginfo --where file1 \
-  | grep 't/infodir/file1.info$'
+  | grep 't/infodir/file1.info'
 

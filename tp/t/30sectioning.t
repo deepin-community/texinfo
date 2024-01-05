@@ -1,61 +1,11 @@
 use strict;
 
 use lib '.';
-use Texinfo::ModulePath (undef, undef, 'updirs' => 2);
+use Texinfo::ModulePath (undef, undef, undef, 'updirs' => 2);
 
 require 't/test_utils.pl';
 
-my $sections_no_top_text =
-'@chapter chapter
-
-@section section
-
-@subsection subsection
-
-@subsubsection subsubsection
-
-@part part
-
-@chapter chapter in part
-
-@chapter second chapter in part
-
-@unnumbered unnumbered
-
-@appendix appendix
-
-@appendixsec appendixsec
-';
-
-my $test_text =
-'@top top
-
-'.$sections_no_top_text;
-
-my $chapter_sections_text = 
-'@unnumbered unnumbered
-
-@chapter First chapter
-
-@section second
-
-@chapter Chapter
-
-@section Section of chapter
-
-@subsection subsection 1
-
-@subsection subsection 2
-
-@chapter Chapter 2
-';
-
-my $top_chapter_sections_text = 
-'@top top
-
-'.$chapter_sections_text;
-
-my $unnumbered_top_without_node_text = 
+my $unnumbered_top_without_node_text =
 '@node a node,,,(dir)
 @unnumbered unnumbered
 
@@ -80,196 +30,6 @@ Top section
 Text of chapter
 ';
 
-my $section_in_unnumbered_text = '
-@node Top
-@top Test section in unnumbered
-
-@contents
-
-Menu:
-
-@menu
-* chapter::
-* unnumbered::
-* chapter 2::
-* chapter 3::
-* unnumbered 4::
-@end menu
-
-@node chapter
-@chapter chapter
-
-@menu
-* section in chapter::
-@end menu
-
-@node section in chapter
-@section section in chapter
-
-@node unnumbered
-@unnumbered unnumbered
-
-@menu
-* section in unnumbered::
-@end menu
-
-@node section in unnumbered
-@section section in unnumbered
-
-@node chapter 2
-@chapter chapter 2
-
-@menu
-* unnumberedsec 2::
-* unnumberedsec 2-1::
-@end menu
-
-@node unnumberedsec 2
-@unnumberedsec unnumbered section 2
-
-@menu
-* unnumbered sub 2::
-* numbered sub 2::
-* unnumbered sub2 2::
-* numbered sub2 2::
-@end menu
-
-@node unnumbered sub 2
-@unnumberedsubsec unnumbered subsection 2
-
-@node numbered sub 2
-@subsection numbered subsection 2
-
-@node unnumbered sub2 2
-@unnumberedsubsec unnumbered subsection2 2
-
-@node numbered sub2 2
-@subsection numbered subsection2 2
-
-@node unnumberedsec 2-1
-@unnumberedsec unnumberedsec 2-1
-
-@menu
-* numbered sub 2-1::
-@end menu
-
-@node numbered sub 2-1
-@subsection numbered subsection 2-1
-
-
-@node chapter 3
-@chapter chapter 3
-
-@menu
-* unnumberedsec 3::
-* section 3-1::
-* unnumberedsec 3-2::
-* section 3-3::
-* unnumberedsec 3-4::
-@end menu
-
-@node unnumberedsec 3
-@unnumberedsec unnumbered section 3
-
-@menu
-* unnumbered sub 3::
-* numbered sub 3::
-* unnumbered sub2 3::
-* numbered sub2 3::
-@end menu
-
-@node unnumbered sub 3
-@unnumberedsubsec unnumbered subsection 3
-
-@node numbered sub 3
-@subsection numbered subsection 3
-
-@node unnumbered sub2 3
-@unnumberedsubsec unnumbered subsection2 3
-
-@node numbered sub2 3
-@subsection numbered subsection2 3
-
-@node section 3-1
-@section section 3-1
-
-@node unnumberedsec 3-2
-@unnumberedsec unnumberedsec 3-2
-
-@menu
-* numbered sub 3-2::
-@end menu
-
-@node numbered sub 3-2
-@subsection numbered subsection 3-2
-
-@node section 3-3
-@section section 3-3
-
-@menu
-* subsection 3-3::
-@end menu
-
-@node subsection 3-3
-@subsection subsection 3-3
-
-@node unnumberedsec 3-4
-@unnumberedsec unnumberedsec 3-4
-
-@menu
-* numbered sub 3-4::
-@end menu
-
-@node numbered sub 3-4
-@subsection numbered subsection 3-4
-
-@node unnumbered 4
-@unnumbered unnumbered  4
-
-@menu
-* unnumberedsec 4::
-@end menu
-
-@node unnumberedsec 4
-@unnumberedsec unnumbered section 4
-
-@menu
-* unnumbered sub 4::
-* numbered sub 4::
-* unnumbered sub2 4::
-* numbered sub2 4::
-@end menu
-
-@node unnumbered sub 4
-@unnumberedsubsec unnumbered subsection 4
-
-@node numbered sub 4
-@subsection numbered subsection 4
-
-@node unnumbered sub2 4
-@unnumberedsubsec unnumbered subsection2 4
-
-@node numbered sub2 4
-@subsection numbered subsection2 4
-';
-
-my $anchor_in_footnote_text = '@node Top
-@top Top
-
-In top node@footnote{in footnote
-@anchor{Anchor in footnote}.
-}
-
-@menu
-* chapter::
-@end menu
-
-@node chapter
-@chapter Chap
-
-@ref{Anchor in footnote}.
-';
-
 my $nodes_after_top_before_chapter_text =
 '@node Top
 Top node
@@ -290,46 +50,89 @@ my $nodes_after_top_before_section_text =
 '@node Top
 Top node
 @menu
-* second node::
+* chap node::
 * third node::
 @end menu
 
-@node second node, third node,Top,Top
+@node chap node, third node,Top,Top
 
 second node
 
-@node third node,,second node,Top
+@node third node,,chap node,Top
 @subsection subsection
 ';
 
-my @tests_converted = (
-['contents',
-$test_text.
-'
-@contents
-'],
-['shortcontents',
-$test_text.
-'
-@shortcontents
-'],
-['contents_and_shortcontents',
-$test_text.
-'
-@shortcontents
+my $chapter_between_nodes_text = '@node Top
+@top top section
+Top node
+
+@menu
+* section node::
+@end menu
+
+@chapter Chapter
+
+In chapter
+
+@node section node,,,Top
+@section section
+
+section.
 
 @contents
-'],
-# used as a possible comparison with the next two
-['sections_test',
-$test_text
-],
-['sections_test_no_use_nodes',
-$test_text
-,{},{'USE_NODES' => 0}],
-['sections_test_no_use_nodes_use_node_directions',
-$test_text
-,{},{'USE_NODES' => 0, 'USE_NODE_DIRECTIONS' => 1}],
+';
+
+my $chapter_between_nodes_with_appendix = '@node Top
+@top top section
+@chapter Main
+Top node
+
+@menu
+* Additional::
+@end menu
+
+@node Additional
+@appendix Annex
+';
+
+my $two_nodes_between_chapters_text = '@node Top
+@top top
+
+@menu
+* chapter 1::
+* node between chapters::
+* chapter 2::
+@end menu
+
+@node chapter 1, Top, node between chapters, Top
+@chapter chapter c1
+
+@node node between chapters
+
+@node chapter 2
+@chapter chapter c2
+';
+
+my $two_nodes_at_the_end_text = '@node Top
+@top top
+
+@menu
+* chapter 1::
+* node after chapter 1::
+* last node in chapter 1::
+@end menu
+
+@node chapter 1, node after chapter 1, Top, Top
+@chapter chapter c1
+
+@node node after chapter 1
+
+in node after chapter 1
+
+@node last node in chapter 1
+';
+
+my @tests_converted = (
 ['one_subsection',
 '@subsection The subsection
 '],
@@ -417,9 +220,6 @@ Text part second.
 
 @setfilename a bit too late
 '],
-['section_in_unnumbered_plaintext',
-$section_in_unnumbered_text
-],
 ['two_unnumbered_no_argument',
 '@unnumbered
 @unnumbered
@@ -436,46 +236,17 @@ $section_in_unnumbered_text
 '@node Top
 
 @menu
-* first::
+* chap first::
 @end menu
 
-@node first, (manual1), (manual2) , (manual3)
+@node chap first, (manual1), (manual2) , (manual3)
 ', {'test_split' => 'node'}],
 ['two_nodes_between_chapters',
-'@node Top
-@top top
-
-@menu
-* chapter 1::
-* node between chapters::
-* chapter 2::
-@end menu
-
-@node chapter 1, Top, node between chapters, Top
-@chapter chapter c1
-
-@node node between chapters
-
-@node chapter 2
-@chapter chapter c2
-', {'test_split' => 'section', 'CHECK_NORMAL_MENU_STRUCTURE' => 1}],
+$two_nodes_between_chapters_text,
+{'test_split' => 'section', 'CHECK_NORMAL_MENU_STRUCTURE' => 1}],
 ['two_nodes_at_the_end',
-'@node Top
-@top top
-
-@menu
-* chapter 1::
-* node after chapter 1::
-* node after chapter 2::
-@end menu
-
-@node chapter 1, node after chapter 1, Top, Top
-@chapter chapter c1
-
-@node node after chapter 1
-
-@node node after chapter 2
-', {'test_split' => 'section'}],
+$two_nodes_at_the_end_text
+, {'test_split' => 'section'}],
 ['chapter_before_and_after_part',
 '@chapter chapter
 
@@ -486,6 +257,32 @@ $section_in_unnumbered_text
 @contents
 ', {'test_split' => 'section'}, {'CONTENTS_OUTPUT_LOCATION' => 'inline'}
 ],
+['contents_and_parts',
+'@node Top
+@top top
+
+@menu
+* chapter 1 node::
+* chapter 2 node::
+* chapter 3 node::
+@end menu
+
+@part part 1: part 1
+
+@node chapter 1 node
+@chapter chapter 1
+
+@node chapter 2 node
+@chapter chapter 2
+
+@part part2: part2
+
+@node chapter 3 node
+@chapter chapter 3
+
+@contents
+@shortcontents
+'],
 ['lone_contents',
 '@contents
 '],
@@ -503,48 +300,55 @@ $nodes_after_top_before_chapter_text
 ['nodes_after_top_before_chapter_not_split_no_use_node_directions',
 $nodes_after_top_before_chapter_text
 ,{}, {'USE_NODE_DIRECTIONS' => 0}
-]
+],
+['node_sectop_before_chapter_no_node',
+'@node Top
+@top top section
+
+@chapter chap
+'],
+# automatic directions are confused by the following setup
+# as @node Top next is with the first non Top node which
+# happens to be before.  Then the next node for the
+# node before node is obtained with toplevel next which is
+# the node associated with the chapter, after the Top node!
+['node_sectop_before_lone_node_Top',
+'@node node before
+@top top sectionning
+
+in node before
+
+@node Top
+
+in node Top
+
+@node chap
+@chapter chap
+
+in chap
+'],
+['recursive_self_section_reference',
+'@node sharp
+@chapter @ref{sharp} tuple
+'],
+['double_recursive_self_section_reference',
+'@node n1
+@chapter @ref{n2}
+
+@node n2
+@chapter @ref{n1}
+'],
+['double_recursive_self_section_node_reference',
+'@node Top
+@top top
+
+@node node1
+@chapter @ref{to node1}
+
+@node to @ref{node1}
+'],
 );
 
-my $character_and_spaces_in_refs_text = '@node Top
-@top Test refs
-
-@menu
-* other nodes::
-@end menu
-
-@subheading Testing distant nodes
-
-@ref{ a  node ,,, manual}
-@ref{:,,,manual}
-@ref{ top ,,, manual}
-@ref{(texinfo)Cross References}
-@ref{node,,, ../manual/doc}
-
-@subheading Testing local nodes
-
-@ref{!_"#$%&\'()*+-.}
-@ref{/;<=>?[\\]^_`|~}
-@ref{ Top}
-@ref{  local   node}
-
-@node other nodes, !_"#$%&\'()*+-., Top, Top
-@chapter Chapter with nodes
-
-@menu
-* !_"#$%&\'()*+-.::
-* /;<=>?[\\]^_`|~::
-* local node::
-@end menu
-
-@node !_"#$%&\'()*+-., /;<=>?[\]^_`|~, other nodes, other nodes
-
-@node /;<=>?[\]^_`|~,local   node,!_"#$%&\'()*+-., other nodes
-
-@node  local   node,,/;<=>?[\\]^_`|~,other nodes
-
-@bye
-';
 
 my @tests_info = (
 ['anchor_zero',
@@ -566,16 +370,30 @@ my @tests_info = (
 '@node one node
 @subsection The subsection
 '],
-['character_and_spaces_in_refs',
-$character_and_spaces_in_refs_text],
 ['character_and_spaces_in_node',
 '
 @node Top
-@node other nodes, !_"#$%&\'()*+-., Top, Top
-@node !_"#$%&\'()*+-., /;<=>?[\\]^_`|~, other nodes, other nodes
-@node /;<=>?[\\]^_`|~,local   node,!_"#$%&\'()*+-., other nodes
-@node  local   node,,/;<=>?[\\]^_`|~,other nodes
+@node chap nodes, !_"#$%&\'()*+-., Top, Top
+@node !_"#$%&\'()*+-., /;<=>?[\\]^_`|~, chap nodes, chap nodes
+@node /;<=>?[\\]^_`|~,local   node,!_"#$%&\'()*+-., chap nodes
+@node  local   node,,/;<=>?[\\]^_`|~,chap nodes
 '],
+# a subset of the next test, with ascii spaces only
+['in_menu_only_special_ascii_spaces_node',
+undef, {'test_file' => 'in_menu_only_special_ascii_spaces_node.texi'}],
+['in_menu_only_special_ascii_spaces_node_menu',
+undef, {'test_file' => 'in_menu_only_special_ascii_spaces_node.texi'},
+{'FORMAT_MENU' => 'menu'}],
+['in_menu_only_special_spaces_node',
+undef, {'test_file' => 'in_menu_only_special_spaces_node.texi',
+        'skip' => ($] < 5.014) ? 'Perl too old: /a regex flag needed' : undef, }],
+['in_menu_only_special_spaces_node_menu',
+undef, {'test_file' => 'in_menu_only_special_spaces_node.texi',
+        'skip' => ($] < 5.014) ? 'Perl too old: /a regex flag needed' : undef, },
+       {'FORMAT_MENU' => 'menu'}],
+['reference_to_only_special_spaces_node',
+undef, {'test_file' => 'reference_to_only_special_spaces_node.texi',
+        'skip' => ($] < 5.014) ? 'Perl too old: /a regex flag needed' : undef, }],
 ['double_node_anchor_float',
 '@node node1
 
@@ -612,19 +430,8 @@ $character_and_spaces_in_refs_text],
 
 @xref{TOP}.
 '],
-['equivalent_nodes',
-'@node Top, @emph{node}
-
-@menu
-* @strong{node}::
-@end menu
-
-@node @samp{node}
-
-@xref{node}.
-'],
 ['equivalent_labels',
-'@node Top
+'@node first
 
 @anchor{@samp{anch}}.
 
@@ -637,138 +444,30 @@ In float
 * @code{floa}::
 @end menu
 '],
-['anchor_in_footnote',
-$anchor_in_footnote_text
-],
-['anchor_in_footnote_separate',
-'@footnotestyle separate
-'.
-$anchor_in_footnote_text
-],
-['no_element',
-'@settitle no_element test
-@documentencoding ISO-8859-1
-
-
-@anchor{An anchor}
-
-Ref to the anchor:
-@ref{An anchor}
-
-Ref to the anchor in footnote:
-@ref{Anchor in footnote}.
-
-@footnote{In footnote.
-
-@anchor{Anchor in footnote}
-
-Ref to main text anchor
-@ref{An anchor}
-}
-
-@float , float anchor
-In float
-@end float
-
-Ref to float
-@ref{float anchor}.
+['equivalent_nodes',
+'@node first, @emph{node}
 
 @menu
-* An anchor::                menu entry pointing to the anchor.
+* @strong{node}::
 @end menu
 
-@cindex index entry
-'],
-['placed_things_before_element',
-'@anchor{An anchor}
+@node @samp{node}
 
-Ref to the anchor:
-@ref{An anchor}
-
-Ref to the anchor in footnote:
-@ref{Anchor in footnote}.
-
-@footnote{In footnote.
-
-@anchor{Anchor in footnote}
-
-Ref to main text anchor
-@ref{An anchor}
-}
-
-@float , float anchor
-In float
-@end float
-
-Ref to float
-@ref{float anchor}.
-
-@menu
-* An anchor::                menu entry pointing to the anchor.
-@end menu
-
-@cindex index entry
-
-@section section
-
-Ref to anchor
-@ref{An anchor}
-
-Ref to footnote anchor
-@ref{Anchor in footnote}
-'],
-['placed_things_before_node',
-'@anchor{An anchor}
-
-Ref to the anchor:
-@ref{An anchor}
-
-Ref to the anchor in footnote:
-@ref{Anchor in footnote}.
-
-@footnote{In footnote.
-
-@anchor{Anchor in footnote}
-
-Ref to main text anchor
-@ref{An anchor}
-}
-
-@float , float anchor
-In float
-@end float
-
-Ref to float
-@ref{float anchor}.
-
-@menu
-* An anchor::                menu entry pointing to the anchor.
-@end menu
-
-@cindex index entry
-
-@node Top
-@top top section
-
-Ref to anchor
-@ref{An anchor}
-
-Ref to footnote anchor
-@ref{Anchor in footnote}
+@xref{node}.
 '],
 ['explicit_node_directions',
 '@node Top
 Top node
 @menu
-* second node::
+* chap node::
 * third node::
 @end menu
 
-@node second node, third node,Top,Top
+@node chap node, third node,Top,Top
 
 second node
 
-@node third node,,second node,Top
+@node third node,,chap node,Top
 ', {'test_split' => 'node'}],
 ['nodes_after_top_before_chapter_nodes',
 $nodes_after_top_before_chapter_text,
@@ -786,11 +485,11 @@ $nodes_after_top_before_section_text,
 '@node Top
 
 @menu
-* second node::
+* chap node::
 * TOP:: myself
 @end menu
 
-@node second node,,top,TOP
+@node chap node,,top,TOP
 '],
 ['nodes_no_node_top_explicit_directions',
 '@node first,,,(dir)
@@ -811,27 +510,57 @@ anchor ref @anchor{ref}.
 
 ref to ref @ref{ref}.
 '],
-['chapter_between_nodes',
-'
-@node Top
-@top top section
+['one_node_explicit_directions_anchor_no_use_node',
+'@node one node,,,(dir)
 Top node
 
-@menu
-* section node::
-@end menu
+anchor ref @anchor{ref}.
+
+ref to ref @ref{ref}.
+', {}, {'USE_NODES' => 0}],
+# NOTE that the DocBook output is incorrect because the chapter opened
+# in the Top node is not output, while the closing element is output
+# at the end of the document
+['chapter_between_nodes',
+$chapter_between_nodes_text,
+{}, {'CONTENTS_OUTPUT_LOCATION' => 'inline'}],
+['chapter_between_nodes_texi2html',
+$chapter_between_nodes_text,
+{}, {'TEXI2HTML' => 1, 'CONTENTS_OUTPUT_LOCATION' => 'inline'}],
+# quite similar with previous test, but the following sectioning
+# command is also at chapter level
+['chapter_between_nodes_with_appendix',
+$chapter_between_nodes_with_appendix
+],
+# this difference is interesting, as with something else than menu,
+# the node_next direction of Top node is not determined, and it is
+# a similar setup with texi2any --html.
+['chapter_between_nodes_with_appendix_nomenu',
+$chapter_between_nodes_with_appendix,
+{'FORMAT_MENU' => 'nomenu'},
+],
+['section_before_after_top_node_last_node',
+'@unnumbered before
+
+@node Top
+@top top section
 
 @chapter Chapter
 
-In chapter
+in chapter
 
-@node section node,,,Top
-@section section
+@node node after
+'],
+['section_before_after_top_node',
+'@unnumbered before
 
-section.
+@node Top
+@top top section
 
-@contents
-', {}, {'CONTENTS_OUTPUT_LOCATION' => 'inline'}],
+@chapter Chapter
+
+in chapter
+'],
 ['part_node_before_top',
 '@node part node before top, Top,,Top
 @part part
@@ -848,10 +577,10 @@ section.
 @top top
 
 @menu
-* part node after top::
+* chap part node after top::
 @end menu
 
-@node part node after top
+@node chap part node after top
 @part part
 ', {'test_split' => 'section'}],
 ['part_chapter_after_top',
@@ -1058,6 +787,9 @@ Top node
 
 @part part
 '],
+# FIXME in DocBook the nesting is incorrect, part is opened before chapter
+# and is closed first too.  This is not an important bug, however, as
+# this construct is not normal, and @top has no equivalent in DocBook.
 ['top_node_part_top',
 '@node Top
 
@@ -1080,10 +812,9 @@ Top node
 @chapter chapter 2
 
 @contents
-', {'test_formats' => ['plaintext'], 'CHECK_NORMAL_MENU_STRUCTURE' => 1}, {'CONTENTS_OUTPUT_LOCATION' => 'inline'}],
-['section_in_unnumbered_info',
-$section_in_unnumbered_text
-],
+', {'test_formats' => ['plaintext'],
+    'CHECK_NORMAL_MENU_STRUCTURE' => 1},
+   {'CONTENTS_OUTPUT_LOCATION' => 'inline'}],
 ['top_without_node_sections',
 $top_without_node_text,
 {'test_split' => 'section'}],
@@ -1154,83 +885,12 @@ $unnumbered_top_without_node_text,
 @node subsection
 @subsection subsection
 ', {'CHECK_NORMAL_MENU_STRUCTURE' => 1}],
-['empty_top_node_up',
-'@node Top
-@top empty top node up
-
-@menu
-* first::
-@end menu
-
-@node first
-',{},{'TOP_NODE_UP' => ''}
-],
 ['node_up_direction_for_top_with_manual',
 '@node Top,,,(dir)top
 '],
-['internal_top_node_up',
-'@node Top
-@top internal top node up
-
-@menu
-* first::
-@end menu
-
-@node first
-',{'test_split' => 'node'}, {'TOP_NODE_UP' => 'node@@ node'}
-],
-['top_node_up_url',
-'@node Top
-@top internal top node up
-
-@menu
-* first::
-@end menu
-
-@node first
-',{'test_split' => 'node'}, 
-  {'TOP_NODE_UP' => '@acronym{GNU, @acronym{GNU}\'s Not Unix} manuals', 
-   'TOP_NODE_UP_URL' => 'http://www.gnu.org/manual/'}
-],
-['non_automatic_top_node_up_url',
-'@node Top, first, (dir), (dir)
-@top internal top node up
-
-@menu
-* first::
-@end menu
-
-@node first, , Top, (dir)
-',{'test_split' => 'node'},{'TOP_NODE_UP_URL' => 'http://www.gnu.org/manual/'}
-],
-['non_automatic_internal_top_node_up',
-'@node Top, first, @acronym{GNU, @acronym{GNU}\'s Not Unix} manuals, @acronym{GNU, @acronym{GNU}\'s Not Unix} manuals
-@top internal top node up
-
-@menu
-* first::
-@end menu
-
-@node first, , Top, @acronym{GNU, @acronym{GNU}\'s Not Unix} manuals
-',{'test_split' => 'node'}, 
-  {'TOP_NODE_UP' => '@acronym{GNU, @acronym{GNU}\'s Not Unix} manuals'}
-],
-['non_automatic_top_node_up_and_url',
-'@node Top, first, @acronym{GNU, @acronym{GNU}\'s Not Unix} manuals, @acronym{GNU, @acronym{GNU}\'s Not Unix} manuals
-@top internal top node up
-
-@menu
-* first::
-@end menu
-
-@node first, , Top, @acronym{GNU, @acronym{GNU}\'s Not Unix} manuals
-',{'test_split' => 'node'},
-  {'TOP_NODE_UP' => '@acronym{GNU, @acronym{GNU}\'s Not Unix} manuals',
-   'TOP_NODE_UP_URL' => 'http://www.gnu.org/manual/'}
-],
 ['protected_node_parentheses',
 '
-@node Top
+@node first
 @top top
 
 @menu
@@ -1243,98 +903,25 @@ $unnumbered_top_without_node_text,
 
 @ref{@asis{(}manual2) name2}.
 '],
+['automatic_menu_referencing_node',
+'@node Top
+@top top
+
+@node Chapter
+@chapter chap
+
+@node section
+@section sec
+']
 );
 
-my $complex_case = '@node Top,First node,(dir)
-@top
-@menu
-* First node:: 
-* between node::
-* Second node::   node 2
-* Third node unnumbered:: unnumbered in Top menu
-* continuity::
-* Last node no description::
-@end menu
-
-@node First node,,Top,Top
-@chapter first node chapter
-
-first node chapter text
-@menu
-* unnumbered:: un
-* unnumbered2:: un2
-* numbered:: nu
-
-@end menu
-
-@node unnumbered
-@unnumberedsec unnumbered section
-
-@menu
-* unnumbered sub:: un
-* numbered sub:: nu
-* unnumbered sub2:: un2
-* numbered sub2:: nu2
-@end menu
-
-@node unnumbered sub
-@unnumberedsubsec unnumbered subsection
-
-@node numbered sub
-@subsection numbered subsection
-
-@node unnumbered sub2
-@unnumberedsubsec unnumbered subsection2
-
-@node numbered sub2
-@subsection numbered subsection2
-
-@node unnumbered2
-@unnumberedsec unnumbered section2
-
-@menu
-*  numbered sub3::
-@end menu
-
-@node numbered sub3
-@subsection numbered subsection3
-
-
-@node numbered
-@section  numbered section
-
-@node between node,,,Top
-
-between node, node without sectioning node
-
-@node Second node,Third node unnumbered,,Top
-
-Second node text
-
-@chapter second node chapter
-
-second node chapter text.
-
-@node Third node unnumbered
-@unnumbered unnumbered chapter
-
-unnumbered chapter text.
-
-@node continuity,  Third node unnumbered, Last node no description, Top
-@unnumbered unnumbered continuity
-
-Unumbered and node needed for continuity between automatic 
-directions and lone node.
-
-@node Last node no description,,continuity,Top
-
-@contents
-@bye
-';
 
 my @test_cases = (
+['node_simple',
+'@node first'
+],
 ['node_too_much_args',
-'@node Top, , , , (dir)'
+'@node first, , , , (dir)'
 ],
 [ 'node_line_arguments',
 '
@@ -1360,12 +947,12 @@ my @test_cases = (
 '@node Top
 
 @menu
-* first level node::
+* chap first level node::
 @end menu
 
 @ref{second level node}.
 
-@node first level node
+@node chap first level node
 
 @node second level node
 '],
@@ -1421,7 +1008,7 @@ Dummy section with (manual)node node syntax.
 
 ', {'CHECK_NORMAL_MENU_STRUCTURE' => 1}],
 ['node_nested_parentheses',
-'@node Top
+'@node first
 
 @menu
 * ((some) file)::
@@ -1434,7 +1021,7 @@ Dummy section with (manual)node node syntax.
 '@node name, '
 ],
 ['unknown_node_in_menu',
-'@node Top
+'@node first
 
 @menu
 * unknown::
@@ -1442,44 +1029,6 @@ Dummy section with (manual)node node syntax.
 '],
 ['ref_to_unknown_node',
 '@xref{unknown node}.'],
-['raiselowersections',
-'\input texinfo @c -*-texinfo-*-
-
-@node Top
-@top
-@menu
-* Chapter::
-* Second chapter::
-@end menu
-
-@node Chapter
-@chapter Chapter
-
-@menu
-@ifclear include
-* Chapter in included file::
-@end ifclear
-@end menu
-
-@set do-top
-
-@lowersections
-
-@ifclear include
-@include section_file.texi
-@end ifclear
-@raisesections
-
-@clear do-top
-
-@node Second chapter
-@chapter Second chapter
-
-Second chapter
-
-@contents
-@bye
-'],
 ['empty_node',
 '@node
 
@@ -1500,42 +1049,6 @@ Top node
 
 @node top,,ToP,Top
 second node.
-'],
-['rec_nodes',
-'@node Top
-Top node
-
-@menu
-* second node::
-* node following second::
-@end menu
-
-@node second node,,Top,Top
-
-@menu
-* other node::
-* second node::
-@end menu
-
-@node other node,,,second node
-
-@menu 
-* other node::
-@end menu
-
-@node node up node following second,,,node following second
-@menu
-* node following second::
-@end menu
-
-in node up node following second
-
-@node node following second,,,node up node following second
-
-in node following second
-@menu
-* node up node following second::
-@end menu
 '],
 ['semi_auto',
 '@node Top
@@ -1563,11 +1076,11 @@ in node following second
 '@node Top
 
 @menu
-* first node::
+* chap first node::
 * no return::
 @end menu
 
-@node first node, no return,, Top
+@node chap first node, no return,, Top
 
 @node no return,,, Top 
 '],
@@ -1584,21 +1097,20 @@ in node following second
 @xref{unknown ref}.
 '],
 ['loop_nodes',
-'
-@node Top
+'@node Top
 @top top
 
 @menu
-* node up::
+* chap node up::
 @end menu
 
-@node node up,,,node down
+@node chap node up,,,node down
 
 @menu
 * node middle::
 @end menu
 
-@node node middle,,,node up
+@node node middle,,,chap node up
 
 @menu
 * node down::
@@ -1606,14 +1118,6 @@ in node following second
 
 @node node down
 ', {'CHECK_NORMAL_MENU_STRUCTURE' => 1}],
-['complex',
-$complex_case,
-{'test_split' => 'section'}
-],
-['complex_split_at_node',
-$complex_case,
-{'test_split' => 'node'}
-],
 ['double_top_section',
 '@top First top
 
@@ -1650,62 +1154,6 @@ Second top.
 @chapter chap
 ', {'test_split' => 'section', 'CHECK_NORMAL_MENU_STRUCTURE' => 1}
 ],
-['lowered_subsubsection',
-'@node Top
-@top
-
-@menu
-* Chapter::
-@end menu
-
-@node Chapter
-@chapter Chapter
-
-@menu
-* Section::
-@end menu
-
-@node Section
-@section Section
-
-@menu
-* Subsection::
-@end menu
-
-@node Subsection
-@subsection Subsection
-
-@menu
-* Subsubsection::
-* Lowered subsec::
-@end menu
-
-@node Subsubsection
-@subsubsection Subsubsection
-
-@lowersections
-@node Lowered subsec
-@subsection Lowered subsec
-
-@menu
-* Lowered subsubsection::
-@end menu
-
-@node Lowered subsubsection
-@subsubsection Lowered subsubsection
-@raisesections
-
-@contents
-@bye
-', # use CHECK_NORMAL_MENU_STRUCTURE to check that lowering leads to
-   # inconsistent menu with sectioning
-{'CHECK_NORMAL_MENU_STRUCTURE' => 1}],
-['loweredheading',
-'@lowersections
-@section Foo
-@heading Bar
-@bye
-'],
 ['menutextorder',
 '@menu
 * foo::
@@ -1763,6 +1211,25 @@ Second top.
 @node second node
 @chapter a chapter
 '],
+['nodes_before_after_top',
+'@node node before
+
+In node before
+
+@node Top
+@top top sectionning
+
+in node Top
+
+@node after
+
+in node after
+
+@node chap
+@chapter chap
+
+in chap
+'],
 ['part_before_section',
 '@part part
 
@@ -1801,18 +1268,6 @@ Second top.
 
 @appendix Appendix
 '],
-['sectioning_part_appendix',
-$test_text,
-{'test_split' => 'section'}],
-['sectioning_part_appendix_no_top',
-$sections_no_top_text,
-{'test_split' => 'section'}],
-['chapter_sections',
-$chapter_sections_text,
-{'test_split' => 'section'}],
-['top_chapter_sections',
-$top_chapter_sections_text,
-{'test_split' => 'section'}],
 ['contents_in_html_text',
 '@top top
 
@@ -1826,55 +1281,13 @@ $top_chapter_sections_text,
 @contents
 ', {'test_formats' => ['html_text']}, {'CONTENTS_OUTPUT_LOCATION' => 'inline'}
 ],
-['more_sections_than_nodes',
-'@node Top
-@top top
-
-@menu
-* n c2::
-* n c3::
-* n c3 s1 s2::
-@end menu
-
-@chapter c1
-
-@node n c2
-@chapter c2
-
-@section s1
-
-@node n c3, n c3 s1 s2, n c2, Top
-@chapter c3
-
-@menu 
-* n c3 s 2::
-@end menu
-
-@section C3 s1
-
-@node n c3 s 2
-@section c3 s2
-
-@section c3 s3
-
-@chapter c4
-
-@section c3 s1
-
-@subsection c3 s1 s1
-
-@node n c3 s1 s2,,n c3,Top
-@subsection c3 s1 s2
-
-@appendix appendix
-'],
 ['empty_ref_arg',
-'@node Top
+'@node first
 
-@ref{Top, @ }
-@ref{Top, , @ }
-@ref{Top, @ , @:}
-@ref{Top, @c aaa
+@ref{first, @ }
+@ref{first, , @ }
+@ref{first, @ , @:}
+@ref{first, @c aaa
  @ 
 @c ggg
 , @c fff
@@ -1896,21 +1309,11 @@ $top_chapter_sections_text,
 @chapter c3
 ', {'test_formats' => ['info', 'html']}
 ],
-['contents_at_document_begin',
-undef, {'test_file' => 'contents_at_document_begin.texi'}],
-['contents_at_end_document_after_node',
-undef, {'test_file' => 'contents_at_end_document_after_node.texi'}],
-['contents_at_end_document',
-undef, {'test_file' => 'contents_at_end_document.texi'}],
-['contents_in_document',
-undef, {'test_file' => 'contents_in_document.texi'}],
-['contents_no_section',
-undef, {'test_file' => 'contents_no_section.texi'}],
 );
 
 my @test_out_files = (
 ['transliterated_split_equivalent_nodes',
-'@node Top
+'@node top
 
 @menu
 * @~a::
@@ -1919,72 +1322,198 @@ my @test_out_files = (
 @end menu
 
 @node @~a
+@unnumbered @~a
 
 @node n
 
 @node @^a
 ', {'test_split' => 'node'}],
-['character_and_spaces_in_refs_out',
-$character_and_spaces_in_refs_text,
-{'test_split' => 'node'}]
+# test the texi2html style to test the style for tests
+# interesting to test diverse tree splitting options, and already
+# used for that above.  Since all the options for test_split have
+# already been tested before, it is not useful to do so here, but
+# USE_NODES is used for converters.
+['nodes_after_top_before_chapter_texi2html',
+  $nodes_after_top_before_chapter_text,
+  {},
+  {'TEXI2HTML' => 1, }
+],
+['nodes_after_top_before_chapter_texi2html_use_nodes_chapter',
+  $nodes_after_top_before_chapter_text,
+  {},
+  {'TEXI2HTML' => 1, 'USE_NODES' => 1, 'SPLIT' => 'chapter'}
+],
+['nodes_after_top_before_chapter_no_use_nodes_chapter',
+  $nodes_after_top_before_chapter_text,
+  {},
+  {'USE_NODES' => 0, 'SPLIT' => 'chapter'}
+],
+['nodes_after_top_before_section_texi2html_chapter',
+  $nodes_after_top_before_section_text,
+  {},
+  {'TEXI2HTML' => 1, 'SPLIT' => 'chapter'}
+],
+['nodes_after_top_before_section_texi2html_use_nodes',
+  $nodes_after_top_before_section_text,
+  {},
+  {'TEXI2HTML' => 1, 'USE_NODES' => 1}
+],
+['nodes_after_top_before_section_texi2html_use_nodes_chapter',
+  $nodes_after_top_before_section_text,
+  {},
+  {'TEXI2HTML' => 1, 'USE_NODES' => 1, 'SPLIT' => 'chapter'}
+],
+['split_for_format_not_split',
+  undef,
+  {'test_file' => 'simplest.texi',
+   'test_formats' => ['file_xml']
+  },
+  {'SPLIT' => 'chapter'}
+],
+['top_without_node_texi2html_no_use_nodes',
+$top_without_node_text,
+# use TEXI2HTML for the directions
+{}, {'USE_NODES' => 0, 'TEXI2HTML' => 1},
+],
+['two_nodes_between_chapters_nodes',
+$two_nodes_between_chapters_text,
+{}, {'SPLIT' => 'node'}],
+# both for USE_NODES=0 and specific directions.
+['two_nodes_between_chapters_texi2html',
+$two_nodes_between_chapters_text,
+{}, {'TEXI2HTML' => 1}],
+['two_nodes_at_the_end_nodes',
+$two_nodes_at_the_end_text,
+{}, {'SPLIT' => 'node'}],
+# both for USE_NODES=0 and specific directions.
+['two_nodes_at_the_end_texi2html',
+$two_nodes_at_the_end_text,
+{}, {'TEXI2HTML' => 1}],
 );
 
 foreach my $test (@test_out_files) {
-  push @{$test->[2]->{'test_formats'}}, 'file_html';
+  push @{$test->[2]->{'test_formats'}}, 'file_html'
+    if (!$test->[2]->{'test_formats'});
   $test->[2]->{'test_input_file_name'} = $test->[0] . '.texi';
 }
 
-my @xml_tests_converted_tests = ('section_before_part', 'chapter_before_part', 
-  'part_before_top', 'double_part', 'section_in_unnumbered_plaintext',
+my @xml_tests_converted_tests = ('section_before_part', 'chapter_before_part',
+  'part_before_top', 'double_part',
   'two_unnumbered_no_argument', 'two_nodes_between_chapters',
-  'chapter_before_and_after_part');
+  'chapter_before_and_after_part', 'node_up_external_node');
+
+my @docbook_tests_converted_tests = ('node_sectop_before_chapter_no_node',
+  'node_sectop_before_lone_node_Top');
+
+my @latex_tests_converted_tests = ('two_nodes_at_the_end',
+  'node_sectop_before_chapter_no_node',
+  'node_sectop_before_lone_node_Top');
+
+my @file_latex_tests_converted_tests = ('node_sectop_before_chapter_no_node',
+  'node_sectop_before_lone_node_Top');
 
 foreach my $test (@tests_converted) {
   push @{$test->[2]->{'test_formats'}}, 'plaintext';
   push @{$test->[2]->{'test_formats'}}, 'html';
-  push @{$test->[2]->{'test_formats'}}, 'xml' 
+  push @{$test->[2]->{'test_formats'}}, 'xml'
     if (grep {$_ eq $test->[0]} @xml_tests_converted_tests);
+  push @{$test->[2]->{'test_formats'}}, 'docbook'
+    if (grep {$_ eq $test->[0]} @docbook_tests_converted_tests);
+  push @{$test->[2]->{'test_formats'}}, 'latex_text'
+    if (grep {$_ eq $test->[0]} @latex_tests_converted_tests);
+  if (grep {$_ eq $test->[0]} @file_latex_tests_converted_tests) {
+    push @{$test->[2]->{'test_formats'}}, 'file_latex';
+    $test->[2]->{'test_input_file_name'} = $test->[0] . '.texi';
+  }
+
+  $test->[2]->{'full_document'} = 1 unless (exists($test->[2]->{'full_document'}));
 }
 
-my @xml_tests_info_tests = ('part_chapter_after_top', 
+my @xml_tests_info_tests = ('part_chapter_after_top',
   'part_node_after_top', 'part_node_before_top',
   'chapter_between_nodes', 'nodes_no_node_top_explicit_directions',
   'part_node_chapter_after_top', 'node_part_chapter_after_top',
-  'node_part_chapter_after_chapter', 'section_before_top', 
+  'node_part_chapter_after_chapter', 'section_before_top',
   'section_node_before_part', 'top_node_part_top',
   'chapter_node_before_and_after_part',
+  'in_menu_only_special_spaces_node',
   'more_nodes_than_sections', 'part_node_chapter_appendix',
   'part_node_part_appendix', 'part_node_chapter_node_appendix',
   'part_node_part_node_appendix', 'part_node_node_part_appendix',
   'explicit_node_directions', 'nodes_after_top_before_chapter_nodes',
-  'double_node_anchor_float');
+  'double_node_anchor_float', 'space_in_node');
 
-my @docbook_tests_info_tests = ('double_node_anchor_float');
+my @docbook_tests_info_tests = (
+  'chapter_between_nodes', 'section_before_after_top_node_last_node',
+  'section_before_after_top_node', 'part_node_before_top part_node_after_top',
+  'part_chapter_after_top node_part_chapter_after_top',
+  'node_part_chapter_after_chapter',
+  'part_node_chapter_appendix part_node_part_appendix',
+  'unnumbered_before_top_node', 'section_before_top',
+  'section_chapter_before_top_nodes', 'top_node_part_top',
+  'top_without_node_sections', 'double_node_anchor_float');
+
+my @latex_tests_info_tests = (
+  'chapter_between_nodes',
+  'section_before_after_top_node_last_node',
+  'section_before_after_top_node',
+  'section_chapter_before_top_nodes', 'unnumbered_top_without_node_sections',
+  'top_node_part_top');
+
+my @file_latex_tests_info_tests = ('chapter_between_nodes',
+  'section_before_after_top_node_last_node',
+  'section_before_after_top_node',
+  'section_chapter_before_top_nodes', 'top_node_part_top');
 
 foreach my $test (@tests_info) {
   push @{$test->[2]->{'test_formats'}}, 'info';
   push @{$test->[2]->{'test_formats'}}, 'html';
-  push @{$test->[2]->{'test_formats'}}, 'xml' 
+  push @{$test->[2]->{'test_formats'}}, 'xml'
     if (grep {$_ eq $test->[0]} @xml_tests_info_tests);
   push @{$test->[2]->{'test_formats'}}, 'docbook'
     if (grep {$_ eq $test->[0]} @docbook_tests_info_tests);
+  if (grep {$_ eq $test->[0]} @latex_tests_info_tests) {
+    push @{$test->[2]->{'test_formats'}}, 'latex_text';
+    $test->[2]->{'full_document'} = 1 unless (exists($test->[2]->{'full_document'}));
+  }
+  if (grep {$_ eq $test->[0]} @file_latex_tests_info_tests) {
+    push @{$test->[2]->{'test_formats'}}, 'file_latex';
+    $test->[2]->{'test_input_file_name'} = $test->[0] . '.texi';
+    $test->[2]->{'full_document'} = 1 unless (exists($test->[2]->{'full_document'}));
+  }
 }
 
-my @xml_tests_cases_tests = ('part_before_section', 
+my @xml_tests_cases_tests = ('part_before_section',
 'section_before_chapter',
-'top_part_chapter', 'section_before_top_no_node', 
-'section_chapter_before_top', 'sectioning_part_appendix',
-'part_chapter_appendix', 'sectioning_part_appendix_no_top',
-'top_chapter_sections', 'chapter_sections',
-'more_sections_than_nodes');
+'top_part_chapter', 'section_before_top_no_node',
+'section_chapter_before_top',
+'part_chapter_appendix',
+'next_no_prev_to_node',
+'empty_ref_arg');
+
+my @docbook_tests_cases_tests = ('hole_in_sectioning');
+
+my @latex_tests_cases_tests = ('loop_nodes', 'lone_Top_node',
+ 'nodes_before_top', 'nodes_before_after_top',
+ );
+
+my @file_latex_tests_cases_tests = ('loop_nodes', 'lone_Top_node',
+ 'nodes_before_top', 'nodes_before_after_top',
+ );
+
 foreach my $test (@test_cases) {
-  push @{$test->[2]->{'test_formats'}}, 'xml' 
+  push @{$test->[2]->{'test_formats'}}, 'xml'
     if (grep {$_ eq $test->[0]} @xml_tests_cases_tests);
+  push @{$test->[2]->{'test_formats'}}, 'docbook'
+    if (grep {$_ eq $test->[0]} @docbook_tests_cases_tests);
+  push @{$test->[2]->{'test_formats'}}, 'latex_text'
+    if (grep {$_ eq $test->[0]} @latex_tests_cases_tests);
+  if (grep {$_ eq $test->[0]} @file_latex_tests_cases_tests) {
+    push @{$test->[2]->{'test_formats'}}, 'file_latex';
+    $test->[2]->{'test_input_file_name'} = $test->[0] . '.texi';
+    $test->[2]->{'full_document'} = 1 unless (exists($test->[2]->{'full_document'}));
+  }
 }
 
-our ($arg_test_case, $arg_generate, $arg_debug);
-
-run_all ('sectioning', [@test_cases, @tests_converted, 
-                        @test_out_files, @tests_info], $arg_test_case,
-   $arg_generate, $arg_debug);
-
+run_all('sectioning', [@test_cases, @tests_converted,
+                       @test_out_files, @tests_info]);

@@ -1,4 +1,5 @@
-This is multiple_lang_chapters.info, produced from .
+This is multiple_lang_chapters.info, produced from
+multiple_lang_chapters.texi.
 
 
 File: multiple_lang_chapters.info,  Node: Top,  Next: chapter ja,  Up: (dir)
@@ -20,7 +21,7 @@ File: multiple_lang_chapters.info,  Node: chapter ja,  Next: chapter en,  Prev: 
 1 ja
 ****
 
-In japanese.  *Note Top::.
+In japanese.  *Note chapter ja::.
  -- Instance Variable of AAA: BBB CCC
 
 
@@ -29,7 +30,7 @@ File: multiple_lang_chapters.info,  Node: chapter en,  Next: chapter fr_FR,  Pre
 2 en
 ****
 
-In english.  *Note Top::.
+In english.  *Note chapter ja::.
  -- Instance Variable of AAA: BBB CCC
 
 
@@ -52,16 +53,16 @@ File: multiple_lang_chapters.info,  Node: chapter pt_BR,  Prev: chapter de,  Up:
 5 pt_bR
 *******
 
-In brazilian.  *Note Top::.
+In brazilian.  *Note chapter ja::.
 
 
 Tag Table:
-Node: Top54
-Node: chapter ja266
-Node: chapter en440
-Node: chapter fr_FR623
-Node: chapter de789
-Node: chapter pt_BR910
+Node: Top81
+Node: chapter ja293
+Node: chapter en474
+Node: chapter fr_FR664
+Node: chapter de830
+Node: chapter pt_BR951
 
 End Tag Table
 

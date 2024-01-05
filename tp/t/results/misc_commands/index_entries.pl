@@ -1,155 +1,136 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'index_entries'} = {
   'contents' => [
     {
-      'args' => [
+      'contents' => [
         {
-          'contents' => [
+          'args' => [
             {
-              'parent' => {},
-              'text' => 'cindex entry'
+              'contents' => [
+                {
+                  'text' => 'cindex entry'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
             }
           ],
+          'cmdname' => 'cindex',
           'extra' => {
-            'spaces_after_argument' => '
-'
+            'index_entry' => [
+              'cp',
+              1
+            ]
           },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'cindex',
-      'extra' => {
-        'index_entry' => {
-          'command' => {},
-          'content' => [],
-          'content_normalized' => [],
-          'in_code' => 0,
-          'index_at_command' => 'cindex',
-          'index_name' => 'cp',
-          'index_type_command' => 'cindex',
-          'key' => 'cindex entry',
-          'number' => 1
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 1,
+            'macro' => ''
+          },
+          'type' => 'index_entry_command'
         },
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {},
-      'type' => 'index_entry_command'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
         {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'truc'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'defindex',
-      'extra' => {
-        'misc_args' => [
-          'truc'
-        ],
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 3,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
+          'text' => '
 ',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'index truc'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'line_arg'
-        }
-      ],
-      'cmdname' => 'trucindex',
-      'extra' => {
-        'index_entry' => {
-          'command' => {},
-          'content' => [],
-          'content_normalized' => [],
-          'in_code' => 0,
-          'index_at_command' => 'trucindex',
-          'index_name' => 'truc',
-          'index_type_command' => 'trucindex',
-          'key' => 'index truc',
-          'number' => 1
+          'type' => 'empty_line'
         },
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 5,
-        'macro' => ''
-      },
-      'parent' => {},
-      'type' => 'index_entry_command'
+        {
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'truc'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
+            }
+          ],
+          'cmdname' => 'defindex',
+          'extra' => {
+            'misc_args' => [
+              'truc'
+            ]
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 3,
+            'macro' => ''
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'index truc'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
+            }
+          ],
+          'cmdname' => 'trucindex',
+          'extra' => {
+            'index_entry' => [
+              'truc',
+              1
+            ]
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 5,
+            'macro' => ''
+          },
+          'type' => 'index_entry_command'
+        }
+      ],
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'index_entries'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'index_entries'}{'contents'}[0]{'args'}[0];
-$result_trees{'index_entries'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'index_entries'}{'contents'}[0];
-$result_trees{'index_entries'}{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'index_entries'}{'contents'}[0];
-$result_trees{'index_entries'}{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'index_entries'}{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'index_entries'}{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'index_entries'}{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'index_entries'}{'contents'}[0]{'parent'} = $result_trees{'index_entries'};
-$result_trees{'index_entries'}{'contents'}[1]{'parent'} = $result_trees{'index_entries'};
-$result_trees{'index_entries'}{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'index_entries'}{'contents'}[2]{'args'}[0];
-$result_trees{'index_entries'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'index_entries'}{'contents'}[2];
-$result_trees{'index_entries'}{'contents'}[2]{'parent'} = $result_trees{'index_entries'};
-$result_trees{'index_entries'}{'contents'}[3]{'parent'} = $result_trees{'index_entries'};
-$result_trees{'index_entries'}{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'index_entries'}{'contents'}[4]{'args'}[0];
-$result_trees{'index_entries'}{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'index_entries'}{'contents'}[4];
-$result_trees{'index_entries'}{'contents'}[4]{'extra'}{'index_entry'}{'command'} = $result_trees{'index_entries'}{'contents'}[4];
-$result_trees{'index_entries'}{'contents'}[4]{'extra'}{'index_entry'}{'content'} = $result_trees{'index_entries'}{'contents'}[4]{'args'}[0]{'contents'};
-$result_trees{'index_entries'}{'contents'}[4]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'index_entries'}{'contents'}[4]{'args'}[0]{'contents'};
-$result_trees{'index_entries'}{'contents'}[4]{'parent'} = $result_trees{'index_entries'};
 
 $result_texis{'index_entries'} = '@cindex cindex entry
 
@@ -165,7 +146,7 @@ $result_texts{'index_entries'} = '
 
 $result_errors{'index_entries'} = [
   {
-    'error_line' => ':1: warning: entry for index `cp\' outside of any node
+    'error_line' => 'warning: entry for index `cp\' outside of any node
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -174,7 +155,7 @@ $result_errors{'index_entries'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':5: warning: entry for index `truc\' outside of any node
+    'error_line' => 'warning: entry for index `truc\' outside of any node
 ',
     'file_name' => '',
     'line_nr' => 5,
@@ -241,6 +222,16 @@ $result_indices{'index_entries'} = {
 
 
 $result_floats{'index_entries'} = {};
+
+
+$result_indices_sort_strings{'index_entries'} = {
+  'cp' => [
+    'cindex entry'
+  ],
+  'truc' => [
+    'index truc'
+  ]
+};
 
 
 1;

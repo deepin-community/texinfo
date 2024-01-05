@@ -1,4 +1,4 @@
-/* Copyright 2010-2020 Free Software Foundation, Inc.
+/* Copyright 2010-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -13,8 +13,6 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#define _GNU_SOURCE
-
 #include <config.h>
 
 #include <stdlib.h>
@@ -25,77 +23,129 @@
 #include <sys/stat.h>
 
 #include "errors.h"
+#include "debug.h"
 #include "input.h"
 #include "text.h"
 #include "commands.h"
+#include "source_marks.h"
 
 enum input_type { IN_file, IN_text };
-
-enum character_encoding {
-    ce_latin1,
-    ce_latin2,
-    ce_latin15,
-    ce_utf8,
-    ce_shiftjis,
-    ce_koi8r,
-    ce_koi8u
-};
 
 typedef struct {
     enum input_type type;
 
     FILE *file;
-    LINE_NR line_nr;
+    SOURCE_INFO source_info;
+    char *input_file_path; /* for IN_file type, the full input file path */
 
     char *text;  /* Input text to be parsed as Texinfo. */
     char *ptext; /* How far we are through 'text'.  Used to split 'text'
                     into lines. */
+    char *value_flag; /* value flag if the input text is a @value
+                         expansion */
+    char *macro_name; /* macro name if the input text is a user-defined
+                        macro expansion */
+    SOURCE_MARK *input_source_mark;
 } INPUT;
 
-enum character_encoding input_encoding;
+static char *input_pushback_string;
 
-void
+static iconv_t reverse_iconv; /* used in encode_file_name */
+
+typedef struct {
+  char *encoding_name;
+  iconv_t iconv;
+} ENCODING_CONVERSION;
+
+static ENCODING_CONVERSION *encodings_list = 0;
+int encoding_number = 0;
+int encoding_space = 0;
+char *global_input_encoding_name = 0;
+
+static ENCODING_CONVERSION *current_encoding_conversion = 0;
+
+/* ENCODING should always be lower cased */
+/* WARNING: it is very important for the first call to
+   set_input_encoding to be for "utf-8" as the codes assume
+   a conversion to UTF-8 in encodings_list[0]. */
+int
 set_input_encoding (char *encoding)
 {
-  if (!strcasecmp (encoding, "utf-8"))
-    input_encoding = ce_utf8;
-  else if (!strcmp (encoding, "iso-8859-1")
-          || !strcmp (encoding, "us-ascii"))
-    input_encoding = ce_latin1;
-  else if (!strcmp (encoding, "iso-8859-2"))
-    input_encoding = ce_latin2;
-  else if (!strcmp (encoding, "iso-8859-15"))
-    input_encoding = ce_latin15;
-  else if (!strcmp (encoding, "shift_jis"))
-    input_encoding = ce_shiftjis;
-  else if (!strcmp (encoding, "koi8-r"))
-    input_encoding = ce_koi8r;
-  else if (!strcmp (encoding, "koi8-u"))
-    input_encoding = ce_koi8u;
+  int encoding_index = -1;
+  int encoding_set = 0;
+  char *conversion_encoding = encoding;
+
+  /* should correspond to
+     Texinfo::Common::encoding_name_conversion_map.
+     Thoughts on this mapping are available near
+     Texinfo::Common::encoding_name_conversion_map definition
+  */
+  if (!strcmp (encoding, "us-ascii"))
+    conversion_encoding = "iso-8859-1";
+
+  if (reverse_iconv)
+    {
+      iconv_close (reverse_iconv);
+      reverse_iconv = (iconv_t) 0;
+    }
+
+  if (!strcmp (encoding, "utf-8"))
+    {
+      if (encoding_number > 0)
+        encoding_index = 0;
+    }
+  else if (encoding_number > 1)
+    {
+      int i;
+      for (i = 1; i < encoding_number; i++)
+        {
+          if (!strcmp (encoding, encodings_list[i].encoding_name))
+            {
+              encoding_index = i;
+              break;
+            }
+        }
+    }
+
+  if (encoding_index == -1)
+    {
+      if (encoding_number >= encoding_space)
+        {
+          encodings_list = realloc (encodings_list,
+                   (encoding_space += 3) * sizeof (ENCODING_CONVERSION));
+        }
+      encodings_list[encoding_number].encoding_name
+           = strdup (conversion_encoding);
+      /* Initialize conversions for the first time.  iconv_open returns
+         (iconv_t) -1 on failure so these should only be called once. */
+      encodings_list[encoding_number].iconv
+           = iconv_open ("UTF-8", conversion_encoding);
+      encoding_index = encoding_number;
+      encoding_number++;
+    }
+
+  if (encodings_list[encoding_index].iconv == (iconv_t) -1)
+    current_encoding_conversion = 0;
   else
-    fprintf (stderr, "warning: unhandled encoding %s\n", encoding);
+    {
+      current_encoding_conversion = &encodings_list[encoding_index];
+      encoding_set = 1;
+      free (global_input_encoding_name);
+      global_input_encoding_name = strdup (encoding);
+    }
+
+  return encoding_set;
 }
 
 
 static INPUT *input_stack = 0;
 int input_number = 0;
 int input_space = 0;
+int macro_expansion_nr = 0;
+int value_expansion_nr = 0;
 
 /* Current filename and line number.  Used for reporting. */
-LINE_NR line_nr;
-
-/* Change the line number of filename of the top input source.  Used to
-   record a #line directive.  If FILENAME is non-null, it should hbae
-   been returned from save_string. */
-void
-save_line_directive (int line_nr, char *filename)
-{
-  INPUT *top = &input_stack[input_number - 1];
-  if (line_nr)
-    top->line_nr.line_nr = line_nr;
-  if (filename)
-    top->line_nr.file_name = filename;
-}
+SOURCE_INFO current_source_info;
 
 /* Collect text from the input sources until a newline is found.  This is used 
    instead of next_text when we need to be sure we get an entire line of 
@@ -104,8 +154,9 @@ save_line_directive (int line_nr, char *filename)
 
    Return value should not be freed by caller, and becomes invalid after
    a subsequent call. */
+/* CURRENT is the current container that can be used for source marks. */
 char *
-new_line (void)
+new_line (ELEMENT *current)
 {
   static TEXT t;
   char *new = 0;
@@ -114,7 +165,7 @@ new_line (void)
 
   while (1)
     {
-      new = next_text ();
+      new = next_text (current);
       if (!new)
         break;
       text_append (&t, new);
@@ -130,14 +181,6 @@ new_line (void)
     return 0;
 }
 
-
-static iconv_t iconv_from_latin1;
-static iconv_t iconv_from_latin2;
-static iconv_t iconv_from_latin15;
-static iconv_t iconv_from_shiftjis;
-static iconv_t iconv_from_koi8u;
-static iconv_t iconv_from_koi8r;
-static iconv_t iconv_validate_utf8;
 
 /* Run iconv using text buffer as output buffer. */
 size_t
@@ -164,74 +207,14 @@ text_buffer_iconv (TEXT *buf, iconv_t iconv_state,
 }
 
 
-/* Return conversion of S according to input_encoding.  This function
-   frees S. */
 static char *
-convert_to_utf8 (char *s)
+encode_with_iconv (iconv_t our_iconv,  char *s)
 {
-  iconv_t our_iconv = (iconv_t) -1;
   static TEXT t;
   ICONV_CONST char *inptr; size_t bytes_left;
   size_t iconv_ret;
-  enum character_encoding enc;
 
-  /* Convert from @documentencoding to UTF-8.
-     It might be possible not to convert to UTF-8 and use an 8-bit encoding
-     throughout, but then we'd have to not set the UTF-8 flag on the Perl 
-     strings in api.c.  If multiple character encodings were used in a single 
-     file, then we'd have to keep track of which strings needed the UTF-8 flag
-     and which didn't. */
-
-  /* Initialize conversions for the first time. */
-  if (iconv_validate_utf8 == (iconv_t) 0)
-    iconv_validate_utf8 = iconv_open ("UTF-8", "UTF-8");
-  if (iconv_from_latin1 == (iconv_t) 0)
-    iconv_from_latin1 = iconv_open ("UTF-8", "ISO-8859-1");
-  if (iconv_from_latin2 == (iconv_t) 0)
-    iconv_from_latin2 = iconv_open ("UTF-8", "ISO-8859-2");
-  if (iconv_from_latin15 == (iconv_t) 0)
-    iconv_from_latin15 = iconv_open ("UTF-8", "ISO-8859-15");
-  if (iconv_from_shiftjis == (iconv_t) 0)
-    iconv_from_shiftjis = iconv_open ("UTF-8", "SHIFT-JIS");
-  if (iconv_from_koi8r == (iconv_t) 0)
-    iconv_from_koi8r = iconv_open ("UTF-8", "KOI8-R");
-  if (iconv_from_koi8u == (iconv_t) 0)
-    iconv_from_koi8u = iconv_open ("UTF-8", "KOI8-U");
-
-  switch (input_encoding)
-    {
-    case ce_utf8:
-      our_iconv = iconv_validate_utf8;
-      break;
-    case ce_latin1:
-      our_iconv = iconv_from_latin1;
-      break;
-    case ce_latin2:
-      our_iconv = iconv_from_latin2;
-      break;
-    case ce_latin15:
-      our_iconv = iconv_from_latin15;
-      break;
-    case ce_shiftjis:
-      our_iconv = iconv_from_shiftjis;
-      break;
-    case ce_koi8r:
-      our_iconv = iconv_from_koi8r;
-      break;
-    case ce_koi8u:
-      our_iconv = iconv_from_koi8u;
-      break;
-    }
-
-  if (our_iconv == (iconv_t) -1)
-    {
-      /* In case the converter couldn't be initialised.
-         Danger: this will cause problems if the input is not in UTF-8 as
-         the Perl strings that are created are flagged as being UTF-8. */
-      return s;
-    }
-
-  t.end = 0;
+  t.end = 0; /* reset internal TEXT buffer */
   inptr = s;
   bytes_left = strlen (s);
   text_alloc (&t, 10);
@@ -261,16 +244,123 @@ convert_to_utf8 (char *s)
         case EILSEQ:
         default:
           fprintf(stderr, "%s:%d: encoding error at byte 0x%2x\n",
-            line_nr.file_name, line_nr.line_nr, *(unsigned char *)inptr);
+            current_source_info.file_name, current_source_info.line_nr,
+                                                 *(unsigned char *)inptr);
           inptr++; bytes_left--;
           break;
         }
     }
 
-  free (s);
   t.text[t.end] = '\0';
   return strdup (t.text);
 }
+
+/* Return conversion of S according to input_encoding.  This function
+   frees S. */
+char *
+convert_to_utf8 (char *s)
+{
+  char *ret;
+
+  /* Convert from @documentencoding to UTF-8.
+     It might be possible not to convert to UTF-8 and use an 8-bit encoding
+     throughout, but then we'd have to not set the UTF-8 flag on the Perl 
+     strings in api.c.  If multiple character encodings were used in a single 
+     file, then we'd have to keep track of which strings needed the UTF-8 flag
+     and which didn't. */
+
+  if (current_encoding_conversion == 0)
+    {
+      /* In case the converter couldn't be initialised.
+         Danger: this will cause problems if the input is not in UTF-8 as
+         the Perl strings that are created are flagged as being UTF-8. */
+      return s;
+    }
+
+  ret = encode_with_iconv (current_encoding_conversion->iconv, s);
+  free (s);
+  return ret;
+}
+
+
+int doc_encoding_for_input_file_name = 1;
+char *input_file_name_encoding = 0;
+char *locale_encoding = 0;
+
+void
+set_input_file_name_encoding (char *value)
+{
+  free (input_file_name_encoding);
+  input_file_name_encoding = value ? strdup (value) : 0;
+}
+
+void
+set_locale_encoding (char *value)
+{
+  free (locale_encoding);
+  locale_encoding =  value ? strdup (value) : 0;
+}
+
+/* Reverse the decoding of the filename to the input encoding, to retrieve
+   the bytes that were present in the original Texinfo file.  Return
+   value is freed by free_small_strings. */
+char *
+encode_file_name (char *filename)
+{
+  if (!reverse_iconv)
+    {
+      if (input_file_name_encoding)
+        {
+          reverse_iconv = iconv_open (input_file_name_encoding, "UTF-8");
+        }
+      else if (doc_encoding_for_input_file_name)
+        {
+          if (current_encoding_conversion
+              && strcmp (global_input_encoding_name, "utf-8"))
+            {
+              char *conversion_encoding
+                = current_encoding_conversion->encoding_name;
+              reverse_iconv = iconv_open (conversion_encoding, "UTF-8");
+            }
+        }
+      else if (locale_encoding)
+        {
+          reverse_iconv = iconv_open (locale_encoding, "UTF-8");
+        }
+    }
+  if (reverse_iconv && reverse_iconv != (iconv_t) -1)
+    {
+      char *s, *conv;
+      conv = encode_with_iconv (reverse_iconv, filename);
+      s = save_string (conv);
+      free (conv);
+      return s;
+    }
+  else
+    {
+      return save_string (filename);
+    }
+}
+
+/* Change the line number of filename of the top input source.  Used to
+   record a #line directive. */
+void
+save_line_directive (int line_nr, char *filename)
+{
+  char *f = 0;
+  INPUT *top;
+
+  if (filename)
+    f = encode_file_name (filename);
+
+  top = &input_stack[input_number - 1];
+  if (line_nr)
+    top->source_info.line_nr = line_nr;
+  if (filename)
+    top->source_info.file_name = f;
+}
+
+
 
 int
 expanding_macro (char *macro)
@@ -278,8 +368,8 @@ expanding_macro (char *macro)
   int i;
   for (i = 0; i < input_number; i++)
     {
-      if (input_stack[i].line_nr.macro
-          && !strcmp (input_stack[i].line_nr.macro, macro))
+      if (input_stack[i].source_info.macro
+          && !strcmp (input_stack[i].source_info.macro, macro))
         {
           return 1;
         }
@@ -289,48 +379,72 @@ expanding_macro (char *macro)
 
 char *save_string (char *string);
 
+void
+input_pushback (char *string)
+{
+  if (input_pushback_string)
+    fprintf (stderr,
+             "texi2any (XS module): bug: input_pushback called twice\n");
+  input_pushback_string = string;
+}
+
 /* Return value to be freed by caller.  Return null if we are out of input. */
+/* CURRENT is the current container that can be used for source marks. */
 char *
-next_text (void)
+next_text (ELEMENT *current)
 {
   ssize_t status;
   char *line = 0;
-  size_t n;
+  size_t n = 1;
+  /* Note: n needs to be a positive value, rather than 0, to work around
+     a bug in getline on MinGW.   This appears to be allowed by POSIX. */
   FILE *input_file;
+
+  if (input_pushback_string)
+    {
+      char *s;
+      s = input_pushback_string;
+      input_pushback_string = 0;
+      return s;
+    }
 
   while (input_number > 0)
     {
       /* Check for pending input. */
-      INPUT *i = &input_stack[input_number - 1];
+      INPUT *input = &input_stack[input_number - 1];
 
-      switch (i->type)
+      switch (input->type)
         {
           char *p, *new;
         case IN_text:
-          if (!*i->ptext)
-            {
-              /* End of text reached. */
-              free (i->text);
-              break;
-            }
+          /*
+          debug_nonl ("IN_TEXT '"); debug_print_protected_string (input->ptext);
+          debug ("'");
+          */
+          if (!*input->ptext)
+            break;
           /* Split off a line of input. */
-          p = strchrnul (i->ptext, '\n');
-          new = strndup (i->ptext, p - i->ptext + 1);
+          p = strchrnul (input->ptext, '\n');
+          new = strndup (input->ptext, p - input->ptext + 1);
           if (*p)
-            i->ptext = p + 1;
+            input->ptext = p + 1;
           else
-            i->ptext = p; /* The next time, we will pop the input source. */
+            input->ptext = p; /* The next time, we will pop the input source. */
+          /*
+          debug_nonl ("NEW IN_TEXT '"); debug_print_protected_string (new);
+          debug_nonl ("' next: '");
+          debug_print_protected_string (input->ptext); debug ("'");
+          */
+          if (!input->source_info.macro && !input->value_flag)
+            input->source_info.line_nr++;
 
-          if (!i->line_nr.macro)
-            i->line_nr.line_nr++;
-
-          line_nr = i->line_nr;
+          current_source_info = input->source_info;
 
           return new;
 
           break;
         case IN_file:
-          input_file = input_stack[input_number - 1].file;
+          input_file = input->file;
           status = getline (&line, &n, input_file);
           if (status != -1)
             {
@@ -339,7 +453,7 @@ next_text (void)
                 {
                   /* Add a newline at the end of the file if one is missing. */
                   char *line2;
-                  asprintf (&line2, "%s\n", line);
+                  xasprintf (&line2, "%s\n", line);
                   free (line);
                   line = line2;
                 }
@@ -347,10 +461,27 @@ next_text (void)
               /* Strip off a comment. */
               comment = strchr (line, '\x7F');
               if (comment)
-                *comment = '\0';
+                {
+                  SOURCE_MARK *source_mark
+                    = new_source_mark (SM_type_delcomment);
+                  *comment = '\0';
+                  if (*(comment+1) != '\0')
+                    source_mark->line = convert_to_utf8 (strdup (comment+1));
+                  else
+                    source_mark->line = 0;
+                  input_push_text(strdup (""),
+                                  input->source_info.line_nr, 0, 0);
+                  /* if the input_stack was reallocated in input_push_text,
+                     the input pointer for the file may have been freed and
+                     re-created at another address.  Therefore we reset it.
+                     input_number has been increased too, so the input file
+                     being processed is now at input_number - 2 */
+                  input = &input_stack[input_number - 2];
+                  set_input_source_mark (source_mark);
+                }
 
-              i->line_nr.line_nr++;
-              line_nr = i->line_nr;
+              input->source_info.line_nr++;
+              current_source_info = input->source_info;
 
               return convert_to_utf8 (line);
             }
@@ -360,29 +491,93 @@ next_text (void)
           fatal ("unknown input source type");
         }
 
-      /* Top input source failed.  Pop it and try the next one. */
-      
-      if (input_stack[input_number - 1].type == IN_file)
+      /* Top input source failed.  Close, pop, and try the next one. */
+      if (input->type == IN_file)
         {
-          FILE *file = input_stack[input_number - 1].file;
+          FILE *file = input->file;
 
           if (file != stdin)
             {
-              if (fclose (input_stack[input_number - 1].file) == EOF)
-                fprintf (stderr, "error on closing %s: %s",
-                        input_stack[input_number - 1].line_nr.file_name,
-                        strerror (errno));
+              if (fclose (input->file) == EOF)
+                {
+          /* convert to UTF-8 for the messages, to have character strings in perl
+             that will be encoded on output to the locale encoding.
+             Done differently for the file names in source_info
+             which are byte strings and end up unmodified in output error
+             messages.
+          */
+                  char *decoded_file_name
+                          = convert_to_utf8 (strdup(input->input_file_path));
+                  line_warn ("error on closing %s: %s",
+                             decoded_file_name,
+                             strerror (errno));
+                  free (decoded_file_name);
+                }
+            }
+        }
+      else
+        {
+          /* End of text reached. */
+          free (input->text);
+          if (input->value_flag)
+            {
+              value_expansion_nr--;
+              free (input->value_flag);
+            }
+          else if (input->macro_name)
+            {
+              macro_expansion_nr--;
             }
         }
 
+      if (input->input_source_mark)
+        {
+          if (current)
+            {
+              SOURCE_MARK *input_source_mark = input->input_source_mark;
+              SOURCE_MARK *end_include_source_mark;
+              if (input_source_mark->type == SM_type_delcomment)
+                end_include_source_mark = input_source_mark;
+              else
+                {
+                  end_include_source_mark
+                    = new_source_mark (input_source_mark->type);
+                  end_include_source_mark->counter = input_source_mark->counter;
+                  end_include_source_mark->status = SM_status_end;
+                }
+              register_source_mark (current, end_include_source_mark);
+            }
+          else
+            debug ("INPUT MARK MISSED");
+
+          input->input_source_mark = 0;
+        }
       input_number--;
     }
+  debug ("INPUT FINISHED");
   return 0;
 }
 
+/* Store TEXT as a source for Texinfo content.  TEXT should be a UTF-8
+   string.  TEXT will be later free'd and must be allocated on the heap.
+   MACRO_NAME is the name of the macro expanded as text.  It should only be
+   given if this is the text corresponds to a new macro expansion.
+   If already within a macro expansion, but not from a macro expansion
+   (from a value expansion, for instance), the macro name will be taken
+   from the input stack.
+   VALUE_FLAG is the name of the value flag expanded as text.
+   VALUE_FLAG will be later free'd, but not MACRO_NAME.
+ */
 void
-input_push (char *text, char *macro, char *filename, int line_number)
+input_push_text (char *text, int line_number, char *macro_name,
+                 char *value_flag)
 {
+  char *filename = 0;
+  char *in_macro = 0;
+
+  if (!text)
+    return;
+
   if (input_number == input_space)
     {
       input_space++; input_space *= 1.5;
@@ -393,15 +588,35 @@ input_push (char *text, char *macro, char *filename, int line_number)
 
   input_stack[input_number].type = IN_text;
   input_stack[input_number].file = 0;
+  input_stack[input_number].input_file_path = 0;
   input_stack[input_number].text = text;
   input_stack[input_number].ptext = text;
 
-  if (!macro)
+  if (input_number > 0)
+    {
+      filename = input_stack[input_number - 1].source_info.file_name;
+      /* context macro expansion */
+      in_macro = input_stack[input_number - 1].source_info.macro;
+    }
+  if (macro_name) {
+    /* new macro expansion */
+    in_macro = macro_name;
+  }
+  if (!in_macro && !value_flag)
     line_number--;
-  input_stack[input_number].line_nr.line_nr = line_number;
-  input_stack[input_number].line_nr.file_name = save_string (filename);
-  input_stack[input_number].line_nr.macro = save_string (macro);
+  input_stack[input_number].source_info.line_nr = line_number;
+  input_stack[input_number].source_info.file_name = save_string (filename);
+  input_stack[input_number].source_info.macro = save_string (in_macro);
+  input_stack[input_number].macro_name = save_string (macro_name);
+  input_stack[input_number].value_flag = value_flag;
+  input_stack[input_number].input_source_mark = 0;
   input_number++;
+}
+
+void
+set_input_source_mark (SOURCE_MARK *source_mark)
+{
+  input_stack[input_number - 1].input_source_mark = source_mark;
 }
 
 /* For filenames and macro names, it is possible that they won't be referenced 
@@ -443,33 +658,6 @@ free_small_strings (void)
   small_strings_num = 0;
 }
 
-
-/* Store TEXT as a source for Texinfo content.  TEXT should be a UTF-8
-   string.  TEXT will be later free'd and must be allocated on the heap.
-   MACRO is the name of a macro that the text came from. */
-void
-input_push_text (char *text, char *macro)
-{
-  if (text)
-    {
-      char *filename = 0;
-      if (input_number > 0)
-        {
-          filename = input_stack[input_number - 1].line_nr.file_name;
-        }
-      input_push (text, macro, filename, line_nr.line_nr);
-    }
-}
-
-/* Used in tests - like input_push_text, but the lines from the text have
-   line numbers. */
-void
-input_push_text_with_line_nos (char *text, int starting)
-{
-  input_push (text, 0, 0, starting);
-  input_stack[input_number - 1].type = IN_text;
-}
-
 void
 input_reset_input_stack (void)
 {
@@ -488,6 +676,29 @@ input_reset_input_stack (void)
         }
     }
   input_number = 0;
+  macro_expansion_nr = 0;
+  value_expansion_nr = 0;
+}
+
+void
+reset_encoding_list (void)
+{
+  int i;
+  /* never reset the utf-8 encoding in position 0 */
+  if (encoding_number > 1)
+    {
+      for (i = 1; i < encoding_number; i++)
+        {
+          free (encodings_list[i].encoding_name);
+          if (encodings_list[i].iconv != (iconv_t) -1)
+            iconv_close (encodings_list[i].iconv);
+        }
+      encoding_number = 1;
+    }
+  /* could be named global_encoding_conversion and reset in wipe_global_info,
+     but we prefer to keep it static as long as it is only used in one
+     file */
+  current_encoding_conversion = 0;
 }
 
 int
@@ -520,6 +731,17 @@ add_include_directory (char *filename)
     filename[len - 1] = '\0';
 }
 
+void
+clear_include_directories (void)
+{
+  int i;
+  for (i = 0; i < include_dirs_number; i++)
+    {
+      free (include_dirs[i]);
+    }
+  include_dirs_number = 0;
+}
+
 /* Return value to be freed by caller. */
 char *
 locate_include_file (char *filename)
@@ -528,11 +750,9 @@ locate_include_file (char *filename)
   struct stat dummy;
   int i, status;
 
-  /* Checks if filename is absolute or relative to current directory.
-     TODO: Could use macros in top-level config.h for this. */
-  /* TODO: The Perl code (in Common.pm, 'locate_include_file') handles 
-     a volume in a path (like "A:"), possibly more general treatment 
-     with File::Spec module. */
+  /* Checks if filename is absolute or relative to current directory. */
+  /* Note: the Perl code (in Common.pm, 'locate_include_file') handles 
+     a volume in a path (like "A:") using the File::Spec module. */
   if (!memcmp (filename, "/", 1)
       || !memcmp (filename, "../", 3)
       || !memcmp (filename, "./", 2))
@@ -545,7 +765,7 @@ locate_include_file (char *filename)
     {
       for (i = 0; i < include_dirs_number; i++)
         {
-          asprintf (&fullpath, "%s/%s", include_dirs[i], filename);
+          xasprintf (&fullpath, "%s/%s", include_dirs[i], filename);
           status = stat (fullpath, &dummy);
           if (status == 0)
             return fullpath;
@@ -560,11 +780,18 @@ locate_include_file (char *filename)
 int
 input_push_file (char *filename)
 {
-  FILE *stream;
+  FILE *stream = 0;
+  char *p, *q;
+  char *base_filename;
 
-  stream = fopen (filename, "r");
-  if (!stream)
-    return errno;
+  if (!strcmp (filename, "-"))
+    stream = stdin;
+  else
+    {
+      stream = fopen (filename, "r");
+      if (!stream)
+        return errno;
+    }
 
   if (input_number == input_space)
     {
@@ -574,7 +801,6 @@ input_push_file (char *filename)
     }
 
   /* Strip off a leading directory path. */
-  char *p, *q;
   p = 0;
   q = strchr (filename, '/');
   while (q)
@@ -583,15 +809,17 @@ input_push_file (char *filename)
       q = strchr (q + 1, '/');
     }
   if (p)
-    filename = save_string (p+1);
+    base_filename = save_string (p+1);
   else
-    filename = save_string (filename);
+    base_filename = save_string (filename);
 
   input_stack[input_number].type = IN_file;
   input_stack[input_number].file = stream;
-  input_stack[input_number].line_nr.file_name = filename;
-  input_stack[input_number].line_nr.line_nr = 0;
-  input_stack[input_number].line_nr.macro = 0;
+  input_stack[input_number].input_file_path = filename;
+  input_stack[input_number].source_info.file_name = base_filename;
+  input_stack[input_number].source_info.line_nr = 0;
+  input_stack[input_number].source_info.macro = 0;
+  input_stack[input_number].input_source_mark = 0;
   input_stack[input_number].text = 0;
   input_stack[input_number].ptext = 0;
   input_number++;

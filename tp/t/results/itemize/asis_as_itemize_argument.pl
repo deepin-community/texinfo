@@ -1,121 +1,119 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'asis_as_itemize_argument'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'cmdname' => 'asis',
-              'contents' => [],
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {},
-              'type' => 'command_as_argument'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'itemize',
       'contents' => [
-        {
-          'cmdname' => 'item',
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'as is
-'
-                }
-              ],
-              'parent' => {},
-              'type' => 'paragraph'
-            }
-          ],
-          'extra' => {
-            'item_number' => 1,
-            'spaces_before_argument' => ' '
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 2,
-            'macro' => ''
-          },
-          'parent' => {}
-        },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'itemize'
+                  'cmdname' => 'asis',
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  },
+                  'type' => 'command_as_argument'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'itemize',
+          'contents' => [
+            {
+              'cmdname' => 'item',
+              'contents' => [
+                {
+                  'text' => ' ',
+                  'type' => 'ignorable_spaces_after_command'
+                },
+                {
+                  'contents' => [
+                    {
+                      'text' => 'as is
+'
+                    }
+                  ],
+                  'type' => 'paragraph'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'item_number' => 1
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 2,
+                'macro' => ''
+              }
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'itemize'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'itemize'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
             }
           ],
-          'cmdname' => 'end',
           'extra' => {
-            'command_argument' => 'itemize',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'itemize'
+            'command_as_argument' => {}
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'command_as_argument' => {},
-        'end_command' => {},
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'args'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[1];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'extra'}{'command_as_argument'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[1];
-$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'parent'} = $result_trees{'asis_as_itemize_argument'};
+$result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0]{'extra'}{'command_as_argument'} = $result_trees{'asis_as_itemize_argument'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0];
 
 $result_texis{'asis_as_itemize_argument'} = '@itemize @asis
 @item as is
@@ -137,9 +135,15 @@ $result_converted{'plaintext'}->{'asis_as_itemize_argument'} = '     as is
 ';
 
 
-$result_converted{'html_text'}->{'asis_as_itemize_argument'} = '<ul class="no-bullet">
-<li> as is
+$result_converted{'html_text'}->{'asis_as_itemize_argument'} = '<ul class="itemize">
+<li>as is
 </li></ul>
+';
+
+
+$result_converted{'xml'}->{'asis_as_itemize_argument'} = '<itemize commandarg="asis" spaces=" " endspaces=" ">
+<listitem><prepend></prepend> <para>as is
+</para></listitem></itemize>
 ';
 
 1;

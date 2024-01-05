@@ -1,4 +1,4 @@
-/* Copyright 2010-2021 Free Software Foundation, Inc.
+/* Copyright 2010-2023 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -27,6 +27,27 @@
 #include "errors.h"
 #include "input.h"
 #include "text.h"
+#include "debug.h"
+
+/* wrappers for asprintf and vasprintf */
+int
+xvasprintf (char **ptr, const char *template, va_list ap)
+{
+  int ret;
+  ret = vasprintf (ptr, template, ap);
+  if (ret < 0)
+    abort (); /* out of memory */
+  return ret;
+}
+
+int
+xasprintf (char **ptr, const char *template, ...)
+{
+  va_list v;
+  va_start (v, template);
+  return xvasprintf (ptr, template, v);
+}
+
 
 void bug (char *message)
 {
@@ -39,26 +60,36 @@ void fatal (char *message)
   abort ();
 }
 
+/* these are not full line messages, but the part that are output along
+   with debug messages, as is done in Texinfo::Register::line_warn/line_error
+   called by the perl parser.  Here without using the gettext framework
+   for the translation of 'warning'*/
+void
+debug_error_warning_message (ERROR_MESSAGE *error_message)
+{
+  if (error_message->type == warning)
+    fprintf (stderr, "warning: ");
 
-typedef struct {
-    char *message;
-    enum error_type type;
-    LINE_NR line_nr;
-} ERROR_MESSAGE;
+  if (error_message->source_info.macro)
+    fprintf (stderr, "%s (possibly involving @%s)\n",
+             error_message->message, error_message->source_info.macro);
+  else
+    fprintf (stderr, "%s\n", error_message->message);
+}
 
-static ERROR_MESSAGE *error_list = 0;
-static size_t error_number = 0;
+ERROR_MESSAGE *error_list = 0;
+size_t error_number = 0;
 static size_t error_space = 0;
 
 static void
-line_error_internal (enum error_type type, LINE_NR *cmd_line_nr,
+line_error_internal (enum error_type type, SOURCE_INFO *cmd_source_info,
                      char *format, va_list v)
 {
   char *message;
 #ifdef ENABLE_NLS
-  vasprintf (&message, gettext(format), v);
+  xvasprintf (&message, gettext(format), v);
 #else
-  vasprintf (&message, format, v);
+  xvasprintf (&message, format, v);
 #endif
   if (!message) fatal ("vasprintf failed");
 
@@ -70,25 +101,28 @@ line_error_internal (enum error_type type, LINE_NR *cmd_line_nr,
   error_list[error_number].message = message;
   error_list[error_number].type = type;
 
-  if (cmd_line_nr)
+  if (cmd_source_info)
     {
-      if (cmd_line_nr->line_nr)
-        error_list[error_number++].line_nr = *cmd_line_nr;
+      if (cmd_source_info->line_nr)
+        error_list[error_number++].source_info = *cmd_source_info;
       else
-        error_list[error_number++].line_nr = line_nr;
+        error_list[error_number++].source_info = current_source_info;
     }
   else
-    error_list[error_number++].line_nr = line_nr;
+    error_list[error_number++].source_info = current_source_info;
+
+  if (debug_output)
+    debug_error_warning_message (&error_list[error_number -1]);
 }
 
 void
-line_error_ext (enum error_type type, LINE_NR *cmd_line_nr,
+line_error_ext (enum error_type type, SOURCE_INFO *cmd_source_info,
                 char *format, ...)
 {
   va_list v;
 
   va_start (v, format);
-  line_error_internal (type, cmd_line_nr, format, v);
+  line_error_internal (type, cmd_source_info, format, v);
 }
 
 void
@@ -115,7 +149,7 @@ command_warn (ELEMENT *e, char *format, ...)
   va_list v;
 
   va_start (v, format);
-  line_error_internal (warning, &e->line_nr, format, v);
+  line_error_internal (warning, &e->source_info, format, v);
 }
 
 void
@@ -124,7 +158,7 @@ command_error (ELEMENT *e, char *format, ...)
   va_list v;
 
   va_start (v, format);
-  line_error_internal (error, &e->line_nr, format, v);
+  line_error_internal (error, &e->source_info, format, v);
 }
 
 void
@@ -142,12 +176,13 @@ bug_message_internal (char *format, va_list v)
   fprintf (stderr, "You found a bug: ");
   vfprintf (stderr, format, v);
   fprintf (stderr, "\n");
-  if (line_nr.file_name)
+  if (current_source_info.file_name)
     {
       fprintf (stderr,
-               "last location %s:%d", line_nr.file_name, line_nr.line_nr);
-      if (line_nr.macro)
-        fprintf (stderr, " (possibly involving @%s)", line_nr.macro);
+               "last location %s:%d", current_source_info.file_name,
+                                         current_source_info.line_nr);
+      if (current_source_info.macro)
+        fprintf (stderr, " (possibly involving @%s)", current_source_info.macro);
       fprintf (stderr, "\n");
     }
   exit (1);
@@ -161,94 +196,4 @@ bug_message (char *format, ...)
   va_start (v, format);
   bug_message_internal (format, v);
 }
-
-static int indent = 0;
-
-/* Output INDENT spaces. */
-static void
-dump_indent (TEXT *text)
-{
-  int i;
-
-  for (i = 0; i < indent; i++)
-    text_append_n (text, " ", 1);
-}
-
-/* Ouput S escaping single quotes and backslashes, so that
-   Perl can read it in when it is surrounded by single quotes.  */
-void
-dump_string (char *s, TEXT *text)
-{
- while (*s)
-   {
-     if (*s == '\''
-       || *s == '\\')
-       text_append_n (text, "\\", 1);
-     text_append_n (text, s++, 1);
-   }
-}
-
-static void
-dump_line_nr (LINE_NR *line_nr, TEXT *text)
-{
-  text_append_n (text, "{\n", 2);
-  indent += 2;
-
-  dump_indent (text);
-  text_printf (text, "'file_name' => '%s',\n",
-               line_nr->file_name ?
-               line_nr->file_name : "");
-
-  if (line_nr->line_nr)
-    {
-      dump_indent (text);
-      text_append (text, "'line_nr' => ");
-      text_printf (text, "%d", line_nr->line_nr);
-      text_append (text, ",\n");
-    }
-
-  /* TODO: macro. */
-  if (line_nr->macro)
-    {
-      dump_indent (text);
-      text_append (text, "'macro' => ");
-      text_printf (text, "'%s'", line_nr->macro);
-      text_append (text, ",\n");
-    }
-  else
-    {
-      dump_indent (text);
-      text_append (text, "'macro' => ''\n");
-    }
-
-
-  indent -= 2;
-  dump_indent (text);
-  text_append_n (text, "},\n", 3);
-}
-
-char *
-dump_errors (void)
-{
-  int i;
-  static TEXT t;
-  
-  text_reset (&t);
-  text_append (&t, "$ERRORS = [\n");
-  for (i = 0; i < error_number; i++)
-    {
-      text_append (&t, "{ 'message' =>\n'");
-      dump_string (error_list[i].message, &t);
-      text_append (&t, "',\n");
-      text_printf (&t, "'type' => '%s',", error_list[i].type == error ? "error"
-                                                                : "warning");
-      text_append (&t, "'line_nr' => ");
-      dump_line_nr (&error_list[i].line_nr, &t);
-      text_append (&t, "},\n");
-    }
-  text_append (&t, "];\n");
-
-  return t.text;
-}
-
 

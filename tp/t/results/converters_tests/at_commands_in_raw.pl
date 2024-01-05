@@ -1,38 +1,67 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'at_commands_in_raw'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'Top'
+      },
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 1,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'top'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'top',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -40,7 +69,6 @@ $result_trees{'at_commands_in_raw'} = {
         {
           'args' => [
             {
-              'parent' => {},
               'text' => 'othermacro',
               'type' => 'macro_name'
             }
@@ -48,56 +76,145 @@ $result_trees{'at_commands_in_raw'} = {
           'cmdname' => 'macro',
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'Other macro',
+              'text' => 'Other macro
+',
               'type' => 'raw'
             },
             {
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'last_raw_newline'
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'macro'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'macro'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 6,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
+          'info' => {
             'arg_line' => ' othermacro{}
 '
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 4,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
-          'type' => 'empty_line_after_command'
-        },
+          'type' => 'empty_line'
+        }
+      ],
+      'extra' => {},
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 2,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
         {
-          'parent' => {},
+          'contents' => [
+            {
+              'text' => 'chap'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'extra' => {
+        'isindex' => 1,
+        'normalized' => 'chap'
+      },
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 8,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'Chapter'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'chapter',
+      'contents' => [
+        {
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
           'cmdname' => 'html',
           'contents' => [
             {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line_after_command'
-            },
-            {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => '<b>in b'
                 },
                 {
@@ -107,29 +224,23 @@ $result_trees{'at_commands_in_raw'} = {
                         {
                           'contents' => [
                             {
-                              'parent' => {},
                               'text' => 'in footnote'
                             }
                           ],
-                          'parent' => {},
                           'type' => 'paragraph'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'brace_command_context'
                     }
                   ],
                   'cmdname' => 'footnote',
-                  'contents' => [],
-                  'line_nr' => {
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 8,
+                    'line_nr' => 12,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 },
                 {
-                  'parent' => {},
                   'text' => '.</b>
 '
                 },
@@ -138,37 +249,28 @@ $result_trees{'at_commands_in_raw'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'anchor in html'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'brace_command_arg'
                     }
                   ],
                   'cmdname' => 'anchor',
-                  'contents' => [],
                   'extra' => {
-                    'node_content' => [
-                      {}
-                    ],
                     'normalized' => 'anchor-in-html'
                   },
-                  'line_nr' => {
+                  'source_info' => {
                     'file_name' => '',
-                    'line_nr' => 9,
+                    'line_nr' => 13,
                     'macro' => ''
-                  },
-                  'parent' => {}
+                  }
                 },
                 {
-                  'parent' => {},
                   'text' => '
 ',
-                  'type' => 'empty_spaces_after_close_brace'
+                  'type' => 'spaces_after_close_brace'
                 }
               ],
-              'parent' => {},
               'type' => 'rawpreformatted'
             },
             {
@@ -176,41 +278,39 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'html'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'end',
               'extra' => {
-                'command_argument' => 'html',
-                'spaces_before_argument' => ' ',
                 'text_arg' => 'html'
               },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 10,
-                'macro' => ''
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
               },
-              'parent' => {}
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 14,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 7,
+            'line_nr' => 11,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'contents' => [
@@ -219,22 +319,18 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'in kbd before tex'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'kbd',
-              'contents' => [],
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 11,
+                'line_nr' => 15,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
               'args' => [
@@ -243,129 +339,340 @@ $result_trees{'at_commands_in_raw'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => 'second footnote'
                         }
                       ],
-                      'parent' => {},
                       'type' => 'paragraph'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'brace_command_context'
                 }
               ],
               'cmdname' => 'footnote',
-              'contents' => [],
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 11,
+                'line_nr' => 15,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
           'cmdname' => 'tex',
           'contents' => [
             {
-              'contents' => [],
-              'parent' => {},
-              'type' => 'elided_block'
-            },
-            {
-              'parent' => {},
-              'text' => '
+              'contents' => [
+                {
+                  'text' => '@kbdinputstyle code
 ',
-              'type' => 'empty_line_after_command'
+                  'type' => 'raw'
+                },
+                {
+                  'text' => 'in tex@footnote{footnote in tex}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@anchor{anchor in tex}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@cindex entry
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@findex fentry1
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@float Figs, f1
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => 'Float
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@caption{Fcaption}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@end float
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@menu
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '* n::
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@end menu
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@acronym{FF, Fi Foo}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@synindex cp fn
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@defindex new
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@definfoenclose a,:,:
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@alias moviecite = cite
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@documentlanguage fr
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@errormsg{mymsg}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@ref{Somewhere}.
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@set flag soemthing
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@macro mymacro{}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => 'truc
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@end macro
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@macro macroarg{arg}
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => 'Some \\arg\\.
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@end macro
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '@unmacro othermacro
+',
+                  'type' => 'raw'
+                },
+                {
+                  'text' => '
+',
+                  'type' => 'raw'
+                }
+              ],
+              'type' => 'elided_rawpreformatted'
             },
             {
               'args' => [
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'tex'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'end',
               'extra' => {
-                'command_argument' => 'tex',
-                'spaces_before_argument' => ' ',
                 'text_arg' => 'tex'
               },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 57,
-                'macro' => ''
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
               },
-              'parent' => {}
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 61,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'parent' => {}
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 17,
+            'macro' => ''
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
-          'cmdname' => 'value',
-          'contents' => [],
-          'parent' => {},
-          'type' => 'flag'
+          'args' => [
+            {
+              'text' => 'flag'
+            }
+          ],
+          'cmdname' => 'value'
         },
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => '.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -377,34 +684,27 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'in kbd after tex'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'kbd',
-              'contents' => [],
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 63,
+                'line_nr' => 67,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -416,43 +716,33 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'anchor in html'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'anchor-in-html'
+                  },
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'xref',
-              'contents' => [],
-              'extra' => {
-                'label' => {},
-                'node_argument' => {
-                  'node_content' => [
-                    {}
-                  ],
-                  'normalized' => 'anchor-in-html'
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 65,
+                'line_nr' => 69,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -464,33 +754,26 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'anchor in tex'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'anchor-in-tex'
+                  },
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'ref',
-              'contents' => [],
-              'extra' => {
-                'node_argument' => {
-                  'node_content' => [
-                    {}
-                  ],
-                  'normalized' => 'anchor-in-tex'
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 67,
+                'line_nr' => 71,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '.
 '
             },
@@ -499,65 +782,60 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'fentry2'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'findex',
               'extra' => {
-                'index_entry' => {
-                  'command' => {},
-                  'content' => [],
-                  'content_normalized' => [],
-                  'in_code' => 1,
-                  'index_at_command' => 'findex',
-                  'index_name' => 'fn',
-                  'index_type_command' => 'findex',
-                  'key' => 'fentry2',
-                  'node' => {},
-                  'number' => 1
-                },
-                'spaces_before_argument' => ' '
+                'element_node' => {},
+                'index_entry' => [
+                  'fn',
+                  1
+                ]
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 68,
+                'line_nr' => 72,
                 'macro' => ''
               },
-              'parent' => {},
               'type' => 'index_entry_command'
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
+          'text' => ' ',
+          'type' => 'spaces_before_paragraph'
+        },
+        {
           'contents' => [
             {
-              'parent' => {},
-              'text' => ' newidx entry
+              'text' => 'newidx entry
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -567,15 +845,15 @@ $result_trees{'at_commands_in_raw'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'cp'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -583,30 +861,33 @@ $result_trees{'at_commands_in_raw'} = {
           'extra' => {
             'misc_args' => [
               'cp'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 72,
+            'line_nr' => 76,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'fn'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -614,18 +895,20 @@ $result_trees{'at_commands_in_raw'} = {
           'extra' => {
             'misc_args' => [
               'fn'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 73,
+            'line_nr' => 77,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -635,37 +918,34 @@ $result_trees{'at_commands_in_raw'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'Figs'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'listoffloats',
           'extra' => {
-            'spaces_before_argument' => ' ',
-            'type' => {
-              'content' => [
-                {}
-              ],
-              'normalized' => 'Figs'
+            'float_type' => 'Figs'
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
             }
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 75,
+            'line_nr' => 79,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -677,37 +957,27 @@ $result_trees{'at_commands_in_raw'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'FF'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'acronym',
-              'contents' => [],
-              'extra' => {
-                'explanation_contents' => []
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
-                'line_nr' => 77,
+                'line_nr' => 81,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -715,16 +985,13 @@ $result_trees{'at_commands_in_raw'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'tt.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -732,16 +999,13 @@ $result_trees{'at_commands_in_raw'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'movie name
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -749,16 +1013,38 @@ $result_trees{'at_commands_in_raw'} = {
         {
           'contents' => [
             {
-              'parent' => {},
+              'source_marks' => [
+                {
+                  'counter' => 1,
+                  'element' => {
+                    'args' => [
+                      {
+                        'type' => 'brace_command_arg'
+                      }
+                    ],
+                    'info' => {
+                      'command_name' => 'othermacro'
+                    },
+                    'type' => 'macro_call'
+                  },
+                  'position' => 20,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'start'
+                },
+                {
+                  'counter' => 1,
+                  'position' => 31,
+                  'sourcemark_type' => 'macro_expansion',
+                  'status' => 'end'
+                }
+              ],
               'text' => 'Macro not unmacroed Other macro.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -766,170 +1052,46 @@ $result_trees{'at_commands_in_raw'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Macros that should not be defined: . with arg.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         }
       ],
-      'extra' => {
-        'isindex' => 1,
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+      'extra' => {},
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
       },
-      'line_nr' => {
+      'source_info' => {
         'file_name' => '',
-        'line_nr' => 1,
+        'line_nr' => 9,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'at_commands_in_raw'}{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'};
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[0]{'extra'}{'command'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3]{'extra'}{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[4]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[2]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[2];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[2]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'extra'}{'end_command'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[2];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[0]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1]{'args'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'contents'}[2]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[5]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[6]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[2]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[2];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[2]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'extra'}{'end_command'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'contents'}[2];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[7]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[8]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[9]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[10]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[11]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[12]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[12];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[12]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[13]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'contents'}[0]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[14]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[15]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'extra'}{'label'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[4]{'contents'}[1]{'contents'}[3];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[16]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[17]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'extra'}{'index_entry'}{'command'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'extra'}{'index_entry'}{'content'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'args'}[0]{'contents'};
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'args'}[0]{'contents'};
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'extra'}{'index_entry'}{'node'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'contents'}[2]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[18]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[19]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[20]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[20];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[20]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[21]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[22]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[22]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[22]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[22];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[22]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[23]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[23]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[23]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[23];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[23]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[24]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25]{'extra'}{'type'}{'content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[25]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[26]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'contents'}[0]{'args'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[27]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[28]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[29]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[29];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[29]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[30]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[31]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[31];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[31]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[32]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[33]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[33];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[33]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[34]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[35]{'contents'}[0]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[35];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[35]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'contents'}[36]{'parent'} = $result_trees{'at_commands_in_raw'}{'contents'}[1];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'at_commands_in_raw'}{'contents'}[1]{'parent'} = $result_trees{'at_commands_in_raw'};
+$result_trees{'at_commands_in_raw'}{'contents'}[4]{'contents'}[13]{'contents'}[0]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[4]{'contents'}[13]{'contents'}[0]{'args'}[0]{'contents'}[0];
+$result_trees{'at_commands_in_raw'}{'contents'}[4]{'contents'}[15]{'contents'}[0]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'at_commands_in_raw'}{'contents'}[4]{'contents'}[15]{'contents'}[0]{'args'}[0]{'contents'}[0];
+$result_trees{'at_commands_in_raw'}{'contents'}[4]{'contents'}[15]{'contents'}[2]{'extra'}{'element_node'} = $result_trees{'at_commands_in_raw'}{'contents'}[3];
 
 $result_texis{'at_commands_in_raw'} = '@node Top
+@top top
 
 @macro othermacro{}
 Other macro
 @end macro
+
+@node chap
+@chapter Chapter
 
 @html
 <b>in b@footnote{in footnote}.</b>
@@ -938,6 +1100,49 @@ Other macro
 @kbd{in kbd before tex}@footnote{second footnote}.
 
 @tex
+@kbdinputstyle code
+in tex@footnote{footnote in tex}
+@anchor{anchor in tex}
+@cindex entry
+@findex fentry1
+
+@float Figs, f1
+Float
+@caption{Fcaption}
+@end float
+
+@menu
+* n::
+@end menu
+
+@acronym{FF, Fi Foo}
+
+@synindex cp fn
+
+@defindex new
+
+@definfoenclose a,:,:
+
+@alias moviecite = cite
+
+@documentlanguage fr
+
+@errormsg{mymsg}
+
+@ref{Somewhere}.
+
+@set flag soemthing
+
+@macro mymacro{}
+truc
+@end macro
+
+@macro macroarg{arg}
+Some \\arg\\.
+@end macro
+
+@unmacro othermacro
+
 @end tex
 
 
@@ -971,8 +1176,14 @@ Macros that should not be defined: . with arg.
 ';
 
 
-$result_texts{'at_commands_in_raw'} = '
+$result_texts{'at_commands_in_raw'} = 'top
+***
 
+
+1 Chapter
+*********
+
+<b>in b.</b>
 in kbd before tex.
 
 
@@ -986,7 +1197,7 @@ anchor in html.
 
 anchor in tex.
 
- newidx entry
+newidx entry
 
 
 
@@ -1002,158 +1213,230 @@ Macros that should not be defined: . with arg.
 
 ';
 
-$result_sectioning{'at_commands_in_raw'} = {};
+$result_sectioning{'at_commands_in_raw'} = {
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'top',
+        'extra' => {
+          'associated_node' => {
+            'cmdname' => 'node',
+            'extra' => {
+              'normalized' => 'Top'
+            },
+            'structure' => {}
+          }
+        },
+        'structure' => {
+          'section_childs' => [
+            {
+              'cmdname' => 'chapter',
+              'extra' => {
+                'associated_node' => {
+                  'cmdname' => 'node',
+                  'extra' => {
+                    'isindex' => 1,
+                    'normalized' => 'chap'
+                  },
+                  'structure' => {}
+                }
+              },
+              'structure' => {
+                'section_level' => 1,
+                'section_number' => 1,
+                'section_up' => {},
+                'toplevel_prev' => {},
+                'toplevel_up' => {}
+              }
+            }
+          ],
+          'section_level' => 0,
+          'section_up' => {}
+        }
+      }
+    ],
+    'section_level' => -1
+  }
+};
+$result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'toplevel_prev'} = $result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'toplevel_up'} = $result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'at_commands_in_raw'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'at_commands_in_raw'};
 
 $result_nodes{'at_commands_in_raw'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'associated_section' => {
+      'cmdname' => 'top',
+      'extra' => {},
+      'structure' => {}
+    },
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'associated_section' => {
+          'cmdname' => 'chapter',
+          'extra' => {},
+          'structure' => {
+            'section_number' => 1
+          }
+        },
+        'isindex' => 1,
+        'normalized' => 'chap'
+      },
+      'structure' => {
+        'node_prev' => {},
+        'node_up' => {}
+      }
+    }
   }
 };
+$result_nodes{'at_commands_in_raw'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'at_commands_in_raw'};
+$result_nodes{'at_commands_in_raw'}{'structure'}{'node_next'}{'structure'}{'node_up'} = $result_nodes{'at_commands_in_raw'};
 
 $result_menus{'at_commands_in_raw'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'at_commands_in_raw'} = [
   {
-    'error_line' => ':61: warning: undefined flag: flag
+    'error_line' => 'warning: undefined flag: flag
 ',
     'file_name' => '',
-    'line_nr' => 61,
+    'line_nr' => 65,
     'macro' => '',
     'text' => 'undefined flag: flag',
     'type' => 'warning'
   },
   {
-    'error_line' => ':70: unknown command `newindex\'
+    'error_line' => 'unknown command `newindex\'
 ',
     'file_name' => '',
-    'line_nr' => 70,
+    'line_nr' => 74,
     'macro' => '',
     'text' => 'unknown command `newindex\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':79: unknown command `a\'
+    'error_line' => 'unknown command `a\'
 ',
     'file_name' => '',
-    'line_nr' => 79,
+    'line_nr' => 83,
     'macro' => '',
     'text' => 'unknown command `a\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':79: misplaced {
+    'error_line' => 'misplaced {
 ',
     'file_name' => '',
-    'line_nr' => 79,
+    'line_nr' => 83,
     'macro' => '',
     'text' => 'misplaced {',
     'type' => 'error'
   },
   {
-    'error_line' => ':79: misplaced }
+    'error_line' => 'misplaced }
 ',
     'file_name' => '',
-    'line_nr' => 79,
+    'line_nr' => 83,
     'macro' => '',
     'text' => 'misplaced }',
     'type' => 'error'
   },
   {
-    'error_line' => ':81: unknown command `moviecite\'
+    'error_line' => 'unknown command `moviecite\'
 ',
     'file_name' => '',
-    'line_nr' => 81,
+    'line_nr' => 85,
     'macro' => '',
     'text' => 'unknown command `moviecite\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':81: misplaced {
+    'error_line' => 'misplaced {
 ',
     'file_name' => '',
-    'line_nr' => 81,
+    'line_nr' => 85,
     'macro' => '',
     'text' => 'misplaced {',
     'type' => 'error'
   },
   {
-    'error_line' => ':81: misplaced }
+    'error_line' => 'misplaced }
 ',
     'file_name' => '',
-    'line_nr' => 81,
+    'line_nr' => 85,
     'macro' => '',
     'text' => 'misplaced }',
     'type' => 'error'
   },
   {
-    'error_line' => ':85: unknown command `mymacro\'
+    'error_line' => 'unknown command `mymacro\'
 ',
     'file_name' => '',
-    'line_nr' => 85,
+    'line_nr' => 89,
     'macro' => '',
     'text' => 'unknown command `mymacro\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':85: misplaced {
+    'error_line' => 'misplaced {
 ',
     'file_name' => '',
-    'line_nr' => 85,
+    'line_nr' => 89,
     'macro' => '',
     'text' => 'misplaced {',
     'type' => 'error'
   },
   {
-    'error_line' => ':85: misplaced }
+    'error_line' => 'misplaced }
 ',
     'file_name' => '',
-    'line_nr' => 85,
+    'line_nr' => 89,
     'macro' => '',
     'text' => 'misplaced }',
     'type' => 'error'
   },
   {
-    'error_line' => ':85: unknown command `macroarg\'
+    'error_line' => 'unknown command `macroarg\'
 ',
     'file_name' => '',
-    'line_nr' => 85,
+    'line_nr' => 89,
     'macro' => '',
     'text' => 'unknown command `macroarg\'',
     'type' => 'error'
   },
   {
-    'error_line' => ':85: misplaced {
+    'error_line' => 'misplaced {
 ',
     'file_name' => '',
-    'line_nr' => 85,
+    'line_nr' => 89,
     'macro' => '',
     'text' => 'misplaced {',
     'type' => 'error'
   },
   {
-    'error_line' => ':85: misplaced }
+    'error_line' => 'misplaced }
 ',
     'file_name' => '',
-    'line_nr' => 85,
+    'line_nr' => 89,
     'macro' => '',
     'text' => 'misplaced }',
     'type' => 'error'
   },
   {
-    'error_line' => ':67: @ref reference to nonexistent node `anchor in tex\'
+    'error_line' => '@ref reference to nonexistent node `anchor in tex\'
 ',
     'file_name' => '',
-    'line_nr' => 67,
+    'line_nr' => 71,
     'macro' => '',
     'text' => '@ref reference to nonexistent node `anchor in tex\'',
     'type' => 'error'
@@ -1164,14 +1447,27 @@ $result_errors{'at_commands_in_raw'} = [
 $result_floats{'at_commands_in_raw'} = {};
 
 
+$result_indices_sort_strings{'at_commands_in_raw'} = {
+  'fn' => [
+    'fentry2'
+  ]
+};
 
-$result_converted{'plaintext'}->{'at_commands_in_raw'} = '<b>in b(1).</b>
-   \'in kbd before tex\'(2).
+
+
+$result_converted{'plaintext'}->{'at_commands_in_raw'} = 'top
+***
+
+1 Chapter
+*********
+
+<b>in b(1).</b>
+   ‘in kbd before tex’(2).
 
    {No value for \'flag\'}
    .
 
-   \'in kbd after tex\'.
+   ‘in kbd after tex’.
 
    *Note anchor in html::.
 
@@ -1181,7 +1477,7 @@ $result_converted{'plaintext'}->{'at_commands_in_raw'} = '<b>in b(1).</b>
 
 * Menu:
 
-* fentry2:                               Top.                  (line 10)
+* fentry2:                               chap.                 (line 16)
 
    FF.
 
@@ -1202,42 +1498,54 @@ $result_converted{'plaintext'}->{'at_commands_in_raw'} = '<b>in b(1).</b>
 ';
 
 
-$result_converted{'html_text'}->{'at_commands_in_raw'} = '<span id="Top"></span><h1 class="node-heading">Top</h1>
+$result_converted{'html_text'}->{'at_commands_in_raw'} = '<div class="top-level-extent" id="Top">
+<div class="nav-panel">
+<p>
+[<a href="#chap" title="Index" rel="index">Index</a>]</p>
+</div>
+<h1 class="top" id="top"><span>top<a class="copiable-link" href="#top"> &para;</a></span></h1>
 
 
-<b>in b<a id="DOCF1" href="#FOOT1"><sup>1</sup></a>.</b>
-<span id="anchor-in-html"></span><p><kbd>in kbd before tex</kbd><a id="DOCF2" href="#FOOT2"><sup>2</sup></a>.
+<ul class="mini-toc">
+<li><a href="#chap" accesskey="1">Chapter</a></li>
+</ul>
+<hr>
+<div class="chapter-level-extent" id="chap">
+<div class="nav-panel">
+<p>
+[<a href="#chap" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Chapter"><span>1 Chapter<a class="copiable-link" href="#Chapter"> &para;</a></span></h2>
+
+<b>in b<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a>.</b>
+<a class="anchor" id="anchor-in-html"></a><p><kbd class="kbd">in kbd before tex</kbd><a class="footnote" id="DOCF2" href="#FOOT2"><sup>2</sup></a>.
 </p>
 
 
 
 {No value for &lsquo;flag&rsquo;}<p>.
 </p>
-<p><kbd>in kbd after tex</kbd>.
+<p><kbd class="kbd">in kbd after tex</kbd>.
 </p>
-<p>See <a href="#anchor-in-html">anchor in html</a>.
+<p>See <a class="xref" href="#anchor-in-html">anchor in html</a>.
 </p>
 <p>&lsquo;anchor in tex&rsquo;.
-<span id="index-fentry2"></span>
+<a class="index-entry-id" id="index-fentry2"></a>
 </p>
-<p> newidx entry
+<p>newidx entry
 </p>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#t_h_fn_letter-F"><b>F</b></a>
- &nbsp; 
-</td></tr></table>
-<table class="index-fn" border="0">
-<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="t_h_fn_letter-F">F</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-fentry2"><code>fentry2</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
+<div class="printindex fn-printindex">
+<table class="fn-entries-printindex" border="0">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="chap_fn_letter-F">F</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-fentry2"><code>fentry2</code></a></td><td class="printindex-index-section"><a href="#chap">chap</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
 </table>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#t_h_fn_letter-F"><b>F</b></a>
- &nbsp; 
-</td></tr></table>
+</div>
 
 
-<p><acronym>FF</acronym>.
+<p><abbr class="acronym">FF</abbr>.
 </p>
 <p>tt.
 </p>
@@ -1247,28 +1555,79 @@ $result_converted{'html_text'}->{'at_commands_in_raw'} = '<span id="Top"></span>
 </p>
 <p>Macros that should not be defined: . with arg.
 </p>
-<div class="footnote">
+</div>
+</div>
+<div class="footnotes-segment">
 <hr>
 <h4 class="footnotes-heading">Footnotes</h4>
 
-<h5><a id="FOOT1" href="#DOCF1">(1)</a></h5>
+<h5 class="footnote-body-heading"><a id="FOOT1" href="#DOCF1">(1)</a></h5>
 <p>in footnote</p>
-<h5><a id="FOOT2" href="#DOCF2">(2)</a></h5>
+<h5 class="footnote-body-heading"><a id="FOOT2" href="#DOCF2">(2)</a></h5>
 <p>second footnote</p>
 </div>
-<hr>';
+';
 
 
-$result_converted{'xml'}->{'at_commands_in_raw'} = '<node name="Top" spaces=" "><nodename>Top</nodename></node>
+$result_converted{'xml'}->{'at_commands_in_raw'} = '<node name="Top" spaces=" "><nodename>Top</nodename><nodenext automatic="on">chap</nodenext></node>
+<top spaces=" "><sectiontitle>top</sectiontitle>
 
-<macro name="othermacro" line=" othermacro{}">Other macro
+<macro name="othermacro" line=" othermacro{}" endspaces=" ">
+Other macro
 </macro>
+
+</top>
+<node name="chap" spaces=" "><nodename>chap</nodename><nodeprev automatic="on">Top</nodeprev><nodeup automatic="on">Top</nodeup></node>
+<chapter spaces=" "><sectiontitle>Chapter</sectiontitle>
 
 <b>in b<footnote><para>in footnote</para></footnote>.</b>
 <anchor name="anchor-in-html">anchor in html</anchor>
 <para><kbd>in kbd before tex</kbd><footnote><para>second footnote</para></footnote>.
 </para>
 <tex endspaces=" ">
+@kbdinputstyle code
+in tex@footnote{footnote in tex}
+@anchor{anchor in tex}
+@cindex entry
+@findex fentry1
+
+@float Figs, f1
+Float
+@caption{Fcaption}
+@end float
+
+@menu
+* n::
+@end menu
+
+@acronym{FF, Fi Foo}
+
+@synindex cp fn
+
+@defindex new
+
+@definfoenclose a,:,:
+
+@alias moviecite = cite
+
+@documentlanguage fr
+
+@errormsg{mymsg}
+
+@ref{Somewhere}.
+
+@set flag soemthing
+
+@macro mymacro{}
+truc
+@end macro
+
+@macro macroarg{arg}
+Some \\arg\\.
+@end macro
+
+@unmacro othermacro
+
 </tex>
 
 
@@ -1282,10 +1641,10 @@ $result_converted{'xml'}->{'at_commands_in_raw'} = '<node name="Top" spaces=" ">
 <para><ref label="anchor-in-tex"><xrefnodename>anchor in tex</xrefnodename></ref>.
 <findex index="fn" spaces=" "><indexterm index="fn" number="1">fentry2</indexterm></findex>
 </para>
-<para> newidx entry
+ <para>newidx entry
 </para>
-<printindex value="cp" line="cp"></printindex>
-<printindex value="fn" line="fn"></printindex>
+<printindex spaces=" " value="cp" line="cp"></printindex>
+<printindex spaces=" " value="fn" line="fn"></printindex>
 
 <listoffloats type="Figs" spaces=" ">Figs</listoffloats>
 
@@ -1299,11 +1658,12 @@ $result_converted{'xml'}->{'at_commands_in_raw'} = '<node name="Top" spaces=" ">
 </para>
 <para>Macros that should not be defined: . with arg.
 </para>
+</chapter>
 ';
 
 
-$result_converted{'docbook'}->{'at_commands_in_raw'} = '<anchor id="Top"/>
-
+$result_converted{'docbook'}->{'at_commands_in_raw'} = '<chapter label="1" id="chap">
+<title>Chapter</title>
 
 <b>in b<footnote><para>in footnote</para></footnote>.</b>
 <anchor id="anchor-in-html"/><para><userinput>in kbd before tex</userinput><footnote><para>second footnote</para></footnote>.
@@ -1320,7 +1680,7 @@ $result_converted{'docbook'}->{'at_commands_in_raw'} = '<anchor id="Top"/>
 <para><link linkend="anchor-in-tex">anchor in tex</link>.
 <indexterm role="fn"><primary>fentry2</primary></indexterm>
 </para>
-<para> newidx entry
+<para>newidx entry
 </para>
 <index role="cp"></index>
 <index role="fn"></index>
@@ -1336,6 +1696,45 @@ $result_converted{'docbook'}->{'at_commands_in_raw'} = '<anchor id="Top"/>
 </para>
 <para>Macros that should not be defined: . with arg.
 </para>
+</chapter>
+';
+
+
+$result_converted{'latex_text'}->{'at_commands_in_raw'} = '\\label{anchor:Top}%
+\\chapter{{Chapter}}
+\\label{anchor:chap}%
+
+<b>in b\\footnote{in footnote}.</b>
+\\label{anchor:anchor-in-html}%
+\\Texinfocommandstyletextkbd{in kbd before tex}\\footnote{second footnote}.
+
+
+
+
+\\{No value for `flag\'\\}.
+
+\\Texinfocommandstyletextkbd{in kbd after tex}.
+
+See \\hyperref[anchor:anchor-in-html]{[anchor in html], page~\\pageref*{anchor:anchor-in-html}}.
+
+anchor in tex.
+\\index[fn]{fentry2@\\texttt{fentry2}}%
+
+ newidx entry
+
+\\printindex[fn]
+
+
+FF.
+
+tt.
+
+movie name
+
+Macro not unmacroed Other macro.
+
+Macros that should not be defined: . with arg.
+
 ';
 
 1;

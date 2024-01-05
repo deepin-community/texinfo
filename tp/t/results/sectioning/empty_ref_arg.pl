@@ -1,38 +1,35 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'empty_ref_arg'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'Top'
+              'text' => 'first'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -44,47 +41,39 @@ $result_trees{'empty_ref_arg'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => 'Top'
+                      'text' => 'first'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'first'
+                  },
                   'type' => 'brace_command_arg'
                 },
                 {
                   'contents' => [
                     {
-                      'cmdname' => ' ',
-                      'parent' => {}
+                      'cmdname' => ' '
                     }
                   ],
-                  'extra' => {
-                    'spaces_before_argument' => ' '
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'ref',
-              'contents' => [],
-              'extra' => {
-                'label' => {},
-                'node_argument' => {
-                  'node_content' => [
-                    {}
-                  ],
-                  'normalized' => 'Top'
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 3,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 '
             },
@@ -93,55 +82,47 @@ $result_trees{'empty_ref_arg'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => 'Top'
+                      'text' => 'first'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'first'
+                  },
                   'type' => 'brace_command_arg'
                 },
                 {
-                  'contents' => [],
-                  'extra' => {
-                    'spaces_before_argument' => ' '
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 },
                 {
                   'contents' => [
                     {
-                      'cmdname' => ' ',
-                      'parent' => {}
+                      'cmdname' => ' '
                     }
                   ],
-                  'extra' => {
-                    'spaces_before_argument' => ' '
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'ref',
-              'contents' => [],
-              'extra' => {
-                'label' => {},
-                'node_argument' => {
-                  'node_content' => [
-                    {}
-                  ],
-                  'normalized' => 'Top'
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 4,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 '
             },
@@ -150,60 +131,52 @@ $result_trees{'empty_ref_arg'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => 'Top'
+                      'text' => 'first'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'first'
+                  },
                   'type' => 'brace_command_arg'
                 },
                 {
                   'contents' => [
                     {
-                      'cmdname' => ' ',
-                      'parent' => {}
+                      'cmdname' => ' '
                     }
                   ],
-                  'extra' => {
-                    'spaces_before_argument' => ' '
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 },
                 {
                   'contents' => [
                     {
-                      'cmdname' => ':',
-                      'parent' => {}
+                      'cmdname' => ':'
                     }
                   ],
-                  'extra' => {
-                    'spaces_before_argument' => ' '
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'ref',
-              'contents' => [],
-              'extra' => {
-                'label' => {},
-                'node_argument' => {
-                  'node_content' => [
-                    {}
-                  ],
-                  'normalized' => 'Top'
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 5,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 '
             },
@@ -212,11 +185,15 @@ $result_trees{'empty_ref_arg'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
-                      'text' => 'Top'
+                      'text' => 'first'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'first'
+                  },
                   'type' => 'brace_command_arg'
                 },
                 {
@@ -224,54 +201,39 @@ $result_trees{'empty_ref_arg'} = {
                     {
                       'args' => [
                         {
-                          'parent' => {},
                           'text' => ' aaa
 ',
-                          'type' => 'misc_arg'
+                          'type' => 'rawline_arg'
                         }
                       ],
-                      'cmdname' => 'c',
-                      'extra' => {
-                        'misc_args' => [
-                          ' aaa
-'
-                        ]
-                      },
-                      'parent' => {}
+                      'cmdname' => 'c'
                     },
                     {
-                      'parent' => {},
                       'text' => ' '
                     },
                     {
-                      'cmdname' => ' ',
-                      'parent' => {}
-                    }
-                  ],
-                  'extra' => {
-                    'comment_at_end' => {
+                      'cmdname' => ' '
+                    },
+                    {
+                      'text' => '
+'
+                    },
+                    {
                       'args' => [
                         {
-                          'parent' => {},
                           'text' => ' ggg
 ',
-                          'type' => 'misc_arg'
+                          'type' => 'rawline_arg'
                         }
                       ],
-                      'cmdname' => 'c',
-                      'extra' => {
-                        'misc_args' => [
-                          ' ggg
-'
-                        ]
-                      },
-                      'parent' => {}
-                    },
-                    'spaces_after_argument' => '
-',
-                    'spaces_before_argument' => ' '
+                      'cmdname' => 'c'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 },
                 {
@@ -279,160 +241,75 @@ $result_trees{'empty_ref_arg'} = {
                     {
                       'args' => [
                         {
-                          'parent' => {},
                           'text' => ' fff
 ',
-                          'type' => 'misc_arg'
+                          'type' => 'rawline_arg'
                         }
                       ],
-                      'cmdname' => 'c',
-                      'extra' => {
-                        'misc_args' => [
-                          ' fff
-'
-                        ]
-                      },
-                      'parent' => {}
-                    }
-                  ],
-                  'extra' => {
-                    'comment_at_end' => {
+                      'cmdname' => 'c'
+                    },
+                    {
                       'args' => [
                         {
-                          'parent' => {},
                           'text' => '
 ',
-                          'type' => 'misc_arg'
+                          'type' => 'rawline_arg'
                         }
                       ],
-                      'cmdname' => 'c',
-                      'extra' => {
-                        'misc_args' => [
-                          '
-'
-                        ]
-                      },
-                      'parent' => {}
-                    },
-                    'spaces_before_argument' => ' '
+                      'cmdname' => 'c'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'brace_command_arg'
                 }
               ],
               'cmdname' => 'ref',
-              'contents' => [],
-              'extra' => {
-                'label' => {},
-                'node_argument' => {
-                  'node_content' => [
-                    {}
-                  ],
-                  'normalized' => 'Top'
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 6,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             },
             {
-              'parent' => {},
               'text' => '
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         }
       ],
       'extra' => {
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'first'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 1,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'empty_ref_arg'}{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'};
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'args'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'extra'}{'label'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[2]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[2]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'extra'}{'label'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[2]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[2]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'extra'}{'label'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[5]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'contents'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'contents'}[2]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'extra'}{'comment_at_end'}{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'extra'}{'comment_at_end'};
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'extra'}{'comment_at_end'}{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'contents'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'extra'}{'comment_at_end'}{'args'}[0]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'extra'}{'comment_at_end'};
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'extra'}{'comment_at_end'}{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[2]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'extra'}{'label'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[7]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'empty_ref_arg'}{'contents'}[1];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_ref_arg'}{'contents'}[1]{'parent'} = $result_trees{'empty_ref_arg'};
+$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'args'}[0]{'contents'}[0];
+$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0];
+$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0];
+$result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'empty_ref_arg'}{'contents'}[1]{'contents'}[1]{'contents'}[6]{'args'}[0]{'contents'}[0];
 
-$result_texis{'empty_ref_arg'} = '@node Top
+$result_texis{'empty_ref_arg'} = '@node first
 
-@ref{Top, @ }
-@ref{Top, , @ }
-@ref{Top, @ , @:}
-@ref{Top, @c aaa
+@ref{first, @ }
+@ref{first, , @ }
+@ref{first, @ , @:}
+@ref{first, @c aaa
  @ 
 @c ggg
 , @c fff
@@ -442,33 +319,29 @@ $result_texis{'empty_ref_arg'} = '@node Top
 
 
 $result_texts{'empty_ref_arg'} = '
-Top
-Top
-Top
-Top
+first
+first
+first
+first
 ';
-
-$result_sectioning{'empty_ref_arg'} = {};
 
 $result_nodes{'empty_ref_arg'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'first'
   }
 };
 
 $result_menus{'empty_ref_arg'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'first'
   }
 };
 
 $result_errors{'empty_ref_arg'} = [
   {
-    'error_line' => ':3: warning: in @ref empty cross reference name after expansion `@ \'
+    'error_line' => 'warning: in @ref empty cross reference name after expansion `@ \'
 ',
     'file_name' => '',
     'line_nr' => 3,
@@ -477,7 +350,7 @@ $result_errors{'empty_ref_arg'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':4: warning: in @ref empty cross reference title after expansion `@ \'
+    'error_line' => 'warning: in @ref empty cross reference title after expansion `@ \'
 ',
     'file_name' => '',
     'line_nr' => 4,
@@ -486,7 +359,7 @@ $result_errors{'empty_ref_arg'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':5: warning: in @ref empty cross reference name after expansion `@ \'
+    'error_line' => 'warning: in @ref empty cross reference name after expansion `@ \'
 ',
     'file_name' => '',
     'line_nr' => 5,
@@ -495,7 +368,7 @@ $result_errors{'empty_ref_arg'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':5: warning: in @ref empty cross reference title after expansion `@:\'
+    'error_line' => 'warning: in @ref empty cross reference title after expansion `@:\'
 ',
     'file_name' => '',
     'line_nr' => 5,
@@ -504,24 +377,30 @@ $result_errors{'empty_ref_arg'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':11: warning: in @ref empty cross reference name after expansion `@c aaa
- @ \'
+    'error_line' => 'warning: in @ref empty cross reference name after expansion `@c aaa
+ @ 
+@c ggg
+\'
 ',
     'file_name' => '',
     'line_nr' => 11,
     'macro' => '',
     'text' => 'in @ref empty cross reference name after expansion `@c aaa
- @ \'',
+ @ 
+@c ggg
+\'',
     'type' => 'warning'
   },
   {
-    'error_line' => ':11: warning: in @ref empty cross reference title after expansion `@c fff
+    'error_line' => 'warning: in @ref empty cross reference title after expansion `@c fff
+@c
 \'
 ',
     'file_name' => '',
     'line_nr' => 11,
     'macro' => '',
     'text' => 'in @ref empty cross reference title after expansion `@c fff
+@c
 \'',
     'type' => 'warning'
   }
@@ -530,5 +409,19 @@ $result_errors{'empty_ref_arg'} = [
 
 $result_floats{'empty_ref_arg'} = {};
 
+
+
+$result_converted{'xml'}->{'empty_ref_arg'} = '<node name="first" spaces=" "><nodename>first</nodename></node>
+
+<para><ref label="first"><xrefnodename>first</xrefnodename><xrefinfoname spaces=" "><spacecmd type="spc"/></xrefinfoname></ref>
+<ref label="first"><xrefnodename>first</xrefnodename><xrefinfoname spaces=" "></xrefinfoname><xrefprinteddesc spaces=" "><spacecmd type="spc"/></xrefprinteddesc></ref>
+<ref label="first"><xrefnodename>first</xrefnodename><xrefinfoname spaces=" "><spacecmd type="spc"/></xrefinfoname><xrefprinteddesc spaces=" ">&noeos;</xrefprinteddesc></ref>
+<ref label="first"><xrefnodename>first</xrefnodename><xrefinfoname spaces=" "><!-- c aaa -->
+ <spacecmd type="spc"/>
+<!-- c ggg -->
+</xrefinfoname><xrefprinteddesc spaces=" "><!-- c fff -->
+<!-- c -->
+</xrefprinteddesc></ref>
+</para>';
 
 1;

@@ -1,122 +1,111 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'verb_in_menu_description'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'Top'
+              'text' => 'first'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
-      'contents' => [],
       'extra' => {
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'first'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 1,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'top',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
         },
         {
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
           'cmdname' => 'menu',
           'contents' => [
             {
-              'extra' => {
-                'command' => {}
-              },
-              'parent' => {},
-              'text' => '
-',
-              'type' => 'empty_line_after_command'
-            },
-            {
-              'args' => [
+              'contents' => [
                 {
-                  'parent' => {},
                   'text' => '* ',
                   'type' => 'menu_entry_leading_text'
                 },
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => '('
                     },
                     {
-                      'parent' => {},
                       'text' => 'manual'
                     },
                     {
-                      'parent' => {},
                       'text' => ')'
                     }
                   ],
-                  'parent' => {},
+                  'extra' => {
+                    'manual_content' => [
+                      {}
+                    ]
+                  },
                   'type' => 'menu_entry_node'
                 },
                 {
-                  'parent' => {},
                   'text' => '::',
                   'type' => 'menu_entry_separator'
                 },
@@ -125,7 +114,6 @@ $result_trees{'verb_in_menu_description'} = {
                     {
                       'contents' => [
                         {
-                          'parent' => {},
                           'text' => '
 '
                         },
@@ -134,62 +122,45 @@ $result_trees{'verb_in_menu_description'} = {
                             {
                               'contents' => [
                                 {
-                                  'parent' => {},
                                   'text' => ' in verb
 ',
                                   'type' => 'raw'
                                 },
                                 {
-                                  'parent' => {},
                                   'text' => '
 ',
                                   'type' => 'raw'
                                 }
                               ],
-                              'parent' => {},
                               'type' => 'brace_command_arg'
                             }
                           ],
                           'cmdname' => 'verb',
-                          'contents' => [],
-                          'extra' => {
+                          'info' => {
                             'delimiter' => ':'
                           },
-                          'line_nr' => {
+                          'source_info' => {
                             'file_name' => '',
                             'line_nr' => 6,
                             'macro' => ''
-                          },
-                          'parent' => {}
+                          }
                         },
                         {
-                          'parent' => {},
                           'text' => '
 '
                         }
                       ],
-                      'parent' => {},
                       'type' => 'preformatted'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'menu_entry_description'
                 }
               ],
-              'extra' => {
-                'menu_entry_description' => {},
-                'menu_entry_node' => {
-                  'manual_content' => [
-                    {}
-                  ]
-                }
-              },
-              'line_nr' => {
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 5,
                 'macro' => ''
               },
-              'parent' => {},
               'type' => 'menu_entry'
             },
             {
@@ -197,17 +168,14 @@ $result_trees{'verb_in_menu_description'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => '
 ',
-                      'type' => 'after_description_line'
+                      'type' => 'after_menu_description_line'
                     }
                   ],
-                  'parent' => {},
                   'type' => 'preformatted'
                 }
               ],
-              'parent' => {},
               'type' => 'menu_comment'
             },
             {
@@ -215,96 +183,59 @@ $result_trees{'verb_in_menu_description'} = {
                 {
                   'contents' => [
                     {
-                      'parent' => {},
                       'text' => 'menu'
                     }
                   ],
-                  'extra' => {
-                    'spaces_after_argument' => '
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
 '
+                    }
                   },
-                  'parent' => {},
                   'type' => 'line_arg'
                 }
               ],
               'cmdname' => 'end',
               'extra' => {
-                'command_argument' => 'menu',
-                'spaces_before_argument' => ' ',
                 'text_arg' => 'menu'
               },
-              'line_nr' => {
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
                 'file_name' => '',
                 'line_nr' => 10,
                 'macro' => ''
-              },
-              'parent' => {}
+              }
             }
           ],
-          'extra' => {
-            'end_command' => {}
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 4,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'spaces_before_argument' => ' '
+      'extra' => {},
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
       },
-      'level' => 0,
-      'line_nr' => {
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 2,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'verb_in_menu_description'}{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'};
-$result_trees{'verb_in_menu_description'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[1]{'args'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'verb_in_menu_description'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'verb_in_menu_description'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[1]{'parent'} = $result_trees{'verb_in_menu_description'};
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'args'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'extra'}{'command'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1]{'contents'}[1]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1]{'contents'}[2]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[2]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'contents'}[2]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'extra'}{'menu_entry_description'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[3];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'extra'}{'menu_entry_node'}{'manual_content'}[0] = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'args'}[1]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[2]{'contents'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[2];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[3];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[3];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'verb_in_menu_description'}{'contents'}[2];
-$result_trees{'verb_in_menu_description'}{'contents'}[2]{'parent'} = $result_trees{'verb_in_menu_description'};
+$result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'extra'}{'manual_content'}[0] = $result_trees{'verb_in_menu_description'}{'contents'}[2]{'contents'}[1]{'contents'}[0]{'contents'}[1]{'contents'}[1];
 
-$result_texis{'verb_in_menu_description'} = '@node Top
+$result_texis{'verb_in_menu_description'} = '@node first
 @top top
 
 @menu
@@ -328,81 +259,74 @@ $result_texts{'verb_in_menu_description'} = 'top
 ';
 
 $result_sectioning{'verb_in_menu_description'} = {
-  'level' => -1,
-  'section_childs' => [
-    {
-      'cmdname' => 'top',
-      'extra' => {
-        'associated_node' => {
-          'cmdname' => 'node',
-          'extra' => {
-            'normalized' => 'Top',
-            'spaces_before_argument' => ' '
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'top',
+        'extra' => {
+          'associated_node' => {
+            'cmdname' => 'node',
+            'extra' => {
+              'normalized' => 'first'
+            },
+            'structure' => {}
           }
         },
-        'spaces_before_argument' => ' '
-      },
-      'level' => 0,
-      'section_up' => {}
-    }
-  ]
+        'structure' => {
+          'section_level' => 0,
+          'section_up' => {}
+        }
+      }
+    ],
+    'section_level' => -1
+  }
 };
-$result_sectioning{'verb_in_menu_description'}{'section_childs'}[0]{'section_up'} = $result_sectioning{'verb_in_menu_description'};
+$result_sectioning{'verb_in_menu_description'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'verb_in_menu_description'};
 
 $result_nodes{'verb_in_menu_description'} = {
   'cmdname' => 'node',
   'extra' => {
     'associated_section' => {
       'cmdname' => 'top',
-      'extra' => {
-        'spaces_before_argument' => ' '
-      },
-      'level' => 0
+      'extra' => {},
+      'structure' => {}
     },
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  },
-  'menu_child' => {
-    'extra' => {
-      'manual_content' => [
-        {
-          'text' => 'manual'
-        }
-      ]
-    }
-  },
-  'menus' => [
-    {
-      'cmdname' => 'menu',
-      'extra' => {
-        'end_command' => {
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'menu',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'menu'
-          }
-        }
+    'menus' => [
+      {
+        'cmdname' => 'menu'
       }
+    ],
+    'normalized' => 'first'
+  },
+  'structure' => {
+    'menu_child' => {
+      'extra' => {
+        'manual_content' => [
+          {
+            'text' => 'manual'
+          }
+        ]
+      },
+      'type' => 'menu_entry_node'
     }
-  ],
-  'node_next' => {}
+  }
 };
-$result_nodes{'verb_in_menu_description'}{'node_next'} = $result_nodes{'verb_in_menu_description'}{'menu_child'};
 
 $result_menus{'verb_in_menu_description'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'first'
   },
-  'menu_child' => {
-    'extra' => {
-      'manual_content' => [
-        {
-          'text' => 'manual'
-        }
-      ]
+  'structure' => {
+    'menu_child' => {
+      'extra' => {
+        'manual_content' => [
+          {
+            'text' => 'manual'
+          }
+        ]
+      },
+      'type' => 'menu_entry_node'
     }
   }
 };
@@ -427,7 +351,7 @@ $result_converted{'plaintext'}->{'verb_in_menu_description'} = 'top
 ';
 
 
-$result_converted{'html'}->{'verb_in_menu_description'} = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+$result_converted{'html'}->{'verb_in_menu_description'} = '<!DOCTYPE html>
 <html>
 <!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
 <head>
@@ -440,24 +364,15 @@ $result_converted{'html'}->{'verb_in_menu_description'} = '<!DOCTYPE html PUBLIC
 <meta name="distribution" content="global">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<link href="#Top" rel="start" title="Top">
+<link href="#first" rel="start" title="first">
 <style type="text/css">
 <!--
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+pre.menu-comment-preformatted {font-family: serif}
+span:hover a.copiable-link {visibility: visible}
+td.menu-entry-description {vertical-align: top}
+td.menu-entry-destination {vertical-align: top}
+th.menu-comment {text-align:left}
 -->
 </style>
 
@@ -465,19 +380,17 @@ ul.no-bullet {list-style: none}
 </head>
 
 <body lang="en">
-<div class="top" id="Top">
-<span id="top"></span><h1 class="top">top</h1>
+<div class="top-level-extent" id="first">
+<h1 class="top" id="top"><span>top<a class="copiable-link" href="#top"> &para;</a></span></h1>
 
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="manual.html#Top" accesskey="1">(manual)</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-<tt> in verb
-
-</tt>
+<tr><td class="menu-entry-destination">&bull; <a href="manual.html#Top" accesskey="1">(manual)</a>:</td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+<code class="verb">&nbsp;in&nbsp;verb<br><br></code>
 </td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<tr><th class="menu-comment" colspan="3"><pre class="menu-comment-preformatted">
 
 </pre></th></tr></table>
-<hr></div>
+</div>
 
 
 
@@ -486,11 +399,11 @@ ul.no-bullet {list-style: none}
 ';
 
 
-$result_converted{'xml'}->{'verb_in_menu_description'} = '<node name="Top" spaces=" "><nodename>Top</nodename><nodenext automatic="on">(manual)</nodenext></node>
+$result_converted{'xml'}->{'verb_in_menu_description'} = '<node name="first" spaces=" "><nodename>first</nodename></node>
 <top spaces=" "><sectiontitle>top</sectiontitle>
 
 <menu endspaces=" ">
-<menuentry leadingtext="* "><menunode separator="::">(manual)</menunode><menudescription><pre xml:space="preserve">
+<menuentry><menuleadingtext>* </menuleadingtext><menunode>(manual)</menunode><menuseparator>::</menuseparator><menudescription><pre xml:space="preserve">
 <verb delimiter=":"> in verb
 
 </verb>

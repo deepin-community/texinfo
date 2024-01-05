@@ -1,7 +1,3 @@
-disable-failing-tests
 warn_missing_tex
 numerical-signal-names
-#Update-locale-handling-for-Perl-5.28
-#enable-xs-parser
-upstream-c0666e580a-fix-makeinfo-dash-input
-13a8894fe2faa45b04033d7122a8fe7939ce6aa2
+c106b85ae5a6bb24de227f50e5d2a1ce81ba7868.diff

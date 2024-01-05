@@ -1,115 +1,104 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'empty_comment'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'args' => [
-                {
-                  'contents' => [],
-                  'extra' => {
-                    'comment_at_end' => {
-                      'args' => [
-                        {
-                          'parent' => {},
-                          'text' => '
-',
-                          'type' => 'misc_arg'
-                        }
-                      ],
-                      'cmdname' => 'c',
-                      'extra' => {
-                        'misc_args' => [
-                          '
-'
-                        ]
-                      },
-                      'parent' => {}
-                    }
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'columnfractions',
-              'extra' => {
-                'missing_argument' => 1,
-                'spaces_before_argument' => ' '
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 1,
-                'macro' => ''
-              },
-              'parent' => {}
-            }
-          ],
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'multitable',
       'contents' => [
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'multitable'
+                  'args' => [
+                    {
+                      'info' => {
+                        'comment_at_end' => {
+                          'args' => [
+                            {
+                              'text' => '
+',
+                              'type' => 'rawline_arg'
+                            }
+                          ],
+                          'cmdname' => 'c'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'columnfractions',
+                  'extra' => {
+                    'missing_argument' => 1
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 1,
+                    'macro' => ''
+                  }
                 }
               ],
-              'parent' => {},
-              'type' => 'line_arg'
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'end',
+          'cmdname' => 'multitable',
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'multitable'
+                    }
+                  ],
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'multitable'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 2,
+                'macro' => ''
+              }
+            }
+          ],
           'extra' => {
-            'command_argument' => 'multitable',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'multitable'
+            'max_columns' => 0
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 2,
+            'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {},
-        'max_columns' => 0,
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'extra'}{'comment_at_end'}{'args'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'extra'}{'comment_at_end'};
-$result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'extra'}{'comment_at_end'}{'parent'} = $result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0]{'args'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0]{'contents'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'empty_comment'}{'contents'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'empty_comment'}{'contents'}[0]{'contents'}[0];
-$result_trees{'empty_comment'}{'contents'}[0]{'parent'} = $result_trees{'empty_comment'};
 
 $result_texis{'empty_comment'} = '@multitable @columnfractions @c
 @end multitable';
@@ -119,7 +108,7 @@ $result_texts{'empty_comment'} = '';
 
 $result_errors{'empty_comment'} = [
   {
-    'error_line' => ':1: @columnfractions missing argument
+    'error_line' => '@columnfractions missing argument
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -132,5 +121,14 @@ $result_errors{'empty_comment'} = [
 
 $result_floats{'empty_comment'} = {};
 
+
+
+$result_converted{'xml'}->{'empty_comment'} = '<multitable spaces=" " endspaces=" "><columnfractions spaces=" " line="@c"></columnfractions><!-- c -->
+</multitable>';
+
+
+$result_converted{'latex_text'}->{'empty_comment'} = '\\begin{tabular}{}%
+\\end{tabular}%
+';
 
 1;

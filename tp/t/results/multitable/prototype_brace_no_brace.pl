@@ -1,121 +1,94 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'prototype_brace_no_brace'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'aa'
-                }
-              ],
-              'parent' => {},
-              'type' => 'bracketed'
-            },
-            {
-              'parent' => {},
-              'text' => ' bb'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'multitable',
       'contents' => [
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'multitable'
+                  'contents' => [
+                    {
+                      'text' => 'aa'
+                    }
+                  ],
+                  'type' => 'bracketed_arg'
+                },
+                {
+                  'text' => ' bb'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'end',
+          'cmdname' => 'multitable',
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'multitable'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'multitable'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 2,
+                'macro' => ''
+              }
+            }
+          ],
           'extra' => {
-            'command_argument' => 'multitable',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'multitable'
+            'max_columns' => 1
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 2,
+            'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {},
-        'max_columns' => 2,
-        'prototypes' => [
-          {
-            'contents' => [
-              {}
-            ],
-            'type' => 'bracketed_multitable_prototype'
-          },
-          {
-            'text' => 'bb',
-            'type' => 'row_prototype'
-          }
-        ],
-        'prototypes_line' => [
-          {},
-          {
-            'text' => ' ',
-            'type' => 'prototype_space'
-          },
-          {
-            'text' => 'bb',
-            'type' => 'row_prototype'
-          }
-        ],
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'extra'}{'prototypes'}[0]{'contents'}[0] = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'extra'}{'prototypes_line'}[0] = $result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'prototype_brace_no_brace'}{'contents'}[0]{'parent'} = $result_trees{'prototype_brace_no_brace'};
 
 $result_texis{'prototype_brace_no_brace'} = '@multitable {aa} bb
 @end multitable
@@ -137,7 +110,7 @@ $result_converted{'plaintext'}->{'prototype_brace_no_brace'} = '';
 $result_converted{'html_text'}->{'prototype_brace_no_brace'} = '';
 
 
-$result_converted{'xml'}->{'prototype_brace_no_brace'} = '<multitable spaces=" " endspaces=" "><columnprototypes><columnprototype bracketed="on">aa</columnprototype> <columnprototype>bb</columnprototype></columnprototypes>
+$result_converted{'xml'}->{'prototype_brace_no_brace'} = '<multitable spaces=" " endspaces=" "><columnprototypes><columnprototype bracketed="on">aa</columnprototype> bb</columnprototypes>
 </multitable>
 ';
 

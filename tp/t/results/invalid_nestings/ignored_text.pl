@@ -1,60 +1,111 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'ignored_text'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
-              'text' => 'before ignore '
+              'text' => 'before ignore'
             }
           ],
-          'parent' => {},
+          'info' => {
+            'spaces_after_argument' => {
+              'source_marks' => [
+                {
+                  'counter' => 1,
+                  'element' => {
+                    'args' => [
+                      {
+                        'info' => {
+                          'spaces_after_argument' => {
+                            'text' => '
+'
+                          }
+                        },
+                        'type' => 'block_line_arg'
+                      }
+                    ],
+                    'cmdname' => 'ifinfo',
+                    'source_info' => {
+                      'file_name' => '',
+                      'line_nr' => 1,
+                      'macro' => ''
+                    }
+                  },
+                  'position' => 1,
+                  'sourcemark_type' => 'ignored_conditional_block'
+                }
+              ],
+              'text' => ' '
+            }
+          },
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
-      'contents' => [],
+      'contents' => [
+        {
+          'contents' => [
+            {
+              'text' => 'in ifinfo
+'
+            }
+          ],
+          'type' => 'paragraph'
+        }
+      ],
       'extra' => {
-        'spaces_before_argument' => ' '
+        'normalized' => 'before-ignore'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 1,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'ignored_text'}{'contents'}[0]{'parent'} = $result_trees{'ignored_text'};
-$result_trees{'ignored_text'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ignored_text'}{'contents'}[1]{'args'}[0];
-$result_trees{'ignored_text'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'ignored_text'}{'contents'}[1];
-$result_trees{'ignored_text'}{'contents'}[1]{'parent'} = $result_trees{'ignored_text'};
 
-$result_texis{'ignored_text'} = '@node before ignore ';
+$result_texis{'ignored_text'} = '@node before ignore in ifinfo
+';
 
 
-$result_texts{'ignored_text'} = '';
+$result_texts{'ignored_text'} = 'in ifinfo
+';
 
-$result_sectioning{'ignored_text'} = {};
+$result_nodes{'ignored_text'} = {
+  'cmdname' => 'node',
+  'extra' => {
+    'normalized' => 'before-ignore'
+  }
+};
+
+$result_menus{'ignored_text'} = {
+  'cmdname' => 'node',
+  'extra' => {
+    'normalized' => 'before-ignore'
+  }
+};
 
 $result_errors{'ignored_text'} = [
   {
-    'error_line' => ':1: warning: @ifinfo should only appear at the beginning of a line
+    'error_line' => 'warning: @ifinfo should only appear at the beginning of a line
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -63,18 +114,44 @@ $result_errors{'ignored_text'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':3: warning: superfluous argument to @end ifinfo:  on the node line
+    'error_line' => 'no matching `@end ifinfo\'
+',
+    'file_name' => '',
+    'line_nr' => 1,
+    'macro' => '',
+    'text' => 'no matching `@end ifinfo\'',
+    'type' => 'error'
+  },
+  {
+    'error_line' => 'bad argument to @end: ifinfo on the node line
 ',
     'file_name' => '',
     'line_nr' => 3,
     'macro' => '',
-    'text' => 'superfluous argument to @end ifinfo:  on the node line',
-    'type' => 'warning'
+    'text' => 'bad argument to @end: ifinfo on the node line',
+    'type' => 'error'
+  },
+  {
+    'error_line' => 'unmatched `@end ifinfo\'
+',
+    'file_name' => '',
+    'line_nr' => 3,
+    'macro' => '',
+    'text' => 'unmatched `@end ifinfo\'',
+    'type' => 'error'
   }
 ];
 
 
 $result_floats{'ignored_text'} = {};
 
+
+
+$result_converted{'plaintext'}->{'ignored_text'} = 'in ifinfo
+';
+
+
+$result_converted{'xml'}->{'ignored_text'} = '<node name="before-ignore" spaces=" "><nodename trailingspaces=" ">before ignore</nodename></node><para>in ifinfo
+</para>';
 
 1;

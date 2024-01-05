@@ -1,220 +1,222 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'misc_raw'} = {
   'contents' => [
     {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'html',
       'contents' => [
         {
-          'extra' => {
-            'command' => {}
-          },
-          'parent' => {},
-          'text' => ' 
-',
-          'type' => 'empty_line_after_command'
-        },
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'in html <br> '
-            }
-          ],
-          'parent' => {},
-          'type' => 'rawpreformatted'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'html'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'html',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'html'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 3,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 2,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'in tex'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'tex',
-      'contents' => [
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'tex'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'tex',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'tex'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 6,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {},
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 5,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'verbatim',
-      'contents' => [
-        {
-          'extra' => {
-            'command' => {}
-          },
-          'parent' => {},
           'text' => '
 ',
-          'type' => 'empty_line_after_command'
+          'type' => 'empty_line'
         },
         {
-          'parent' => {},
-          'text' => 'in  v---erbatim`` <>
-',
-          'type' => 'raw'
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => ' 
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'html',
+          'contents' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'in html <br> '
+                }
+              ],
+              'type' => 'rawpreformatted'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'html'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'html'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
+            }
+          ],
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 2,
+            'macro' => ''
+          }
         },
         {
-          'parent' => {},
-          'text' => 'in verbatim2
+          'text' => '
 ',
-          'type' => 'raw'
+          'type' => 'empty_line'
+        },
+        {
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'in tex'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'tex',
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'tex'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'tex'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 6,
+                'macro' => ''
+              }
+            }
+          ],
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 5,
+            'macro' => ''
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'args' => [
+            {
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'block_line_arg'
+            }
+          ],
+          'cmdname' => 'verbatim',
+          'contents' => [
+            {
+              'text' => 'in  v---erbatim`` <>
+',
+              'type' => 'raw'
+            },
+            {
+              'text' => 'in verbatim2
+',
+              'type' => 'raw'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'verbatim'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'verbatim'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 11,
+                'macro' => ''
+              }
+            }
+          ],
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 8,
+            'macro' => ''
+          }
         }
       ],
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 8,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line_after_command'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'misc_raw'}{'contents'}[0]{'parent'} = $result_trees{'misc_raw'};
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[0]{'extra'}{'command'} = $result_trees{'misc_raw'}{'contents'}[1];
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[1];
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[1]{'contents'}[1];
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'misc_raw'}{'contents'}[1];
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[1]{'contents'}[2]{'args'}[0];
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[1]{'contents'}[2];
-$result_trees{'misc_raw'}{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'misc_raw'}{'contents'}[1];
-$result_trees{'misc_raw'}{'contents'}[1]{'extra'}{'end_command'} = $result_trees{'misc_raw'}{'contents'}[1]{'contents'}[2];
-$result_trees{'misc_raw'}{'contents'}[1]{'parent'} = $result_trees{'misc_raw'};
-$result_trees{'misc_raw'}{'contents'}[2]{'parent'} = $result_trees{'misc_raw'};
-$result_trees{'misc_raw'}{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[3]{'args'}[0];
-$result_trees{'misc_raw'}{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[3];
-$result_trees{'misc_raw'}{'contents'}[3]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[3]{'contents'}[0]{'args'}[0];
-$result_trees{'misc_raw'}{'contents'}[3]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[3]{'contents'}[0];
-$result_trees{'misc_raw'}{'contents'}[3]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[3];
-$result_trees{'misc_raw'}{'contents'}[3]{'extra'}{'end_command'} = $result_trees{'misc_raw'}{'contents'}[3]{'contents'}[0];
-$result_trees{'misc_raw'}{'contents'}[3]{'parent'} = $result_trees{'misc_raw'};
-$result_trees{'misc_raw'}{'contents'}[4]{'parent'} = $result_trees{'misc_raw'};
-$result_trees{'misc_raw'}{'contents'}[5]{'contents'}[0]{'extra'}{'command'} = $result_trees{'misc_raw'}{'contents'}[5];
-$result_trees{'misc_raw'}{'contents'}[5]{'contents'}[0]{'parent'} = $result_trees{'misc_raw'}{'contents'}[5];
-$result_trees{'misc_raw'}{'contents'}[5]{'contents'}[1]{'parent'} = $result_trees{'misc_raw'}{'contents'}[5];
-$result_trees{'misc_raw'}{'contents'}[5]{'contents'}[2]{'parent'} = $result_trees{'misc_raw'}{'contents'}[5];
-$result_trees{'misc_raw'}{'contents'}[5]{'parent'} = $result_trees{'misc_raw'};
-$result_trees{'misc_raw'}{'contents'}[6]{'parent'} = $result_trees{'misc_raw'};
 
 $result_texis{'misc_raw'} = '
 @html 
@@ -231,7 +233,7 @@ in verbatim2
 
 
 $result_texts{'misc_raw'} = '
-
+in html <br> 
 
 in  v---erbatim`` <>
 in verbatim2
@@ -239,12 +241,21 @@ in verbatim2
 
 $result_errors{'misc_raw'} = [
   {
-    'error_line' => ':3: warning: @end should only appear at the beginning of a line
+    'error_line' => 'warning: @end should only appear at the beginning of a line
 ',
     'file_name' => '',
     'line_nr' => 3,
     'macro' => '',
     'text' => '@end should only appear at the beginning of a line',
+    'type' => 'warning'
+  },
+  {
+    'error_line' => 'warning: unexpected argument on @tex line: in tex
+',
+    'file_name' => '',
+    'line_nr' => 5,
+    'macro' => '',
+    'text' => 'unexpected argument on @tex line: in tex',
     'type' => 'warning'
   }
 ];
@@ -256,6 +267,20 @@ $result_floats{'misc_raw'} = {};
 
 $result_converted{'plaintext'}->{'misc_raw'} = 'in  v---erbatim`` <>
 in verbatim2
+';
+
+
+$result_converted{'xml'}->{'misc_raw'} = '
+<html endspaces=" "> 
+in html &lt;br&gt; </html>
+
+<tex spaces=" " endspaces=" ">
+</tex>
+
+<verbatim xml:space="preserve" endspaces=" ">
+in  v---erbatim`` &lt;&gt;
+in verbatim2
+</verbatim>
 ';
 
 1;

@@ -1,183 +1,147 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'multitable_item_in_index'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'aaa'
-                }
-              ],
-              'parent' => {},
-              'type' => 'bracketed'
-            },
-            {
-              'parent' => {},
-              'text' => ' '
-            },
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'bbb'
-                }
-              ],
-              'parent' => {},
-              'type' => 'bracketed'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-'
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'multitable',
       'contents' => [
-        {
-          'contents' => [
-            {
-              'args' => [
-                {
-                  'contents' => [
-                    {
-                      'parent' => {},
-                      'text' => ' ',
-                      'type' => 'empty_spaces_after_command'
-                    },
-                    {
-                      'parent' => {},
-                      'text' => 'on item line'
-                    }
-                  ],
-                  'extra' => {
-                    'spaces_after_argument' => '
-'
-                  },
-                  'parent' => {},
-                  'type' => 'line_arg'
-                }
-              ],
-              'cmdname' => 'vindex',
-              'extra' => {
-                'index_entry' => {
-                  'command' => {},
-                  'content' => [],
-                  'content_normalized' => [],
-                  'in_code' => 1,
-                  'index_at_command' => 'vindex',
-                  'index_name' => 'vr',
-                  'index_type_command' => 'vindex',
-                  'key' => 'on item line',
-                  'number' => 1
-                },
-                'spaces_before_argument' => ' '
-              },
-              'line_nr' => {
-                'file_name' => '',
-                'line_nr' => 2,
-                'macro' => ''
-              },
-              'parent' => {},
-              'type' => 'index_entry_command'
-            }
-          ],
-          'parent' => {},
-          'type' => 'before_item'
-        },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'multitable'
+                  'contents' => [
+                    {
+                      'text' => 'aaa'
+                    }
+                  ],
+                  'type' => 'bracketed_arg'
+                },
+                {
+                  'text' => ' '
+                },
+                {
+                  'contents' => [
+                    {
+                      'text' => 'bbb'
+                    }
+                  ],
+                  'type' => 'bracketed_arg'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
-              'type' => 'line_arg'
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'end',
+          'cmdname' => 'multitable',
+          'contents' => [
+            {
+              'contents' => [
+                {
+                  'args' => [
+                    {
+                      'contents' => [
+                        {
+                          'text' => ' ',
+                          'type' => 'ignorable_spaces_after_command'
+                        },
+                        {
+                          'text' => 'on item line'
+                        }
+                      ],
+                      'info' => {
+                        'spaces_after_argument' => {
+                          'text' => '
+'
+                        }
+                      },
+                      'type' => 'line_arg'
+                    }
+                  ],
+                  'cmdname' => 'vindex',
+                  'extra' => {
+                    'index_entry' => [
+                      'vr',
+                      1
+                    ]
+                  },
+                  'info' => {
+                    'spaces_before_argument' => {
+                      'text' => ' '
+                    }
+                  },
+                  'source_info' => {
+                    'file_name' => '',
+                    'line_nr' => 2,
+                    'macro' => ''
+                  },
+                  'type' => 'index_entry_command'
+                }
+              ],
+              'type' => 'before_item'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'multitable'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'multitable'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
+            }
+          ],
           'extra' => {
-            'command_argument' => 'multitable',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'multitable'
+            'max_columns' => 2
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {},
-        'max_columns' => 2,
-        'prototypes' => [
-          {
-            'contents' => [
-              {}
-            ],
-            'type' => 'bracketed_multitable_prototype'
-          },
-          {
-            'contents' => [
-              {}
-            ],
-            'type' => 'bracketed_multitable_prototype'
-          }
-        ],
-        'spaces_before_argument' => ' '
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[2];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[1]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'command'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'};
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[1];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'multitable_item_in_index'}{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'contents'}[1];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'extra'}{'prototypes'}[0]{'contents'}[0] = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'extra'}{'prototypes'}[1]{'contents'}[0] = $result_trees{'multitable_item_in_index'}{'contents'}[0]{'args'}[0]{'contents'}[2]{'contents'}[0];
-$result_trees{'multitable_item_in_index'}{'contents'}[0]{'parent'} = $result_trees{'multitable_item_in_index'};
 
 $result_texis{'multitable_item_in_index'} = '@multitable {aaa} {bbb}
 @vindex  on item line
@@ -189,16 +153,16 @@ $result_texts{'multitable_item_in_index'} = '';
 
 $result_errors{'multitable_item_in_index'} = [
   {
-    'error_line' => ':2: warning: @item should not appear in @vindex
+    'error_line' => 'warning: @item should not appear on @vindex line
 ',
     'file_name' => '',
     'line_nr' => 2,
     'macro' => '',
-    'text' => '@item should not appear in @vindex',
+    'text' => '@item should not appear on @vindex line',
     'type' => 'warning'
   },
   {
-    'error_line' => ':2: @item outside of table or list
+    'error_line' => '@item outside of table or list
 ',
     'file_name' => '',
     'line_nr' => 2,
@@ -207,7 +171,7 @@ $result_errors{'multitable_item_in_index'} = [
     'type' => 'error'
   },
   {
-    'error_line' => ':2: warning: entry for index `vr\' outside of any node
+    'error_line' => 'warning: entry for index `vr\' outside of any node
 ',
     'file_name' => '',
     'line_nr' => 2,
@@ -216,7 +180,7 @@ $result_errors{'multitable_item_in_index'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':1: warning: @multitable has text but no @item
+    'error_line' => 'warning: @multitable has text but no @item
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -228,6 +192,13 @@ $result_errors{'multitable_item_in_index'} = [
 
 
 $result_floats{'multitable_item_in_index'} = {};
+
+
+$result_indices_sort_strings{'multitable_item_in_index'} = {
+  'vr' => [
+    'on item line'
+  ]
+};
 
 
 1;

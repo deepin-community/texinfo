@@ -1,62 +1,71 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'a_comma_after_node'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Commands'
             }
           ],
-          'parent' => {},
           'type' => 'line_arg'
         },
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Requirements'
             }
           ],
           'extra' => {
-            'spaces_before_argument' => ' '
+            'node_content' => [
+              {}
+            ],
+            'normalized' => 'Requirements'
           },
-          'parent' => {},
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
           'type' => 'line_arg'
         },
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Nodes and Menus'
             }
           ],
           'extra' => {
-            'spaces_after_argument' => '
-',
-            'spaces_before_argument' => ' '
+            'node_content' => [
+              {}
+            ],
+            'normalized' => 'Nodes-and-Menus'
           },
-          'parent' => {},
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            },
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -64,67 +73,32 @@ $result_trees{'a_comma_after_node'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'A comma in text, end.
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         }
       ],
       'extra' => {
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Commands'
-          },
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Requirements'
-          },
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Nodes-and-Menus'
-          }
-        ],
-        'normalized' => 'Commands',
-        'spaces_before_argument' => ' '
+        'normalized' => 'Commands'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 1,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'a_comma_after_node'}{'contents'}[0]{'parent'} = $result_trees{'a_comma_after_node'};
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[0];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[1]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[2]{'contents'}[0]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[2];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[2]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1]{'contents'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'a_comma_after_node'}{'contents'}[1];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'extra'}{'nodes_manuals'}[1]{'node_content'}[0] = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[1]{'contents'}[0];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'extra'}{'nodes_manuals'}[2]{'node_content'}[0] = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[2]{'contents'}[0];
-$result_trees{'a_comma_after_node'}{'contents'}[1]{'parent'} = $result_trees{'a_comma_after_node'};
+$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[1]{'extra'}{'node_content'}[0] = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[1]{'contents'}[0];
+$result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[2]{'extra'}{'node_content'}[0] = $result_trees{'a_comma_after_node'}{'contents'}[1]{'args'}[2]{'contents'}[0];
 
 $result_texis{'a_comma_after_node'} = '@node Commands, Requirements, Nodes and Menus
 
@@ -136,27 +110,23 @@ $result_texts{'a_comma_after_node'} = '
 A comma in text, end.
 ';
 
-$result_sectioning{'a_comma_after_node'} = {};
-
 $result_nodes{'a_comma_after_node'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Commands',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Commands'
   }
 };
 
 $result_menus{'a_comma_after_node'} = {
   'cmdname' => 'node',
   'extra' => {
-    'normalized' => 'Commands',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Commands'
   }
 };
 
 $result_errors{'a_comma_after_node'} = [
   {
-    'error_line' => ':1: Next reference to nonexistent `Requirements\'
+    'error_line' => 'Next reference to nonexistent `Requirements\'
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -165,7 +135,7 @@ $result_errors{'a_comma_after_node'} = [
     'type' => 'error'
   },
   {
-    'error_line' => ':1: Prev reference to nonexistent `Nodes and Menus\'
+    'error_line' => 'Prev reference to nonexistent `Nodes and Menus\'
 ',
     'file_name' => '',
     'line_nr' => 1,

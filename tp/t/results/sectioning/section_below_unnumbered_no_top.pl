@@ -1,87 +1,82 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'section_below_unnumbered_no_top'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'contents' => [
+        {
+          'contents' => [],
+          'type' => 'preamble_before_content'
+        }
+      ],
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'U'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'unnumbered',
-      'contents' => [],
-      'extra' => {
-        'spaces_before_argument' => ' '
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
       },
-      'level' => 1,
-      'line_nr' => {
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 1,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'S'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'section',
-      'contents' => [],
-      'extra' => {
-        'spaces_before_argument' => ' '
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
       },
-      'level' => 2,
-      'line_nr' => {
+      'source_info' => {
         'file_name' => '',
         'line_nr' => 2,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[0]{'parent'} = $result_trees{'section_below_unnumbered_no_top'};
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'section_below_unnumbered_no_top'}{'contents'}[1]{'args'}[0];
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'section_below_unnumbered_no_top'}{'contents'}[1];
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[1]{'parent'} = $result_trees{'section_below_unnumbered_no_top'};
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'section_below_unnumbered_no_top'}{'contents'}[2]{'args'}[0];
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'section_below_unnumbered_no_top'}{'contents'}[2];
-$result_trees{'section_below_unnumbered_no_top'}{'contents'}[2]{'parent'} = $result_trees{'section_below_unnumbered_no_top'};
 
 $result_texis{'section_below_unnumbered_no_top'} = '@unnumbered U
 @section S
@@ -95,30 +90,30 @@ S
 ';
 
 $result_sectioning{'section_below_unnumbered_no_top'} = {
-  'level' => 0,
-  'section_childs' => [
-    {
-      'cmdname' => 'unnumbered',
-      'extra' => {
-        'spaces_before_argument' => ' '
-      },
-      'level' => 1,
-      'section_childs' => [
-        {
-          'cmdname' => 'section',
-          'extra' => {
-            'spaces_before_argument' => ' '
-          },
-          'level' => 2,
+  'structure' => {
+    'section_childs' => [
+      {
+        'cmdname' => 'unnumbered',
+        'structure' => {
+          'section_childs' => [
+            {
+              'cmdname' => 'section',
+              'structure' => {
+                'section_level' => 2,
+                'section_up' => {}
+              }
+            }
+          ],
+          'section_level' => 1,
           'section_up' => {}
         }
-      ],
-      'section_up' => {}
-    }
-  ]
+      }
+    ],
+    'section_level' => 0
+  }
 };
-$result_sectioning{'section_below_unnumbered_no_top'}{'section_childs'}[0]{'section_childs'}[0]{'section_up'} = $result_sectioning{'section_below_unnumbered_no_top'}{'section_childs'}[0];
-$result_sectioning{'section_below_unnumbered_no_top'}{'section_childs'}[0]{'section_up'} = $result_sectioning{'section_below_unnumbered_no_top'};
+$result_sectioning{'section_below_unnumbered_no_top'}{'structure'}{'section_childs'}[0]{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'section_below_unnumbered_no_top'}{'structure'}{'section_childs'}[0];
+$result_sectioning{'section_below_unnumbered_no_top'}{'structure'}{'section_childs'}[0]{'structure'}{'section_up'} = $result_sectioning{'section_below_unnumbered_no_top'};
 
 $result_errors{'section_below_unnumbered_no_top'} = [];
 
@@ -136,7 +131,7 @@ S
 ';
 
 
-$result_converted{'html'}->{'section_below_unnumbered_no_top'} = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+$result_converted{'html'}->{'section_below_unnumbered_no_top'} = '<!DOCTYPE html>
 <html>
 <!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
 <head>
@@ -151,21 +146,8 @@ $result_converted{'html'}->{'section_below_unnumbered_no_top'} = '<!DOCTYPE html
 
 <style type="text/css">
 <!--
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
 -->
 </style>
 
@@ -173,14 +155,14 @@ ul.no-bullet {list-style: none}
 </head>
 
 <body lang="en">
-<div class="unnumbered" id="U">
-<h2 class="unnumbered">U</h2>
-<ul class="section-toc">
+<div class="unnumbered-level-extent" id="U">
+<h2 class="unnumbered"><span>U<a class="copiable-link" href="#U"> &para;</a></span></h2>
+<ul class="mini-toc">
 <li><a href="#S" accesskey="1">S</a></li>
 </ul>
-<div class="section" id="S">
-<h3 class="section">S</h3>
-<hr></div>
+<div class="section-level-extent" id="S">
+<h3 class="section"><span>S<a class="copiable-link" href="#S"> &para;</a></span></h3>
+</div>
 </div>
 
 

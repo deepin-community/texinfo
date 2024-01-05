@@ -1,818 +1,645 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'all_empty_def'} = {
   'contents' => [
     {
-      'cmdname' => 'deffn',
       'contents' => [
         {
-          'args' => [
+          'cmdname' => 'deffn',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'block_line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'extra' => {
+                'def_command' => 'deffn',
+                'original_def_cmdname' => 'deffn'
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 1,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'deffn'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'deffn'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 2,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'deffn',
-            'original_def_cmdname' => 'deffn'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 1,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'defvr',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'deffn'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'defvr',
+                'original_def_cmdname' => 'defvr'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'deffn',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'deffn'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 2,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'defvr',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 4,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'defvr'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'defvr'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 5,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'defvr',
-            'original_def_cmdname' => 'defvr'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 4,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'deftypefn',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'defvr'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'deftypefn',
+                'original_def_cmdname' => 'deftypefn'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'defvr',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'defvr'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 5,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 4,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'deftypefn',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 7,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'deftypefn'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'deftypefn'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 8,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'deftypefn',
-            'original_def_cmdname' => 'deftypefn'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 7,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'deftypeop',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'deftypefn'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'deftypeop',
+                'original_def_cmdname' => 'deftypeop'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'deftypefn',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'deftypefn'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 8,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 7,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'deftypeop',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 10,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'deftypeop'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'deftypeop'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 11,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'deftypeop',
-            'original_def_cmdname' => 'deftypeop'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 10,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'deftypevr',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'deftypeop'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'deftypevr',
+                'original_def_cmdname' => 'deftypevr'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'deftypeop',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'deftypeop'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 11,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 10,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'deftypevr',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 13,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'deftypevr'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'deftypevr'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 14,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'deftypevr',
-            'original_def_cmdname' => 'deftypevr'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 13,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'defcv',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'deftypevr'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'defcv',
+                'original_def_cmdname' => 'defcv'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'deftypevr',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'deftypevr'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 14,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 13,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'defcv',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 16,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'defcv'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'defcv'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 17,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'defcv',
-            'original_def_cmdname' => 'defcv'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 16,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'deftypecv',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'defcv'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'deftypecv',
+                'original_def_cmdname' => 'deftypecv'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'defcv',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'defcv'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 17,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 16,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'deftypecv',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 19,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'deftypecv'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'deftypecv'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 20,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'deftypecv',
-            'original_def_cmdname' => 'deftypecv'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 19,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'defop',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'deftypecv'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'defop',
+                'original_def_cmdname' => 'defop'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'deftypecv',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'deftypecv'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 20,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 19,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'defop',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 22,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'defop'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'defop'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 23,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'defop',
-            'original_def_cmdname' => 'defop'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 22,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
+          }
         },
         {
-          'args' => [
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'cmdname' => 'deftp',
+          'contents' => [
             {
-              'contents' => [
+              'args' => [
                 {
-                  'parent' => {},
-                  'text' => 'defop'
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'block_line_arg'
                 }
               ],
               'extra' => {
-                'spaces_after_argument' => '
-'
+                'def_command' => 'deftp',
+                'original_def_cmdname' => 'deftp'
               },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'defop',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'defop'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 23,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 22,
-        'macro' => ''
-      },
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'cmdname' => 'deftp',
-      'contents' => [
-        {
-          'args' => [
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 25,
+                'macro' => ''
+              },
+              'type' => 'def_line'
+            },
             {
-              'contents' => [
+              'args' => [
                 {
-                  'extra' => {
-                    'command' => {}
+                  'contents' => [
+                    {
+                      'text' => 'deftp'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
                   },
-                  'parent' => {},
-                  'text' => '
-',
-                  'type' => 'empty_line_after_command'
+                  'type' => 'line_arg'
                 }
               ],
-              'parent' => {},
-              'type' => 'block_line_arg'
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'deftp'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 26,
+                'macro' => ''
+              }
             }
           ],
-          'extra' => {
-            'def_command' => 'deftp',
-            'original_def_cmdname' => 'deftp'
-          },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
             'line_nr' => 25,
             'macro' => ''
-          },
-          'parent' => {},
-          'type' => 'def_line'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'deftp'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'deftp',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'deftp'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 26,
-            'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
-      'extra' => {
-        'end_command' => {}
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 25,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[0]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[2];
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[2];
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[2];
-$result_trees{'all_empty_def'}{'contents'}[2]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[2]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[2]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[3]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[4];
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[4];
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[4];
-$result_trees{'all_empty_def'}{'contents'}[4]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[4]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[4]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[5]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[6];
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[6];
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[6];
-$result_trees{'all_empty_def'}{'contents'}[6]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[6]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[6]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[7]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[8];
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[8];
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[8];
-$result_trees{'all_empty_def'}{'contents'}[8]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[8]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[8]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[9]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[10];
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[10];
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[10];
-$result_trees{'all_empty_def'}{'contents'}[10]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[10]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[10]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[11]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[12];
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[12];
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[12];
-$result_trees{'all_empty_def'}{'contents'}[12]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[12]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[12]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[13]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[14];
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[14];
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[14];
-$result_trees{'all_empty_def'}{'contents'}[14]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[14]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[14]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[15]{'parent'} = $result_trees{'all_empty_def'};
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[0]{'args'}[0]{'contents'}[0]{'extra'}{'command'} = $result_trees{'all_empty_def'}{'contents'}[16];
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[0]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[0];
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[16];
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[1]{'args'}[0];
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[1]{'parent'} = $result_trees{'all_empty_def'}{'contents'}[16];
-$result_trees{'all_empty_def'}{'contents'}[16]{'extra'}{'end_command'} = $result_trees{'all_empty_def'}{'contents'}[16]{'contents'}[1];
-$result_trees{'all_empty_def'}{'contents'}[16]{'parent'} = $result_trees{'all_empty_def'};
 
 $result_texis{'all_empty_def'} = '@deffn
 @end deffn
@@ -855,7 +682,7 @@ $result_texts{'all_empty_def'} = '
 
 $result_errors{'all_empty_def'} = [
   {
-    'error_line' => ':1: warning: missing category for @deffn
+    'error_line' => 'warning: missing category for @deffn
 ',
     'file_name' => '',
     'line_nr' => 1,
@@ -864,7 +691,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':4: warning: missing category for @defvr
+    'error_line' => 'warning: missing category for @defvr
 ',
     'file_name' => '',
     'line_nr' => 4,
@@ -873,7 +700,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':7: warning: missing category for @deftypefn
+    'error_line' => 'warning: missing category for @deftypefn
 ',
     'file_name' => '',
     'line_nr' => 7,
@@ -882,7 +709,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':10: warning: missing category for @deftypeop
+    'error_line' => 'warning: missing category for @deftypeop
 ',
     'file_name' => '',
     'line_nr' => 10,
@@ -891,7 +718,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':13: warning: missing category for @deftypevr
+    'error_line' => 'warning: missing category for @deftypevr
 ',
     'file_name' => '',
     'line_nr' => 13,
@@ -900,7 +727,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':16: warning: missing category for @defcv
+    'error_line' => 'warning: missing category for @defcv
 ',
     'file_name' => '',
     'line_nr' => 16,
@@ -909,7 +736,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':19: warning: missing category for @deftypecv
+    'error_line' => 'warning: missing category for @deftypecv
 ',
     'file_name' => '',
     'line_nr' => 19,
@@ -918,7 +745,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':22: warning: missing category for @defop
+    'error_line' => 'warning: missing category for @defop
 ',
     'file_name' => '',
     'line_nr' => 22,
@@ -927,7 +754,7 @@ $result_errors{'all_empty_def'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':25: warning: missing category for @deftp
+    'error_line' => 'warning: missing category for @deftp
 ',
     'file_name' => '',
     'line_nr' => 25,
@@ -940,5 +767,130 @@ $result_errors{'all_empty_def'} = [
 
 $result_floats{'all_empty_def'} = {};
 
+
+
+$result_converted{'info'}->{'all_empty_def'} = 'This is , produced from .
+
+
+
+Tag Table:
+
+End Tag Table
+
+
+Local Variables:
+coding: utf-8
+End:
+';
+
+$result_converted_errors{'info'}->{'all_empty_def'} = [
+  {
+    'error_line' => 'warning: document without nodes
+',
+    'text' => 'document without nodes',
+    'type' => 'warning'
+  }
+];
+
+
+
+$result_converted{'html'}->{'all_empty_def'} = '<!DOCTYPE html>
+<html>
+<!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
+
+<meta name="description" content="Untitled Document">
+<meta name="keywords" content="Untitled Document">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+</head>
+
+<body lang="en">
+<dl class="first-deffn">
+<dt class="deffn"></dt>
+</dl>
+
+<dl class="first-defvr">
+<dt class="defvr"></dt>
+</dl>
+
+<dl class="first-deftypefn">
+<dt class="deftypefn"></dt>
+</dl>
+
+<dl class="first-deftypeop">
+<dt class="deftypeop"></dt>
+</dl>
+
+<dl class="first-deftypevr">
+<dt class="deftypevr"></dt>
+</dl>
+
+<dl class="first-defcv">
+<dt class="defcv"></dt>
+</dl>
+
+<dl class="first-deftypecv">
+<dt class="deftypecv"></dt>
+</dl>
+
+<dl class="first-defop">
+<dt class="defop"></dt>
+</dl>
+
+<dl class="first-deftp">
+<dt class="deftp"></dt>
+</dl>
+
+
+
+</body>
+</html>
+';
+
+$result_converted_errors{'html'}->{'all_empty_def'} = [
+  {
+    'error_line' => 'warning: must specify a title with a title command or @top
+',
+    'text' => 'must specify a title with a title command or @top',
+    'type' => 'warning'
+  }
+];
+
+
+
+$result_converted{'xml'}->{'all_empty_def'} = '<deffn endspaces=" "><definitionterm></definitionterm>
+</deffn>
+
+<defvr endspaces=" "><definitionterm></definitionterm>
+</defvr>
+
+<deftypefn endspaces=" "><definitionterm></definitionterm>
+</deftypefn>
+
+<deftypeop endspaces=" "><definitionterm></definitionterm>
+</deftypeop>
+
+<deftypevr endspaces=" "><definitionterm></definitionterm>
+</deftypevr>
+
+<defcv endspaces=" "><definitionterm></definitionterm>
+</defcv>
+
+<deftypecv endspaces=" "><definitionterm></definitionterm>
+</deftypecv>
+
+<defop endspaces=" "><definitionterm></definitionterm>
+</defop>
+
+<deftp endspaces=" "><definitionterm></definitionterm>
+</deftp>
+';
 
 1;

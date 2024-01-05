@@ -1,38 +1,67 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'complex_recursive_synindex'} = {
   'contents' => [
     {
-      'contents' => [],
-      'parent' => {},
-      'type' => 'text_root'
+      'type' => 'before_node_section'
     },
     {
       'args' => [
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'Top'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
 '
+            }
           },
-          'parent' => {},
+          'type' => 'line_arg'
+        }
+      ],
+      'cmdname' => 'node',
+      'extra' => {
+        'normalized' => 'Top'
+      },
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
+        'file_name' => '',
+        'line_nr' => 1,
+        'macro' => ''
+      }
+    },
+    {
+      'args' => [
+        {
+          'contents' => [
+            {
+              'text' => 'chap'
+            }
+          ],
+          'info' => {
+            'spaces_after_argument' => {
+              'text' => '
+'
+            }
+          },
           'type' => 'line_arg'
         }
       ],
       'cmdname' => 'node',
       'contents' => [
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -42,15 +71,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'aaa'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -58,30 +87,33 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'aaa'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 3,
+            'line_nr' => 4,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'bbb'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -89,30 +121,33 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'bbb'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 4,
+            'line_nr' => 5,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'ccc'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -120,30 +155,33 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'ccc'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 5,
+            'line_nr' => 6,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'ddd'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -151,30 +189,33 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'ddd'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 6,
+            'line_nr' => 7,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'eee'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -182,18 +223,20 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'eee'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 7,
+            'line_nr' => 8,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -203,15 +246,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'aaa bbb'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -220,46 +263,49 @@ $result_trees{'complex_recursive_synindex'} = {
             'misc_args' => [
               'aaa',
               'bbb'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 9,
+            'line_nr' => 10,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'bbb aaa'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'synindex',
-          'extra' => {
-            'spaces_before_argument' => ' '
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 10,
+            'line_nr' => 11,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -269,15 +315,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'ccc aaa'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -286,30 +332,33 @@ $result_trees{'complex_recursive_synindex'} = {
             'misc_args' => [
               'ccc',
               'aaa'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 12,
+            'line_nr' => 13,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'ddd bbb'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -318,59 +367,57 @@ $result_trees{'complex_recursive_synindex'} = {
             'misc_args' => [
               'ddd',
               'bbb'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 13,
+            'line_nr' => 14,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'e before synindex'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'eeeindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'eeeindex',
-              'index_name' => 'eee',
-              'index_type_command' => 'eeeindex',
-              'key' => 'e before synindex',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'eee',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 14,
+            'line_nr' => 15,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -380,15 +427,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'eee ddd'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -397,46 +444,49 @@ $result_trees{'complex_recursive_synindex'} = {
             'misc_args' => [
               'eee',
               'ddd'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 16,
+            'line_nr' => 17,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'bbb eee'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'synindex',
-          'extra' => {
-            'spaces_before_argument' => ' '
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 17,
+            'line_nr' => 18,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -446,40 +496,36 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'c index'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'cccindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'cccindex',
-              'index_name' => 'ccc',
-              'index_type_command' => 'cccindex',
-              'key' => 'c index',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'ccc',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 19,
+            'line_nr' => 20,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
@@ -487,40 +533,36 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'b entry'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'bbbindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'bbbindex',
-              'index_name' => 'bbb',
-              'index_type_command' => 'bbbindex',
-              'key' => 'b entry',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'bbb',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 20,
+            'line_nr' => 21,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
@@ -528,40 +570,36 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'a entry'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'aaaindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'aaaindex',
-              'index_name' => 'aaa',
-              'index_type_command' => 'aaaindex',
-              'key' => 'a entry',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'aaa',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 21,
+            'line_nr' => 22,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
@@ -569,40 +607,36 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'd index'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'dddindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'dddindex',
-              'index_name' => 'ddd',
-              'index_type_command' => 'dddindex',
-              'key' => 'd index',
-              'node' => {},
-              'number' => 1
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'ddd',
+              1
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 22,
+            'line_nr' => 23,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
@@ -610,44 +644,39 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'e index'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
           'cmdname' => 'eeeindex',
           'extra' => {
-            'index_entry' => {
-              'command' => {},
-              'content' => [],
-              'content_normalized' => [],
-              'in_code' => 0,
-              'index_at_command' => 'eeeindex',
-              'index_name' => 'eee',
-              'index_type_command' => 'eeeindex',
-              'key' => 'e index',
-              'node' => {},
-              'number' => 2
-            },
-            'spaces_before_argument' => ' '
+            'element_node' => {},
+            'index_entry' => [
+              'eee',
+              2
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 23,
+            'line_nr' => 24,
             'macro' => ''
           },
-          'parent' => {},
           'type' => 'index_entry_command'
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -655,12 +684,10 @@ $result_trees{'complex_recursive_synindex'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'bbb
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
@@ -668,15 +695,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'bbb'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -684,18 +711,20 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'bbb'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 26,
+            'line_nr' => 27,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -703,12 +732,10 @@ $result_trees{'complex_recursive_synindex'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'aaa
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
@@ -716,15 +743,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'aaa'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -732,18 +759,20 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'aaa'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 29,
+            'line_nr' => 30,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -751,12 +780,10 @@ $result_trees{'complex_recursive_synindex'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'ccc
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
@@ -764,15 +791,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'ccc'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -780,18 +807,20 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'ccc'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 32,
+            'line_nr' => 33,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -799,12 +828,10 @@ $result_trees{'complex_recursive_synindex'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'ddd
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
@@ -812,15 +839,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'ddd'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -828,18 +855,20 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'ddd'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 35,
+            'line_nr' => 36,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
 ',
           'type' => 'empty_line'
@@ -847,12 +876,10 @@ $result_trees{'complex_recursive_synindex'} = {
         {
           'contents' => [
             {
-              'parent' => {},
               'text' => 'eee
 '
             }
           ],
-          'parent' => {},
           'type' => 'paragraph'
         },
         {
@@ -860,15 +887,15 @@ $result_trees{'complex_recursive_synindex'} = {
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'eee'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
 '
+                }
               },
-              'parent' => {},
               'type' => 'line_arg'
             }
           ],
@@ -876,161 +903,47 @@ $result_trees{'complex_recursive_synindex'} = {
           'extra' => {
             'misc_args' => [
               'eee'
-            ],
-            'spaces_before_argument' => ' '
+            ]
           },
-          'line_nr' => {
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 38,
+            'line_nr' => 39,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         }
       ],
       'extra' => {
         'isindex' => 1,
-        'node_content' => [
-          {}
-        ],
-        'nodes_manuals' => [
-          {
-            'node_content' => [
-              {}
-            ],
-            'normalized' => 'Top'
-          }
-        ],
-        'normalized' => 'Top',
-        'spaces_before_argument' => ' '
+        'normalized' => 'chap'
       },
-      'line_nr' => {
+      'info' => {
+        'spaces_before_argument' => {
+          'text' => ' '
+        }
+      },
+      'source_info' => {
         'file_name' => '',
-        'line_nr' => 1,
+        'line_nr' => 2,
         'macro' => ''
-      },
-      'parent' => {}
+      }
     }
   ],
   'type' => 'document_root'
 };
-$result_trees{'complex_recursive_synindex'}{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[1]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[1]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[2]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[2]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[2];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[2]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[3]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[3]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[3];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[3]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[4]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[4]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[4]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[4];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[4]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[5]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[5]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[5]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[5];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[5]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[6]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[7]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[7]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[7]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[7];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[7]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[8]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[8]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[8]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[8];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[8]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[9]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[10]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[10]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[10]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[10];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[10]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[11]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[11]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[11]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[11];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[11]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'extra'}{'index_entry'}{'command'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'extra'}{'index_entry'}{'content'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'extra'}{'index_entry'}{'node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[12]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[13]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[14]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[14]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[14]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[14];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[14]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[15]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[15]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[15]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[15];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[15]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[16]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'extra'}{'index_entry'}{'command'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'extra'}{'index_entry'}{'content'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'extra'}{'index_entry'}{'node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[17]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'extra'}{'index_entry'}{'command'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'extra'}{'index_entry'}{'content'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'extra'}{'index_entry'}{'node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[18]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'extra'}{'index_entry'}{'command'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'extra'}{'index_entry'}{'content'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'extra'}{'index_entry'}{'node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[19]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'extra'}{'index_entry'}{'command'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'extra'}{'index_entry'}{'content'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'extra'}{'index_entry'}{'node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[20]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'extra'}{'index_entry'}{'command'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'extra'}{'index_entry'}{'content'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'extra'}{'index_entry'}{'content_normalized'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'args'}[0]{'contents'};
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'extra'}{'index_entry'}{'node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[21]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[22]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[23]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[23];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[23]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[24]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[24]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[24]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[24];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[24]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[25]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[26]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[26];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[26]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[27]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[27]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[27]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[27];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[27]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[28]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[29]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[29];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[29]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[30]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[30]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[30]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[30];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[30]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[31]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[32]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[32];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[32]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[33]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[33]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[33]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[33];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[33]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[34]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[35]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[35];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[35]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[36]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[36]{'args'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[36]{'args'}[0]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[36];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'contents'}[36]{'parent'} = $result_trees{'complex_recursive_synindex'}{'contents'}[1];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'extra'}{'node_content'}[0] = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'extra'}{'nodes_manuals'}[0]{'node_content'}[0] = $result_trees{'complex_recursive_synindex'}{'contents'}[1]{'args'}[0]{'contents'}[0];
-$result_trees{'complex_recursive_synindex'}{'contents'}[1]{'parent'} = $result_trees{'complex_recursive_synindex'};
+$result_trees{'complex_recursive_synindex'}{'contents'}[2]{'contents'}[12]{'extra'}{'element_node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[2];
+$result_trees{'complex_recursive_synindex'}{'contents'}[2]{'contents'}[17]{'extra'}{'element_node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[2];
+$result_trees{'complex_recursive_synindex'}{'contents'}[2]{'contents'}[18]{'extra'}{'element_node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[2];
+$result_trees{'complex_recursive_synindex'}{'contents'}[2]{'contents'}[19]{'extra'}{'element_node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[2];
+$result_trees{'complex_recursive_synindex'}{'contents'}[2]{'contents'}[20]{'extra'}{'element_node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[2];
+$result_trees{'complex_recursive_synindex'}{'contents'}[2]{'contents'}[21]{'extra'}{'element_node'} = $result_trees{'complex_recursive_synindex'}{'contents'}[2];
 
 $result_texis{'complex_recursive_synindex'} = '@node Top
+@node chap
 
 @defindex aaa
 @defindex bbb
@@ -1088,77 +1001,85 @@ ddd
 eee
 ';
 
-$result_sectioning{'complex_recursive_synindex'} = {};
-
 $result_nodes{'complex_recursive_synindex'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
+    'normalized' => 'Top'
+  },
+  'structure' => {
+    'node_next' => {
+      'cmdname' => 'node',
+      'extra' => {
+        'isindex' => 1,
+        'normalized' => 'chap'
+      },
+      'structure' => {
+        'node_prev' => {}
+      }
+    }
   }
 };
+$result_nodes{'complex_recursive_synindex'}{'structure'}{'node_next'}{'structure'}{'node_prev'} = $result_nodes{'complex_recursive_synindex'};
 
 $result_menus{'complex_recursive_synindex'} = {
   'cmdname' => 'node',
   'extra' => {
-    'isindex' => 1,
-    'normalized' => 'Top',
-    'spaces_before_argument' => ' '
-  }
+    'normalized' => 'Top'
+  },
+  'structure' => {}
 };
 
 $result_errors{'complex_recursive_synindex'} = [
   {
-    'error_line' => ':10: warning: @synindex leads to a merging of bbb in itself, ignoring
+    'error_line' => 'warning: @synindex leads to a merging of bbb in itself, ignoring
 ',
     'file_name' => '',
-    'line_nr' => 10,
+    'line_nr' => 11,
     'macro' => '',
     'text' => '@synindex leads to a merging of bbb in itself, ignoring',
     'type' => 'warning'
   },
   {
-    'error_line' => ':17: warning: @synindex leads to a merging of bbb in itself, ignoring
+    'error_line' => 'warning: @synindex leads to a merging of bbb in itself, ignoring
 ',
     'file_name' => '',
-    'line_nr' => 17,
+    'line_nr' => 18,
     'macro' => '',
     'text' => '@synindex leads to a merging of bbb in itself, ignoring',
     'type' => 'warning'
   },
   {
-    'error_line' => ':29: warning: printing an index `aaa\' merged in another one, `bbb\'
+    'error_line' => 'warning: printing an index `aaa\' merged in another one, `bbb\'
 ',
     'file_name' => '',
-    'line_nr' => 29,
+    'line_nr' => 30,
     'macro' => '',
     'text' => 'printing an index `aaa\' merged in another one, `bbb\'',
     'type' => 'warning'
   },
   {
-    'error_line' => ':32: warning: printing an index `ccc\' merged in another one, `bbb\'
+    'error_line' => 'warning: printing an index `ccc\' merged in another one, `bbb\'
 ',
     'file_name' => '',
-    'line_nr' => 32,
+    'line_nr' => 33,
     'macro' => '',
     'text' => 'printing an index `ccc\' merged in another one, `bbb\'',
     'type' => 'warning'
   },
   {
-    'error_line' => ':35: warning: printing an index `ddd\' merged in another one, `bbb\'
+    'error_line' => 'warning: printing an index `ddd\' merged in another one, `bbb\'
 ',
     'file_name' => '',
-    'line_nr' => 35,
+    'line_nr' => 36,
     'macro' => '',
     'text' => 'printing an index `ddd\' merged in another one, `bbb\'',
     'type' => 'warning'
   },
   {
-    'error_line' => ':38: warning: printing an index `eee\' merged in another one, `bbb\'
+    'error_line' => 'warning: printing an index `eee\' merged in another one, `bbb\'
 ',
     'file_name' => '',
-    'line_nr' => 38,
+    'line_nr' => 39,
     'macro' => '',
     'text' => 'printing an index `eee\' merged in another one, `bbb\'',
     'type' => 'warning'
@@ -1246,6 +1167,18 @@ $result_indices{'complex_recursive_synindex'} = {
 
 
 $result_floats{'complex_recursive_synindex'} = {};
+
+
+$result_indices_sort_strings{'complex_recursive_synindex'} = {
+  'bbb' => [
+    'a entry',
+    'b entry',
+    'c index',
+    'd index',
+    'e before synindex',
+    'e index'
+  ]
+};
 
 
 1;

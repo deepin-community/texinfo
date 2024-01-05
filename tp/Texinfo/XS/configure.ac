@@ -1,6 +1,6 @@
 # configure.ac for XS modules
 #
-# Copyright 2015-2020 Free Software Foundation, Inc.
+# Copyright 2015-2023 Free Software Foundation, Inc.
 #
 # This file is free software; as a special exception the author gives
 # unlimited permission to copy and/or distribute it, with or without
@@ -130,10 +130,11 @@ LT_INIT([disable-static])
 # Note that the above have to be outside the disable_xs block
 # otherwise it causes an error with configure.
 
-# Disable gnulib provision of "Microsoft deprecated alias" fdopen on
+# Disable gnulib provision of "Microsoft deprecated alias" functions on
 # MS-Windows to prevent a clash with definitions in Perl header files
-GNULIB_MDA_FDOPEN=0
-
+GL_GNULIB_MDA_FDOPEN=0
+GL_GNULIB_MDA_MKTEMP=0
+GL_GNULIB_MDA_PUTENV=0
 
 host_needs_no_undefined=no
 case "$host" in *-mingw32 | *-mingw64 | *-msdosdjgpp | *-cygwin )
@@ -146,9 +147,15 @@ AM_CONDITIONAL([HAVE_ICONV],
                [test "x$am_func_iconv" = "xyes"])
 
 
-# Do not include Perl configuration values when outputting these variables
+# Do not include Perl configuration values when outputting these variables,
+# as advised in the automake manual for CFLAGS and LDFLAGS, which could be
+# reset by the user.  Here PERL_EXT_CFLAGS and PERL_EXT_LDFLAGS play the
+# same role as CFLAGS and LDFLAGS.  The Perl configuration values are then
+# readded in Makefile.am.
+# For CPPFLAGS we do not follow the same rule because we want to keep the
+# flags added by gnulib macros, as for libunistring there is no separate
+# CPPFLAGS-like variable, the main CPPFLAGS is modified.
 CFLAGS=$PERL_EXT_CFLAGS
-CPPFLAGS=$PERL_EXT_CPPFLAGS
 LDFLAGS=$PERL_EXT_LDFLAGS
 
 AC_CONFIG_FILES([Makefile gnulib/lib/Makefile])

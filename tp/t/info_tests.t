@@ -1,7 +1,7 @@
 use strict;
 
 use lib '.';
-use Texinfo::ModulePath (undef, undef, 'updirs' => 2);
+use Texinfo::ModulePath (undef, undef, undef, 'updirs' => 2);
 
 require 't/test_utils.pl';
 
@@ -37,6 +37,102 @@ In copying.
 Copying second para.
 @end copying
 
+@paragraphindent 1
+
+After paragraphindent.
+
+@node Top
+@top test @@paragraphindent in preamble effect in preamble
+
+First para.
+
+Second para.
+
+@bye
+
+', {'full_document' => 1}],
+['two_paragraphindent_in_preamble',
+'@copying
+In copying.
+
+Copying second para.
+@end copying
+
+@paragraphindent 1
+
+@paragraphindent 6
+
+After two paragraphindent.
+
+@node Top
+@top test @@paragraphindent in preamble effect in preamble
+
+First para.
+
+Second para.
+
+@bye
+
+', {'full_document' => 1}],
+['paragraphindent_in_preamble_and_in_document',
+'@copying
+In copying.
+
+Copying second para.
+@end copying
+
+@paragraphindent 1
+
+After paragraphindent.
+
+@node Top
+@top test @@paragraphindent in preamble effect in preamble
+
+First para.
+
+Second para.
+
+@paragraphindent 3
+
+Third para after second paragraphindent.
+
+@bye
+
+', {'full_document' => 1}],
+['two_paragraphindent_in_preamble_and_in_document',
+'@copying
+In copying.
+
+Copying second para.
+@end copying
+
+@paragraphindent 1
+
+@paragraphindent 6
+
+After two paragraphindent.
+
+@node Top
+@top test @@paragraphindent in preamble effect in preamble
+
+First para.
+
+Second para.
+
+@paragraphindent 3
+
+Third para after third paragraphindent.
+
+@bye
+
+', {'full_document' => 1}],
+['paragraphindent_not_in_preamble',
+'@copying
+In copying.
+
+Copying second para.
+@end copying
+
 @node Top
 @top test @@paragraphindent effect in preamble
 
@@ -50,7 +146,7 @@ After paragraphindent.
 
 @bye
 
-'],
+', {'full_document' => 1}],
 ['paragraphindent_asis_first',
 '
      bbb
@@ -177,7 +273,12 @@ ref to anchor1@footnote{another footnote}, which is before @@node Top: @ref{anch
 @printindex cp
 
 '],
-['image_quotes', 
+['image_text_file_only_and_alt',
+'@node Top
+
+@image{text_only_image,,,alt}
+'],
+['image_quotes',
 '@node Top
 
 @image{f--ile,,,alt""\\}
@@ -416,7 +517,7 @@ V@footnote{F2}
 # here, in fact.
 ['split_no_copying',
 '\input texinfo
-@setfilename split-nocopying.info
+@setfilename split_no_copying.info
 
 @node Top
 @top Top
@@ -834,6 +935,60 @@ HHH
 @image{figure, , , ,txt} JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 @end flushright
 '],
+['empty_copying_not_ended',
+'
+@copying
+'],
+['empty_arguments',
+'
+@strong{}
+@uref{,}
+@abbr{a,}
+'],
+['float_without_type',
+'
+@node Top
+
+@float a,
+aa
+@end float
+
+@listoffloats a
+'],
+['empty_caption',
+'
+@node Top
+
+@float a,b
+aa
+@caption{}
+@end float
+
+@listoffloats a
+'],
+# not clearly useful, the mix of counted things in one node
+# may not be found elsewhere.
+['one_node_counted_elements',
+'Garbage
+@cindex before nodes
+
+@node one node,,,(dir)
+Top node
+@cindex Top node
+
+anchor ref @anchor{ref}.
+
+@menu
+* (some_manual_name_with_gcc):: ref to gcc
+@end menu
+
+
+ref to ref @ref{ref}.
+
+Some text.
+
+@printindex cp
+'],
 );
 
 my @file_tests = (
@@ -858,7 +1013,7 @@ In chap1.
 
 ',{},{'SPLIT_SIZE' => 10}],
 ['split_test_before_first_node_no_empty_line',
-'@setfilename split_test_before_first_node.info
+'@setfilename split_test_before_first_node_no_empty_line.info
 
 truc machin et reuc machin  ze aze zea zae eaz eaz zae
 @node Top
@@ -876,7 +1031,104 @@ In top node
 In chap1.
 
 ',{},{'SPLIT_SIZE' => 10}],
+['split_nocopying',
+  undef, {'test_file' => '../../tests/formatting/split_nocopying.texi',},
+],
+['split_nocopying_split',
+  undef, {'test_file' => '../../tests/formatting/split_nocopying.texi',},
+  {'SPLIT_SIZE' => 10},
+],
+['direntry_dircategory',
+  undef, {'test_file' => 'direntry_dircategory.texi'},
+  {'SPLIT_SIZE' => 1}
+],
+['quote_node_names_info',
+undef, {'test_file' => 'nodequote.texi',},
+{'INFO_SPECIAL_CHARS_QUOTE' => 1,
+ 'INFO_SPECIAL_CHARS_WARNING' => 0,}
+],
+['end_of_line_command_in_node_lines',
+# the reference to the node with two end of line is not found
+# by the Info reader, but it is a feature.  References are not
+# searched for too far to avoid risking to run into markup
+# significant for cross-reference for text that is not cross-reference.
+'@node Top
+@top top
+
+@node chap @* f     nl Something? @* After punct
+@chapter Chap
+
+@anchor{ankh @* p}
+
+text @* f     nl Something? @* After punct
+
+@cindex a @* b
+
+@printindex cp
+
+@node new n
+@chapter Ochap
+
+@xref{chap @* f     nl Something? @* After punct}.
+
+@xref{ankh @* p}.
+
+@xref{ankh @* p, addll@*gg}.
+
+@menu
+* chap @* f     nl Something? @* After punct::
+* ankh @* p::
+* what @* is: ankh @* p.
+* what @* is: ankh p.
+@end menu
+'],
+['chinese_mixed_with_en_EUC_CN',
+undef, {'test_file' => 'chinese_mixed_with_en_EUC_CN.texi',
+        'skip' => $Texinfo::ModulePath::conversion_from_euc_cn ne 'yes'
+                   ? 'No conversion from EUC-CN' : undef, }
+],
 );
+
+my $colons_in_index_entries_and_node = 
+'@node Top
+
+@menu
+* One@asis{::}node@comma{} with entries.::
+* Concept Index::
+@end menu
+
+@node One@asis{::}node@comma{} with entries.
+
+@cindex :
+@cindex :a
+@cindex b:c
+
+@example
+some example just to have text
+@end example
+
+@cindex d::e
+@cindex f :d
+@cindex g: h
+
+node one
+
+@node Concept Index
+
+@printindex cp
+
+';
+
+push @file_tests,
+['colons_in_index_entries_and_node',
+$colons_in_index_entries_and_node,
+undef, {'INFO_SPECIAL_CHARS_QUOTE' => 1,
+ 'INFO_SPECIAL_CHARS_WARNING' => 0,}],
+['colons_in_index_entries_and_node_no_quoting',
+$colons_in_index_entries_and_node,
+undef, {'INFO_SPECIAL_CHARS_QUOTE' => 0,
+ 'INFO_SPECIAL_CHARS_WARNING' => 1,}],
+;
 
 foreach my $test (@test_cases) {
   push @{$test->[2]->{'test_formats'}}, 'info';
@@ -884,12 +1136,7 @@ foreach my $test (@test_cases) {
 
 foreach my $test (@file_tests) {
   push @{$test->[2]->{'test_formats'}}, 'file_info';
+  $test->[2]->{'test_input_file_name'} = $test->[0] . '.texi';
 }
 
-our ($arg_test_case, $arg_generate, $arg_debug);
-
-run_all ('info_tests', [@test_cases, @file_tests], $arg_test_case,
-   $arg_generate, $arg_debug);
-
-1;
-
+run_all('info_tests', [@test_cases, @file_tests]);

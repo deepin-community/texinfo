@@ -1,74 +1,94 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'value_in_invalid_documentencoding'} = {
   'contents' => [
     {
-      'args' => [
+      'contents' => [
         {
-          'parent' => {},
-          'text' => 'badvalue',
-          'type' => 'misc_arg'
-        },
-        {
-          'parent' => {},
-          'text' => 'bad',
-          'type' => 'misc_arg'
-        }
-      ],
-      'cmdname' => 'set',
-      'extra' => {
-        'arg_line' => ' badvalue bad
-',
-        'misc_args' => [
-          'badvalue',
-          'bad'
-        ]
-      },
-      'parent' => {}
-    },
-    {
-      'args' => [
-        {
-          'contents' => [
+          'args' => [
             {
-              'parent' => {},
-              'text' => 'bad'
+              'text' => 'badvalue',
+              'type' => 'rawline_arg'
+            },
+            {
+              'text' => 'bad',
+              'type' => 'rawline_arg'
             }
           ],
-          'extra' => {
-            'spaces_after_argument' => '
+          'cmdname' => 'set',
+          'info' => {
+            'arg_line' => ' badvalue bad
 '
+          }
+        },
+        {
+          'args' => [
+            {
+              'contents' => [
+                {
+                  'source_marks' => [
+                    {
+                      'counter' => 1,
+                      'position' => 3,
+                      'sourcemark_type' => 'value_expansion',
+                      'status' => 'end'
+                    }
+                  ],
+                  'text' => 'bad'
+                }
+              ],
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                }
+              },
+              'type' => 'line_arg'
+            }
+          ],
+          'cmdname' => 'documentencoding',
+          'extra' => {
+            'text_arg' => 'bad'
           },
-          'parent' => {},
-          'type' => 'line_arg'
+          'info' => {
+            'spaces_before_argument' => {
+              'source_marks' => [
+                {
+                  'counter' => 1,
+                  'element' => {
+                    'args' => [
+                      {
+                        'text' => 'badvalue'
+                      }
+                    ],
+                    'cmdname' => 'value'
+                  },
+                  'line' => 'bad',
+                  'position' => 1,
+                  'sourcemark_type' => 'value_expansion',
+                  'status' => 'start'
+                }
+              ],
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 2,
+            'macro' => ''
+          }
         }
       ],
-      'cmdname' => 'documentencoding',
-      'extra' => {
-        'spaces_before_argument' => ' ',
-        'text_arg' => 'bad'
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 2,
-        'macro' => ''
-      },
-      'parent' => {}
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'value_in_invalid_documentencoding'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'value_in_invalid_documentencoding'}{'contents'}[0];
-$result_trees{'value_in_invalid_documentencoding'}{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'value_in_invalid_documentencoding'}{'contents'}[0];
-$result_trees{'value_in_invalid_documentencoding'}{'contents'}[0]{'parent'} = $result_trees{'value_in_invalid_documentencoding'};
-$result_trees{'value_in_invalid_documentencoding'}{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'value_in_invalid_documentencoding'}{'contents'}[1]{'args'}[0];
-$result_trees{'value_in_invalid_documentencoding'}{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'value_in_invalid_documentencoding'}{'contents'}[1];
-$result_trees{'value_in_invalid_documentencoding'}{'contents'}[1]{'parent'} = $result_trees{'value_in_invalid_documentencoding'};
 
 $result_texis{'value_in_invalid_documentencoding'} = '@set badvalue bad
 @documentencoding bad
@@ -79,7 +99,7 @@ $result_texts{'value_in_invalid_documentencoding'} = '';
 
 $result_errors{'value_in_invalid_documentencoding'} = [
   {
-    'error_line' => ':2: warning: encoding `bad\' is not a canonical texinfo encoding
+    'error_line' => 'warning: encoding `bad\' is not a canonical texinfo encoding
 ',
     'file_name' => '',
     'line_nr' => 2,
@@ -88,12 +108,12 @@ $result_errors{'value_in_invalid_documentencoding'} = [
     'type' => 'warning'
   },
   {
-    'error_line' => ':2: warning: unrecognized encoding name `bad\'
+    'error_line' => 'warning: unhandled encoding name `bad\'
 ',
     'file_name' => '',
     'line_nr' => 2,
     'macro' => '',
-    'text' => 'unrecognized encoding name `bad\'',
+    'text' => 'unhandled encoding name `bad\'',
     'type' => 'warning'
   }
 ];

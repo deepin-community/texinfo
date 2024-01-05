@@ -1,338 +1,276 @@
 use vars qw(%result_texis %result_texts %result_trees %result_errors 
    %result_indices %result_sectioning %result_nodes %result_menus
    %result_floats %result_converted %result_converted_errors 
-   %result_elements %result_directions_text);
+   %result_elements %result_directions_text %result_indices_sort_strings);
 
 use utf8;
 
 $result_trees{'ref_to_float'} = {
   'contents' => [
     {
-      'args' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'Text'
-            }
-          ],
-          'parent' => {},
-          'type' => 'block_line_arg'
-        },
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'Label1'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-',
-            'spaces_before_argument' => ' '
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'float',
       'contents' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'Float
-'
-            }
-          ],
-          'parent' => {},
-          'type' => 'paragraph'
-        },
-        {
-          'args' => [
-            {
-              'contents' => [
-                {
-                  'parent' => {},
-                  'text' => 'float'
-                }
-              ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'float',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'float'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 3,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {},
-        'node_content' => [
-          {}
-        ],
-        'normalized' => 'Label1',
-        'spaces_before_argument' => ' ',
-        'type' => {
-          'content' => [
-            {}
-          ],
-          'normalized' => 'Text'
-        }
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 1,
-        'macro' => ''
-      },
-      'number' => 1,
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'args' => [
         {
           'contents' => [],
-          'parent' => {},
-          'type' => 'block_line_arg'
-        },
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'Label2'
-            }
-          ],
-          'extra' => {
-            'spaces_after_argument' => '
-',
-            'spaces_before_argument' => ' '
-          },
-          'parent' => {},
-          'type' => 'block_line_arg'
-        }
-      ],
-      'cmdname' => 'float',
-      'contents' => [
-        {
-          'contents' => [
-            {
-              'parent' => {},
-              'text' => 'In foat 2.
-'
-            }
-          ],
-          'parent' => {},
-          'type' => 'paragraph'
+          'type' => 'preamble_before_content'
         },
         {
           'args' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
-                  'text' => 'float'
+                  'text' => 'Text'
                 }
               ],
-              'extra' => {
-                'spaces_after_argument' => '
-'
-              },
-              'parent' => {},
-              'type' => 'line_arg'
-            }
-          ],
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'float',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'float'
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 7,
-            'macro' => ''
-          },
-          'parent' => {}
-        }
-      ],
-      'extra' => {
-        'end_command' => {},
-        'node_content' => [
-          {}
-        ],
-        'normalized' => 'Label2',
-        'spaces_before_argument' => ' ',
-        'type' => {
-          'normalized' => ''
-        }
-      },
-      'line_nr' => {
-        'file_name' => '',
-        'line_nr' => 5,
-        'macro' => ''
-      },
-      'number' => 1,
-      'parent' => {}
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'args' => [
+              'type' => 'block_line_arg'
+            },
             {
               'contents' => [
                 {
-                  'parent' => {},
                   'text' => 'Label1'
                 }
               ],
-              'parent' => {},
-              'type' => 'brace_command_arg'
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                },
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'ref',
-          'contents' => [],
-          'extra' => {
-            'label' => {},
-            'node_argument' => {
-              'node_content' => [
-                {}
-              ],
-              'normalized' => 'Label1'
-            }
-          },
-          'line_nr' => {
-            'file_name' => '',
-            'line_nr' => 9,
-            'macro' => ''
-          },
-          'parent' => {}
-        },
-        {
-          'parent' => {},
-          'text' => '
-'
-        }
-      ],
-      'parent' => {},
-      'type' => 'paragraph'
-    },
-    {
-      'parent' => {},
-      'text' => '
-',
-      'type' => 'empty_line'
-    },
-    {
-      'contents' => [
-        {
-          'args' => [
+          'cmdname' => 'float',
+          'contents' => [
             {
               'contents' => [
                 {
-                  'parent' => {},
+                  'text' => 'Float
+'
+                }
+              ],
+              'type' => 'paragraph'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'float'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'float'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 3,
+                'macro' => ''
+              }
+            }
+          ],
+          'extra' => {
+            'float_type' => 'Text',
+            'normalized' => 'Label1'
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
+            }
+          },
+          'source_info' => {
+            'file_name' => '',
+            'line_nr' => 1,
+            'macro' => ''
+          }
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'args' => [
+            {
+              'type' => 'block_line_arg'
+            },
+            {
+              'contents' => [
+                {
                   'text' => 'Label2'
                 }
               ],
-              'parent' => {},
-              'type' => 'brace_command_arg'
+              'info' => {
+                'spaces_after_argument' => {
+                  'text' => '
+'
+                },
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'type' => 'block_line_arg'
             }
           ],
-          'cmdname' => 'ref',
-          'contents' => [],
-          'extra' => {
-            'label' => {},
-            'node_argument' => {
-              'node_content' => [
-                {}
+          'cmdname' => 'float',
+          'contents' => [
+            {
+              'contents' => [
+                {
+                  'text' => 'In foat 2.
+'
+                }
               ],
-              'normalized' => 'Label2'
+              'type' => 'paragraph'
+            },
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'float'
+                    }
+                  ],
+                  'info' => {
+                    'spaces_after_argument' => {
+                      'text' => '
+'
+                    }
+                  },
+                  'type' => 'line_arg'
+                }
+              ],
+              'cmdname' => 'end',
+              'extra' => {
+                'text_arg' => 'float'
+              },
+              'info' => {
+                'spaces_before_argument' => {
+                  'text' => ' '
+                }
+              },
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 7,
+                'macro' => ''
+              }
+            }
+          ],
+          'extra' => {
+            'float_type' => '',
+            'normalized' => 'Label2'
+          },
+          'info' => {
+            'spaces_before_argument' => {
+              'text' => ' '
             }
           },
-          'line_nr' => {
+          'source_info' => {
             'file_name' => '',
-            'line_nr' => 11,
+            'line_nr' => 5,
             'macro' => ''
-          },
-          'parent' => {}
+          }
         },
         {
-          'parent' => {},
           'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'Label1'
+                    }
+                  ],
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'Label1'
+                  },
+                  'type' => 'brace_command_arg'
+                }
+              ],
+              'cmdname' => 'ref',
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 9,
+                'macro' => ''
+              }
+            },
+            {
+              'text' => '
 '
+            }
+          ],
+          'type' => 'paragraph'
+        },
+        {
+          'text' => '
+',
+          'type' => 'empty_line'
+        },
+        {
+          'contents' => [
+            {
+              'args' => [
+                {
+                  'contents' => [
+                    {
+                      'text' => 'Label2'
+                    }
+                  ],
+                  'extra' => {
+                    'node_content' => [
+                      {}
+                    ],
+                    'normalized' => 'Label2'
+                  },
+                  'type' => 'brace_command_arg'
+                }
+              ],
+              'cmdname' => 'ref',
+              'source_info' => {
+                'file_name' => '',
+                'line_nr' => 11,
+                'macro' => ''
+              }
+            },
+            {
+              'text' => '
+'
+            }
+          ],
+          'type' => 'paragraph'
         }
       ],
-      'parent' => {},
-      'type' => 'paragraph'
+      'type' => 'before_node_section'
     }
   ],
-  'type' => 'text_root'
+  'type' => 'document_root'
 };
-$result_trees{'ref_to_float'}{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0]{'args'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0]{'args'}[1];
-$result_trees{'ref_to_float'}{'contents'}[0]{'args'}[1]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[1]{'args'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[1];
-$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[1]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'extra'}{'end_command'} = $result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[1];
-$result_trees{'ref_to_float'}{'contents'}[0]{'extra'}{'node_content'}[0] = $result_trees{'ref_to_float'}{'contents'}[0]{'args'}[1]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'extra'}{'type'}{'content'}[0] = $result_trees{'ref_to_float'}{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'};
-$result_trees{'ref_to_float'}{'contents'}[1]{'parent'} = $result_trees{'ref_to_float'};
-$result_trees{'ref_to_float'}{'contents'}[2]{'args'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2];
-$result_trees{'ref_to_float'}{'contents'}[2]{'args'}[1]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2]{'args'}[1];
-$result_trees{'ref_to_float'}{'contents'}[2]{'args'}[1]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2];
-$result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2];
-$result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[1]{'args'}[0];
-$result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[1]{'args'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[1];
-$result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[1]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[2];
-$result_trees{'ref_to_float'}{'contents'}[2]{'extra'}{'end_command'} = $result_trees{'ref_to_float'}{'contents'}[2]{'contents'}[1];
-$result_trees{'ref_to_float'}{'contents'}[2]{'extra'}{'node_content'}[0] = $result_trees{'ref_to_float'}{'contents'}[2]{'args'}[1]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[2]{'parent'} = $result_trees{'ref_to_float'};
-$result_trees{'ref_to_float'}{'contents'}[3]{'parent'} = $result_trees{'ref_to_float'};
-$result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'args'}[0];
-$result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'extra'}{'label'} = $result_trees{'ref_to_float'}{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[4];
-$result_trees{'ref_to_float'}{'contents'}[4]{'contents'}[1]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[4];
-$result_trees{'ref_to_float'}{'contents'}[4]{'parent'} = $result_trees{'ref_to_float'};
-$result_trees{'ref_to_float'}{'contents'}[5]{'parent'} = $result_trees{'ref_to_float'};
-$result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'args'}[0]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'args'}[0];
-$result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'args'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'extra'}{'label'} = $result_trees{'ref_to_float'}{'contents'}[2];
-$result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'extra'}{'node_argument'}{'node_content'}[0] = $result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'args'}[0]{'contents'}[0];
-$result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[0]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[6];
-$result_trees{'ref_to_float'}{'contents'}[6]{'contents'}[1]{'parent'} = $result_trees{'ref_to_float'}{'contents'}[6];
-$result_trees{'ref_to_float'}{'contents'}[6]{'parent'} = $result_trees{'ref_to_float'};
+$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[5]{'contents'}[0]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[5]{'contents'}[0]{'args'}[0]{'contents'}[0];
+$result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[7]{'contents'}[0]{'args'}[0]{'extra'}{'node_content'}[0] = $result_trees{'ref_to_float'}{'contents'}[0]{'contents'}[7]{'contents'}[0]{'args'}[0]{'contents'}[0];
 
 $result_texis{'ref_to_float'} = '@float Text, Label1
 Float
@@ -367,47 +305,24 @@ $result_floats{'ref_to_float'} = {
     {
       'cmdname' => 'float',
       'extra' => {
-        'end_command' => {
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'float',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'float'
-          }
-        },
-        'normalized' => 'Label2',
-        'spaces_before_argument' => ' ',
-        'type' => {
-          'normalized' => ''
-        }
+        'float_type' => '',
+        'normalized' => 'Label2'
       },
-      'number' => 1
+      'structure' => {
+        'float_number' => 1
+      }
     }
   ],
   'Text' => [
     {
       'cmdname' => 'float',
       'extra' => {
-        'end_command' => {
-          'cmdname' => 'end',
-          'extra' => {
-            'command_argument' => 'float',
-            'spaces_before_argument' => ' ',
-            'text_arg' => 'float'
-          }
-        },
-        'normalized' => 'Label1',
-        'spaces_before_argument' => ' ',
-        'type' => {
-          'content' => [
-            {
-              'text' => 'Text'
-            }
-          ],
-          'normalized' => 'Text'
-        }
+        'float_type' => 'Text',
+        'normalized' => 'Label1'
       },
-      'number' => 1
+      'structure' => {
+        'float_number' => 1
+      }
     }
   ]
 };
@@ -417,18 +332,16 @@ $result_floats{'ref_to_float'} = {
 $result_converted{'plaintext'}->{'ref_to_float'} = 'Float
 
 Text 1
-
 In foat 2.
 
 1
-
 *note Text 1: Label1.
 
    *note 1: Label2.
 ';
 
 
-$result_converted{'html'}->{'ref_to_float'} = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+$result_converted{'html'}->{'ref_to_float'} = '<!DOCTYPE html>
 <html>
 <!-- Created by texinfo, http://www.gnu.org/software/texinfo/ -->
 <head>
@@ -441,41 +354,20 @@ $result_converted{'html'}->{'ref_to_float'} = '<!DOCTYPE html PUBLIC "-//W3C//DT
 <meta name="distribution" content="global">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<style type="text/css">
-<!--
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
--->
-</style>
 
 
 </head>
 
 <body lang="en">
-<div class="float"><span id="Label1"></span>
+<div class="float" id="Label1">
 <p>Float
-</p><div class="float-caption"><p><strong>Text 1
-</strong></p></div></div>
-<div class="float"><span id="Label2"></span>
+</p><div class="type-number-float"><p><strong class="strong">Text 1</strong></p></div></div>
+<div class="float" id="Label2">
 <p>In foat 2.
-</p><div class="float-caption"><p><strong>1
-</strong></p></div></div>
-<p><a href="#Label1">Text 1</a>
+</p><div class="type-number-float"><p><strong class="strong">1</strong></p></div></div>
+<p><a class="ref" href="#Label1">Text 1</a>
 </p>
-<p><a href="#Label2">1</a>
+<p><a class="ref" href="#Label2">1</a>
 </p>
 
 
@@ -492,5 +384,86 @@ $result_converted_errors{'html'}->{'ref_to_float'} = [
   }
 ];
 
+
+
+$result_converted{'xml'}->{'ref_to_float'} = '<float name="Label1" type="Text" number="1" spaces=" " endspaces=" "><floattype>Text</floattype><floatname spaces=" ">Label1</floatname>
+<para>Float
+</para></float>
+
+<float name="Label2" type="" number="1" spaces=" " endspaces=" "><floatname spaces=" ">Label2</floatname>
+<para>In foat 2.
+</para></float>
+
+<para><ref label="Label1"><xrefnodename>Label1</xrefnodename></ref>
+</para>
+<para><ref label="Label2"><xrefnodename>Label2</xrefnodename></ref>
+</para>';
+
+
+$result_converted{'latex'}->{'ref_to_float'} = '\\documentclass{book}
+\\usepackage{amsfonts}
+\\usepackage{amsmath}
+\\usepackage[gen]{eurosym}
+\\usepackage{textcomp}
+\\usepackage{graphicx}
+\\usepackage{etoolbox}
+\\usepackage{titleps}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{float}
+% use hidelinks to remove boxes around links to be similar to Texinfo TeX
+\\usepackage[hidelinks]{hyperref}
+
+\\makeatletter
+\\newcommand{\\Texinfosettitle}{No Title}%
+
+% new float for type `\'
+\\newfloat{TexinfoFloat}{htb}{tfl}[chapter]
+\\floatname{TexinfoFloat}{}
+% new float for type `Text\'
+\\newfloat{TexinfoFloatText}{htb}{tfl}[chapter]
+\\floatname{TexinfoFloatText}{}
+% redefine the \\mainmatter command such that it does not clear page
+% as if in double page
+\\renewcommand\\mainmatter{\\clearpage\\@mainmattertrue\\pagenumbering{arabic}}
+\\newenvironment{Texinfopreformatted}{%
+  \\par\\GNUTobeylines\\obeyspaces\\frenchspacing\\parskip=\\z@\\parindent=\\z@}{}
+{\\catcode`\\^^M=13 \\gdef\\GNUTobeylines{\\catcode`\\^^M=13 \\def^^M{\\null\\par}}}
+\\newenvironment{Texinfoindented}{\\begin{list}{}{}\\item\\relax}{\\end{list}}
+
+% used for substitutions in commands
+\\newcommand{\\Texinfoplaceholder}[1]{}
+
+\\newpagestyle{single}{\\sethead[\\chaptername{} \\thechapter{} \\chaptertitle{}][][\\thepage]
+                              {\\chaptername{} \\thechapter{} \\chaptertitle{}}{}{\\thepage}}
+
+% allow line breaking at underscore
+\\let\\Texinfounderscore\\_
+\\renewcommand{\\_}{\\Texinfounderscore\\discretionary{}{}{}}
+\\renewcommand{\\includegraphics}[1]{\\fbox{FIG \\detokenize{#1}}}
+
+\\makeatother
+% set default for @setchapternewpage
+\\makeatletter
+\\patchcmd{\\chapter}{\\if@openright\\cleardoublepage\\else\\clearpage\\fi}{\\Texinfoplaceholder{setchapternewpage placeholder}\\clearpage}{}{}
+\\makeatother
+\\pagestyle{single}%
+
+\\begin{document}
+\\begin{TexinfoFloatText}
+Float
+\\label{anchor:Label1}%
+\\end{TexinfoFloatText}
+
+\\begin{TexinfoFloat}
+In foat 2.
+\\label{anchor:Label2}%
+\\end{TexinfoFloat}
+
+\\hyperref[anchor:Label1]{Text~\\ref*{anchor:Label1}}
+
+\\hyperref[anchor:Label2]{\\ref*{anchor:Label2}}
+\\end{document}
+';
 
 1;

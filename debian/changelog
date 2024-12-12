@@ -1,3 +1,9 @@
+texinfo (7.1-2deepin1) unstable; urgency=medium
+
+  * change the priority of package info and install-info to optional.(pms: bug 291853).
+
+ -- liujianqiang <liujianqiang@uniontech.com>  Thu, 12 Dec 2024 09:36:15 +0800
+
 texinfo (7.1-2) unstable; urgency=medium
 
   * obstack alignment patch from upstream. Should fix build failure
